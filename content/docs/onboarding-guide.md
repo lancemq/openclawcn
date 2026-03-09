@@ -1,12 +1,12 @@
 ---
 title: Onboarding 引导流程说明
-description: 为什么 OpenClaw 要强调 onboarding，以及中文用户第一次配置时应该关注什么。
+description: 基于官方 Onboarding 思路，说明第一次配置 OpenClaw 时应该先做什么、后做什么，以及哪些事情不要过早展开。
 category: 入门
 ---
 
 # Onboarding 引导流程说明
 
-从官方文档结构看，OpenClaw 非常重视 onboarding。这个信息很关键，因为它意味着官方并不要求你第一次使用就理解全部内部结构，而是希望你先完成一轮受控的初始化。
+从官方文档结构看，OpenClaw 非常重视 onboarding。这个信息很关键，因为它意味着官方并不要求你第一次使用就理解全部内部结构，而是希望你先完成一轮受控的初始化。对中文用户来说，这能把“装上了但不知道下一步是什么”的状态，变成“已经有一条可执行路径”。
 
 ## 为什么 onboarding 很重要
 
@@ -14,9 +14,18 @@ category: 入门
 
 - 不清楚先从哪里开始
 - 不知道 Control UI、渠道和工具之间是什么关系
-- 不确定哪些配置是现在就必须做的
+- 不确定哪些配置是现在就必须做的，哪些可以后补
 
 onboarding 的价值，就是把这三个问题的顺序理清楚。
+
+## onboarding 真正要解决什么
+
+更准确地说，onboarding 不是单纯的“新手教程”，而是帮助你完成以下几件事：
+
+- 让系统进入一个可启动、可验证的状态
+- 指出当前缺的关键配置
+- 避免你在没跑通最小链路前就同时接入太多能力
+- 为后续 Control UI、渠道和运维配置打基础
 
 ## 第一次配置最应该关注什么
 
@@ -47,6 +56,17 @@ onboarding 的价值，就是把这三个问题的顺序理清楚。
 - hooks
 - 安全与远程访问
 
+## 一条更稳的 onboarding 顺序
+
+如果你想降低第一次使用的失败率，建议按这个顺序走：
+
+1. 确认 Node.js、网络和基础依赖没有问题
+2. 完成最小初始化，确保系统能启动
+3. 通过 Control UI 或等效入口确认当前状态
+4. 只选择一个主要入口做验证
+5. 记录当前模型、工具、凭证和认证配置
+6. 最后再决定是否扩展第二个渠道或远程访问
+
 ## 中文用户常见误区
 
 ### 一开始就想把所有能力都接上
@@ -61,10 +81,23 @@ onboarding 的价值，就是把这三个问题的顺序理清楚。
 
 OpenClaw 不是只有界面体验，入口、权限、模型、渠道和部署边界要一起看。
 
+### 把“能启动”误认为“可长期运行”
+
+onboarding 解决的是第一轮可控配置，不等于你已经完成了长期运行所需的认证、日志、更新和安全策略。
+
+## 完成 onboarding 后应该做什么
+
+完成第一轮 onboarding 后，建议立即补三件事：
+
+1. 阅读 [Control UI 是什么](/docs/control-ui)，确认自己知道去哪里看系统状态
+2. 阅读 [安全配置基础](/docs/safety-basics)，避免直接把入口暴露出去
+3. 阅读 [如何持续跟踪 OpenClaw 更新](/docs/release-tracking)，建立最基本的升级意识
+
 ## 推荐的第一次使用顺序
 
-1. 阅读 [OpenClaw 是什么](/Users/maqi/code/openclawcn/content/docs/what-is-openclaw.md)
-2. 阅读 [安装与环境](/Users/maqi/code/openclawcn/content/docs/installation.md)
+1. 阅读 [OpenClaw 是什么](/docs/what-is-openclaw)
+2. 阅读 [安装与环境](/docs/installation)
 3. 完成最小 onboarding
-4. 打开 [Control UI 是什么](/Users/maqi/code/openclawcn/content/docs/control-ui.md)
+4. 打开 [Control UI 是什么](/docs/control-ui)
 5. 再决定是否扩展渠道和 hooks
+6. 开始整理自己的排错和更新跟踪习惯

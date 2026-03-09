@@ -11,6 +11,12 @@ const { data: page } = await useAsyncData(`docs:${slug.value}`, () =>
   queryCollection('docs').path(pagePath.value).first(),
 )
 
+const breadcrumbItems = computed(() => [
+  { label: '首页', to: '/' },
+  { label: '文档', to: '/docs' },
+  { label: String(page.value?.title || '文档详情') },
+])
+
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -28,6 +34,8 @@ useSeo({
 <template>
   <section class="section">
     <div class="container">
+      <AppBreadcrumbs :items="breadcrumbItems" />
+
       <article class="card prose">
         <p class="eyebrow">{{ page?.category || '文档' }}</p>
         <h1>{{ page?.title }}</h1>

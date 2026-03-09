@@ -61,6 +61,6 @@ Control UI 这类管理入口的安全要求，通常应高于普通聊天入口
 
 ## 下一步推荐
 
-- [Control UI 是什么](/Users/maqi/code/openclawcn/content/docs/control-ui.md)
-- [渠道能力概览](/Users/maqi/code/openclawcn/content/docs/channels-overview.md)
-- [Hooks 能做什么](/Users/maqi/code/openclawcn/content/docs/hooks-overview.md)
+- [Control UI 是什么](/docs/control-ui)
+- [渠道能力概览](/docs/channels-overview)
+- [Hooks 能做什么](/docs/hooks-overview)

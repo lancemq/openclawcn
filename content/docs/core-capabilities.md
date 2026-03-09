@@ -68,6 +68,6 @@ OpenClaw 的价值还在于它不是只调用模型。它还包含工具、hooks
 
 ## 下一步推荐
 
-- [渠道能力概览](/Users/maqi/code/openclawcn/content/docs/channels-overview.md)
-- [Control UI 是什么](/Users/maqi/code/openclawcn/content/docs/control-ui.md)
-- [Hooks 能做什么](/Users/maqi/code/openclawcn/content/docs/hooks-overview.md)
+- [渠道能力概览](/docs/channels-overview)
+- [Control UI 是什么](/docs/control-ui)
+- [Hooks 能做什么](/docs/hooks-overview)

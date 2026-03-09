@@ -1,29 +1,89 @@
 ---
 title: 快速入门
-description: 用最短时间理解 OpenClaw 的定位、核心能力，以及第一次阅读时更推荐的中文路径。
+description: 用 5 到 10 分钟建立对 OpenClaw 的整体认识，并明确第一次上手时应该按什么顺序阅读和配置。
 category: 入门
 ---
 
 # 快速入门
 
-如果你是第一次接触 OpenClaw，最重要的不是立刻记住所有配置项，而是先建立一个清晰的理解顺序。
+如果你第一次接触 OpenClaw，最重要的不是立刻把所有渠道、模型、工具和自动化都接上，而是先完成一轮最小可理解的体验。官方文档当前把内容分成 Getting Started、Onboarding、Channels、Tools、Models、Platforms、Gateway & Ops 等模块，这说明 OpenClaw 不是单一聊天页面，而是一套可运行、可扩展、可管理的代理系统。
+
+## 先记住三件事
+
+1. OpenClaw 不是单个聊天窗口，而是一套可长期运行的助手系统
+2. 官方强调 onboarding、Control UI 和 Channels，说明“先配置好”和“先看清系统状态”比“先接很多入口”更重要
+3. 第一次使用最稳的目标不是全功能上线，而是跑通一条最小链路
 
 ## 推荐阅读顺序
 
-1. 先看 [OpenClaw 是什么](/Users/maqi/code/openclawcn/content/docs/what-is-openclaw.md)
-2. 再看 [OpenClaw 适合哪些用户](/Users/maqi/code/openclawcn/content/docs/who-is-openclaw-for.md)
-3. 然后进入 [OpenClaw 核心能力总览](/Users/maqi/code/openclawcn/content/docs/core-capabilities.md)
-4. 接着阅读 [Onboarding 引导流程说明](/Users/maqi/code/openclawcn/content/docs/onboarding-guide.md)
-5. 最后再看渠道、Hooks 和安全基础
+1. 先看 [OpenClaw 是什么](/docs/what-is-openclaw)
+2. 再看 [OpenClaw 适合哪些用户](/docs/who-is-openclaw-for)
+3. 然后看 [OpenClaw 核心能力总览](/docs/core-capabilities)
+4. 接着阅读 [安装与环境](/docs/installation)
+5. 再看 [Onboarding 引导流程说明](/docs/onboarding-guide)
+6. 完成最小链路后再进入渠道、Hooks 和安全文档
 
 ## 第一次使用时先回答三个问题
 
-- 我为什么需要 OpenClaw，而不是普通聊天工具？
-- 我更关心哪类入口或渠道？
-- 我是想先理解结构，还是已经准备开始接入？
+### 1. 你准备把它当成什么来用
+
+- 个人工作台
+- 团队里的代理入口
+- 挂在某个消息渠道后的长期助手
+- 需要接工具和自动化的运行系统
+
+### 2. 你准备先走哪条最小路径
+
+- 先通过 Control UI 验证系统状态
+- 先跑一次 onboarding，完成基础初始化
+- 先接一个最常用入口，不同时展开多个渠道
+
+### 3. 你是否已经准备好长期运行
+
+如果只是试用，先本地跑通即可。如果准备长期运行，就要尽早阅读安全、更新跟踪、排错和迁移相关内容。
+
+## 官方文档反映出的能力结构
+
+从官方目录看，OpenClaw 的重点大致可以按下面的方式理解：
+
+- `Onboarding`：第一次初始化和引导式配置
+- `Control UI`：可见、可查、可管理的控制界面
+- `Channels`：把同一套代理能力接到不同消息入口
+- `Tools / Models / Platforms`：真正决定你能做什么、接什么、运行在哪里
+- `Gateway & Ops`：长期运行时必须关注的暴露面、认证、日志和诊断
+- `Help / Reference`：排错、命令、配置和术语说明
+
+## 一条适合中文用户的第一次上手路径
+
+### 第一步：只验证本地最小链路
+
+目标不是“全都配好”，而是确认：
+
+- 环境准备正确
+- 初始化能完成
+- 能通过一个可控入口看到系统正常工作
+
+### 第二步：只选择一个主入口
+
+对大多数人来说，第一次接入时只保留一个主要渠道最稳。这样一旦出现问题，排查成本也最低。
+
+### 第三步：再决定是否扩展工具、Hooks 和远程访问
+
+这一步才适合进入真正的定制。过早扩展，只会把第一次体验变成大规模排错。
+
+## 一周学习计划
+
+如果你准备把中文站当成系统学习入口，可以按这个节奏走：
+
+1. 第 1 天：理解定位、适用人群、核心结构
+2. 第 2 天：完成安装准备和 onboarding
+3. 第 3 天：理解 Control UI 与渠道的分工
+4. 第 4 天：阅读 Hooks、安全和社区支持
+5. 第 5 天到第 7 天：开始跟踪版本变化、整理自己的配置和接入计划
 
 ## 接下来去哪里
 
 - 想先了解定位：看产品介绍
-- 想先开始配置：看安装与 onboarding
-- 想了解长期跟踪方式：看新闻、FAQ 和社区页
+- 想先开始配置：看 [安装与环境](/docs/installation) 与 [Onboarding 引导流程说明](/docs/onboarding-guide)
+- 想理解结构：看 [内容结构与系统架构](/docs/architecture)
+- 想了解长期跟踪方式：看 [如何持续跟踪 OpenClaw 更新](/docs/release-tracking) 与 [故障排除与诊断思路](/docs/troubleshooting)

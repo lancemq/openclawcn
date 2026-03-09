@@ -59,6 +59,6 @@ category: 功能
 
 ## 推荐阅读顺序
 
-- [OpenClaw 核心能力总览](/Users/maqi/code/openclawcn/content/docs/core-capabilities.md)
-- [渠道能力概览](/Users/maqi/code/openclawcn/content/docs/channels-overview.md)
-- [安全配置基础](/Users/maqi/code/openclawcn/content/docs/safety-basics.md)
+- [OpenClaw 核心能力总览](/docs/core-capabilities)
+- [渠道能力概览](/docs/channels-overview)
+- [安全配置基础](/docs/safety-basics)

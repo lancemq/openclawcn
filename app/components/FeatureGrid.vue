@@ -1,20 +1,20 @@
 <script setup lang="ts">
 const features = [
   {
-    title: '中文内容优先',
-    description: '首页、文档、新闻全部按中文阅读习惯组织，降低初次理解门槛。',
+    title: '快速理解定位',
+    description: '先用中文说明 OpenClaw 是什么、适合谁、和普通聊天工具有什么区别。',
   },
   {
-    title: '产品理解优先',
-    description: '先帮助用户理解 OpenClaw 的定位、能力边界和适用场景，再进入具体配置与接入。',
+    title: '更稳地开始使用',
+    description: '把安装、Onboarding、Control UI 和渠道接入按更容易上手的顺序整理清楚。',
   },
   {
-    title: 'Markdown 驱动',
-    description: '新闻、教程和最佳实践都可以按内容文件持续扩充，不先依赖后台。',
+    title: '聚焦关键能力',
+    description: '围绕渠道、Hooks、安全、升级和排错等真正会影响使用体验的主题展开说明。',
   },
   {
-    title: '持续更新',
-    description: '通过文档、新闻、RSS 和社区反馈形成长期维护的中文资料体系。',
+    title: '跟踪版本变化',
+    description: '通过新闻、FAQ 和社区入口，持续了解 OpenClaw 的版本更新和使用提醒。',
   },
 ]
 </script>
@@ -23,9 +23,9 @@ const features = [
   <section class="section">
     <div class="container">
       <p class="eyebrow">核心价值</p>
-      <h2 class="section-title">把 OpenClaw 的中文介绍、文档与更新入口整理清楚。</h2>
+      <h2 class="section-title">先回答中文用户真正关心的几个问题。</h2>
       <p class="section-copy">
-        网站的重点不是展示建设过程，而是让中文用户第一次进入后，就能顺着产品介绍、文档、更新和社区一路读下去。
+        进入首页后，你应该能快速知道 OpenClaw 能做什么、自己适不适合用、第一次该从哪里开始，以及后续去哪里继续查资料。
       </p>
 
       <div class="feature-grid">

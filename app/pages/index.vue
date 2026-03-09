@@ -70,7 +70,7 @@ useSeo({
     <section class="section">
       <div class="container">
         <p class="eyebrow">互动入口</p>
-        <h2 class="section-title">通过搜索、反馈和社区入口持续补齐中文用户真正需要的内容。</h2>
+        <h2 class="section-title">用搜索、FAQ、反馈和社区入口更快解决问题。</h2>
         <div class="grid three-up">
           <ContentCard
             v-for="item in actionOverview"
@@ -88,9 +88,9 @@ useSeo({
       <div class="container subscribe-grid card">
         <div>
           <p class="eyebrow">订阅更新</p>
-          <h2 class="section-title">如果你希望跟进中文资料更新，可以先留下订阅邮箱。</h2>
+          <h2 class="section-title">如果你想持续关注 OpenClaw 变化，可以订阅更新。</h2>
           <p class="section-copy">
-            你可以通过订阅和 RSS 持续跟踪文档、最佳实践和重要更新，不必每次手动回到站点查看。
+            通过订阅和 RSS，你可以更轻松地跟踪版本动态、重点功能变化和新的中文资料。
           </p>
         </div>
 
@@ -103,18 +103,18 @@ useSeo({
 <style scoped>
 .two-up {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .three-up {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .subscribe-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-  gap: 24px;
+  gap: 18px;
 }
 
 @media (max-width: 980px) {

@@ -468,12 +468,12 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-wn7VH8Zw.mjs')
+    component: () => import('./index-C7wZa2Li.mjs')
   },
   {
     name: "search",
     path: "/search",
-    component: () => import('./search-C32Lz5RJ.mjs')
+    component: () => import('./search-ByKftwiU.mjs')
   },
   {
     name: "feedback",
@@ -483,37 +483,37 @@ const _routes = [
   {
     name: "community",
     path: "/community",
-    component: () => import('./community-58wJ7Ys4.mjs')
+    component: () => import('./community-DNx4gpd8.mjs')
   },
   {
     name: "docs",
     path: "/docs",
-    component: () => import('./index-CngvhEZI.mjs')
+    component: () => import('./index-AP8y5gAA.mjs')
   },
   {
     name: "news",
     path: "/news",
-    component: () => import('./index-bE1JRAjC.mjs')
+    component: () => import('./index-5k2Wkxwt.mjs')
   },
   {
     name: "docs-slug",
     path: "/docs/:slug(.*)*",
-    component: () => import('./_...slug_-DBjvbUy3.mjs')
+    component: () => import('./_...slug_-BcW5FBTt.mjs')
   },
   {
     name: "news-slug",
     path: "/news/:slug(.*)*",
-    component: () => import('./_...slug_-C8mTaWFS.mjs')
+    component: () => import('./_...slug_-lhZuHnO6.mjs')
   },
   {
     name: "best-practices",
     path: "/best-practices",
-    component: () => import('./index-Cq_rP51W.mjs')
+    component: () => import('./index-oYSCmhqM.mjs')
   },
   {
     name: "best-practices-slug",
     path: "/best-practices/:slug(.*)*",
-    component: () => import('./_...slug_-ClGic-VS.mjs')
+    component: () => import('./_...slug_-CviOD9Uo.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {

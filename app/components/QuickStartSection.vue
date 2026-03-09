@@ -3,29 +3,44 @@
     <div class="container quick-start card">
       <div>
         <p class="eyebrow">5 分钟快速开始</p>
-        <h2 class="section-title">先理解 OpenClaw，再决定从哪条路径开始阅读与使用。</h2>
+        <h2 class="section-title">先理解定位，再按更稳的顺序开始上手。</h2>
       </div>
 
       <div class="steps">
         <div class="step">
           <span class="step-number">1</span>
-          <div>
-            <h3>先看产品定位</h3>
-            <pre><code>/docs/what-is-openclaw</code></pre>
+          <div class="step-body">
+            <h3>理解 OpenClaw 是什么</h3>
+            <p>先建立对产品定位、适用人群和核心能力的整体认识，避免一开始就陷入配置细节。</p>
+            <div class="step-links">
+              <NuxtLink to="/docs/what-is-openclaw">产品定位</NuxtLink>
+              <NuxtLink to="/docs/who-is-openclaw-for">适用人群</NuxtLink>
+              <NuxtLink to="/docs/core-capabilities">核心能力</NuxtLink>
+            </div>
           </div>
         </div>
         <div class="step">
           <span class="step-number">2</span>
-          <div>
-            <h3>再看入门与渠道</h3>
-            <pre><code>/docs/onboarding-guide</code></pre>
+          <div class="step-body">
+            <h3>完成安装与初始化</h3>
+            <p>再进入安装、Onboarding 和 Control UI，先跑通最小链路，再决定是否扩展渠道和工具。</p>
+            <div class="step-links">
+              <NuxtLink to="/docs/installation">安装与环境</NuxtLink>
+              <NuxtLink to="/docs/onboarding-guide">Onboarding</NuxtLink>
+              <NuxtLink to="/docs/control-ui">Control UI</NuxtLink>
+            </div>
           </div>
         </div>
         <div class="step">
           <span class="step-number">3</span>
-          <div>
-            <h3>最后跟踪更新与社区</h3>
-            <pre><code>/news /community /rss.xml</code></pre>
+          <div class="step-body">
+            <h3>再扩展渠道与排错</h3>
+            <p>完成基础使用后，再看渠道、安全、升级和排错内容，建立长期使用和维护的基本方法。</p>
+            <div class="step-links">
+              <NuxtLink to="/docs/channels-overview">渠道能力</NuxtLink>
+              <NuxtLink to="/docs/safety-basics">安全基础</NuxtLink>
+              <NuxtLink to="/docs/troubleshooting">故障排除</NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -36,19 +51,24 @@
 <style scoped>
 .quick-start {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .step {
   display: flex;
   gap: 12px;
   padding-top: 4px;
+}
+
+.step-body {
+  display: grid;
+  gap: 8px;
 }
 
 .step-number {
@@ -72,10 +92,37 @@ h3 {
   letter-spacing: -0.03em;
 }
 
-pre {
+.step-body p {
   margin: 0;
-  color: #f8f4ea;
-  font-size: 0.84rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.step-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.step-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.step-links a:hover {
+  transform: translateY(-1px);
+  border-color: rgba(12, 108, 105, 0.28);
+  color: var(--brand);
 }
 
 @media (max-width: 860px) {

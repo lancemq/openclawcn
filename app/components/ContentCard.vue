@@ -26,7 +26,7 @@ defineProps<{
 h3 {
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.18rem;
+  font-size: 1.1rem;
   letter-spacing: -0.03em;
 }
 

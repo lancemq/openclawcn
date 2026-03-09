@@ -156,7 +156,7 @@ useSeo({
 .practice-card h2 {
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.28rem;
+  font-size: 1.18rem;
   letter-spacing: -0.03em;
 }
 

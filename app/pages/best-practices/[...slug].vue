@@ -18,6 +18,12 @@ const { data: relatedPractices } = await useAsyncData(`best-practices:related:${
     .slice(0, 3)
 })
 
+const breadcrumbItems = computed(() => [
+  { label: '首页', to: '/' },
+  { label: '最佳实践', to: '/best-practices' },
+  { label: String(page.value?.title || '最佳实践详情') },
+])
+
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -37,6 +43,8 @@ useSeo({
 <template>
   <section class="section">
     <div class="container">
+      <AppBreadcrumbs :items="breadcrumbItems" />
+
       <article class="card prose">
         <div class="practice-meta">
           <span class="eyebrow">{{ page?.category || '最佳实践' }}</span>
@@ -85,7 +93,7 @@ useSeo({
 }
 
 .related-block {
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .related-head h2 {

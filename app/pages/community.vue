@@ -23,7 +23,7 @@ const channels = [
   },
   {
     title: '贡献与协作',
-    description: '后续会补齐中文贡献指南、翻译说明和社区协作规则。',
+    description: '了解提问建议、反馈方式和当前可用的社区协作入口。',
     href: '/docs/community',
   },
   {
@@ -33,7 +33,7 @@ const channels = [
   },
   {
     title: '更新订阅',
-    description: '通过 RSS 跟踪新闻与最佳实践更新，适合长期关注站点内容演进。',
+    description: '通过 RSS 跟踪新闻和版本观察，适合长期关注 OpenClaw 变化。',
     href: '/rss.xml',
   },
 ]
@@ -66,7 +66,7 @@ const workflows = [
       <p class="eyebrow">Community</p>
       <h1 class="section-title">社区支持</h1>
       <p class="section-copy">
-        这里集中整理 GitHub、FAQ、内容反馈和更新订阅入口，方便中文用户持续跟踪 OpenClaw 并参与讨论。
+        这里提供 GitHub、FAQ、反馈和更新订阅入口，方便中文用户查资料、提问题并持续关注 OpenClaw。
       </p>
 
       <div class="grid cards">
@@ -99,9 +99,9 @@ const workflows = [
         </section>
 
         <section class="card subscribe-card">
-          <h2>内容更新订阅</h2>
+          <h2>更新订阅</h2>
           <p>
-            如果你主要关心站点内容是否有更新，可以直接订阅 RSS，而不是依赖站内搜索或手动刷新。
+            如果你主要关心 OpenClaw 的版本变化和中文解读，可以直接订阅 RSS，不必每次手动回来看。
           </p>
           <div class="button-row">
             <a class="button primary" href="/rss.xml" target="_blank" rel="noreferrer">打开 RSS</a>

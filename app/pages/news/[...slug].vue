@@ -23,6 +23,12 @@ const { data: relatedPractices } = await useAsyncData(`news:related-practices:${
   return items.slice(0, 2)
 })
 
+const breadcrumbItems = computed(() => [
+  { label: '首页', to: '/' },
+  { label: '新闻', to: '/news' },
+  { label: String(page.value?.title || '新闻详情') },
+])
+
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -43,6 +49,8 @@ useSeo({
 <template>
   <section class="section">
     <div class="container">
+      <AppBreadcrumbs :items="breadcrumbItems" />
+
       <article class="card prose">
         <div class="news-meta">
           <span class="eyebrow">{{ page?.category || '动态' }}</span>
@@ -102,7 +110,7 @@ useSeo({
 }
 
 .related-block {
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .related-head h2 {

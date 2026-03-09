@@ -9,7 +9,7 @@ const { public: publicConfig } = useRuntimeConfig()
         <p class="eyebrow">OpenClaw 中文官网</p>
         <h1 class="hero-title">让中文用户更快理解 OpenClaw，并找到清晰的中文资料入口。</h1>
         <p class="hero-copy">
-          这里集中整理 OpenClaw 的产品介绍、入门文档、功能专题、版本更新和社区入口，帮助中文用户连续地理解与使用它。
+          这里提供 OpenClaw 的产品介绍、入门文档、功能专题、版本观察和社区入口，帮助中文用户更顺畅地理解与使用它。
         </p>
 
         <div class="button-row">
@@ -30,21 +30,21 @@ const { public: publicConfig } = useRuntimeConfig()
 
       <div class="hero-panel card">
         <div class="hero-panel-header">
-          <span>Editorial Frame</span>
-          <span class="status">Live Structure</span>
+          <span>OpenClaw Guide</span>
+          <span class="status">Ready to Explore</span>
         </div>
         <div class="hero-stats">
           <div>
             <strong>Docs</strong>
-            <span>中文文档入口</span>
+            <span>从入门到排错</span>
           </div>
           <div>
             <strong>News</strong>
-            <span>持续更新动态</span>
+            <span>版本与变化观察</span>
           </div>
           <div>
             <strong>Community</strong>
-            <span>集中社区支持</span>
+            <span>反馈与讨论入口</span>
           </div>
         </div>
         <ol class="timeline">
@@ -54,11 +54,11 @@ const { public: publicConfig } = useRuntimeConfig()
           </li>
           <li>
             <strong>再进入文档与功能专题</strong>
-            <p>把安装、渠道、Control UI、Hooks 和安全基础按中文阅读习惯组织清楚。</p>
+            <p>优先看安装、Onboarding、Control UI、Channels 和安全边界。</p>
           </li>
           <li>
             <strong>持续跟踪更新与社区讨论</strong>
-            <p>通过新闻、RSS、反馈与 GitHub 入口长期关注版本变化和实践经验。</p>
+            <p>通过新闻、FAQ、反馈和 GitHub 入口持续跟踪版本变化与使用经验。</p>
           </li>
         </ol>
       </div>
@@ -94,7 +94,7 @@ const { public: publicConfig } = useRuntimeConfig()
   max-width: 900px;
   margin: 12px 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: clamp(1.82rem, 3.15vw, 3.18rem);
+  font-size: clamp(1.68rem, 2.82vw, 2.86rem);
   line-height: 0.95;
   letter-spacing: -0.055em;
 }
