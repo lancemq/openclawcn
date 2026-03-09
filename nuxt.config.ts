@@ -1,3 +1,43 @@
+import { readdirSync } from 'node:fs'
+import { join, relative, sep } from 'node:path'
+
+function collectMarkdownRoutes(baseDir: string, routePrefix: string) {
+  const stack = [baseDir]
+  const routes: string[] = []
+
+  while (stack.length) {
+    const currentDir = stack.pop()
+
+    if (!currentDir) {
+      continue
+    }
+
+    for (const entry of readdirSync(currentDir, { withFileTypes: true })) {
+      const fullPath = join(currentDir, entry.name)
+
+      if (entry.isDirectory()) {
+        stack.push(fullPath)
+        continue
+      }
+
+      if (!entry.name.endsWith('.md')) {
+        continue
+      }
+
+      const slug = relative(baseDir, fullPath).replace(/\.md$/, '').split(sep).join('/')
+      routes.push(`${routePrefix}/${slug}`)
+    }
+  }
+
+  return routes.sort()
+}
+
+const contentRoutes = [
+  ...collectMarkdownRoutes(join(process.cwd(), 'content', 'docs'), '/docs'),
+  ...collectMarkdownRoutes(join(process.cwd(), 'content', 'news'), '/news'),
+  ...collectMarkdownRoutes(join(process.cwd(), 'content', 'best-practices'), '/best-practices'),
+]
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-02-20',
   srcDir: 'app/',
@@ -74,5 +114,8 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'vercel',
+    prerender: {
+      routes: contentRoutes,
+    },
   },
 })
