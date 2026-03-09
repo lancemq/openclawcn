@@ -10,12 +10,9 @@ const items = [
 <template>
   <section class="section">
     <div class="container spotlight">
-      <div>
+      <div class="spotlight-copy card">
         <p class="eyebrow">重点导览</p>
-        <h2 class="section-title">先把第一次使用最需要的答案放在前面。</h2>
-        <p class="section-copy">
-          如果你是第一次接触 OpenClaw，最需要的不是一次看完所有细节，而是先找到正确的入门顺序和查阅路径。
-        </p>
+        <p class="spotlight-note">第一次进入时，优先解决阅读顺序和查阅路径，而不是一次看完全部细节。</p>
         <div class="button-row">
           <NuxtLink class="button primary" to="/docs/getting-started">开始了解 OpenClaw</NuxtLink>
           <NuxtLink class="button secondary" to="/community">查看社区支持</NuxtLink>
@@ -35,17 +32,30 @@ const items = [
 .spotlight {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  gap: 22px;
+  gap: 14px;
   align-items: stretch;
+}
+
+.spotlight-copy {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.spotlight-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.64;
 }
 
 .spotlight-list {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   margin: 0;
   padding-left: 20px;
   color: var(--ink-soft);
-  line-height: 1.7;
+  line-height: 1.62;
 }
 
 @media (max-width: 900px) {

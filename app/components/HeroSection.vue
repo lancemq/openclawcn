@@ -6,10 +6,13 @@ const { public: publicConfig } = useRuntimeConfig()
   <section class="hero section">
     <div class="container hero-grid">
       <div class="hero-copy-column">
-        <p class="eyebrow">OpenClaw 中文官网</p>
-        <h1 class="hero-title">让中文用户更快理解 OpenClaw，并找到清晰的中文资料入口。</h1>
+        <div class="hero-heading-row">
+          <p class="eyebrow">OpenClaw 中文官网</p>
+          <span class="hero-kicker">成熟、稳定、可持续查阅的中文入口</span>
+        </div>
+        <h1 class="hero-title">OpenClaw 中文资料与更新导航</h1>
         <p class="hero-copy">
-          这里提供 OpenClaw 的产品介绍、入门文档、功能专题、版本观察和社区入口，帮助中文用户更顺畅地理解与使用它。
+          以更紧凑的方式组织产品介绍、安装路径、关键能力、版本变化和社区入口，减少第一次进入时的信息噪音。
         </p>
 
         <div class="button-row">
@@ -25,6 +28,17 @@ const { public: publicConfig } = useRuntimeConfig()
           <span class="tag">安装指引</span>
           <span class="tag">社区入口</span>
           <span class="tag">最新动态</span>
+        </div>
+
+        <div class="hero-summary-grid">
+          <article>
+            <strong>先读什么</strong>
+            <p>产品定位、安装、Control UI。</p>
+          </article>
+          <article>
+            <strong>持续关注什么</strong>
+            <p>版本变化、能力更新、排错路径。</p>
+          </article>
         </div>
       </div>
 
@@ -69,56 +83,90 @@ const { public: publicConfig } = useRuntimeConfig()
 <style scoped>
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.65fr);
-  gap: 28px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
+  gap: 20px;
+  align-items: start;
 }
 
 .hero-copy-column {
   position: relative;
-  padding-left: 18px;
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  border-radius: 24px;
+  background: rgba(255, 251, 244, 0.72);
+  box-shadow: 0 18px 40px rgba(74, 56, 28, 0.08);
 }
 
-.hero-copy-column::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 6px;
-  width: 3px;
-  height: calc(100% - 12px);
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--accent), rgba(166, 111, 44, 0.16));
+.hero-heading-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.hero-kicker {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
 }
 
 .hero-title {
-  max-width: 900px;
-  margin: 12px 0;
+  max-width: 14ch;
+  margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: clamp(1.68rem, 2.82vw, 2.86rem);
-  line-height: 0.95;
-  letter-spacing: -0.055em;
+  font-size: clamp(1.46rem, 2.05vw, 2.08rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .hero-copy {
-  max-width: 720px;
-  margin: 0 0 18px;
+  max-width: 62ch;
+  margin: 0;
   color: var(--ink-soft);
   font-size: 0.96rem;
-  line-height: 1.72;
+  line-height: 1.64;
 }
 
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+}
+
+.hero-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hero-summary-grid article {
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.hero-summary-grid strong {
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 0.98rem;
+}
+
+.hero-summary-grid p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
 }
 
 .hero-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: var(--ink-soft);
   font-size: 0.76rem;
   letter-spacing: 0.08em;
@@ -133,7 +181,7 @@ const { public: publicConfig } = useRuntimeConfig()
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .hero-stats div {
@@ -157,10 +205,10 @@ const { public: publicConfig } = useRuntimeConfig()
 
 .timeline {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   margin: 0;
   padding-left: 16px;
-  font-size: 0.94rem;
+  font-size: 0.9rem;
 }
 
 .timeline p {
@@ -175,11 +223,11 @@ const { public: publicConfig } = useRuntimeConfig()
     grid-template-columns: 1fr;
   }
 
-  .hero-copy-column {
-    padding-left: 18px;
+  .hero-stats {
+    grid-template-columns: 1fr;
   }
 
-  .hero-stats {
+  .hero-summary-grid {
     grid-template-columns: 1fr;
   }
 }

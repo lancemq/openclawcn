@@ -1,9 +1,9 @@
 <template>
   <section class="section">
     <div class="container quick-start card">
-      <div>
+      <div class="quick-start-head">
         <p class="eyebrow">5 分钟快速开始</p>
-        <h2 class="section-title">先理解定位，再按更稳的顺序开始上手。</h2>
+        <p class="quick-start-note">按照“定位、安装、扩展”三步推进，比一开始铺开所有配置更稳。</p>
       </div>
 
       <div class="steps">
@@ -51,7 +51,20 @@
 <style scoped>
 .quick-start {
   display: grid;
-  gap: 14px;
+  gap: 12px;
+}
+
+.quick-start-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.quick-start-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
 }
 
 .steps {
@@ -88,7 +101,7 @@
 h3 {
   margin: 0 0 8px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.08rem;
+  font-size: 0.98rem;
   letter-spacing: -0.03em;
 }
 

@@ -22,11 +22,10 @@ const features = [
 <template>
   <section class="section">
     <div class="container">
-      <p class="eyebrow">核心价值</p>
-      <h2 class="section-title">先回答中文用户真正关心的几个问题。</h2>
-      <p class="section-copy">
-        进入首页后，你应该能快速知道 OpenClaw 能做什么、自己适不适合用、第一次该从哪里开始，以及后续去哪里继续查资料。
-      </p>
+      <div class="section-head compact-head">
+        <p class="eyebrow">核心价值</p>
+        <p class="head-note">先回答中文用户最关心的四件事。</p>
+      </div>
 
       <div class="feature-grid">
         <article v-for="(feature, index) in features" :key="feature.title" class="card feature-card">
@@ -44,12 +43,25 @@ const features = [
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 22px;
+  margin-top: 14px;
 }
 
 .feature-card {
-  min-height: 180px;
+  min-height: 152px;
   align-content: start;
+}
+
+.compact-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.head-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
 }
 
 .feature-index {
@@ -68,7 +80,7 @@ const features = [
 h3 {
   margin: 0 0 8px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.18rem;
+  font-size: 1.02rem;
   letter-spacing: -0.03em;
 }
 

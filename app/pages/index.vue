@@ -16,11 +16,13 @@ useSeo({
     <QuickStartSection />
     <ContentSpotlight />
 
-    <section class="section">
+    <section class="section content-section docs-section">
       <div class="container">
-        <p class="eyebrow">文档入口</p>
-        <h2 class="section-title">从产品介绍、入门文档和功能专题开始系统理解 OpenClaw。</h2>
-        <div class="grid two-up">
+        <div class="home-head">
+          <p class="eyebrow">文档入口</p>
+          <p class="home-head-note">从定位、安装到架构与排错，按顺序建立完整理解。</p>
+        </div>
+        <div class="grid docs-grid">
           <ContentCard
             v-for="item in docsOverview"
             :key="item.to"
@@ -33,11 +35,13 @@ useSeo({
       </div>
     </section>
 
-    <section class="section">
+    <section class="section content-section news-section">
       <div class="container">
-        <p class="eyebrow">最新动态</p>
-        <h2 class="section-title">通过版本更新、能力变化和使用提醒持续跟踪 OpenClaw。</h2>
-        <div class="grid two-up">
+        <div class="home-head">
+          <p class="eyebrow">最新动态</p>
+          <p class="home-head-note">聚焦版本变化、能力更新和需要及时关注的使用提醒。</p>
+        </div>
+        <div class="grid news-grid">
           <ContentCard
             v-for="item in newsOverview"
             :key="item.to"
@@ -50,11 +54,13 @@ useSeo({
       </div>
     </section>
 
-    <section class="section">
+    <section class="section content-section practice-section">
       <div class="container">
-        <p class="eyebrow">最佳实践</p>
-        <h2 class="section-title">把常见的接入、运维和协作经验整理成更稳定的中文实践。</h2>
-        <div class="grid two-up">
+        <div class="home-head">
+          <p class="eyebrow">最佳实践</p>
+          <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法。</p>
+        </div>
+        <div class="grid practice-grid">
           <ContentCard
             v-for="item in bestPracticeOverview"
             :key="item.to"
@@ -67,11 +73,13 @@ useSeo({
       </div>
     </section>
 
-    <section class="section">
+    <section class="section content-section action-section">
       <div class="container">
-        <p class="eyebrow">互动入口</p>
-        <h2 class="section-title">用搜索、FAQ、反馈和社区入口更快解决问题。</h2>
-        <div class="grid three-up">
+        <div class="home-head">
+          <p class="eyebrow">互动入口</p>
+          <p class="home-head-note">通过搜索、FAQ、反馈和社区入口更快找到下一步动作。</p>
+        </div>
+        <div class="grid action-grid">
           <ContentCard
             v-for="item in actionOverview"
             :key="item.to"
@@ -86,12 +94,9 @@ useSeo({
 
     <section class="section">
       <div class="container subscribe-grid card">
-        <div>
+        <div class="subscribe-copy">
           <p class="eyebrow">订阅更新</p>
-          <h2 class="section-title">如果你想持续关注 OpenClaw 变化，可以订阅更新。</h2>
-          <p class="section-copy">
-            通过订阅和 RSS，你可以更轻松地跟踪版本动态、重点功能变化和新的中文资料。
-          </p>
+          <p class="home-head-note">通过订阅和 RSS 持续跟踪版本动态、重点功能变化和新的中文资料。</p>
         </div>
 
         <SubscribeForm />
@@ -101,14 +106,52 @@ useSeo({
 </template>
 
 <style scoped>
-.two-up {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 16px;
+.content-section {
+  padding-top: 28px;
+  padding-bottom: 18px;
 }
 
-.three-up {
+.home-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.home-head-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.docs-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.docs-grid > :first-child {
+  grid-column: span 2;
+}
+
+.news-grid {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+}
+
+.practice-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 16px;
+}
+
+.practice-grid > :first-child {
+  grid-column: span 2;
+}
+
+.action-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.action-grid > :first-child {
+  grid-column: span 2;
 }
 
 .subscribe-grid {
@@ -117,13 +160,30 @@ useSeo({
   gap: 18px;
 }
 
+.subscribe-copy {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
 @media (max-width: 980px) {
-  .two-up {
+  .docs-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .three-up {
-    grid-template-columns: 1fr;
+  .docs-grid > :first-child {
+    grid-column: span 2;
+  }
+
+  .news-grid,
+  .practice-grid,
+  .action-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .practice-grid > :first-child,
+  .action-grid > :first-child {
+    grid-column: span 2;
   }
 
   .subscribe-grid {
@@ -132,8 +192,17 @@ useSeo({
 }
 
 @media (max-width: 760px) {
-  .two-up {
+  .docs-grid,
+  .news-grid,
+  .practice-grid,
+  .action-grid {
     grid-template-columns: 1fr;
+  }
+
+  .docs-grid > :first-child,
+  .practice-grid > :first-child,
+  .action-grid > :first-child {
+    grid-column: span 1;
   }
 }
 </style>
