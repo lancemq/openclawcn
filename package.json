@@ -26,9 +26,6 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@oxc-minify/binding-darwin-arm64": "^0.112.0",
-    "@oxc-parser/binding-darwin-arm64": "^0.112.0",
-    "@oxc-transform/binding-darwin-arm64": "^0.112.0",
     "@types/node": "^22.13.10",
     "eslint": "^9.22.0",
     "typescript": "^5.8.2"
