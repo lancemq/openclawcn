@@ -21,5 +21,15 @@ export default defineContentConfig({
         date: z.string(),
       }),
     }),
+    bestPractices: defineCollection({
+      type: 'page',
+      source: 'best-practices/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        category: z.string(),
+        difficulty: z.string(),
+      }),
+    }),
   },
 })

@@ -2,7 +2,7 @@
 title: OpenClawCN MVP 启动
 description: 第 1 步聚焦搭建中文官网的最小可用版本，先建立首页、文档和新闻入口。
 category: 项目动态
-date: 2026-03-09
+date: 2026-03-05
 ---
 
 # OpenClawCN MVP 启动

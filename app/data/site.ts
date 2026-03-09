@@ -19,6 +19,33 @@ export const docsOverview = [
   },
 ]
 
+export const bestPracticeOverview = [
+  {
+    title: '中文文档站点维护',
+    description: '如何把文档、社区入口和搜索组织成一个更容易理解的中文官网。',
+    to: '/best-practices/content-ops',
+    meta: '内容运营',
+  },
+  {
+    title: '反馈闭环设计',
+    description: '把站内反馈、GitHub 和社区协作组织成一条可验证的改进路径。',
+    to: '/best-practices/feedback-loop',
+    meta: '社区协作',
+  },
+  {
+    title: '内容发布节奏管理',
+    description: '如何让新闻、文档和最佳实践的更新节奏更稳定，避免站点长期停滞。',
+    to: '/best-practices/publishing-rhythm',
+    meta: '内容运营',
+  },
+  {
+    title: '首页信息架构收敛',
+    description: '如何控制首页信息量，让第一次访问的中文用户更快理解站点主线。',
+    to: '/best-practices/homepage-ia',
+    meta: '信息架构',
+  },
+]
+
 export const actionOverview = [
   {
     title: '站内搜索',
@@ -63,6 +90,18 @@ export const newsOverview = [
     title: '搜索与反馈入口已上线',
     description: '第 2 步开始交付站内搜索、社区页和反馈表单，网站进入基础交互阶段。',
     to: '/news/search-feedback-launch',
+    meta: '2026-03-09',
+  },
+  {
+    title: '第 2 步演示能力继续增强',
+    description: '搜索空状态、高亮、FAQ 页面和订阅入口已补齐，第 2 步更接近可演示状态。',
+    to: '/news/demo-ready-step2',
+    meta: '2026-03-09',
+  },
+  {
+    title: '最佳实践专题已上线',
+    description: '第 3 步开始补充最佳实践列表与详情页，站点内容开始走向专题沉淀。',
+    to: '/news/best-practices-launch',
     meta: '2026-03-09',
   },
 ]

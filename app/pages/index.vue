@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { actionOverview, docsOverview, newsOverview } from '~/data/site'
+import { actionOverview, bestPracticeOverview, docsOverview, newsOverview } from '~/data/site'
 
 useSeo({
   title: 'OpenClaw 中文官网',
   description: '面向中文用户的 OpenClaw 官网 MVP，包含新闻、文档和社区支持入口。',
   path: '/',
+  type: 'website',
 })
 </script>
 
@@ -39,6 +40,23 @@ useSeo({
         <div class="grid two-up">
           <ContentCard
             v-for="item in newsOverview"
+            :key="item.to"
+            :title="item.title"
+            :description="item.description"
+            :to="item.to"
+            :meta="item.meta"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">最佳实践</p>
+        <h2 class="section-title">第 3 步先从最核心的中文站点实践沉淀开始。</h2>
+        <div class="grid two-up">
+          <ContentCard
+            v-for="item in bestPracticeOverview"
             :key="item.to"
             :title="item.title"
             :description="item.description"

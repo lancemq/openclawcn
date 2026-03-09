@@ -36,38 +36,46 @@
 <style scoped>
 .quick-start {
   display: grid;
-  gap: 20px;
+  gap: 18px;
 }
 
 .steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 14px;
 }
 
 .step {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  padding-top: 4px;
 }
 
 .step-number {
   display: grid;
   flex: none;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  color: #042f2e;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: #fff8ef;
+  font-size: 0.84rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--brand) 0%, #99f6e4 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #c28b44 100%);
+  box-shadow: 0 14px 24px rgba(166, 111, 44, 0.2);
 }
 
 h3 {
   margin: 0 0 8px;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.08rem;
+  letter-spacing: -0.03em;
 }
 
 pre {
   margin: 0;
+  color: #f8f4ea;
+  font-size: 0.84rem;
 }
 
 @media (max-width: 860px) {

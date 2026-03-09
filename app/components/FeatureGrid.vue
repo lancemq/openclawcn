@@ -29,7 +29,8 @@ const features = [
       </p>
 
       <div class="feature-grid">
-        <article v-for="feature in features" :key="feature.title" class="card">
+        <article v-for="(feature, index) in features" :key="feature.title" class="card feature-card">
+          <span class="feature-index">0{{ index + 1 }}</span>
           <h3>{{ feature.title }}</h3>
           <p>{{ feature.description }}</p>
         </article>
@@ -42,18 +43,40 @@ const features = [
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 26px;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.feature-card {
+  min-height: 180px;
+  align-content: start;
+}
+
+.feature-index {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 16px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: var(--accent);
+  background: rgba(234, 215, 182, 0.44);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
 }
 
 h3 {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.18rem;
+  letter-spacing: -0.03em;
 }
 
 p {
   margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.62;
 }
 
 @media (max-width: 980px) {

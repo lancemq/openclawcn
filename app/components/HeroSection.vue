@@ -5,7 +5,7 @@ const { public: publicConfig } = useRuntimeConfig()
 <template>
   <section class="hero section">
     <div class="container hero-grid">
-      <div>
+      <div class="hero-copy-column">
         <p class="eyebrow">OpenClaw 中文官网</p>
         <h1 class="hero-title">让中文用户更快理解 OpenClaw，并找到清晰的中文资料入口。</h1>
         <p class="hero-copy">
@@ -30,8 +30,22 @@ const { public: publicConfig } = useRuntimeConfig()
 
       <div class="hero-panel card">
         <div class="hero-panel-header">
-          <span>Step 1 MVP</span>
-          <span class="status">可验证</span>
+          <span>Editorial Frame</span>
+          <span class="status">Live Structure</span>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <strong>Docs</strong>
+            <span>中文文档入口</span>
+          </div>
+          <div>
+            <strong>News</strong>
+            <span>持续更新动态</span>
+          </div>
+          <div>
+            <strong>Community</strong>
+            <span>集中社区支持</span>
+          </div>
         </div>
         <ol class="timeline">
           <li>
@@ -55,59 +69,117 @@ const { public: publicConfig } = useRuntimeConfig()
 <style scoped>
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.65fr);
   gap: 28px;
   align-items: center;
 }
 
+.hero-copy-column {
+  position: relative;
+  padding-left: 18px;
+}
+
+.hero-copy-column::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 3px;
+  height: calc(100% - 12px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), rgba(166, 111, 44, 0.16));
+}
+
 .hero-title {
-  margin: 16px 0;
-  font-size: clamp(2.5rem, 6vw, 4.9rem);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  max-width: 900px;
+  margin: 12px 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: clamp(2.4rem, 4.6vw, 4.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
 }
 
 .hero-copy {
-  max-width: 640px;
-  margin: 0 0 24px;
-  color: var(--muted);
-  font-size: 1.06rem;
-  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  line-height: 1.72;
 }
 
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 22px;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 .hero-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
-  color: var(--muted);
+  margin-bottom: 14px;
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .status {
   color: var(--brand);
 }
 
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.hero-stats div {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(67, 73, 60, 0.08);
+}
+
+.hero-stats strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 0.94rem;
+}
+
+.hero-stats span {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
 .timeline {
   display: grid;
-  gap: 18px;
+  gap: 14px;
   margin: 0;
-  padding-left: 18px;
+  padding-left: 16px;
+  font-size: 0.94rem;
 }
 
 .timeline p {
-  margin: 6px 0 0;
-  color: var(--muted);
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {
   .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy-column {
+    padding-left: 18px;
+  }
+
+  .hero-stats {
     grid-template-columns: 1fr;
   }
 }

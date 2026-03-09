@@ -4,6 +4,7 @@ const route = useRoute()
 const navItems = [
   { label: '首页', to: '/' },
   { label: '文档', to: '/docs' },
+  { label: '实践', to: '/best-practices' },
   { label: '新闻', to: '/news' },
   { label: '社区', to: '/community' },
   { label: '搜索', to: '/search' },
@@ -58,8 +59,8 @@ function isActive(to: string) {
   top: 0;
   z-index: 30;
   backdrop-filter: blur(14px);
-  background: rgba(8, 18, 27, 0.75);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  background: rgba(248, 244, 234, 0.78);
+  border-bottom: 1px solid rgba(67, 73, 60, 0.1);
 }
 
 .header-inner {
@@ -67,24 +68,26 @@ function isActive(to: string) {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 76px;
+  min-height: 68px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  font-size: 0.88rem;
   font-weight: 800;
-  color: #042f2e;
-  background: linear-gradient(135deg, var(--brand) 0%, #99f6e4 100%);
+  color: #fff8ef;
+  background: linear-gradient(135deg, var(--accent) 0%, #c28b44 100%);
+  box-shadow: 0 14px 24px rgba(166, 111, 44, 0.22);
 }
 
 .brand-copy {
@@ -93,8 +96,18 @@ function isActive(to: string) {
   line-height: 1.1;
 }
 
+.brand-copy strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+}
+
 .brand-copy small {
-  color: var(--muted);
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .nav {
@@ -104,20 +117,22 @@ function isActive(to: string) {
 }
 
 .nav-link {
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: 999px;
-  color: var(--muted);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .nav-link.active,
 .nav-link:hover {
-  color: var(--text);
-  background: rgba(148, 163, 184, 0.08);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.66);
 }
 
 .compact {
-  min-height: 40px;
-  padding-inline: 14px;
+  min-height: 36px;
+  padding-inline: 12px;
 }
 
 @media (max-width: 860px) {

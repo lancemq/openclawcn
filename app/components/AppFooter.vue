@@ -16,6 +16,7 @@ const year = new Date().getFullYear()
         <h3>内容</h3>
         <ul>
           <li><NuxtLink to="/docs">文档</NuxtLink></li>
+          <li><NuxtLink to="/best-practices">最佳实践</NuxtLink></li>
           <li><NuxtLink to="/news">新闻</NuxtLink></li>
           <li><NuxtLink to="/community">社区支持</NuxtLink></li>
           <li><NuxtLink to="/search">站内搜索</NuxtLink></li>
@@ -42,7 +43,8 @@ const year = new Date().getFullYear()
 <style scoped>
 .footer {
   padding: 40px 0 28px;
-  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  border-top: 1px solid rgba(67, 73, 60, 0.12);
+  background: linear-gradient(180deg, rgba(239, 231, 216, 0.1), rgba(234, 224, 206, 0.36));
 }
 
 .footer-grid {
@@ -53,13 +55,15 @@ const year = new Date().getFullYear()
 
 .footer-copy {
   max-width: 420px;
-  color: var(--muted);
+  color: var(--ink-soft);
   line-height: 1.8;
 }
 
 h3 {
   margin: 0 0 12px;
-  font-size: 1rem;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
 }
 
 ul {
@@ -78,8 +82,8 @@ li + li {
   gap: 12px;
   padding-top: 26px;
   margin-top: 28px;
-  color: var(--muted);
-  border-top: 1px solid rgba(148, 163, 184, 0.08);
+  color: var(--ink-soft);
+  border-top: 1px solid rgba(67, 73, 60, 0.08);
 }
 
 @media (max-width: 760px) {

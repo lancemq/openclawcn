@@ -12,6 +12,9 @@ const searchInput = ref(typeof route.query.q === 'string' ? route.query.q : '')
 
 const { data: docs } = await useAsyncData('search:docs', () => queryCollection('docs').all())
 const { data: news } = await useAsyncData('search:news', () => queryCollection('news').all())
+const { data: bestPractices } = await useAsyncData('search:best-practices', () =>
+  queryCollection('bestPractices').all(),
+)
 
 const normalizedQuery = computed(() => searchInput.value.trim().toLowerCase())
 
@@ -32,7 +35,15 @@ const allItems = computed(() => {
     kind: '新闻',
   }))
 
-  return [...docItems, ...newsItems]
+  const practiceItems = (bestPractices.value || []).map((item) => ({
+    title: String(item.title || ''),
+    description: String(item.description || ''),
+    category: String(item.category || '最佳实践'),
+    path: String(item.path || ''),
+    kind: '最佳实践',
+  }))
+
+  return [...docItems, ...newsItems, ...practiceItems]
 })
 
 const filteredItems = computed(() => {

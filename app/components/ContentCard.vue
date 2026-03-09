@@ -19,22 +19,28 @@ defineProps<{
 <style scoped>
 .content-card {
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  min-height: 100%;
 }
 
 h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.48rem;
+  letter-spacing: -0.03em;
 }
 
 p {
   margin: 0;
-  color: var(--muted);
+  color: var(--ink-soft);
   line-height: 1.7;
 }
 
 .more {
+  margin-top: auto;
   color: var(--brand);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 </style>

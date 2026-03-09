@@ -50,6 +50,7 @@ export default defineNuxtConfig({
     '/search': { prerender: true },
     '/feedback': { prerender: true },
     '/faq': { prerender: true },
+    '/best-practices': { prerender: true },
   },
   nitro: {
     preset: 'vercel',

@@ -35,16 +35,16 @@ const items = [
 .spotlight {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  gap: 24px;
+  gap: 30px;
   align-items: stretch;
 }
 
 .spotlight-list {
   display: grid;
-  gap: 16px;
+  gap: 18px;
   margin: 0;
   padding-left: 20px;
-  color: var(--muted);
+  color: var(--ink-soft);
   line-height: 1.7;
 }
 
