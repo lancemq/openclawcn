@@ -1,213 +1,718 @@
 <script setup lang="ts">
 useSeo({
   title: '社区支持',
-  description: '查看 OpenClawCN 的社区入口、问题反馈方式、贡献路径和后续中文社区规划。',
+  description: '查看 OpenClawCN 的社区入口、问题分流方式、贡献路径和中文社区协作现状。',
   path: '/community',
 })
 
-const channels = [
+const primaryChannels = [
   {
-    title: 'GitHub 仓库',
-    description: '查看源码、版本动态、Issue 和 PR 记录。',
-    href: 'https://github.com/openclaw/openclaw',
+    title: '先查资料',
+    summary: '适合刚接触 OpenClaw、概念还不清晰，或者需要先确认是否已有答案。',
+    detail: '从文档与 FAQ 开始，通常比直接发问更快。',
+    href: '/docs',
+    cta: '查看文档',
+    tag: '推荐起点',
   },
   {
-    title: 'GitHub Issues',
-    description: '如果是明确的问题、缺失内容或 bug，直接进入 Issue 更适合形成后续跟踪。',
+    title: '提交明确问题',
+    summary: '适合 bug、功能异常、可复现问题、缺失页面或需要长期追踪的事项。',
+    detail: '优先进入 GitHub Issues，方便公开跟踪和补充上下文。',
     href: 'https://github.com/openclaw/openclaw/issues',
+    cta: '打开 Issues',
+    tag: '公开跟踪',
   },
   {
-    title: '问题反馈',
-    description: '如果你发现文档问题或站点 bug，可以直接提交反馈。',
+    title: '反馈中文站内容',
+    summary: '适合错别字、结构建议、内容缺失、链接异常或页面展示问题。',
+    detail: '如果问题只和中文站有关，用站内反馈更高效。',
     href: '/feedback',
+    cta: '提交反馈',
+    tag: '站内入口',
   },
   {
-    title: '贡献与协作',
-    description: '了解提问建议、反馈方式和当前可用的社区协作入口。',
-    href: '/docs/community',
-  },
-  {
-    title: 'FAQ',
-    description: '先查看常见问题，再决定去文档、反馈还是 GitHub。',
-    href: '/faq',
-  },
-  {
-    title: '更新订阅',
-    description: '通过 RSS 跟踪新闻和版本观察，适合长期关注 OpenClaw 变化。',
+    title: '持续跟踪动态',
+    summary: '适合长期关注产品变化，不想靠手动刷新页面检查。',
+    detail: 'RSS 和新闻页负责承接更新追踪。',
     href: '/rss.xml',
+    cta: '订阅 RSS',
+    tag: '持续订阅',
+  },
+]
+
+const triageSteps = [
+  {
+    step: '01',
+    title: '先判断问题属于哪一层',
+    description: '产品能力、使用方法、站点内容、还是代码级 bug。先分层，才能走对入口。',
+  },
+  {
+    step: '02',
+    title: '再决定是否需要公开追踪',
+    description: '需要复现、协作、补日志和后续回溯的，放到 GitHub；只涉及中文站内容时走站内反馈。',
+  },
+  {
+    step: '03',
+    title: '最后补齐上下文',
+    description: '带上版本、页面路径、错误信息、复现步骤或预期行为，能显著减少来回沟通。',
+  },
+]
+
+const scenarios = [
+  {
+    label: '看不懂概念',
+    route: '文档 / FAQ',
+    note: '先建立背景，再决定是否继续提问。',
+  },
+  {
+    label: '中文站内容有问题',
+    route: '反馈表单',
+    note: '适合错别字、结构建议、缺图、链接错误。',
+  },
+  {
+    label: '功能异常或 bug',
+    route: 'GitHub Issues',
+    note: '适合公开跟踪和补充复现信息。',
+  },
+  {
+    label: '想持续关注更新',
+    route: '新闻 / RSS',
+    note: '适合版本变化、能力更新、里程碑追踪。',
+  },
+]
+
+const contributionLanes = [
+  {
+    title: '内容修订',
+    description: '纠正表达、补充案例、优化阅读路径，让中文资料更稳定。',
+    action: '从反馈或文档页开始',
+  },
+  {
+    title: '问题归档',
+    description: '把零散的使用问题整理成 FAQ、最佳实践或更清晰的 Issue。',
+    action: '优先形成可复用的问题描述',
+  },
+  {
+    title: '能力验证',
+    description: '围绕安装、渠道接入、运维、安全等主题补充真实使用反馈。',
+    action: '用实践案例提升文档可信度',
+  },
+]
+
+const communityStatus = [
+  {
+    label: '当前主入口',
+    value: 'GitHub + 站内反馈',
+  },
+  {
+    label: '适合提问的内容',
+    value: '使用问题、缺失说明、站点异常、可复现 bug',
+  },
+  {
+    label: '仍在补充',
+    value: '更完整的中文讨论渠道与内容协作机制',
   },
 ]
 
 const faqs = [
-  '我应该先看文档还是先看新闻？建议先看快速入门，再看安装与环境。',
-  '发现错别字或内容缺失怎么办？直接提交反馈即可。',
-  '社区入口目前在哪？当前以 GitHub 和站内反馈为主，后续会补充中文社区渠道。',
-]
-
-const workflows = [
   {
-    title: '先判断问题类型',
-    description: '内容建议适合站内反馈，明确 bug 或缺失条目更适合进入 GitHub Issues。',
+    question: '我第一次接触 OpenClaw，应该从哪里开始？',
+    answer: '先看文档首页和快速开始，再进入安装、功能手册或 FAQ。这样提问时上下文会更完整。',
   },
   {
-    title: '再决定公开或私下提交',
-    description: '需要讨论上下文和后续追踪时，优先走 GitHub；仅内容修订建议时可直接反馈表单。',
+    question: '我发现的是中文站问题，不是 OpenClaw 本身的问题，发哪里更合适？',
+    answer: '直接走站内反馈。这样能更快区分是内容修订、结构优化还是页面 bug。',
   },
   {
-    title: '持续跟踪更新',
-    description: '通过 RSS 订阅新闻和最佳实践更新，不需要反复手动回到站点检查。',
+    question: '什么情况下应该直接去 GitHub Issues？',
+    answer: '当问题需要复现、公开讨论、附日志或长期跟踪时，GitHub Issues 比私下反馈更合适。',
+  },
+  {
+    question: '现在有独立的中文社区群吗？',
+    answer: '当前仍以 GitHub 和站内反馈为主。中文社区入口会随着内容与协作机制成熟逐步补充。',
   },
 ]
 </script>
 
 <template>
-  <section class="section">
+  <section class="section community-page">
     <div class="container">
-      <p class="eyebrow">Community</p>
-      <h1 class="section-title">社区支持</h1>
-      <p class="section-copy">
-        这里提供 GitHub、FAQ、反馈和更新订阅入口，方便中文用户查资料、提问题并持续关注 OpenClaw。
-      </p>
+      <section class="hero-shell">
+        <div class="hero-copy">
+          <p class="eyebrow">Community Desk</p>
+          <h1 class="hero-title">把问题分流、协作入口和更新追踪放到同一个工作台里。</h1>
+          <p class="section-copy hero-description">
+            社区页不该只是入口合集。这里优先回答三件事：你现在该去哪里、怎样提问更容易被处理、中文社区当前已经提供了什么。
+          </p>
 
-      <div class="grid cards">
-        <a
-          v-for="channel in channels"
-          :key="channel.title"
-          class="card channel-card"
-          :href="channel.href"
-          :target="channel.href.startsWith('http') ? '_blank' : undefined"
-          :rel="channel.href.startsWith('http') ? 'noreferrer' : undefined"
-        >
-          <h2>{{ channel.title }}</h2>
-          <p>{{ channel.description }}</p>
-          <span class="more">进入</span>
-        </a>
-      </div>
+          <div class="button-row hero-actions">
+            <NuxtLink class="button primary" to="/docs">先看文档</NuxtLink>
+            <a class="button secondary" href="https://github.com/openclaw/openclaw/issues" target="_blank" rel="noreferrer">
+              提交 Issue
+            </a>
+            <NuxtLink class="button ghost" to="/feedback">反馈中文站</NuxtLink>
+          </div>
 
-      <div class="grid lower-grid">
-        <section class="card workflow-card">
-          <h2>推荐参与路径</h2>
-          <div class="workflow-list">
-            <article v-for="(workflow, index) in workflows" :key="workflow.title" class="workflow-item">
-              <span class="workflow-index">0{{ index + 1 }}</span>
+          <div class="hero-signals">
+            <div class="signal-pill">
+              <strong>资料优先</strong>
+              <span>概念不清先查文档与 FAQ</span>
+            </div>
+            <div class="signal-pill">
+              <strong>问题公开化</strong>
+              <span>可复现 bug 优先进入 GitHub</span>
+            </div>
+            <div class="signal-pill">
+              <strong>持续更新</strong>
+              <span>新闻页与 RSS 承接长期追踪</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="signal-board card">
+          <p class="board-kicker">社区工作台</p>
+          <div class="board-grid">
+            <article class="board-stat">
+              <span class="board-label">优先入口</span>
+              <strong>文档 / Issues / 反馈</strong>
+              <p>按问题类型分流，比所有人都挤进同一个入口更高效。</p>
+            </article>
+            <article class="board-stat">
+              <span class="board-label">建议携带</span>
+              <strong>版本、路径、现象、预期</strong>
+              <p>上下文越完整，越容易快速定位和形成长期可追踪记录。</p>
+            </article>
+            <article class="board-stat">
+              <span class="board-label">当前状态</span>
+              <strong>中文支持持续建设中</strong>
+              <p>现阶段以资料沉淀和问题归档为核心，讨论渠道会逐步补齐。</p>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="priority-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Priority Routes</p>
+          <h2 class="section-title">先选正确入口，再开始沟通。</h2>
+        </div>
+
+        <div class="priority-grid">
+          <a
+            v-for="channel in primaryChannels"
+            :key="channel.title"
+            class="card route-card"
+            :href="channel.href"
+            :target="channel.href.startsWith('http') ? '_blank' : undefined"
+            :rel="channel.href.startsWith('http') ? 'noreferrer' : undefined"
+          >
+            <span class="route-tag">{{ channel.tag }}</span>
+            <h3>{{ channel.title }}</h3>
+            <p>{{ channel.summary }}</p>
+            <span class="route-detail">{{ channel.detail }}</span>
+            <span class="route-cta">{{ channel.cta }}</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="triage-layout">
+        <div class="card triage-card">
+          <div class="section-heading">
+            <p class="eyebrow">Triage Flow</p>
+            <h2 class="section-title">遇到问题时，按这个顺序判断。</h2>
+          </div>
+
+          <div class="triage-steps">
+            <article v-for="item in triageSteps" :key="item.step" class="triage-step">
+              <span class="triage-step-no">{{ item.step }}</span>
               <div>
-                <h3>{{ workflow.title }}</h3>
-                <p>{{ workflow.description }}</p>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
               </div>
             </article>
           </div>
-        </section>
+        </div>
 
-        <section class="card subscribe-card">
-          <h2>更新订阅</h2>
-          <p>
-            如果你主要关心 OpenClaw 的版本变化和中文解读，可以直接订阅 RSS，不必每次手动回来看。
-          </p>
-          <div class="button-row">
-            <a class="button primary" href="/rss.xml" target="_blank" rel="noreferrer">打开 RSS</a>
-            <NuxtLink class="button secondary" to="/news">查看新闻动态</NuxtLink>
+        <div class="card scenario-card">
+          <div class="section-heading">
+            <p class="eyebrow">Quick Map</p>
+            <h2 class="section-title">常见场景对应入口</h2>
           </div>
-        </section>
-      </div>
 
-      <div class="faq card">
-        <h2>常见问题</h2>
-        <ul>
-          <li v-for="faq in faqs" :key="faq">{{ faq }}</li>
-        </ul>
-      </div>
+          <div class="scenario-grid">
+            <article v-for="scenario in scenarios" :key="scenario.label" class="scenario-item">
+              <span class="scenario-label">{{ scenario.label }}</span>
+              <strong>{{ scenario.route }}</strong>
+              <p>{{ scenario.note }}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contribute-layout">
+        <div class="card contribution-card">
+          <div class="section-heading">
+            <p class="eyebrow">Contribution</p>
+            <h2 class="section-title">如果你想参与建设，优先做这些事。</h2>
+          </div>
+
+          <div class="lane-grid">
+            <article v-for="lane in contributionLanes" :key="lane.title" class="lane-item">
+              <h3>{{ lane.title }}</h3>
+              <p>{{ lane.description }}</p>
+              <span>{{ lane.action }}</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="card status-card">
+          <div class="section-heading">
+            <p class="eyebrow">Status</p>
+            <h2 class="section-title">中文社区当前状态</h2>
+          </div>
+
+          <div class="status-list">
+            <article v-for="item in communityStatus" :key="item.label" class="status-item">
+              <span>{{ item.label }}</span>
+              <strong>{{ item.value }}</strong>
+            </article>
+          </div>
+
+          <div class="button-row status-actions">
+            <NuxtLink class="button secondary" to="/docs/community">查看协作说明</NuxtLink>
+            <NuxtLink class="button ghost" to="/news">查看新闻动态</NuxtLink>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-panel">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="section-title">把最容易重复的问题先说清楚。</h2>
+        </div>
+
+        <div class="faq-list">
+          <details v-for="faq in faqs" :key="faq.question" class="card faq-item">
+            <summary>{{ faq.question }}</summary>
+            <p>{{ faq.answer }}</p>
+          </details>
+        </div>
+      </section>
     </div>
   </section>
 </template>
 
 <style scoped>
-.cards {
-  margin-top: 28px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.community-page {
+  --community-shadow: 0 24px 54px rgba(64, 49, 27, 0.12);
 }
 
-.lower-grid {
-  grid-template-columns: 1.3fr 0.7fr;
-  margin-top: 20px;
-}
-
-.channel-card {
+.hero-shell {
   display: grid;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  gap: 22px;
+  align-items: start;
 }
 
-.channel-card h2,
-.faq h2,
-.workflow-card h2,
-.subscribe-card h2 {
-  margin: 0;
+.hero-copy {
+  position: relative;
+  padding: 30px 32px 34px;
+  border: 1px solid rgba(12, 108, 105, 0.14);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top left, rgba(19, 129, 125, 0.14), transparent 32%),
+    radial-gradient(circle at 88% 22%, rgba(166, 111, 44, 0.18), transparent 24%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.94), rgba(247, 240, 227, 0.98));
+  box-shadow: var(--community-shadow);
+  overflow: hidden;
+}
+
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  right: -32px;
+  bottom: -42px;
+  width: 180px;
+  height: 180px;
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(19, 129, 125, 0.12), rgba(255, 255, 255, 0.16)),
+    rgba(255, 255, 255, 0.44);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transform: rotate(18deg);
+}
+
+.hero-title {
+  max-width: 11ch;
+  margin: 16px 0 12px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.42rem;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.54rem, 2.2vw, 2.3rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
-.channel-card p,
-.faq li,
-.workflow-item p,
-.subscribe-card p {
-  color: var(--ink-soft);
-  line-height: 1.7;
+.hero-description {
+  max-width: 60ch;
 }
 
-.more {
-  color: var(--brand);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.hero-actions {
+  margin-top: 22px;
 }
 
-.workflow-list {
+.hero-signals {
   display: grid;
-  gap: 14px;
-  margin-top: 18px;
-}
-
-.workflow-item {
-  display: flex;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-}
-
-.workflow-index {
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  flex: none;
-  color: var(--accent);
-  background: rgba(234, 215, 182, 0.44);
-  font-size: 0.7rem;
-  font-weight: 800;
-}
-
-.workflow-item h3 {
-  margin: 0 0 4px;
-  font-size: 1rem;
-}
-
-.subscribe-card {
-  align-content: start;
-}
-
-.faq {
   margin-top: 24px;
 }
 
-.faq ul {
-  margin: 18px 0 0;
-  padding-left: 20px;
+.signal-pill {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 4px;
+  min-height: 92px;
+  padding: 14px 14px 16px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.signal-pill strong,
+.board-stat strong,
+.route-card h3,
+.triage-step h3,
+.scenario-item strong,
+.lane-item h3,
+.status-item strong,
+.faq-item summary {
+  font-family: "Fraunces", "Times New Roman", serif;
+}
+
+.signal-pill strong {
+  font-size: 0.98rem;
+}
+
+.signal-pill span,
+.board-stat p,
+.route-card p,
+.triage-step p,
+.scenario-item p,
+.lane-item p,
+.faq-item p {
+  color: var(--ink-soft);
+  line-height: 1.68;
+}
+
+.signal-board {
+  padding: 24px;
+}
+
+.board-kicker {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.board-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.board-stat {
+  padding: 16px 16px 18px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.board-label,
+.route-tag,
+.triage-step-no,
+.scenario-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.board-label {
+  margin-bottom: 8px;
+  color: var(--brand);
+}
+
+.board-stat strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+
+.board-stat p {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.priority-panel,
+.faq-panel {
+  margin-top: 26px;
+}
+
+.section-heading {
+  margin-bottom: 16px;
+}
+
+.priority-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.route-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-height: 260px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.route-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(12, 108, 105, 0.18);
+  box-shadow: 0 22px 36px rgba(64, 49, 27, 0.12);
+}
+
+.route-tag {
+  width: fit-content;
+  padding: 5px 10px;
+  color: var(--accent);
+  background: rgba(234, 215, 182, 0.44);
+}
+
+.route-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+  line-height: 1.4;
+}
+
+.route-card p,
+.route-detail {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.route-detail {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.route-cta {
+  margin-top: auto;
+  color: var(--brand);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.triage-layout,
+.contribute-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.triage-card,
+.scenario-card,
+.contribution-card,
+.status-card {
+  padding-top: 24px;
+}
+
+.triage-steps,
+.status-list {
+  display: grid;
+  gap: 14px;
+}
+
+.triage-step {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(67, 73, 60, 0.12);
+}
+
+.triage-step:first-child {
+  border-top: 0;
+}
+
+.triage-step-no {
+  width: 52px;
+  height: 52px;
+  color: #f8f4ea;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
+}
+
+.triage-step h3,
+.lane-item h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+
+.triage-step p,
+.lane-item p,
+.status-item span,
+.status-item strong {
+  margin: 0;
+}
+
+.scenario-grid,
+.lane-grid {
   display: grid;
   gap: 12px;
 }
 
+.scenario-item,
+.lane-item {
+  padding: 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.scenario-label {
+  width: fit-content;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  color: var(--accent);
+  background: rgba(234, 215, 182, 0.42);
+}
+
+.scenario-item strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1.02rem;
+  letter-spacing: -0.03em;
+}
+
+.lane-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lane-item span {
+  display: inline-flex;
+  margin-top: 10px;
+  color: var(--brand);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.status-list {
+  margin-top: 4px;
+}
+
+.status-item {
+  display: grid;
+  gap: 6px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(67, 73, 60, 0.12);
+}
+
+.status-item:first-child {
+  border-top: 0;
+}
+
+.status-item span {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.status-item strong {
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+.status-actions {
+  margin-top: 18px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item {
+  padding: 0;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 22px;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item[open] summary {
+  border-bottom: 1px solid rgba(67, 73, 60, 0.12);
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 16px 22px 22px;
+}
+
+@media (max-width: 1180px) {
+  .priority-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lane-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 980px) {
-  .cards,
-  .lower-grid {
+  .hero-shell,
+  .triage-layout,
+  .contribute-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-signals {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-copy {
+    padding: 24px 20px 26px;
+    border-radius: 26px;
+  }
+
+  .priority-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .triage-step {
     grid-template-columns: 1fr;
   }
 }
