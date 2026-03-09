@@ -46,6 +46,8 @@ curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -
 
 ```bash
 npm install -g openclaw@latest
+# 或
+pnpm add -g openclaw@latest
 ```
 
 安装后建议立即执行：
@@ -55,6 +57,41 @@ openclaw onboard --install-daemon
 ```
 
 这是当前官方 quick start 里最常见的命令组合。
+
+## Docker 安装方式
+
+如果你更倾向于容器化部署，项目也提供了 Docker 支持：
+
+```bash
+# 克隆仓库
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+
+# 使用 docker-compose 启动
+docker-compose up -d
+```
+
+这种方式适合：
+- 快速原型体验
+- 隔离环境的开发测试
+- 已有 Docker 基础设施的团队
+
+## 从源码安装（开发场景）
+
+如果你想贡献代码或进行深度定制：
+
+```bash
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+
+pnpm install
+pnpm ui:build
+pnpm build
+
+pnpm openclaw onboard --install-daemon
+```
+
+注意：从源码构建需要 `pnpm` 作为包管理器。
 
 ## 安装完成后怎么验证
 
@@ -129,6 +166,16 @@ curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw-ansible/main/inst
 - Debian / Ubuntu 服务器
 - 需要持续运行的 Gateway
 - 希望默认就有 SSH + Tailscale 安全边界的场景
+
+### Tailscale 远程访问
+
+OpenClaw 原生支持 Tailscale 远程访问：
+
+- **Tailscale Serve** - 通过 HTTPS 安全暴露 dashboard，适合大多数远程场景
+- **Tailscale Funnel** - 公网暴露模式，需要额外认证保护
+- **Tailscale 身份认证** - 支持利用 Tailscale 身份头做认证 (`gateway.auth.allowTailscale`)
+
+Tailscale 集成让你可以在保持 Gateway 本地运行的同时，通过加密通道从任何地方安全访问。
 
 ## 安装时最常见的几个坑
 

@@ -22,16 +22,32 @@ OpenClaw 不是“每个聊天应用单独跑一套代理”，而是：
 
 根据官方 Channels 文档，当前主要支持这些聊天渠道：
 
-- WhatsApp
-- Telegram
-- Discord
-- IRC
-- Slack
-- Signal
-- BlueBubbles / iMessage
-- Google Chat
-- Feishu / Lark（插件）
-- Mattermost（插件）
+### 即时通讯
+- **WhatsApp** - 使用 Baileys，需要二维码配对，最常见的入门渠道
+- **Telegram** - 通过 Bot API 接入，支持群组，上手成本低
+- **Discord** - 通过 Discord Bot API + Gateway 接入，适合团队协作
+- **Slack** - 适合工作区内部使用，强调 workspace app 形态
+- **Signal** - 更偏重隐私场景，走 `signal-cli`
+- **IRC** - 传统但稳定的文本协议渠道
+
+### Apple 生态
+- **iMessage / BlueBubbles** - 推荐使用 BlueBubbles 作为 iMessage 路径
+
+### 企业协作
+- **Microsoft Teams** - 企业环境常用
+- **Google Chat** - G Suite 用户友好
+- **Feishu / Lark（飞书）** - 国内企业常用，插件支持
+- **LINE** - 日本及东南亚常用
+- **Mattermost** - 开源企业协作平台
+
+### 其他平台
+- **Matrix** - 去中心化通讯协议
+- **Nostr** - 的去中心化社交协议
+- **Synology Chat** - 群晖 NAS 用户
+- **Tlon** - 分布式协作平台
+- **Twitch** - 直播平台聊天
+- **Zalo** - 越南常用通讯软件
+- **WebChat** - 自定义网页聊天
 
 不同渠道在文本、媒体、反应、群组和机器人能力上的支持并不完全一样，但文本能力是普遍支持的。
 

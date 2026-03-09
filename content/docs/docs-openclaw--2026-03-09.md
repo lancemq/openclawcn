@@ -1,6 +1,8 @@
 ---
 title: "OpenClaw 安全最佳实践"
-date: "2026-03-09T09:16:21.951Z"
+description: "了解使用 OpenClaw 时的安全最佳实践，包括密码管理、权限控制和日志监控。"
+category: 运维
+date: "2026-03-09"
 author: "Security Team"
 source: "openclaw.ai/docs"
 tags: ["security", "best-practices", "guide"]
