@@ -1,11 +1,34 @@
+# dependencies
+node_modules
+
+# nuxt / nitro build outputs
 .nuxt
 .output
 .data
-node_modules
+dist
+.nitro
+
+# generated site artifacts
+public/generated
+
+# vercel local/build artifacts
+.vercel/*
+!.vercel/project.json
+
+# env files
 .env
 .env.*
-!.env.example
-dist
-public/generated
-.vercel
 .env*.local
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# misc caches / local files
+.DS_Store
+.cache
+coverage

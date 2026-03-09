@@ -38,6 +38,10 @@ for (const collectionName of Object.keys(collectionRules)) {
 
     seenPaths.add(entry.publicPath)
 
+    if (entry.slug.includes('--')) {
+      addError(`[${collectionName}] ${entry.relativePath}: slug 不能包含连续短横线 "--"，当前路径为 ${entry.publicPath}`)
+    }
+
     if (collectionName === 'news') {
       const dateValue = String(entry.data.date || '')
       if (dateValue && !isValidDate(dateValue)) {

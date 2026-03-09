@@ -3,7 +3,6 @@
   "framework": "nuxtjs",
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": ".output/public",
   "functions": {
     "server/**/*.ts": {
       "runtime": "nodejs20.x"
