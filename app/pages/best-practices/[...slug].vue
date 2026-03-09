@@ -56,6 +56,7 @@ useSeo({
         <div class="cta-row">
           <NuxtLink class="button secondary" to="/community">进入社区支持</NuxtLink>
           <NuxtLink class="button ghost" to="/feedback">提交反馈</NuxtLink>
+          <a class="button secondary" href="/rss.xml" target="_blank" rel="noreferrer">订阅更新</a>
         </div>
 
         <div class="related-grid">
@@ -115,7 +116,7 @@ useSeo({
 }
 
 .related-card p {
-  color: var(--muted);
+  color: var(--ink-soft);
   line-height: 1.7;
 }
 

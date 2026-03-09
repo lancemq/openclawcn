@@ -59,6 +59,12 @@ useSeo({
           <p class="muted">看完这条动态后，可以继续进入相关更新或更稳定的最佳实践专题。</p>
         </div>
 
+        <div class="cta-row">
+          <NuxtLink class="button secondary" to="/community">进入社区支持</NuxtLink>
+          <NuxtLink class="button ghost" to="/feedback">提交反馈</NuxtLink>
+          <a class="button secondary" href="/rss.xml" target="_blank" rel="noreferrer">订阅更新</a>
+        </div>
+
         <div class="related-grid">
           <NuxtLink
             v-for="item in relatedNews"
@@ -110,6 +116,13 @@ useSeo({
   margin-top: 18px;
 }
 
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
 .related-card {
   display: grid;
   gap: 10px;
@@ -121,7 +134,7 @@ useSeo({
 }
 
 .related-card p {
-  color: var(--muted);
+  color: var(--ink-soft);
   line-height: 1.7;
 }
 

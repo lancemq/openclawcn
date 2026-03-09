@@ -4112,7 +4112,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "c947e83c-0b9a-4d8b-822a-4755531db2ae",
+    "buildId": "c71431fd-804b-4d32-9579-cfe1e34ac8f7",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4146,6 +4146,24 @@ const _inlineRuntimeConfig = {
       },
       "/best-practices": {
         "prerender": true
+      },
+      "/robots.txt": {
+        "headers": {
+          "content-type": "text/plain; charset=utf-8",
+          "cache-control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      "/rss.xml": {
+        "headers": {
+          "content-type": "application/rss+xml; charset=utf-8",
+          "cache-control": "public, max-age=3600, s-maxage=3600"
+        }
+      },
+      "/sitemap.xml": {
+        "headers": {
+          "content-type": "application/xml; charset=utf-8",
+          "cache-control": "public, max-age=3600, s-maxage=3600"
+        }
       },
       "/__nuxt_content/**": {
         "robots": false,
@@ -4227,6 +4245,8 @@ const _inlineRuntimeConfig = {
   },
   "feedbackWebhookUrl": "",
   "subscribeWebhookUrl": "",
+  "vercelDeployHookUrl": "",
+  "contentRebuildToken": "",
   "content": {
     "databaseVersion": "v3.5.0",
     "version": "3.12.0",
@@ -4704,8 +4724,8 @@ async function decompressSQLDump(base64Str, compressionType = "gzip") {
 }
 
 const checksums = {
-  "docs": "v3.5.0--zJTBF_A7NjegF5BxFjyI97LZNeLMyP96lSTsZ94dZzA",
-  "news": "v3.5.0--K_iEDpM4-lWqWoEO6uxnRoXfuMlVqcn-t6xHiBAh8uE",
+  "docs": "v3.5.0--cUO09ePQELvbEQHJrTsGq8qNH_Se5FTzRferPYWef_w",
+  "news": "v3.5.0--CQ4qdQHq0AjSRxP4-CsnGpz8kuH7t0m5Xuj_UFuCD2o",
   "bestPractices": "v3.5.0--StaTUSSUXrLr0C63NxpdJmvZ5Zc4vFyNNrc3rSTm8is"
 };
 const checksumsStructure = {

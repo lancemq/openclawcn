@@ -6,3 +6,6 @@ node_modules
 .env.*
 !.env.example
 dist
+public/generated
+.vercel
+.env*.local

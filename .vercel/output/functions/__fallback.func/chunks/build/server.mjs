@@ -389,7 +389,7 @@ function toArray(value) {
   return Array.isArray(value) ? value : [value];
 }
 const matcher = /* @__PURE__ */ (() => {
-  const $0 = { prerender: true }, $1 = { payload: false };
+  const $0 = { prerender: true }, $1 = {}, $2 = { payload: false };
   return (m, p) => {
     let r = [];
     if (p.charCodeAt(p.length - 1) === 47) p = p.slice(0, -1) || "/";
@@ -417,6 +417,15 @@ const matcher = /* @__PURE__ */ (() => {
     if (p === "/best-practices") {
       r.unshift({ data: $0 });
     }
+    if (p === "/robots.txt") {
+      r.unshift({ data: $1 });
+    }
+    if (p === "/rss.xml") {
+      r.unshift({ data: $1 });
+    }
+    if (p === "/sitemap.xml") {
+      r.unshift({ data: $1 });
+    }
     if (p === "/__nuxt_content/docs/sql_dump.txt") {
       r.unshift({ data: $0 });
     }
@@ -429,7 +438,7 @@ const matcher = /* @__PURE__ */ (() => {
     let s = p.split("/");
     s.length - 1;
     if (s[1] === "__nuxt_content") {
-      r.unshift({ data: $1, params: { "_": s.slice(2).join("/") } });
+      r.unshift({ data: $2, params: { "_": s.slice(2).join("/") } });
     }
     return r;
   };
@@ -459,12 +468,12 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-gCwkuqVq.mjs')
+    component: () => import('./index-CxwhokOY.mjs')
   },
   {
     name: "search",
     path: "/search",
-    component: () => import('./search-B4bXagLl.mjs')
+    component: () => import('./search-ayTLkaMP.mjs')
   },
   {
     name: "feedback",
@@ -474,37 +483,37 @@ const _routes = [
   {
     name: "community",
     path: "/community",
-    component: () => import('./community-6Y4kf-co.mjs')
+    component: () => import('./community-CGnrkJ0v.mjs')
   },
   {
     name: "docs",
     path: "/docs",
-    component: () => import('./index-Cm1LjOTe.mjs')
+    component: () => import('./index-C8okZWLR.mjs')
   },
   {
     name: "news",
     path: "/news",
-    component: () => import('./index-CAGiFJF_.mjs')
+    component: () => import('./index-I54XpqI9.mjs')
   },
   {
     name: "docs-slug",
     path: "/docs/:slug(.*)*",
-    component: () => import('./_...slug_-BMbjY7Uc.mjs')
+    component: () => import('./_...slug_-DVS801UY.mjs')
   },
   {
     name: "news-slug",
     path: "/news/:slug(.*)*",
-    component: () => import('./_...slug_-DxoObb3D.mjs')
+    component: () => import('./_...slug_-22lV3yCG.mjs')
   },
   {
     name: "best-practices",
     path: "/best-practices",
-    component: () => import('./index-CWurGLcx.mjs')
+    component: () => import('./index-B1d9fvE8.mjs')
   },
   {
     name: "best-practices-slug",
     path: "/best-practices/:slug(.*)*",
-    component: () => import('./_...slug_-CmC3SB7B.mjs')
+    component: () => import('./_...slug_-DuAv7G_-.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -921,7 +930,7 @@ const plugins = [
   prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk
 ];
 const layouts = {
-  default: defineAsyncComponent(() => import('./default-CCe_kk8-.mjs').then((m) => m.default || m))
+  default: defineAsyncComponent(() => import('./default-Q5Iv3Lsc.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({

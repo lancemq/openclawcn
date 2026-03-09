@@ -1,66 +1,70 @@
 # OpenClawCN
 
-## 项目概述
-OpenClawCN 是一个专门面向中国国内用户的OpenClaw官方网站，旨在提供：
-- OpenClaw相关新闻资讯
-- 详细的使用方法和教程  
-- 最佳实践案例分享
-- 中文社区支持
+面向中文用户的 OpenClaw 介绍站点，当前包含文档、新闻、最佳实践、社区支持、站内搜索、反馈和订阅等能力。
 
-## 目标用户
-- 中国开发者和技术爱好者
-- 对AI代理和自动化工具感兴趣的用户
-- 希望了解OpenClaw功能和应用场景的潜在用户
+## 技术栈
 
-## 核心功能需求
-### 1. 新闻资讯模块
-- OpenClaw官方新闻和更新公告
-- 社区动态和活动信息
-- 行业相关AI技术新闻
+- `Nuxt 3`
+- `@nuxt/content`
+- `Nitro Server API`
+- `Vercel` 部署目标
 
-### 2. 教程文档模块  
-- 快速入门指南（针对中国用户环境优化）
-- 详细功能使用教程
-- 常见问题解答（FAQ）
-- 视频教程和演示
+## 本地启动
 
-### 3. 最佳实践模块
-- 实际应用案例展示
-- 技能开发教程
-- 性能优化建议
-- 安全使用指南
-
-### 4. 社区互动模块
-- 用户交流论坛
-- 问题反馈渠道
-- 贡献者指南
-
-## 技术要求
-- 响应式设计，适配移动端和PC端
-- 针对中国网络环境优化（考虑CDN、加载速度等）
-- 支持中文SEO优化
-- 易于维护和内容更新
-- 前后端技术栈需优先满足 Vercel 的构建、预览部署和函数运行要求
-
-## 本地化考虑
-- 完全中文化界面
-- 符合中国用户使用习惯
-- 考虑国内网络访问特点
-- 集成国内常用分享和社交功能
-
-## 项目结构
+```bash
+npm install
+npm run dev
 ```
-openclawcn/
-├── specs/                   # 各模块详细规格说明
-│   ├── homepage_spec.md     # 首页模块规格
-│   ├── news_blog_spec.md    # 新闻资讯模块规格
-│   ├── documentation_spec.md # 文档教程模块规格
-│   ├── best_practices_spec.md # 最佳实践模块规格
-│   ├── community_spec.md    # 社区支持模块规格
-│   ├── about_spec.md        # 关于我们模块规格
-│   └── vercel_integration_spec.md # Vercel平台对接规格
-├── REQUIREMENTS.md          # 整体需求设计文档
-├── PROJECT_STRUCTURE.md     # 项目结构规划
-├── TECHNICAL_ARCHITECTURE.md # 技术架构建议
-└── README.md                # 项目概述
+
+默认访问地址：
+- `http://localhost:3000/`
+- `http://localhost:3000/docs`
+- `http://localhost:3000/news`
+- `http://localhost:3000/best-practices`
+- `http://localhost:3000/api/health`
+
+## 生产构建
+
+```bash
+npm run build
 ```
+
+当前项目默认使用 `Nitro preset: vercel`，构建后可直接用于 Vercel 部署。
+
+## 内容发布
+
+发布前可先运行：
+
+```bash
+npm run content:check
+```
+
+这会完成内容字段校验并生成 `public/generated/content-manifest.json`。
+
+自动更新与发布流程说明见 [content-publishing.md](/Users/maqi/code/openclawcn/docs/content-publishing.md)。
+
+## 环境变量
+
+参考 [.env.example](/Users/maqi/code/openclawcn/.env.example)：
+
+```bash
+NUXT_PUBLIC_SITE_URL=https://openclawcn.vercel.app
+NUXT_PUBLIC_GITHUB_URL=https://github.com/openclaw/openclaw
+FEEDBACK_WEBHOOK_URL=
+SUBSCRIBE_WEBHOOK_URL=
+VERCEL_DEPLOY_HOOK_URL=
+CONTENT_REBUILD_TOKEN=
+```
+
+## 上线相关
+
+项目已补齐以下上线基础项：
+- 动态 `robots.txt`
+- 动态 `sitemap.xml`
+- 动态 `rss.xml`
+- canonical / OG / 基础 SEO 配置
+- 内容发布校验与自动生成清单
+- 受 token 保护的自动重建接口
+- 适配 Vercel 的构建与函数路由结构
+
+部署细节见 [deployment.md](/Users/maqi/code/openclawcn/docs/deployment.md)。

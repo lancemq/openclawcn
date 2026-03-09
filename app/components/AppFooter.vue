@@ -20,6 +20,7 @@ const year = new Date().getFullYear()
           <li><NuxtLink to="/news">新闻</NuxtLink></li>
           <li><NuxtLink to="/community">社区支持</NuxtLink></li>
           <li><NuxtLink to="/search">站内搜索</NuxtLink></li>
+          <li><a href="/rss.xml" target="_blank" rel="noreferrer">RSS 订阅</a></li>
         </ul>
       </div>
 
@@ -27,8 +28,8 @@ const year = new Date().getFullYear()
         <h3>阶段状态</h3>
         <ul>
           <li>第 1 步：MVP 已实现</li>
-          <li>第 2 步：搜索与反馈开发中</li>
-          <li>第 3 步：运营增强待开发</li>
+          <li>第 2 步：搜索与反馈已上线</li>
+          <li>第 3 步：运营增强进行中</li>
         </ul>
       </div>
     </div>

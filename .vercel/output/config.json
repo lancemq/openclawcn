@@ -1,23 +1,23 @@
 {
   "version": 3,
   "overrides": {
-    "feedback/index.html": {
-      "path": "feedback"
-    },
-    "docs/index.html": {
-      "path": "docs"
-    },
-    "news/index.html": {
-      "path": "news"
-    },
-    "community/index.html": {
-      "path": "community"
+    "faq/index.html": {
+      "path": "faq"
     },
     "best-practices/index.html": {
       "path": "best-practices"
     },
-    "faq/index.html": {
-      "path": "faq"
+    "feedback/index.html": {
+      "path": "feedback"
+    },
+    "community/index.html": {
+      "path": "community"
+    },
+    "news/index.html": {
+      "path": "news"
+    },
+    "docs/index.html": {
+      "path": "docs"
     },
     "search/index.html": {
       "path": "search"
@@ -38,6 +38,27 @@
         "cache-control": "public, max-age=1, immutable"
       },
       "src": "/_nuxt/builds/(.*)"
+    },
+    {
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "public, max-age=3600, s-maxage=3600"
+      },
+      "src": "/robots.txt"
+    },
+    {
+      "headers": {
+        "content-type": "application/rss+xml; charset=utf-8",
+        "cache-control": "public, max-age=3600, s-maxage=3600"
+      },
+      "src": "/rss.xml"
+    },
+    {
+      "headers": {
+        "content-type": "application/xml; charset=utf-8",
+        "cache-control": "public, max-age=3600, s-maxage=3600"
+      },
+      "src": "/sitemap.xml"
     },
     {
       "headers": {

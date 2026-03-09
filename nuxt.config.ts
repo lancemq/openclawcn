@@ -18,7 +18,7 @@ export default defineNuxtConfig({
         },
         {
           name: 'description',
-          content: 'OpenClaw 中文官网，提供新闻资讯、文档教程、最佳实践与 Vercel 部署指引。',
+          content: 'OpenClaw 中文官网，提供新闻资讯、文档教程、最佳实践与中文社区支持入口。',
         },
         {
           name: 'theme-color',
@@ -37,6 +37,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     feedbackWebhookUrl: process.env.FEEDBACK_WEBHOOK_URL || '',
     subscribeWebhookUrl: process.env.SUBSCRIBE_WEBHOOK_URL || '',
+    vercelDeployHookUrl: process.env.VERCEL_DEPLOY_HOOK_URL || '',
+    contentRebuildToken: process.env.CONTENT_REBUILD_TOKEN || '',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
       githubUrl: process.env.NUXT_PUBLIC_GITHUB_URL || 'https://github.com/openclaw/openclaw',
@@ -51,6 +53,24 @@ export default defineNuxtConfig({
     '/feedback': { prerender: true },
     '/faq': { prerender: true },
     '/best-practices': { prerender: true },
+    '/robots.txt': {
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+        'cache-control': 'public, max-age=3600, s-maxage=3600',
+      },
+    },
+    '/rss.xml': {
+      headers: {
+        'content-type': 'application/rss+xml; charset=utf-8',
+        'cache-control': 'public, max-age=3600, s-maxage=3600',
+      },
+    },
+    '/sitemap.xml': {
+      headers: {
+        'content-type': 'application/xml; charset=utf-8',
+        'cache-control': 'public, max-age=3600, s-maxage=3600',
+      },
+    },
   },
   nitro: {
     preset: 'vercel',

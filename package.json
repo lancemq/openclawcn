@@ -6,7 +6,11 @@
     "node": ">=20"
   },
   "scripts": {
+    "content:validate": "node scripts/validate-content.mjs",
+    "content:manifest": "node scripts/generate-content-manifest.mjs",
+    "content:check": "npm run content:validate && npm run content:manifest",
     "dev": "nuxt dev",
+    "prebuild": "npm run content:check",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

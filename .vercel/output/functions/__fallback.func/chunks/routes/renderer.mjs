@@ -86,7 +86,7 @@ function createHead(options = {}) {
 
 const NUXT_RUNTIME_PAYLOAD_EXTRACTION = false;
 
-const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"OpenClaw 中文官网，提供新闻资讯、文档教程、最佳实践与 Vercel 部署指引。"},{"name":"theme-color","content":"#0f766e"}],"link":[{"rel":"icon","type":"image/svg+xml","href":"/favicon.svg"}],"style":[],"script":[],"noscript":[],"title":"OpenClawCN","titleTemplate":"%s | OpenClawCN","htmlAttrs":{"lang":"zh-CN"}};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"OpenClaw 中文官网，提供新闻资讯、文档教程、最佳实践与中文社区支持入口。"},{"name":"theme-color","content":"#0f766e"}],"link":[{"rel":"icon","type":"image/svg+xml","href":"/favicon.svg"}],"style":[],"script":[],"noscript":[],"title":"OpenClawCN","titleTemplate":"%s | OpenClawCN","htmlAttrs":{"lang":"zh-CN"}};
 
 const appRootTag = "div";
 

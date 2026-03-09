@@ -1,21 +1,33 @@
 export const docsOverview = [
   {
+    title: 'OpenClaw 是什么',
+    description: '用中文快速理解 OpenClaw 的定位、使用方式和它与普通聊天产品的差别。',
+    to: '/docs/what-is-openclaw',
+    meta: '产品',
+  },
+  {
+    title: 'OpenClaw 核心能力总览',
+    description: '一页理解渠道、控制台、扩展和运行边界等最重要的结构。',
+    to: '/docs/core-capabilities',
+    meta: '产品',
+  },
+  {
     title: '快速入门',
     description: '用最短时间理解 OpenClaw 的定位、能力边界和基本使用方式。',
     to: '/docs/getting-started',
     meta: '入门',
   },
   {
-    title: '安装与环境',
-    description: '面向中文用户整理安装环境、启动方式和常见准备工作。',
-    to: '/docs/installation',
-    meta: '安装',
+    title: 'Onboarding 引导流程说明',
+    description: '为什么 OpenClaw 要强调 onboarding，以及第一次配置时该关注什么。',
+    to: '/docs/onboarding-guide',
+    meta: '入门',
   },
   {
-    title: '社区支持',
-    description: '汇总 GitHub、问题反馈、贡献方式和后续社区入口。',
-    to: '/docs/community',
-    meta: '社区',
+    title: '渠道能力概览',
+    description: '先理解为什么需要多渠道，而不是一开始就陷入各平台接入细节。',
+    to: '/docs/channels-overview',
+    meta: '功能',
   },
 ]
 
@@ -71,6 +83,12 @@ export const actionOverview = [
     to: '/faq',
     meta: 'FAQ',
   },
+  {
+    title: 'RSS 订阅',
+    description: '订阅新闻与最佳实践更新，适合长期跟踪站点内容演进。',
+    to: '/community',
+    meta: '订阅',
+  },
 ]
 
 export const newsOverview = [
@@ -102,6 +120,24 @@ export const newsOverview = [
     title: '最佳实践专题已上线',
     description: '第 3 步开始补充最佳实践列表与详情页，站点内容开始走向专题沉淀。',
     to: '/news/best-practices-launch',
+    meta: '2026-03-09',
+  },
+  {
+    title: '社区互动与订阅链路补齐',
+    description: '社区页、内容详情页和 RSS 更新订阅已接通，站点开始具备长期运营入口。',
+    to: '/news/community-rss-launch',
+    meta: '2026-03-09',
+  },
+  {
+    title: '内容发布流程与自动更新已接入',
+    description: '发布前校验、内容清单生成和自动重建接口已经补齐，站点开始具备更稳定的内容发布能力。',
+    to: '/news/publishing-workflow-launch',
+    meta: '2026-03-09',
+  },
+  {
+    title: '冷启动内容首批专题已补充',
+    description: '产品介绍、快速开始、功能专题与更新跟踪的首批中文内容已开始铺量，文档中心不再只有骨架。',
+    to: '/news/content-seeding-batch-1',
     meta: '2026-03-09',
   },
 ]
