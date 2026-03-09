@@ -42,53 +42,54 @@ const features = [
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 14px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .feature-card {
-  min-height: 152px;
+  min-height: 130px;
   align-content: start;
+  padding: 14px;
 }
 
 .compact-head {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .head-note {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
 }
 
 .feature-index {
   display: inline-flex;
   width: fit-content;
-  margin-bottom: 16px;
-  padding: 4px 8px;
+  margin-bottom: 10px;
+  padding: 2px 6px;
   border-radius: 999px;
   color: var(--accent);
   background: rgba(234, 215, 182, 0.44);
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.12em;
 }
 
 h3 {
-  margin: 0 0 8px;
+  margin: 0 0 5px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   letter-spacing: -0.03em;
 }
 
 p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.9rem;
-  line-height: 1.62;
+  font-size: 0.86rem;
+  line-height: 1.55;
 }
 
 @media (max-width: 980px) {

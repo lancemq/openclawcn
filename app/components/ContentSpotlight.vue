@@ -31,31 +31,31 @@ const items = [
 <style scoped>
 .spotlight {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  gap: 14px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 12px;
   align-items: stretch;
 }
 
 .spotlight-copy {
   display: grid;
   align-content: start;
-  gap: 12px;
+  gap: 10px;
 }
 
 .spotlight-note {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.92rem;
-  line-height: 1.64;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .spotlight-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   margin: 0;
-  padding-left: 20px;
+  padding: 16px 16px 16px 18px;
   color: var(--ink-soft);
-  line-height: 1.62;
+  line-height: 1.58;
 }
 
 @media (max-width: 900px) {

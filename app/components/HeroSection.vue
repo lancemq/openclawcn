@@ -83,92 +83,92 @@ const { public: publicConfig } = useRuntimeConfig()
 <style scoped>
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
-  gap: 20px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 16px;
   align-items: start;
 }
 
 .hero-copy-column {
   position: relative;
   display: grid;
-  gap: 12px;
-  padding: 18px 20px;
+  gap: 10px;
+  padding: 16px 18px;
   border: 1px solid rgba(67, 73, 60, 0.12);
-  border-radius: 24px;
+  border-radius: 22px;
   background: rgba(255, 251, 244, 0.72);
-  box-shadow: 0 18px 40px rgba(74, 56, 28, 0.08);
+  box-shadow: 0 14px 32px rgba(74, 56, 28, 0.08);
 }
 
 .hero-heading-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .hero-kicker {
   color: var(--ink-soft);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   letter-spacing: 0.03em;
 }
 
 .hero-title {
-  max-width: 14ch;
+  max-width: 20ch;
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: clamp(1.46rem, 2.05vw, 2.08rem);
+  font-size: clamp(1.4rem, 2vw, 2rem);
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
 .hero-copy {
-  max-width: 62ch;
+  max-width: 60ch;
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.96rem;
-  line-height: 1.64;
+  font-size: 0.94rem;
+  line-height: 1.6;
 }
 
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .hero-summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .hero-summary-grid article {
-  padding: 12px 14px;
-  border-radius: 18px;
+  padding: 10px 12px;
+  border-radius: 16px;
   border: 1px solid rgba(67, 73, 60, 0.1);
   background: rgba(255, 255, 255, 0.46);
 }
 
 .hero-summary-grid strong {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
+  font-size: 0.96rem;
 }
 
 .hero-summary-grid p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.58;
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
 .hero-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--ink-soft);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -180,42 +180,42 @@ const { public: publicConfig } = useRuntimeConfig()
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .hero-stats div {
   display: grid;
-  gap: 4px;
-  padding: 10px 12px;
-  border-radius: 14px;
+  gap: 3px;
+  padding: 8px 10px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(67, 73, 60, 0.08);
 }
 
 .hero-stats strong {
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
 }
 
 .hero-stats span {
   color: var(--ink-soft);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
 }
 
 .timeline {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   margin: 0;
-  padding-left: 16px;
-  font-size: 0.9rem;
+  padding-left: 14px;
+  font-size: 0.88rem;
 }
 
 .timeline p {
-  margin: 4px 0 0;
+  margin: 3px 0 0;
   color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
 @media (max-width: 900px) {

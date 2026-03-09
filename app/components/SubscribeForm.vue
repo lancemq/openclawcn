@@ -53,33 +53,36 @@ async function submitSubscription() {
 <style scoped>
 .subscribe-form {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 .subscribe-field {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .subscribe-field span {
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .subscribe-field input {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 14px;
   background: rgba(15, 23, 42, 0.72);
   color: var(--text);
-  padding: 14px 16px;
+  padding: 12px 14px;
   font: inherit;
+  font-size: 0.94rem;
 }
 
 .notice {
   margin: 0;
-  padding: 12px 14px;
-  border-radius: 16px;
-  line-height: 1.6;
+  padding: 10px 12px;
+  border-radius: 14px;
+  line-height: 1.55;
+  font-size: 0.88rem;
 }
 
 .success {

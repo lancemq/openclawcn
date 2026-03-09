@@ -124,20 +124,20 @@ useSeo({
 <style scoped>
 .filters {
   display: grid;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 .filter-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .filter-label {
   color: var(--ink-soft);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -148,10 +148,10 @@ useSeo({
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.66);
   color: var(--ink);
-  padding: 8px 14px;
+  padding: 6px 12px;
   cursor: pointer;
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
@@ -169,8 +169,8 @@ useSeo({
 .masonry-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 28px;
+  gap: 14px;
+  margin-top: 20px;
 }
 
 .masonry-item {
@@ -181,15 +181,15 @@ useSeo({
 }
 
 .masonry-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
 }
 
 .item-content {
-  padding: 18px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .item-meta {
@@ -199,13 +199,13 @@ useSeo({
 }
 
 .date {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--ink-soft);
 }
 
 .item-meta .tag {
-  font-size: 0.75rem;
-  padding: 4px 10px;
+  font-size: 0.72rem;
+  padding: 3px 8px;
   background: rgba(166, 111, 44, 0.1);
   color: var(--brand);
   border-radius: 999px;
@@ -214,16 +214,16 @@ useSeo({
 .masonry-item h2 {
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.1rem;
+  font-size: 1.04rem;
   letter-spacing: -0.02em;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .masonry-item p {
   margin: 0;
   color: var(--ink-soft);
-  line-height: 1.6;
-  font-size: 0.9rem;
+  line-height: 1.55;
+  font-size: 0.88rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -233,21 +233,21 @@ useSeo({
 .item-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
+  gap: 5px;
+  margin-top: 2px;
 }
 
 .tag-item {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--brand);
   background: rgba(166, 111, 44, 0.1);
-  padding: 3px 8px;
+  padding: 2px 6px;
   border-radius: 4px;
 }
 
 .empty-state {
   text-align: center;
-  padding: 48px 24px;
+  padding: 36px 18px;
   color: var(--ink-soft);
 }
 

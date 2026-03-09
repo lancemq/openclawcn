@@ -107,27 +107,28 @@ useSeo({
 
 <style scoped>
 .content-section {
-  padding-top: 28px;
-  padding-bottom: 18px;
+  padding-top: 14px;
+  padding-bottom: 8px;
 }
 
 .home-head {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .home-head-note {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.5;
 }
 
 .docs-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .docs-grid > :first-child {
@@ -136,10 +137,12 @@ useSeo({
 
 .news-grid {
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: 14px;
 }
 
 .practice-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .practice-grid > :first-child {
@@ -148,6 +151,7 @@ useSeo({
 
 .action-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .action-grid > :first-child {
@@ -156,13 +160,13 @@ useSeo({
 
 .subscribe-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-  gap: 18px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 12px;
 }
 
 .subscribe-copy {
   display: grid;
-  gap: 10px;
+  gap: 6px;
   align-content: start;
 }
 

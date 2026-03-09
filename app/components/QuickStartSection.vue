@@ -51,83 +51,83 @@
 <style scoped>
 .quick-start {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .quick-start-head {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .quick-start-note {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
 }
 
 .steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .step {
   display: flex;
-  gap: 12px;
-  padding-top: 4px;
+  gap: 10px;
+  padding-top: 3px;
 }
 
 .step-body {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .step-number {
   display: grid;
   flex: none;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
   color: #fff8ef;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   font-weight: 700;
   background: linear-gradient(135deg, var(--accent) 0%, #c28b44 100%);
-  box-shadow: 0 14px 24px rgba(166, 111, 44, 0.2);
+  box-shadow: 0 10px 18px rgba(166, 111, 44, 0.18);
 }
 
 h3 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   letter-spacing: -0.03em;
 }
 
 .step-body p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.88rem;
-  line-height: 1.65;
+  font-size: 0.86rem;
+  line-height: 1.6;
 }
 
 .step-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .step-links a {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
-  padding: 0 10px;
+  min-height: 28px;
+  padding: 0 8px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.58);
   color: var(--ink);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }

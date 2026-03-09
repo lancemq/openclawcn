@@ -366,7 +366,7 @@ const faqs = [
 }
 
 .hero-title {
-  max-width: 12ch;
+  max-width: 22ch;
   margin: 14px 0 10px;
   font-family: "Fraunces", "Times New Roman", serif;
   font-size: clamp(1.4rem, 1.9vw, 2.05rem);
@@ -547,24 +547,25 @@ const faqs = [
 
 .priority-panel,
 .faq-panel {
-  margin-top: 26px;
+  margin-top: 20px;
 }
 
 .section-heading {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .priority-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 .route-card {
   display: grid;
   align-content: start;
-  gap: 12px;
-  min-height: 260px;
+  gap: 10px;
+  min-height: 220px;
+  padding: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -611,29 +612,29 @@ const faqs = [
 .triage-layout,
 .contribute-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  gap: 18px;
-  margin-top: 22px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 14px;
+  margin-top: 18px;
 }
 
 .triage-card,
 .scenario-card,
 .contribution-card,
 .status-card {
-  padding-top: 24px;
+  padding-top: 20px;
 }
 
 .triage-steps,
 .status-list {
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .triage-step {
   display: grid;
-  grid-template-columns: 68px minmax(0, 1fr);
-  gap: 14px;
-  padding: 14px 0;
+  grid-template-columns: 60px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
   border-top: 1px solid rgba(67, 73, 60, 0.12);
 }
 
@@ -642,16 +643,16 @@ const faqs = [
 }
 
 .triage-step-no {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   color: #f8f4ea;
   background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
 }
 
 .triage-step h3,
 .lane-item h3 {
-  margin: 0 0 6px;
-  font-size: 1.05rem;
+  margin: 0 0 5px;
+  font-size: 1.02rem;
   line-height: 1.3;
   letter-spacing: -0.03em;
 }
@@ -666,29 +667,29 @@ const faqs = [
 .scenario-grid,
 .lane-grid {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .scenario-item,
 .lane-item {
-  padding: 16px;
+  padding: 14px;
   border: 1px solid rgba(67, 73, 60, 0.12);
-  border-radius: 20px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.46);
 }
 
 .scenario-label {
   width: fit-content;
-  margin-bottom: 8px;
-  padding: 4px 10px;
+  margin-bottom: 6px;
+  padding: 3px 8px;
   color: var(--accent);
   background: rgba(234, 215, 182, 0.42);
 }
 
 .scenario-item strong {
   display: block;
-  margin-bottom: 4px;
-  font-size: 1.02rem;
+  margin-bottom: 3px;
+  font-size: 1rem;
   letter-spacing: -0.03em;
 }
 
@@ -698,9 +699,9 @@ const faqs = [
 
 .lane-item span {
   display: inline-flex;
-  margin-top: 10px;
+  margin-top: 8px;
   color: var(--brand);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -710,8 +711,8 @@ const faqs = [
 
 .status-item {
   display: grid;
-  gap: 6px;
-  padding: 14px 0;
+  gap: 5px;
+  padding: 12px 0;
   border-top: 1px solid rgba(67, 73, 60, 0.12);
 }
 
@@ -721,22 +722,22 @@ const faqs = [
 
 .status-item span {
   color: var(--ink-soft);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 .status-item strong {
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   line-height: 1.3;
   letter-spacing: -0.04em;
 }
 
 .status-actions {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .faq-list {
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .faq-item {

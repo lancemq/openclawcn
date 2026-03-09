@@ -44,7 +44,7 @@ const year = new Date().getFullYear()
 
 <style scoped>
 .footer {
-  padding: 40px 0 28px;
+  padding: 32px 0 22px;
   border-top: 1px solid rgba(67, 73, 60, 0.12);
   background: linear-gradient(180deg, rgba(239, 231, 216, 0.1), rgba(234, 224, 206, 0.36));
 }
@@ -52,19 +52,20 @@ const year = new Date().getFullYear()
 .footer-grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 
 .footer-copy {
-  max-width: 420px;
+  max-width: 400px;
   color: var(--ink-soft);
-  line-height: 1.8;
+  line-height: 1.7;
+  font-size: 0.92rem;
 }
 
 h3 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   letter-spacing: -0.03em;
 }
 
@@ -75,17 +76,22 @@ ul {
 }
 
 li + li {
-  margin-top: 10px;
+  margin-top: 8px;
+}
+
+li a {
+  font-size: 0.92rem;
 }
 
 .footer-bottom {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
-  padding-top: 26px;
-  margin-top: 28px;
+  gap: 10px;
+  padding-top: 20px;
+  margin-top: 22px;
   color: var(--ink-soft);
   border-top: 1px solid rgba(67, 73, 60, 0.08);
+  font-size: 0.86rem;
 }
 
 @media (max-width: 760px) {

@@ -58,8 +58,8 @@ function isActive(to: string) {
   position: sticky;
   top: 0;
   z-index: 30;
-  backdrop-filter: blur(14px);
-  background: rgba(248, 244, 234, 0.78);
+  backdrop-filter: blur(12px);
+  background: rgba(248, 244, 234, 0.82);
   border-bottom: 1px solid rgba(67, 73, 60, 0.1);
 }
 
@@ -67,27 +67,27 @@ function isActive(to: string) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  min-height: 68px;
+  gap: 16px;
+  min-height: 60px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  font-size: 0.88rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 0.84rem;
   font-weight: 800;
   color: #fff8ef;
   background: linear-gradient(135deg, var(--accent) 0%, #c28b44 100%);
-  box-shadow: 0 14px 24px rgba(166, 111, 44, 0.22);
+  box-shadow: 0 10px 18px rgba(166, 111, 44, 0.2);
 }
 
 .brand-copy {
@@ -98,14 +98,14 @@ function isActive(to: string) {
 
 .brand-copy strong {
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1rem;
+  font-size: 0.98rem;
   letter-spacing: -0.03em;
 }
 
 .brand-copy small {
-  margin-top: 2px;
+  margin-top: 1px;
   color: var(--ink-soft);
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -113,14 +113,14 @@ function isActive(to: string) {
 .nav {
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
 }
 
 .nav-link {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 999px;
   color: var(--ink-soft);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
 }
 
@@ -131,14 +131,15 @@ function isActive(to: string) {
 }
 
 .compact {
-  min-height: 36px;
-  padding-inline: 12px;
+  min-height: 32px;
+  padding-inline: 10px;
+  font-size: 0.86rem;
 }
 
 @media (max-width: 860px) {
   .header-inner {
     flex-wrap: wrap;
-    padding: 12px 0;
+    padding: 10px 0;
   }
 
   .nav {

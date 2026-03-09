@@ -34,21 +34,21 @@ defineProps<{
 }
 
 .content-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.1);
 }
 
 .card-content {
   display: grid;
-  gap: 12px;
-  padding: 20px;
+  gap: 10px;
+  padding: 16px;
   flex: 1;
 }
 
 h3 {
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   letter-spacing: -0.03em;
   line-height: 1.4;
 }
@@ -56,24 +56,25 @@ h3 {
 p {
   margin: 0;
   color: var(--ink-soft);
-  line-height: 1.7;
+  line-height: 1.65;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-size: 0.92rem;
 }
 
 .card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .tag-item {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--brand);
   background: rgba(166, 111, 44, 0.1);
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 999px;
 }
 
@@ -83,6 +84,6 @@ p {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 </style>
