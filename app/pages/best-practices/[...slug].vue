@@ -52,7 +52,9 @@ useSeo({
         </div>
         <h1>{{ page?.title }}</h1>
         <p class="muted">{{ page?.description }}</p>
-        <ContentRenderer v-if="page" :value="page" />
+        <div class="markdown-content">
+          <ContentRenderer v-if="page" :value="page" />
+        </div>
       </article>
 
       <section class="related-block">

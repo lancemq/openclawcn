@@ -1,113 +1,169 @@
 ---
-title: 安装与环境
-description: 面向中文用户整理 OpenClaw 的环境准备、平台差异、网络注意点和首次安装后的验证步骤。
+title: OpenClaw 安装与环境
+description: 按官方推荐方式安装 OpenClaw，并根据本地开发、WSL2 和生产部署场景选择合适的安装路径。
 category: 安装
 ---
 
-# 安装与环境
+# OpenClaw 安装与环境
 
-这一页的目标不是替代官方逐步安装手册，而是帮助你在开始前把环境、网络和验证顺序想清楚。对中文用户来说，真正影响第一次体验的通常不是“有没有安装命令”，而是安装前后有没有把依赖、网络和认证边界准备好。
+这一页讲的是 OpenClaw 本身应该如何安装，而不是泛泛的环境准备。根据官方当前文档，最推荐的安装方式是使用官网提供的安装脚本，它会自动处理 Node 检测、OpenClaw CLI 安装，以及首次 onboarding。
 
-## 安装前先确认四件事
+## 官方推荐的系统要求
 
-### 1. 运行环境是否稳定
+OpenClaw 当前的安装前提主要是：
 
-OpenClaw 运行在 Node.js 生态里，因此你至少需要确认：
+- Node.js 22+
+- macOS、Linux 或 Windows
+- 如果你从源码构建，需要 `pnpm`
 
-- 当前机器的 Node.js 版本满足官方当前要求
-- 包管理器可正常安装依赖
-- 本地终端和文件权限没有明显限制
-- 如果要接浏览器、沙箱或外部工具，系统本身允许这些能力运行
+官方还特别强调了一点：如果你在 Windows 上运行 OpenClaw，强烈建议通过 **WSL2** 使用，而不是直接把 Windows 当作首选运行环境。
 
-### 2. 你准备在哪种平台先跑起来
+## 最推荐的安装方式：官网安装脚本
 
-- macOS：适合作为开发和第一次体验环境
-- Windows：更需要提前检查终端、路径和权限差异
-- Linux：适合服务器或常驻运行场景
-- 远程 VPS / 服务器：适合长期运行，但不建议作为第一次体验起点
+官方推荐使用安装脚本完成交互式安装。它会做这些事情：
 
-### 3. 网络与镜像源是否可用
+- 检测并安装 Node.js 22+
+- 安装 OpenClaw CLI
+- 在合适的情况下直接进入 onboarding
 
-对中国用户来说，安装成败很大程度取决于网络条件。你需要提前确认：
+macOS / Linux / WSL2 的推荐命令是：
 
-- 是否能访问 npm 仓库和 GitHub
-- 是否需要企业网络代理或镜像源
-- 后续准备使用的模型供应商和 API 域名能否连通
+```bash
+curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash
+```
 
-### 4. 你第一次想验证什么
+如果你想先看脚本参数：
 
-推荐把目标限定为以下之一：
+```bash
+curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --help
+```
 
-- 完成 onboarding 并进入 Control UI
-- 启动最小本地实例
-- 跑通一个最常用入口
+对绝大多数中文用户来说，这条路径比手工装 Node、再手工全局安装 CLI 更稳，因为它把依赖检查和 onboarding 串在了一起。
 
-不要在第一次安装时同时追求“多渠道 + 多模型 + 多工具”。
+## 另一条常见路径：直接安装 CLI
 
-## 推荐阅读顺序
+如果你已经有稳定的 Node.js 22+ 环境，也可以直接安装：
 
-1. 先阅读 [快速入门](/docs/getting-started)
-2. 再看 [Onboarding 引导流程说明](/docs/onboarding-guide)
-3. 然后了解 [Control UI 是什么](/docs/control-ui)
-4. 最后再进入渠道、Hooks 和安全文档
+```bash
+npm install -g openclaw@latest
+```
 
-## 不同平台的准备重点
+安装后建议立即执行：
+
+```bash
+openclaw onboard --install-daemon
+```
+
+这是当前官方 quick start 里最常见的命令组合。
+
+## 安装完成后怎么验证
+
+官方给出的最小验证动作是：
+
+```bash
+openclaw doctor
+openclaw status
+openclaw dashboard
+```
+
+它们分别解决三个问题：
+
+- `openclaw doctor`：检查配置和环境是否存在明显问题
+- `openclaw status`：确认 gateway 是否在运行
+- `openclaw dashboard`：打开 Control UI，完成第一次可见的使用验证
+
+如果你只跑一条最小链路，建议优先把这三步跑通。
+
+## 配置文件和路径在哪里
+
+官方文档当前说明，默认配置位于：
+
+```bash
+~/.openclaw/openclaw.json
+```
+
+如果你需要调整默认路径，常见环境变量有：
+
+- `OPENCLAW_HOME`
+- `OPENCLAW_STATE_DIR`
+- `OPENCLAW_CONFIG_PATH`
+
+这些变量适合放在更进阶的部署和迁移场景里，第一次安装通常不需要改。
+
+## 平台差异与建议
 
 ### macOS
 
-- 优先确认 Node.js、终端和浏览器相关依赖是否齐全
-- 如果后续要做本机自动化，提前检查系统权限提示
-- 第一次建议走本地模式，先不要暴露远程入口
+最适合做第一次体验和日常桌面使用。官方安装脚本会在需要时补 Homebrew、Node.js 和 Git。
+
+### Linux
+
+适合长期运行、远程访问和服务器部署。apt/dnf/yum 路径都在官方安装脚本考虑范围内。
 
 ### Windows
 
-- 先确认终端环境和路径处理是否稳定
-- 注意某些依赖、脚本和外部工具对 PowerShell / 路径格式较敏感
-- 如果准备长期运行，建议尽早规划 WSL 或独立 Linux 运行环境
+官方强烈建议通过 WSL2 使用。这样可以避开不少 PATH、Git 和本地工具兼容性问题。
 
-### Linux / 服务器
+如果你在 Windows 上直接安装，官方故障排除里点名提到两类常见问题：
 
-- 更适合长期托管、远程访问和多渠道运行
-- 需要额外关注端口暴露、认证和日志保存
-- 如果你还不熟悉 OpenClaw，先在本地完成第一轮 onboarding，再搬到服务器会更稳
+- `npm error spawn git / ENOENT`
+- `openclaw is not recognized`
 
-## 首次安装后的最小验证清单
+这两类问题本质上通常都是 Git 或 PATH 没配好。
 
-完成安装后，不要急着接渠道，先检查下面几项：
+## 生产环境怎么装
 
-1. 进程能正常启动，没有明显依赖报错
-2. onboarding 能完成，或能进入对应初始化流程
-3. Control UI 可以打开并显示基础状态
-4. 配置文件、环境变量和密钥位置明确
-5. 如果使用远程环境，认证机制已经启用
+如果你要把 OpenClaw 放到长期运行的服务器上，官方推荐的生产部署方向不是手工拼命令，而是：
 
-## 中文用户最常见的安装问题
+- 使用 `openclaw-ansible`
+- 通过 Tailscale、UFW、防火墙和 systemd 做更完整的安全部署
 
-### 依赖装上了，但启动不稳定
+官方给出的 Ansible 快速安装入口是：
 
-这通常不是“安装成功”，而是环境边界没有理顺。优先检查：
+```bash
+curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw-ansible/main/install.sh | bash
+```
 
-- Node.js 版本
-- 包管理器缓存和锁文件
-- 本地是否存在旧版本残留配置
+这条路径更适合：
 
-### 界面能开，但核心能力不可用
+- Debian / Ubuntu 服务器
+- 需要持续运行的 Gateway
+- 希望默认就有 SSH + Tailscale 安全边界的场景
 
-这往往是模型、渠道或工具层没有配好，而不是 UI 本身的问题。不要把“界面能访问”等同于“系统已可用”。
+## 安装时最常见的几个坑
 
-### 一开始就上服务器
+### `openclaw` 安装成功但命令找不到
 
-这会把安装问题、网络问题、认证问题、渠道问题混在一起。第一次尽量从本地单机环境开始。
+官方文档指出，这通常是全局 npm 安装目录没有进入 `PATH`。应优先检查：
 
-## 中国网络环境下的额外建议
+```bash
+node -v
+npm -v
+npm prefix -g
+echo "$PATH"
+```
 
-- 安装前先确认 npm、GitHub 和后续 API 提供方是否都可访问
-- 尽量把镜像源、代理和环境变量整理成文档，避免过一周后自己也忘记
-- 如果准备给团队使用，优先选一套稳定、可控、能长期访问的模型供应商
+### Linux 上全局 npm 安装报 `EACCES`
+
+这往往是 npm 的全局前缀指向 root 拥有目录。官方安装脚本会尝试切换前缀到用户目录。
+
+### Windows 缺 Git
+
+即使你走 npm 安装，某些依赖仍可能触发 git URL 相关安装逻辑，所以 Git 仍然是常见前置项。
+
+## 一条适合新用户的安装顺序
+
+1. 先用官网安装脚本完成安装
+2. 跑 `openclaw onboard --install-daemon`
+3. 跑 `openclaw doctor`
+4. 跑 `openclaw status`
+5. 跑 `openclaw dashboard`
+
+如果到这一步都正常，再进入渠道、认证和远程访问配置。
 
 ## 下一步推荐
 
+- [快速入门](/docs/getting-started)
 - [Onboarding 引导流程说明](/docs/onboarding-guide)
-- [Control UI 是什么](/docs/control-ui)
-- [故障排除与诊断思路](/docs/troubleshooting)
+- [Gateway 架构概览](/docs/architecture)
 - [安全配置基础](/docs/safety-basics)

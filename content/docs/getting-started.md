@@ -1,89 +1,140 @@
 ---
 title: 快速入门
-description: 用 5 到 10 分钟建立对 OpenClaw 的整体认识，并明确第一次上手时应该按什么顺序阅读和配置。
+description: 按官方推荐链路，在本机完成 OpenClaw 的安装、初始化、状态检查和第一次进入 Control UI。
 category: 入门
 ---
 
 # 快速入门
 
-如果你第一次接触 OpenClaw，最重要的不是立刻把所有渠道、模型、工具和自动化都接上，而是先完成一轮最小可理解的体验。官方文档当前把内容分成 Getting Started、Onboarding、Channels、Tools、Models、Platforms、Gateway & Ops 等模块，这说明 OpenClaw 不是单一聊天页面，而是一套可运行、可扩展、可管理的代理系统。
+这页的目标不是继续解释概念，而是带你用一条最短路径真正把 OpenClaw 跑起来。按照官方当前的入门链路，第一次上手最稳的顺序是：
 
-## 先记住三件事
+1. 安装 OpenClaw
+2. 运行 onboarding
+3. 检查 gateway 状态
+4. 打开 dashboard
+5. 从 Control UI 开始第一次使用
 
-1. OpenClaw 不是单个聊天窗口，而是一套可长期运行的助手系统
-2. 官方强调 onboarding、Control UI 和 Channels，说明“先配置好”和“先看清系统状态”比“先接很多入口”更重要
-3. 第一次使用最稳的目标不是全功能上线，而是跑通一条最小链路
+如果你只是第一次体验，不要一开始就接多个渠道、多个模型或远程入口。先把本机最小链路跑通，后面再扩展。
 
-## 推荐阅读顺序
+## 开始前准备
 
-1. 先看 [OpenClaw 是什么](/docs/what-is-openclaw)
-2. 再看 [OpenClaw 适合哪些用户](/docs/who-is-openclaw-for)
-3. 然后看 [OpenClaw 核心能力总览](/docs/core-capabilities)
-4. 接着阅读 [安装与环境](/docs/installation)
-5. 再看 [Onboarding 引导流程说明](/docs/onboarding-guide)
-6. 完成最小链路后再进入渠道、Hooks 和安全文档
+在执行命令前，先确认：
 
-## 第一次使用时先回答三个问题
+- 当前机器已经安装可用的 Node.js 环境
+- 终端可以正常访问 npm 和 GitHub
+- 本机浏览器可正常打开本地地址
+- 你准备先在本地完成第一次使用，而不是直接部署到远程服务器
 
-### 1. 你准备把它当成什么来用
+如果你还没确认这些前置条件，先看 [安装与环境](/docs/installation)。
 
-- 个人工作台
-- 团队里的代理入口
-- 挂在某个消息渠道后的长期助手
-- 需要接工具和自动化的运行系统
+## 第 1 步：安装 OpenClaw
 
-### 2. 你准备先走哪条最小路径
+官方当前推荐直接通过 npm 安装 CLI：
 
-- 先通过 Control UI 验证系统状态
-- 先跑一次 onboarding，完成基础初始化
-- 先接一个最常用入口，不同时展开多个渠道
+```bash
+npm install -g openclaw
+```
 
-### 3. 你是否已经准备好长期运行
+安装完成后，可以先确认命令已经可用：
 
-如果只是试用，先本地跑通即可。如果准备长期运行，就要尽早阅读安全、更新跟踪、排错和迁移相关内容。
+```bash
+openclaw --version
+```
 
-## 官方文档反映出的能力结构
+如果这里就报错，优先检查：
 
-从官方目录看，OpenClaw 的重点大致可以按下面的方式理解：
+- Node.js 版本是否过旧
+- 全局 npm 安装路径是否在 `PATH` 中
+- 企业网络、代理或镜像源是否拦截了安装过程
 
-- `Onboarding`：第一次初始化和引导式配置
-- `Control UI`：可见、可查、可管理的控制界面
-- `Channels`：把同一套代理能力接到不同消息入口
-- `Tools / Models / Platforms`：真正决定你能做什么、接什么、运行在哪里
-- `Gateway & Ops`：长期运行时必须关注的暴露面、认证、日志和诊断
-- `Help / Reference`：排错、命令、配置和术语说明
+## 第 2 步：运行 onboarding
 
-## 一条适合中文用户的第一次上手路径
+OpenClaw 当前的推荐第一次初始化方式是执行 onboarding，并在需要时安装 daemon：
 
-### 第一步：只验证本地最小链路
+```bash
+openclaw onboard --install-daemon
+```
 
-目标不是“全都配好”，而是确认：
+这一步的目标不是“配置完所有能力”，而是让系统进入一个可启动、可检查的状态。第一次使用时，你只需要重点关注两件事：
 
-- 环境准备正确
-- 初始化能完成
-- 能通过一个可控入口看到系统正常工作
+- onboarding 是否顺利完成
+- 当前是否已经提示你继续进入 dashboard 或下一步状态检查
 
-### 第二步：只选择一个主入口
+如果这里失败，不要立刻去接渠道，先看 [Onboarding 引导流程说明](/docs/onboarding-guide) 和 [故障排除与诊断思路](/docs/troubleshooting)。
 
-对大多数人来说，第一次接入时只保留一个主要渠道最稳。这样一旦出现问题，排查成本也最低。
+## 第 3 步：检查运行状态
 
-### 第三步：再决定是否扩展工具、Hooks 和远程访问
+完成 onboarding 后，先不要急着聊天，先检查 gateway 是否已经正常运行：
 
-这一步才适合进入真正的定制。过早扩展，只会把第一次体验变成大规模排错。
+```bash
+openclaw gateway status
+```
 
-## 一周学习计划
+理想状态下，你应该能看到当前 gateway 的基本状态信息。如果这里不正常，说明问题大概率还在本机环境、初始化或运行状态上，而不是聊天入口本身。
 
-如果你准备把中文站当成系统学习入口，可以按这个节奏走：
+## 第 4 步：打开 dashboard
 
-1. 第 1 天：理解定位、适用人群、核心结构
-2. 第 2 天：完成安装准备和 onboarding
-3. 第 3 天：理解 Control UI 与渠道的分工
-4. 第 4 天：阅读 Hooks、安全和社区支持
-5. 第 5 天到第 7 天：开始跟踪版本变化、整理自己的配置和接入计划
+确认状态正常后，再打开 dashboard：
 
-## 接下来去哪里
+```bash
+openclaw dashboard
+```
 
-- 想先了解定位：看产品介绍
-- 想先开始配置：看 [安装与环境](/docs/installation) 与 [Onboarding 引导流程说明](/docs/onboarding-guide)
-- 想理解结构：看 [内容结构与系统架构](/docs/architecture)
-- 想了解长期跟踪方式：看 [如何持续跟踪 OpenClaw 更新](/docs/release-tracking) 与 [故障排除与诊断思路](/docs/troubleshooting)
+对大多数第一次接触 OpenClaw 的用户来说，dashboard 也就是最合适的第一站。因为它更像 Control UI，适合做这些事情：
+
+- 看当前系统是否已经正常运行
+- 确认 onboarding 结果是否生效
+- 检查还缺哪些配置
+- 从一个更可见、可控的入口开始第一次使用
+
+如果你更关心 Control UI 的角色，可以继续看 [Control UI 是什么](/docs/control-ui)。
+
+## 第 5 步：完成第一次最小体验
+
+当 dashboard 可以正常打开后，第一次使用建议只做下面几件事：
+
+1. 看当前系统是否健康
+2. 确认自己已经知道主要入口在哪里
+3. 只体验一条最小链路，不同时扩展多个功能
+
+第一次上手最常见的错误，不是“不会用”，而是一次做得太多。只要本地最小链路已经跑通，你就已经完成了这次快速入门。
+
+## 跑通之后下一步看什么
+
+根据你的目标，下一步建议这样选：
+
+- 想理解整体结构：看 [OpenClaw 核心能力总览](/docs/core-capabilities)
+- 想继续理解初始化流程：看 [Onboarding 引导流程说明](/docs/onboarding-guide)
+- 想理解控制台作用：看 [Control UI 是什么](/docs/control-ui)
+- 想准备扩展入口：看 [渠道能力概览](/docs/channels-overview)
+- 想先降低风险：看 [安全配置基础](/docs/safety-basics)
+
+## 快速入门常见问题
+
+### 安装成功了，但 `openclaw` 命令不能用
+
+优先检查全局安装路径是否进入 `PATH`，以及 npm 是否装到了当前 shell 可见的位置。
+
+### onboarding 成功了，但 dashboard 打不开
+
+先回头检查 `openclaw gateway status` 是否正常，再判断是不是本地端口、权限或认证问题。
+
+### 是否应该先接消息渠道
+
+不建议。第一次使用更稳的方式，是先在本机通过 dashboard 或 Control UI 跑通最小链路，再进入渠道接入。
+
+## 一条最短命令清单
+
+如果你已经理解上面的说明，最短路径就是这三条：
+
+```bash
+npm install -g openclaw
+openclaw onboard --install-daemon
+openclaw dashboard
+```
+
+只是更推荐你在第二步和第三步之间加一次状态检查：
+
+```bash
+openclaw gateway status
+```

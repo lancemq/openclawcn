@@ -40,7 +40,9 @@ useSeo({
         <p class="eyebrow">{{ page?.category || '文档' }}</p>
         <h1>{{ page?.title }}</h1>
         <p class="muted">{{ page?.description }}</p>
-        <ContentRenderer v-if="page" :value="page" />
+        <div class="markdown-content">
+          <ContentRenderer v-if="page" :value="page" />
+        </div>
       </article>
     </div>
   </section>

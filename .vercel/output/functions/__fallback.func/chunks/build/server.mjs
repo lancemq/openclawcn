@@ -473,7 +473,7 @@ const _routes = [
   {
     name: "search",
     path: "/search",
-    component: () => import('./search-ByKftwiU.mjs')
+    component: () => import('./search-CHE0BpgL.mjs')
   },
   {
     name: "feedback",
@@ -488,32 +488,32 @@ const _routes = [
   {
     name: "docs",
     path: "/docs",
-    component: () => import('./index-AP8y5gAA.mjs')
+    component: () => import('./index-55qmEK1B.mjs')
   },
   {
     name: "news",
     path: "/news",
-    component: () => import('./index-5k2Wkxwt.mjs')
+    component: () => import('./index-CtmlXa0f.mjs')
   },
   {
     name: "docs-slug",
     path: "/docs/:slug(.*)*",
-    component: () => import('./_...slug_-BcW5FBTt.mjs')
+    component: () => import('./_...slug_-DVcjbfJe.mjs')
   },
   {
     name: "news-slug",
     path: "/news/:slug(.*)*",
-    component: () => import('./_...slug_-lhZuHnO6.mjs')
+    component: () => import('./_...slug_-Bw-r5I18.mjs')
   },
   {
     name: "best-practices",
     path: "/best-practices",
-    component: () => import('./index-oYSCmhqM.mjs')
+    component: () => import('./index-Df5D_PHH.mjs')
   },
   {
     name: "best-practices-slug",
     path: "/best-practices/:slug(.*)*",
-    component: () => import('./_...slug_-CviOD9Uo.mjs')
+    component: () => import('./_...slug_-BXihoS2K.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
