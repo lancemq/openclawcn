@@ -66,7 +66,7 @@ const workflows = [
       <p class="eyebrow">Community</p>
       <h1 class="section-title">社区支持</h1>
       <p class="section-copy">
-        第 2 步开始补齐与用户互动相关的入口。当前先提供问题反馈、GitHub 协作和基础 FAQ，后续再扩展讨论与贡献机制。
+        这里集中整理 GitHub、FAQ、内容反馈和更新订阅入口，方便中文用户持续跟踪 OpenClaw 并参与讨论。
       </p>
 
       <div class="grid cards">

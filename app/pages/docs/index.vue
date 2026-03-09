@@ -18,7 +18,7 @@ useSeo({
       <p class="eyebrow">Documentation</p>
       <h1 class="section-title">文档中心</h1>
       <p class="section-copy">
-        文档中心已经从最初的 MVP 目录，扩展为产品介绍、快速开始、功能专题、运维和更新跟踪的内容入口。
+        这里集中整理 OpenClaw 的产品介绍、快速开始、功能专题、运维建议和更新跟踪说明。
       </p>
 
       <div class="grid docs-grid">

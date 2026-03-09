@@ -35,7 +35,7 @@ useSeo({
   description: (page.value.description as string) || 'OpenClawCN 新闻页面',
   path: pagePath.value,
   type: 'article',
-  section: String(page.value.category || '站点更新'),
+  section: String(page.value.category || '产品更新'),
   publishedTime: String(page.value.date || ''),
 })
 </script>

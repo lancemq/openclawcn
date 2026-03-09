@@ -3,29 +3,29 @@
     <div class="container quick-start card">
       <div>
         <p class="eyebrow">5 分钟快速开始</p>
-        <h2 class="section-title">先理解 OpenClaw，再开始中文资料站点的使用与维护。</h2>
+        <h2 class="section-title">先理解 OpenClaw，再决定从哪条路径开始阅读与使用。</h2>
       </div>
 
       <div class="steps">
         <div class="step">
           <span class="step-number">1</span>
           <div>
-            <h3>安装依赖</h3>
-            <pre><code>npm install</code></pre>
+            <h3>先看产品定位</h3>
+            <pre><code>/docs/what-is-openclaw</code></pre>
           </div>
         </div>
         <div class="step">
           <span class="step-number">2</span>
           <div>
-            <h3>本地运行</h3>
-            <pre><code>npm run dev</code></pre>
+            <h3>再看入门与渠道</h3>
+            <pre><code>/docs/onboarding-guide</code></pre>
           </div>
         </div>
         <div class="step">
           <span class="step-number">3</span>
           <div>
-            <h3>继续查看文档与新闻</h3>
-            <pre><code>npm run build</code></pre>
+            <h3>最后跟踪更新与社区</h3>
+            <pre><code>/news /community /rss.xml</code></pre>
           </div>
         </div>
       </div>

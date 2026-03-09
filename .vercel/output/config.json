@@ -1,71 +1,38 @@
 {
   "version": 3,
   "overrides": {
-    "community/index.html": {
-      "path": "community"
-    },
-    "news/content-seeding-batch-1/index.html": {
-      "path": "news/content-seeding-batch-1"
-    },
-    "news/publishing-workflow-launch/index.html": {
-      "path": "news/publishing-workflow-launch"
-    },
-    "news/search-feedback-launch/index.html": {
-      "path": "news/search-feedback-launch"
-    },
-    "best-practices/content-ops/index.html": {
-      "path": "best-practices/content-ops"
-    },
-    "news/demo-ready-step2/index.html": {
-      "path": "news/demo-ready-step2"
-    },
-    "docs/architecture/index.html": {
-      "path": "docs/architecture"
-    },
     "faq/index.html": {
       "path": "faq"
     },
-    "best-practices/publishing-rhythm/index.html": {
-      "path": "best-practices/publishing-rhythm"
-    },
-    "docs/hooks-overview/index.html": {
-      "path": "docs/hooks-overview"
-    },
-    "docs/safety-basics/index.html": {
-      "path": "docs/safety-basics"
-    },
-    "docs/channels-overview/index.html": {
-      "path": "docs/channels-overview"
-    },
-    "docs/who-is-openclaw-for/index.html": {
-      "path": "docs/who-is-openclaw-for"
-    },
-    "docs/onboarding-guide/index.html": {
-      "path": "docs/onboarding-guide"
-    },
-    "best-practices/homepage-ia/index.html": {
-      "path": "best-practices/homepage-ia"
+    "community/index.html": {
+      "path": "community"
     },
     "best-practices/feedback-loop/index.html": {
       "path": "best-practices/feedback-loop"
     },
-    "docs/core-capabilities/index.html": {
-      "path": "docs/core-capabilities"
+    "docs/architecture/index.html": {
+      "path": "docs/architecture"
     },
-    "docs/release-tracking/index.html": {
-      "path": "docs/release-tracking"
+    "news/best-practices-launch/index.html": {
+      "path": "news/best-practices-launch"
     },
-    "docs/what-is-openclaw/index.html": {
-      "path": "docs/what-is-openclaw"
+    "news/demo-ready-step2/index.html": {
+      "path": "news/demo-ready-step2"
+    },
+    "news/content-structure/index.html": {
+      "path": "news/content-structure"
+    },
+    "news/search-feedback-launch/index.html": {
+      "path": "news/search-feedback-launch"
+    },
+    "docs/channels-overview/index.html": {
+      "path": "docs/channels-overview"
     },
     "news/mvp-launch/index.html": {
       "path": "news/mvp-launch"
     },
-    "docs/installation/index.html": {
-      "path": "docs/installation"
-    },
-    "docs/community/index.html": {
-      "path": "docs/community"
+    "news/publishing-workflow-launch/index.html": {
+      "path": "news/publishing-workflow-launch"
     },
     "docs/control-ui/index.html": {
       "path": "docs/control-ui"
@@ -73,23 +40,56 @@
     "news/community-rss-launch/index.html": {
       "path": "news/community-rss-launch"
     },
-    "news/best-practices-launch/index.html": {
-      "path": "news/best-practices-launch"
+    "best-practices/publishing-rhythm/index.html": {
+      "path": "best-practices/publishing-rhythm"
     },
-    "search/index.html": {
-      "path": "search"
+    "docs/safety-basics/index.html": {
+      "path": "docs/safety-basics"
     },
-    "feedback/index.html": {
-      "path": "feedback"
+    "docs/onboarding-guide/index.html": {
+      "path": "docs/onboarding-guide"
     },
-    "news/content-structure/index.html": {
-      "path": "news/content-structure"
+    "news/content-seeding-batch-1/index.html": {
+      "path": "news/content-seeding-batch-1"
+    },
+    "docs/installation/index.html": {
+      "path": "docs/installation"
+    },
+    "best-practices/homepage-ia/index.html": {
+      "path": "best-practices/homepage-ia"
     },
     "docs/getting-started/index.html": {
       "path": "docs/getting-started"
     },
+    "docs/what-is-openclaw/index.html": {
+      "path": "docs/what-is-openclaw"
+    },
+    "docs/core-capabilities/index.html": {
+      "path": "docs/core-capabilities"
+    },
+    "docs/who-is-openclaw-for/index.html": {
+      "path": "docs/who-is-openclaw-for"
+    },
+    "best-practices/content-ops/index.html": {
+      "path": "best-practices/content-ops"
+    },
+    "docs/release-tracking/index.html": {
+      "path": "docs/release-tracking"
+    },
+    "docs/hooks-overview/index.html": {
+      "path": "docs/hooks-overview"
+    },
     "docs/index.html": {
       "path": "docs"
+    },
+    "docs/community/index.html": {
+      "path": "docs/community"
+    },
+    "feedback/index.html": {
+      "path": "feedback"
+    },
+    "search/index.html": {
+      "path": "search"
     },
     "news/index.html": {
       "path": "news"

@@ -78,7 +78,7 @@ watch(
       <p class="eyebrow">Search</p>
       <h1 class="section-title">站内搜索</h1>
       <p class="section-copy">
-        目前先按标题、描述和分类进行搜索，足够覆盖第 2 步的文档与新闻查找需求。
+        你可以按标题、描述和分类搜索文档、新闻与最佳实践，快速定位需要的 OpenClaw 中文资料。
       </p>
 
       <div class="card search-shell">

@@ -39,7 +39,7 @@ function updateFilters(key: 'category' | 'archive', value: string) {
 
 useSeo({
   title: '新闻动态',
-  description: 'OpenClawCN 项目动态与里程碑记录，当前聚焦官网 MVP 和中文内容建设。',
+  description: 'OpenClawCN 持续跟踪 OpenClaw 的版本更新、使用提醒和中文解读。',
   path: '/news',
   type: 'website',
 })
@@ -51,7 +51,7 @@ useSeo({
       <p class="eyebrow">News</p>
       <h1 class="section-title">新闻动态</h1>
       <p class="section-copy">
-        第 1 步用最小新闻体系记录阶段推进，后续可以直接扩展为完整博客和更新日志。
+        这里主要发布 OpenClaw 的版本更新、功能变化、使用提醒和中文解读，帮助你持续跟踪产品演进。
       </p>
 
       <div class="filters card">

@@ -13,7 +13,7 @@ useSeo({
         <p class="eyebrow">Feedback</p>
         <h1 class="section-title">提交反馈</h1>
         <p class="section-copy">
-          第 2 步先提供可验证的反馈链路：前端表单、服务端校验接口，以及后续接入 webhook 或工单系统的扩展位。
+          如果你发现文档问题、信息缺失、翻译不准确或希望补充某个专题，可以直接在这里提交反馈。
         </p>
       </div>
 

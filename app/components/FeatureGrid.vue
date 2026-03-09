@@ -5,16 +5,16 @@ const features = [
     description: '首页、文档、新闻全部按中文阅读习惯组织，降低初次理解门槛。',
   },
   {
-    title: '介绍站点优先',
-    description: '站点对外重点是介绍 OpenClaw 本身，而不是介绍本站如何部署。',
+    title: '产品理解优先',
+    description: '先帮助用户理解 OpenClaw 的定位、能力边界和适用场景，再进入具体配置与接入。',
   },
   {
     title: 'Markdown 驱动',
     description: '新闻、教程和最佳实践都可以按内容文件持续扩充，不先依赖后台。',
   },
   {
-    title: '可持续扩展',
-    description: '第 1 步先交付可访问 MVP，第 2 步再逐步引入搜索、反馈和社区能力。',
+    title: '持续更新',
+    description: '通过文档、新闻、RSS 和社区反馈形成长期维护的中文资料体系。',
   },
 ]
 </script>
@@ -23,9 +23,9 @@ const features = [
   <section class="section">
     <div class="container">
       <p class="eyebrow">核心价值</p>
-      <h2 class="section-title">第一阶段先解决可上线、可阅读、可预览。</h2>
+      <h2 class="section-title">把 OpenClaw 的中文介绍、文档与更新入口整理清楚。</h2>
       <p class="section-copy">
-        这个阶段不追求大而全，而是先把官网内容结构、页面层级和中文信息表达做对。
+        网站的重点不是展示建设过程，而是让中文用户第一次进入后，就能顺着产品介绍、文档、更新和社区一路读下去。
       </p>
 
       <div class="feature-grid">

@@ -4112,7 +4112,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "b949cd99-056a-485a-bc5d-3fd68d1fcf11",
+    "buildId": "a95348ae-a17e-44c4-b43d-db21d35e26c9",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4724,9 +4724,9 @@ async function decompressSQLDump(base64Str, compressionType = "gzip") {
 }
 
 const checksums = {
-  "docs": "v3.5.0--cUO09ePQELvbEQHJrTsGq8qNH_Se5FTzRferPYWef_w",
-  "news": "v3.5.0--CQ4qdQHq0AjSRxP4-CsnGpz8kuH7t0m5Xuj_UFuCD2o",
-  "bestPractices": "v3.5.0--StaTUSSUXrLr0C63NxpdJmvZ5Zc4vFyNNrc3rSTm8is"
+  "docs": "v3.5.0--WyXupreOKzSuieomKp9dwKIXJQsiOq7dvMs9PO_ahPU",
+  "news": "v3.5.0--xC17944EBUlOndblTsz84QbJXj3ebU5db5GSIA3238I",
+  "bestPractices": "v3.5.0--qNldw-uh1On5YW3KW7Wq3wqXHpT6CYdBmzFF3FWMwXU"
 };
 const checksumsStructure = {
   "docs": "Gi1RUX7KIFQv1Zy3PDGgmYOfuHDwqNAfZ6EK6xg2z3k",

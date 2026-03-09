@@ -463,57 +463,57 @@ const _routes = [
   {
     name: "faq",
     path: "/faq",
-    component: () => import('./faq-DtSELd3i.mjs')
+    component: () => import('./faq-CdLTBOXh.mjs')
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-CxwhokOY.mjs')
+    component: () => import('./index-wn7VH8Zw.mjs')
   },
   {
     name: "search",
     path: "/search",
-    component: () => import('./search-ayTLkaMP.mjs')
+    component: () => import('./search-C32Lz5RJ.mjs')
   },
   {
     name: "feedback",
     path: "/feedback",
-    component: () => import('./feedback-j98ElNDB.mjs')
+    component: () => import('./feedback-wBdFRe8l.mjs')
   },
   {
     name: "community",
     path: "/community",
-    component: () => import('./community-CGnrkJ0v.mjs')
+    component: () => import('./community-58wJ7Ys4.mjs')
   },
   {
     name: "docs",
     path: "/docs",
-    component: () => import('./index-C8okZWLR.mjs')
+    component: () => import('./index-CngvhEZI.mjs')
   },
   {
     name: "news",
     path: "/news",
-    component: () => import('./index-I54XpqI9.mjs')
+    component: () => import('./index-bE1JRAjC.mjs')
   },
   {
     name: "docs-slug",
     path: "/docs/:slug(.*)*",
-    component: () => import('./_...slug_-DVS801UY.mjs')
+    component: () => import('./_...slug_-DBjvbUy3.mjs')
   },
   {
     name: "news-slug",
     path: "/news/:slug(.*)*",
-    component: () => import('./_...slug_-22lV3yCG.mjs')
+    component: () => import('./_...slug_-C8mTaWFS.mjs')
   },
   {
     name: "best-practices",
     path: "/best-practices",
-    component: () => import('./index-B1d9fvE8.mjs')
+    component: () => import('./index-Cq_rP51W.mjs')
   },
   {
     name: "best-practices-slug",
     path: "/best-practices/:slug(.*)*",
-    component: () => import('./_...slug_-DuAv7G_-.mjs')
+    component: () => import('./_...slug_-ClGic-VS.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -930,7 +930,7 @@ const plugins = [
   prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk
 ];
 const layouts = {
-  default: defineAsyncComponent(() => import('./default-Q5Iv3Lsc.mjs').then((m) => m.default || m))
+  default: defineAsyncComponent(() => import('./default-CJk9qzBM.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({

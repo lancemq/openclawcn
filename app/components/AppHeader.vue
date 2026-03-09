@@ -28,7 +28,7 @@ function isActive(to: string) {
         <span class="brand-mark">OC</span>
         <span class="brand-copy">
           <strong>OpenClawCN</strong>
-          <small>中文官网 MVP</small>
+          <small>中文资料站</small>
         </span>
       </NuxtLink>
 

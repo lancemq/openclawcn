@@ -31,7 +31,7 @@ const faqs = [
       <p class="eyebrow">FAQ</p>
       <h1 class="section-title">常见问题</h1>
       <p class="section-copy">
-        这是第 2 步补齐的 FAQ 页面，用来承接用户最常见的“先看哪里”“怎么反馈”“去哪里提问”这类问题。
+        这里整理的是最常见的入门疑问、反馈路径和信息查找方式，适合第一次进入站点时快速扫一遍。
       </p>
 
       <div class="grid faq-grid">

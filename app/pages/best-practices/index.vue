@@ -43,7 +43,7 @@ function updateFilters(key: 'category' | 'difficulty', value: string) {
 
 useSeo({
   title: '最佳实践',
-  description: '查看 OpenClawCN 当前整理的中文内容运营、反馈闭环和站点协作最佳实践。',
+  description: '查看 OpenClawCN 当前整理的 OpenClaw 接入、更新跟踪、安全与协作最佳实践。',
   path: '/best-practices',
   type: 'website',
 })
@@ -55,7 +55,7 @@ useSeo({
       <p class="eyebrow">Best Practices</p>
       <h1 class="section-title">最佳实践</h1>
       <p class="section-copy">
-        这是第 3 步先落下来的第一块内容：把中文站点运营、反馈闭环和社区协作中比较稳定的方法先整理成专题。
+        这里整理的是更偏长期使用和维护的经验，包括接入节奏、更新跟踪、安全基础和社区协作方式。
       </p>
 
       <div class="filters card">
@@ -156,7 +156,7 @@ useSeo({
 .practice-card h2 {
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.74rem;
+  font-size: 1.28rem;
   letter-spacing: -0.03em;
 }
 

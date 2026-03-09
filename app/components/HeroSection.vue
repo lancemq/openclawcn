@@ -9,7 +9,7 @@ const { public: publicConfig } = useRuntimeConfig()
         <p class="eyebrow">OpenClaw 中文官网</p>
         <h1 class="hero-title">让中文用户更快理解 OpenClaw，并找到清晰的中文资料入口。</h1>
         <p class="hero-copy">
-          这个 MVP 聚焦三个动作：快速看懂 OpenClaw、快速找到中文文档、快速进入社区与更新动态。
+          这里集中整理 OpenClaw 的产品介绍、入门文档、功能专题、版本更新和社区入口，帮助中文用户连续地理解与使用它。
         </p>
 
         <div class="button-row">
@@ -49,16 +49,16 @@ const { public: publicConfig } = useRuntimeConfig()
         </div>
         <ol class="timeline">
           <li>
-            <strong>建立中文官网入口</strong>
-            <p>首页、文档和新闻列表可以直接访问。</p>
+            <strong>先理解 OpenClaw 是什么</strong>
+            <p>从定位、能力结构和适用人群开始建立整体认知。</p>
           </li>
           <li>
-            <strong>补齐中文资料结构</strong>
-            <p>安装、概念、社区与动态入口清晰可见。</p>
+            <strong>再进入文档与功能专题</strong>
+            <p>把安装、渠道、Control UI、Hooks 和安全基础按中文阅读习惯组织清楚。</p>
           </li>
           <li>
-            <strong>准备后续扩展</strong>
-            <p>为搜索、反馈、最佳实践和社区互动预留结构。</p>
+            <strong>持续跟踪更新与社区讨论</strong>
+            <p>通过新闻、RSS、反馈与 GitHub 入口长期关注版本变化和实践经验。</p>
           </li>
         </ol>
       </div>
@@ -94,8 +94,8 @@ const { public: publicConfig } = useRuntimeConfig()
   max-width: 900px;
   margin: 12px 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: clamp(2.4rem, 4.6vw, 4.6rem);
-  line-height: 0.92;
+  font-size: clamp(1.82rem, 3.15vw, 3.18rem);
+  line-height: 0.95;
   letter-spacing: -0.055em;
 }
 

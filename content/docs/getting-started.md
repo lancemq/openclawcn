@@ -1,28 +1,29 @@
 ---
 title: 快速入门
-description: 用最短时间了解 OpenClaw 是什么、适合谁，以及 OpenClawCN 当前提供了哪些中文入口。
+description: 用最短时间理解 OpenClaw 的定位、核心能力，以及第一次阅读时更推荐的中文路径。
 category: 入门
 ---
 
 # 快速入门
 
-OpenClawCN 当前完成的是第 1 步 MVP，目标是先帮助中文用户理解 OpenClaw：
+如果你是第一次接触 OpenClaw，最重要的不是立刻记住所有配置项，而是先建立一个清晰的理解顺序。
 
-- 首页可以说明 OpenClawCN 的定位
-- 文档中心已经建立目录入口
-- 新闻列表可以承接项目动态
-- 社区与 GitHub 入口已经放到站点导航中
+## 推荐阅读顺序
 
-## 本地启动
+1. 先看 [OpenClaw 是什么](/Users/maqi/code/openclawcn/content/docs/what-is-openclaw.md)
+2. 再看 [OpenClaw 适合哪些用户](/Users/maqi/code/openclawcn/content/docs/who-is-openclaw-for.md)
+3. 然后进入 [OpenClaw 核心能力总览](/Users/maqi/code/openclawcn/content/docs/core-capabilities.md)
+4. 接着阅读 [Onboarding 引导流程说明](/Users/maqi/code/openclawcn/content/docs/onboarding-guide.md)
+5. 最后再看渠道、Hooks 和安全基础
 
-```bash
-npm install
-npm run dev
-```
+## 第一次使用时先回答三个问题
 
-## 当前可验证内容
+- 我为什么需要 OpenClaw，而不是普通聊天工具？
+- 我更关心哪类入口或渠道？
+- 我是想先理解结构，还是已经准备开始接入？
 
-1. 打开首页，确认 Hero、功能卡片和主要入口可见
-2. 打开 `/docs`，确认文档目录可访问
-3. 打开 `/news`，确认新闻列表可访问
-4. 打开 `/api/health`，确认基础函数可返回 JSON
+## 接下来去哪里
+
+- 想先了解定位：看产品介绍
+- 想先开始配置：看安装与 onboarding
+- 想了解长期跟踪方式：看新闻、FAQ 和社区页

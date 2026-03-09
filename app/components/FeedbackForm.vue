@@ -30,7 +30,7 @@ async function submitFeedback() {
     successMessage.value =
       response.delivery === 'webhook'
         ? '反馈已提交，已进入站点处理流程。'
-        : '反馈已通过接口校验并记录为本地可验证提交，后续可接入真实 webhook。'
+        : '反馈已提交，我们会用于后续内容整理与问题修正。'
 
     form.name = ''
     form.email = ''

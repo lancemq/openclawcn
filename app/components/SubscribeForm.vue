@@ -24,7 +24,7 @@ async function submitSubscription() {
     successMessage.value =
       response.delivery === 'webhook'
         ? '订阅请求已提交，后续更新会进入订阅流程。'
-        : '订阅请求已通过接口校验，当前处于本地可验证模式。'
+        : '订阅请求已提交，后续可通过邮件或更新提醒继续跟踪内容变化。'
     email.value = ''
   } catch (error) {
     errorMessage.value = error instanceof Error ? error.message : '订阅失败，请稍后重试。'

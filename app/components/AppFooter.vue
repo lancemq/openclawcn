@@ -25,11 +25,12 @@ const year = new Date().getFullYear()
       </div>
 
       <div>
-        <h3>阶段状态</h3>
+        <h3>关注</h3>
         <ul>
-          <li>第 1 步：MVP 已实现</li>
-          <li>第 2 步：搜索与反馈已上线</li>
-          <li>第 3 步：运营增强进行中</li>
+          <li><NuxtLink to="/docs/what-is-openclaw">产品介绍</NuxtLink></li>
+          <li><NuxtLink to="/docs/onboarding-guide">入门路径</NuxtLink></li>
+          <li><NuxtLink to="/docs/release-tracking">更新跟踪</NuxtLink></li>
+          <li><NuxtLink to="/feedback">内容反馈</NuxtLink></li>
         </ul>
       </div>
     </div>
