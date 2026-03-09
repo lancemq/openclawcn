@@ -91,6 +91,12 @@
 - 防止XSS和CSRF攻击
 - 定期安全审计
 
+#### 2.2.5 平台集成
+- 支持 GitHub 仓库与 Vercel 项目自动关联
+- 支持 Preview / Production 两套部署环境说明
+- 支持环境变量、Webhook、构建日志等运维指导
+- 前后端实现必须符合 Vercel Functions、无状态运行和只读文件系统约束
+
 ## 3. 非功能需求
 
 ### 3.1 性能要求
@@ -112,21 +118,29 @@
 ## 4. 技术架构建议
 
 ### 4.1 前端技术栈
-- **框架**: React/Vue.js (推荐Vue.js，国内生态更好)
-- **静态站点生成器**: VitePress/Docusaurus (推荐VitePress)
-- **UI组件库**: Element Plus/Ant Design Vue
-- **状态管理**: Pinia/Vuex
+- **框架**: Nuxt 3 + Vue 3 + TypeScript
+- **内容方案**: Nuxt Content
+- **UI组件库**: 自定义组件 + Element Plus 按需引入
+- **状态管理**: Pinia
 
 ### 4.2 后端技术栈
+- **服务端模式**: Nuxt Nitro Server Routes / Vercel Functions
 - **内容管理**: Markdown文件 + Git版本控制
-- **搜索功能**: Algolia或自建Elasticsearch
-- **评论系统**: Gitalk或自建评论系统
-- **部署**: GitHub Pages/Vercel/国内云服务商
+- **搜索功能**: Algolia 或托管搜索服务
+- **评论系统**: Gitalk 或第三方托管评论系统
+- **部署**: 以 Vercel 为主部署平台
 
-### 4.3 基础设施
+### 4.3 Vercel 集成建议
+- **适用场景**: 海外预览环境、内容审核预发布、文档和营销页面快速上线
+- **接入方式**: GitHub 仓库连接 Vercel，推送分支自动生成 Preview
+- **环境管理**: 区分 Preview、Production 环境变量，敏感配置统一托管
+- **发布策略**: 官网文档提供“一键部署”“手动导入项目”“自定义域名绑定”三类指引
+- **实现约束**: 不依赖本地持久化存储、常驻后台任务和进程内 Session
+
+### 4.4 基础设施
 - **域名**: openclaw.cn (建议注册)
-- **CDN**: 阿里云CDN/腾讯云CDN
-- **监控**: Sentry/自建监控系统
+- **CDN**: Vercel Edge Network + 阿里云CDN/腾讯云CDN（按需）
+- **监控**: Sentry/Vercel Observability
 - **分析**: 百度统计/友盟
 
 ## 5. 项目实施计划
@@ -142,6 +156,7 @@
 - [ ] 新闻博客系统
 - [ ] 文档系统集成
 - [ ] 基础SEO配置
+- [ ] 内部部署文档补齐与上线验证
 
 ### 5.3 第三阶段：高级功能和优化 (1-2周)
 - [ ] 搜索功能实现

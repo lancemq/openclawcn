@@ -3,75 +3,60 @@
 ## 1. 技术栈选择
 
 ### 前端技术栈
-- **框架**: Vue 3 + TypeScript (适合中文开发者生态)
-- **UI组件库**: Element Plus (成熟的中文UI库)
+- **框架**: Nuxt 3 + TypeScript（保留 Vue 生态，同时对 Vercel 部署友好）
+- **UI层**: Vue 3 + 自定义组件 / Element Plus（按需引入，避免首屏过重）
 - **状态管理**: Pinia
-- **路由**: Vue Router
-- **构建工具**: Vite (快速开发体验)
-- **静态站点生成**: 可选VitePress或直接SPA
+- **内容系统**: Nuxt Content（文档、新闻、最佳实践统一为 Markdown 内容）
+- **构建方式**: `nuxt build` 为默认构建命令，兼容 SSR、SSG、Hybrid Rendering
+- **图片优化**: `@nuxt/image`（便于接入 Vercel 图片优化能力）
 
 ### 后端技术栈
-- **服务端**: Node.js + Express/NestJS
-- **数据库**: MongoDB (灵活的文档结构，适合内容管理)
-- **缓存**: Redis (提升性能)
-- **文件存储**: 本地存储 + CDN (用于静态资源)
+- **服务端**: Nuxt Nitro Server Routes / API Routes（与前端同仓库部署到 Vercel）
+- **运行时**: Node.js Runtime on Vercel Functions
+- **数据库**: 托管 PostgreSQL（服务端无状态，适合 Vercel 函数模型）
+- **缓存**: 托管 Redis / KV（不依赖本地内存持久化）
+- **文件存储**: 对象存储或 Blob 服务，不依赖本地文件系统写入
+- **扩展原则**: 优先在 Nuxt/Nitro 体系内扩展，避免引入额外常驻服务
 
 ### 部署方案
-- **前端**: 静态资源部署到CDN (如阿里云OSS + CDN)
-- **后端**: Docker容器化部署
-- **域名**: 需要备案的国内域名
-- **服务器**: 国内云服务商 (阿里云/腾讯云)
+- **主站部署**: Vercel（Git 集成、Preview、Production、回滚）
+- **国内加速**: 根据访问策略接入国内 CDN 或镜像分发
+- **域名**: 自定义域名接入 Vercel；如需国内主域名需配合备案方案
+- **构建要求**: 所有前后端能力都必须适配 Vercel 的构建与函数约束
 
 ## 2. 项目目录结构
 
 ```
 openclaw-cn-website/
-├── frontend/                 # 前端项目
-│   ├── public/              # 静态资源
-│   ├── src/
-│   │   ├── assets/          # 项目资源
-│   │   ├── components/      # 公共组件
-│   │   ├── composables/     # Vue组合式函数
-│   │   ├── layouts/         # 布局组件
-│   │   ├── pages/           # 页面组件
-│   │   │   ├── home/        # 首页
-│   │   │   ├── news/        # 新闻中心
-│   │   │   ├── docs/        # 文档中心
-│   │   │   ├── tutorials/   # 教程中心
-│   │   │   ├── best-practices/ # 最佳实践
-│   │   │   └── community/   # 社区
-│   │   ├── router/          # 路由配置
-│   │   ├── stores/          # 状态管理
-│   │   ├── styles/          # 样式文件
-│   │   └── main.ts          # 入口文件
-│   ├── vite.config.ts       # Vite配置
-│   └── package.json
-│
-├── backend/                 # 后端项目
-│   ├── src/
-│   │   ├── controllers/     # 控制器
-│   │   ├── models/          # 数据模型
-│   │   ├── routes/          # 路由
-│   │   ├── services/        # 业务逻辑
-│   │   ├── middleware/      # 中间件
-│   │   └── app.ts           # 应用入口
-│   ├── config/              # 配置文件
-│   ├── scripts/             # 脚本工具
-│   └── package.json
-│
-├── content/                 # 内容管理
+├── app/                     # Nuxt 前端应用
+│   ├── components/          # 公共组件
+│   ├── composables/         # 组合式逻辑
+│   ├── layouts/             # 布局组件
+│   ├── pages/               # 页面路由
+│   ├── plugins/             # 插件
+│   ├── stores/              # Pinia 状态
+│   └── assets/              # 样式与静态资源
+├── server/                  # Nuxt/Nitro 服务端能力
+│   ├── api/                 # Vercel Functions API 路由
+│   ├── routes/              # 服务端路由
+│   ├── middleware/          # 服务端中间件
+│   └── utils/               # 服务端工具
+├── content/                 # Markdown 内容管理
 │   ├── news/                # 新闻内容
 │   ├── tutorials/           # 教程内容
 │   ├── best-practices/      # 最佳实践内容
 │   └── docs/                # 文档内容
 │
+├── public/                  # 可直接发布的静态文件
 ├── docs/                    # 项目文档
 │   ├── technical/           # 技术文档
 │   ├── user-guide/          # 用户指南
-│   └── deployment/          # 部署文档
+│   └── deployment/          # 部署文档（含 Vercel 集成指南）
 │
 ├── scripts/                 # 自动化脚本
-├── docker/                  # Docker配置
+├── nuxt.config.ts           # Nuxt 配置
+├── vercel.json              # Vercel 配置（函数、Header、重写等）
+├── package.json
 ├── .gitignore
 ├── README.md
 └── REQUIREMENTS.md
@@ -80,10 +65,10 @@ openclaw-cn-website/
 ## 3. 开发环境配置
 
 ### 本地开发
-- Node.js 18+
+- Node.js LTS（与 Vercel 项目设置保持一致）
 - npm/yarn/pnpm
-- MongoDB (本地或Docker)
-- Redis (可选，用于开发)
+- 托管数据库的开发环境连接
+- 本地尽量模拟 Vercel 环境变量和无状态运行方式
 
 ### 代码规范
 - ESLint + Prettier
@@ -111,12 +96,14 @@ openclaw-cn-website/
 - 图片懒加载
 - 静态资源缓存
 - PWA支持
+- 按路由选择 SSR / SSG / ISR 策略
 
 ### 后端优化
 - 数据库索引优化
 - API响应缓存
 - CDN加速
 - 压缩传输
+- 避免依赖本地磁盘写入、长连接常驻和进程内状态
 
 ## 6. SEO和可访问性
 

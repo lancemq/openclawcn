@@ -3,25 +3,26 @@
 ## 技术栈选择
 
 ### 前端技术栈
-- **框架**: Vue 3 + TypeScript (适合中文开发者生态，学习曲线平缓)
-- **UI 组件库**: Element Plus (国内广泛使用，中文文档完善)
-- **状态管理**: Pinia (轻量级，TypeScript 友好)
-- **路由**: Vue Router
-- **构建工具**: Vite (快速开发体验)
+- **框架**: Nuxt 3 + TypeScript（保留 Vue 开发体验，并直接适配 Vercel）
+- **UI 组件库**: 轻量自定义组件为主，Element Plus 按需引入
+- **状态管理**: Pinia
+- **内容层**: Nuxt Content（Markdown 驱动文档、博客和教程）
+- **构建方式**: 默认使用 `nuxt build`
 
 ### 后端技术栈
 - **语言**: Node.js + TypeScript
-- **框架**: Express.js 或 Fastify (轻量级，适合内容型网站)
+- **框架**: Nuxt Nitro Server API
 - **数据库**: 
-  - 主数据库: PostgreSQL (关系型数据，如用户、评论)
-  - 缓存: Redis (页面缓存、会话管理)
-- **静态文件存储**: 阿里云 OSS 或腾讯云 COS
+  - 主数据库: PostgreSQL（托管，适合无状态函数访问）
+  - 缓存: Redis / KV（托管，用于页面缓存、会话管理）
+- **静态文件存储**: Blob / OSS / COS 等对象存储
 
 ### 部署架构
-- **CDN**: 阿里云 CDN 或腾讯云 CDN (加速静态资源)
-- **服务器**: 阿里云 ECS 或腾讯云 CVM (国内访问速度优化)
-- **域名**: 建议使用 .cn 域名，便于国内 SEO
-- **HTTPS**: 必须配置，提升安全性和搜索引擎排名
+- **主部署平台**: Vercel
+- **CDN**: Vercel Edge Network 为主，按需补充阿里云 CDN 或腾讯云 CDN
+- **域名**: 自定义域名接入 Vercel；如使用 `.cn` 主域名需单独处理备案与国内访问方案
+- **HTTPS**: 通过 Vercel 默认证书和自定义域名配置启用
+- **预览环境**: 每个 PR 自动生成 Preview Deployment
 
 ## 核心功能模块技术实现
 
@@ -46,6 +47,16 @@
 - **代码分割**: 按路由懒加载
 - **缓存策略**: HTTP 缓存 + CDN 缓存
 
+### 5. Vercel 平台集成
+- **Git 集成**: 连接 GitHub 仓库，主分支部署 Production，功能分支部署 Preview
+- **环境变量**: 将 API 地址、分析脚本密钥、Webhook 密钥按 Development / Preview / Production 隔离
+- **函数模型**: 所有服务端逻辑默认按 Vercel Functions 设计，不依赖长驻进程
+- **文件系统约束**: 运行时不依赖本地持久化文件，临时文件仅作为短时缓存使用
+- **Deploy Hooks**: 内容仓库更新后触发文档与首页静态重建
+- **边缘能力**: 可选使用 Edge Middleware / Edge Functions 处理轻量跳转、鉴权和缓存头
+- **回滚能力**: 利用 Vercel 历史部署快速回退错误版本
+- **对外呈现**: 官网首页和文档页提供 `Deploy to Vercel` 按钮与操作说明
+
 ## 开发流程建议
 
 ### 1. 开发环境
@@ -59,9 +70,16 @@
 - **性能测试**: Lighthouse CI
 
 ### 3. 部署流程
-- **CI/CD**: GitHub Actions 或 Jenkins
-- **自动化部署**: Docker + Kubernetes (可选)
-- **监控告警**: Sentry (错误监控) + Prometheus (性能监控)
+- **CI/CD**: GitHub + Vercel Git Deploy
+- **自动化部署**: 分支自动生成 Preview，主分支发布 Production
+- **监控告警**: Sentry + Vercel Observability
+
+### 4. 平台协同流程
+1. 内容或代码提交到 GitHub
+2. Vercel 自动生成 Preview URL 供审核
+3. 审核通过后合并主分支，发布到 Production
+4. 国内主站可按需同步到自有 CDN，或保留 Vercel 作为国际访问入口
+5. 数据库、缓存、对象存储通过环境变量接入，不放在仓库或本地磁盘中
 
 ## 合规性考虑
 
@@ -90,12 +108,13 @@
 - **社交媒体**: 微信分享、微博分享
 - **分析工具**: 百度统计、友盟
 - **客服系统**: 集成在线客服
+- **部署平台**: Vercel 项目、域名、自定义构建命令和分析能力
 
 ## 技术风险与应对
 
 ### 1. 性能瓶颈
 - **风险**: 高并发访问导致服务器压力
-- **应对**: CDN + 缓存 + 数据库读写分离
+- **应对**: CDN + 缓存 + 托管数据库 + Vercel Functions 自动扩缩
 
 ### 2. 安全威胁
 - **风险**: XSS、CSRF、SQL 注入等
@@ -104,6 +123,10 @@
 ### 3. 兼容性问题
 - **风险**: 国内浏览器兼容性
 - **应对**: 测试主流浏览器（Chrome、Edge、360、QQ 浏览器等）
+
+### 4. 部署模型不匹配
+- **风险**: 使用长驻 Node 进程、本地上传目录或进程内会话导致 Vercel 部署异常
+- **应对**: 采用 Nuxt Nitro API、外部对象存储、托管会话与数据库
 
 ## 开发里程碑
 
