@@ -1,0 +1,6 @@
+# OpenClaw Content Fetch Cron Job
+# 每4小时执行一次内容抓取任务 (0, 4, 8, 12, 16, 20 点)
+0 */4 * * * cd /path/to/projects/openclawcn && npm run content:fetch >> /var/log/openclaw-content-fetch.log 2>&1
+
+# 或者使用更具体的路径（需要替换为实际路径）
+# 0 */4 * * * cd /root/.openclaw/workspace/projects/openclawcn && /usr/bin/npm run content:fetch >> /var/log/openclaw-content-fetch.log 2>&1

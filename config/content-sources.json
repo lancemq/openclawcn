@@ -1,0 +1,33 @@
+{
+  "sources": {
+    "news": {
+      "searchQueries": [
+        "OpenClaw AI assistant",
+        "OpenClaw framework",
+        "OpenClaw open source",
+        "OpenClaw personal assistant",
+        "OpenClaw automation"
+      ],
+      "outputPath": "content/tmp/news/",
+      "filePrefix": "news-openclaw-",
+      "category": "产品更新"
+    },
+    "docs": {
+      "searchQueries": [
+        "OpenClaw documentation",
+        "OpenClaw tutorial",
+        "OpenClaw guide",
+        "OpenClaw technical",
+        "OpenClaw API"
+      ],
+      "outputPath": "content/tmp/docs/",
+      "filePrefix": "docs-openclaw-",
+      "category": "技术文档"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2026-03-09",
+    "description": "Configuration for OpenClaw content fetching sources and paths"
+  }
+}

@@ -8,6 +8,7 @@
   "scripts": {
     "content:validate": "node scripts/validate-content.mjs",
     "content:manifest": "node scripts/generate-content-manifest.mjs",
+    "content:fetch": "node scripts/fetch-openclaw-content.mjs",
     "content:check": "npm run content:validate && npm run content:manifest",
     "dev": "nuxt dev",
     "prebuild": "npm run content:check",
