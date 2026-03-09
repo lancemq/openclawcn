@@ -14,10 +14,6 @@ const selectedDifficulty = computed(() =>
   typeof route.query.difficulty === 'string' ? route.query.difficulty : '全部',
 )
 
-const selectedTag = computed(() =>
-  typeof route.query.tag === 'string' ? route.query.tag : '全部',
-)
-
 const categories = computed(() => [
   '全部',
   ...new Set((items.value || []).map((item) => String(item.category || '未分类'))),
@@ -28,38 +24,21 @@ const difficulties = computed(() => [
   ...new Set((items.value || []).map((item) => String(item.difficulty || '未分级'))),
 ])
 
-const allTags = computed(() => {
-  const tags = ['全部']
-  items.value?.forEach(item => {
-    if (item.tags && Array.isArray(item.tags)) {
-      item.tags.forEach((tag: string) => {
-        if (!tags.includes(tag)) {
-          tags.push(tag)
-        }
-      })
-    }
-  })
-  return tags.sort()
-})
-
 const filteredItems = computed(() =>
   (items.value || []).filter((item) => {
     const categoryMatch =
       selectedCategory.value === '全部' || String(item.category || '') === selectedCategory.value
     const difficultyMatch =
       selectedDifficulty.value === '全部' || String(item.difficulty || '') === selectedDifficulty.value
-    
-    const itemTags = item.tags || []
-    const tagMatch =
-      selectedTag.value === '全部' || itemTags.includes(selectedTag.value)
-    
-    return categoryMatch && difficultyMatch && tagMatch
+
+    return categoryMatch && difficultyMatch
   }),
 )
 
-function updateFilters(key: 'category' | 'difficulty' | 'tag', value: string) {
+function updateFilters(key: 'category' | 'difficulty', value: string) {
   const query = {
     ...route.query,
+    tag: undefined,
     [key]: value === '全部' ? undefined : value,
   }
   router.replace({ query })
@@ -108,20 +87,6 @@ useSeo({
             @click="updateFilters('difficulty', difficulty)"
           >
             {{ difficulty }}
-          </button>
-        </div>
-
-        <div class="filter-group">
-          <span class="filter-label">标签</span>
-          <button
-            v-for="tag in allTags"
-            :key="tag"
-            type="button"
-            class="filter-chip"
-            :class="{ active: selectedTag === tag }"
-            @click="updateFilters('tag', tag)"
-          >
-            {{ tag }}
           </button>
         </div>
       </div>

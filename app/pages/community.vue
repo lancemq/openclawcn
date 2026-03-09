@@ -145,6 +145,17 @@ const faqs = [
             社区页不该只是入口合集。这里优先回答三件事：你现在该去哪里、怎样提问更容易被处理、中文社区当前已经提供了什么。
           </p>
 
+          <div class="hero-summary">
+            <article class="summary-chip">
+              <span>建议起点</span>
+              <strong>先查文档，再决定是否公开提问</strong>
+            </article>
+            <article class="summary-chip">
+              <span>目标</span>
+              <strong>减少入口混用，让问题更快被归档和处理</strong>
+            </article>
+          </div>
+
           <div class="button-row hero-actions">
             <NuxtLink class="button primary" to="/docs">先看文档</NuxtLink>
             <a class="button secondary" href="https://github.com/openclaw/openclaw/issues" target="_blank" rel="noreferrer">
@@ -170,23 +181,35 @@ const faqs = [
         </div>
 
         <aside class="signal-board card">
-          <p class="board-kicker">社区工作台</p>
+          <div class="board-heading">
+            <p class="board-kicker">社区工作台</p>
+            <p class="board-summary">把入口、提问要点和当前协作状态放在一个更容易浏览的摘要面板里。</p>
+          </div>
           <div class="board-grid">
             <article class="board-stat">
               <span class="board-label">优先入口</span>
               <strong>文档 / Issues / 反馈</strong>
-              <p>按问题类型分流，比所有人都挤进同一个入口更高效。</p>
+              <p>先判断问题类型，再选择对应入口。</p>
             </article>
             <article class="board-stat">
               <span class="board-label">建议携带</span>
               <strong>版本、路径、现象、预期</strong>
-              <p>上下文越完整，越容易快速定位和形成长期可追踪记录。</p>
+              <p>信息越完整，越容易直接进入处理。</p>
             </article>
             <article class="board-stat">
               <span class="board-label">当前状态</span>
               <strong>中文支持持续建设中</strong>
-              <p>现阶段以资料沉淀和问题归档为核心，讨论渠道会逐步补齐。</p>
+              <p>当前以资料沉淀和问题归档为核心。</p>
             </article>
+          </div>
+
+          <div class="board-checklist">
+            <span class="board-list-title">提问前快速检查</span>
+            <ul>
+              <li>是否已经看过对应文档或 FAQ</li>
+              <li>是否能描述复现步骤与预期结果</li>
+              <li>是否需要公开跟踪而不是一次性回复</li>
+            </ul>
           </div>
         </aside>
       </section>
@@ -309,14 +332,14 @@ const faqs = [
 
 .hero-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
-  gap: 22px;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 18px;
   align-items: start;
 }
 
 .hero-copy {
   position: relative;
-  padding: 30px 32px 34px;
+  padding: 28px 30px 28px;
   border: 1px solid rgba(12, 108, 105, 0.14);
   border-radius: 32px;
   background:
@@ -343,38 +366,69 @@ const faqs = [
 }
 
 .hero-title {
-  max-width: 11ch;
-  margin: 16px 0 12px;
+  max-width: 12ch;
+  margin: 14px 0 10px;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: clamp(1.54rem, 2.2vw, 2.3rem);
-  line-height: 1;
+  font-size: clamp(1.4rem, 1.9vw, 2.05rem);
+  line-height: 1.05;
   letter-spacing: -0.04em;
 }
 
 .hero-description {
-  max-width: 60ch;
+  max-width: 58ch;
+}
+
+.hero-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.summary-chip {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.summary-chip span,
+.board-list-title {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.summary-chip strong {
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 .hero-actions {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .hero-signals {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 24px;
+  gap: 10px;
+  margin-top: 18px;
 }
 
 .signal-pill {
   position: relative;
   z-index: 1;
-  display: grid;
-  gap: 4px;
-  min-height: 92px;
-  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: auto;
+  padding: 12px 14px 13px;
   border: 1px solid rgba(67, 73, 60, 0.1);
-  border-radius: 18px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.66);
 }
 
@@ -390,7 +444,7 @@ const faqs = [
 }
 
 .signal-pill strong {
-  font-size: 0.98rem;
+  font-size: 0.9rem;
 }
 
 .signal-pill span,
@@ -405,11 +459,15 @@ const faqs = [
 }
 
 .signal-board {
-  padding: 24px;
+  padding: 22px;
+}
+
+.board-heading {
+  margin-bottom: 14px;
 }
 
 .board-kicker {
-  margin: 0 0 14px;
+  margin: 0;
   color: var(--accent);
   font-size: 0.74rem;
   font-weight: 800;
@@ -417,16 +475,27 @@ const faqs = [
   text-transform: uppercase;
 }
 
+.board-summary {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
 .board-grid {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .board-stat {
-  padding: 16px 16px 18px;
+  padding: 14px 15px 16px;
   border: 1px solid rgba(67, 73, 60, 0.1);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.48);
+}
+
+.board-stat:last-child {
+  grid-column: 1 / -1;
 }
 
 .board-label,
@@ -457,7 +526,23 @@ const faqs = [
 
 .board-stat p {
   margin: 0;
-  font-size: 0.96rem;
+  font-size: 0.92rem;
+}
+
+.board-checklist {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(67, 73, 60, 0.12);
+}
+
+.board-checklist ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+}
+
+.board-checklist li + li {
+  margin-top: 7px;
 }
 
 .priority-panel,
@@ -697,6 +782,8 @@ const faqs = [
     grid-template-columns: 1fr;
   }
 
+  .hero-summary,
+  .board-grid,
   .hero-signals {
     grid-template-columns: 1fr;
   }

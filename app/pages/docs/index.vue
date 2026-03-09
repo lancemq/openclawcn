@@ -9,11 +9,6 @@ const selectedCategory = computed(() =>
   typeof route.query.category === 'string' ? route.query.category : '全部',
 )
 
-// Tag 筛选
-const selectedTag = computed(() =>
-  typeof route.query.tag === 'string' ? route.query.tag : '全部',
-)
-
 // 子目录作为分类
 const categories = computed(() => {
   const cats = ['全部']
@@ -34,21 +29,6 @@ const categories = computed(() => {
     }
   })
   return cats
-})
-
-// 从所有文档中提取 tag
-const allTags = computed(() => {
-  const tags = ['全部']
-  items.value?.forEach(item => {
-    if (item.tags && Array.isArray(item.tags)) {
-      item.tags.forEach((tag: string) => {
-        if (!tags.includes(tag)) {
-          tags.push(tag)
-        }
-      })
-    }
-  })
-  return tags.sort()
 })
 
 // 过滤文档
@@ -73,18 +53,15 @@ const filteredItems = computed(() => {
   return itemsList.filter((item) => {
     const categoryMatch =
       selectedCategory.value === '全部' || pathCategoryMap[String(item.path)] === selectedCategory.value
-    
-    const itemTags = item.tags || []
-    const tagMatch =
-      selectedTag.value === '全部' || itemTags.includes(selectedTag.value)
-    
-    return categoryMatch && tagMatch
+
+    return categoryMatch
   })
 })
 
-function updateFilters(key: 'category' | 'tag', value: string) {
+function updateFilters(key: 'category', value: string) {
   const query = {
     ...route.query,
+    tag: undefined,
     [key]: value === '全部' ? undefined : value,
   }
   router.replace({ query })
@@ -132,20 +109,6 @@ useSeo({
             @click="updateFilters('category', category)"
           >
             {{ category }}
-          </button>
-        </div>
-
-        <div class="filter-group">
-          <span class="filter-label">标签</span>
-          <button
-            v-for="tag in allTags"
-            :key="tag"
-            type="button"
-            class="filter-chip"
-            :class="{ active: selectedTag === tag }"
-            @click="updateFilters('tag', tag)"
-          >
-            {{ tag }}
           </button>
         </div>
       </div>

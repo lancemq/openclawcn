@@ -8,10 +8,6 @@ const selectedCategory = computed(() =>
   typeof route.query.category === 'string' ? route.query.category : '全部',
 )
 
-const selectedTag = computed(() =>
-  typeof route.query.tag === 'string' ? route.query.tag : '全部',
-)
-
 const selectedArchive = computed(() =>
   typeof route.query.archive === 'string' ? route.query.archive : '全部',
 )
@@ -20,20 +16,6 @@ const categories = computed(() => [
   '全部',
   ...new Set((items.value || []).map((item) => String(item.category || '未分类'))),
 ])
-
-const allTags = computed(() => {
-  const tags = ['全部']
-  items.value?.forEach(item => {
-    if (item.tags && Array.isArray(item.tags)) {
-      item.tags.forEach((tag: string) => {
-        if (!tags.includes(tag)) {
-          tags.push(tag)
-        }
-      })
-    }
-  })
-  return tags.sort()
-})
 
 const archives = computed(() => [
   '全部',
@@ -44,21 +26,18 @@ const filteredItems = computed(() =>
   (items.value || []).filter((item) => {
     const categoryMatch =
       selectedCategory.value === '全部' || String(item.category || '') === selectedCategory.value
-    
-    const itemTags = item.tags || []
-    const tagMatch =
-      selectedTag.value === '全部' || itemTags.includes(selectedTag.value)
-    
+
     const archiveMatch =
       selectedArchive.value === '全部' || String(item.date || '').startsWith(selectedArchive.value)
-    
-    return categoryMatch && tagMatch && archiveMatch
+
+    return categoryMatch && archiveMatch
   }),
 )
 
-function updateFilters(key: 'category' | 'tag' | 'archive', value: string) {
+function updateFilters(key: 'category' | 'archive', value: string) {
   const query = {
     ...route.query,
+    tag: undefined,
     [key]: value === '全部' ? undefined : value,
   }
   router.replace({ query })
@@ -93,20 +72,6 @@ useSeo({
             @click="updateFilters('category', category)"
           >
             {{ category }}
-          </button>
-        </div>
-
-        <div class="filter-group">
-          <span class="filter-label">标签</span>
-          <button
-            v-for="tag in allTags"
-            :key="tag"
-            type="button"
-            class="filter-chip"
-            :class="{ active: selectedTag === tag }"
-            @click="updateFilters('tag', tag)"
-          >
-            {{ tag }}
           </button>
         </div>
 
