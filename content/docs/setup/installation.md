@@ -210,7 +210,7 @@ echo "$PATH"
 
 ## 下一步推荐
 
-- [快速入门](/docs/getting-started)
-- [Onboarding 引导流程说明](/docs/onboarding-guide)
-- [Gateway 架构概览](/docs/architecture)
-- [安全配置基础](/docs/safety-basics)
+- [快速入门](/docs/getting-started/getting-started)
+- [Onboarding 引导流程说明](/docs/getting-started/onboarding-guide)
+- [Gateway 架构概览](/docs/manual/architecture)
+- [安全配置基础](/docs/operations/safety-basics)

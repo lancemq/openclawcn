@@ -104,6 +104,6 @@ openclaw logs --recent
 - [GitHub Issues](https://github.com/openclaw/openclaw/issues)
 - [GitHub Discussions](https://github.com/openclaw/openclaw/discussions)
 - [官方文档](https://docs.openclaw.ai)
-- [社区论坛](/docs/community)
+- [社区论坛](/docs/reference/community)
 
 这样比所有问题都直接扔进一个入口更稳，也更容易让维护者真正处理到位。

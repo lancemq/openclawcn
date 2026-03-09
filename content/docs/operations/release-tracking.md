@@ -107,6 +107,6 @@ category: 更新
 
 ## 下一步推荐
 
-- [版本迁移与升级检查单](/docs/migration-guide)
-- [故障排除与诊断思路](/docs/troubleshooting)
-- [社区支持](/docs/community)
+- [版本迁移与升级检查单](/docs/setup/migration-guide)
+- [故障排除与诊断思路](/docs/reference/troubleshooting)
+- [社区支持](/docs/reference/community)

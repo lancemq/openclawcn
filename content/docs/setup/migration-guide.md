@@ -102,6 +102,6 @@ release 里如果出现认证、gateway 暴露、query token、header auth、byp
 
 ## 下一步推荐
 
-- [如何持续跟踪 OpenClaw 更新](/docs/release-tracking)
-- [故障排除与诊断思路](/docs/troubleshooting)
-- [安全配置基础](/docs/safety-basics)
+- [如何持续跟踪 OpenClaw 更新](/docs/operations/release-tracking)
+- [故障排除与诊断思路](/docs/reference/troubleshooting)
+- [安全配置基础](/docs/operations/safety-basics)

@@ -59,6 +59,6 @@ category: 功能
 
 ## 推荐阅读顺序
 
-- [OpenClaw 核心能力总览](/docs/core-capabilities)
-- [渠道能力概览](/docs/channels-overview)
-- [安全配置基础](/docs/safety-basics)
+- [OpenClaw 核心能力总览](/docs/manual/core-capabilities)
+- [渠道能力概览](/docs/manual/channels-overview)
+- [安全配置基础](/docs/operations/safety-basics)

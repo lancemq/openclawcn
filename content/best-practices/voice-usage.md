@@ -187,6 +187,6 @@ OpenClaw 支持连续语音对话：
 
 ## 下一步
 
-- [快速入门](/docs/getting-started)
+- [快速入门](/docs/getting-started/getting-started)
 - [多平台客户端](/news/multiplatform-clients)
-- [核心能力总览](/docs/core-capabilities)
+- [核心能力总览](/docs/manual/core-capabilities)

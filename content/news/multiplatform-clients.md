@@ -194,6 +194,6 @@ OpenClaw 支持跨设备同步会话：
 
 ## 下一步
 
-- [快速入门指南](/docs/getting-started)
-- [Gateway 架构概览](/docs/architecture)
-- [安全配置基础](/docs/safety-basics)
+- [快速入门指南](/docs/getting-started/getting-started)
+- [Gateway 架构概览](/docs/manual/architecture)
+- [安全配置基础](/docs/operations/safety-basics)

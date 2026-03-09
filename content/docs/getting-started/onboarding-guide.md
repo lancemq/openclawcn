@@ -89,15 +89,15 @@ onboarding 解决的是第一轮可控配置，不等于你已经完成了长期
 
 完成第一轮 onboarding 后，建议立即补三件事：
 
-1. 阅读 [Control UI 是什么](/docs/control-ui)，确认自己知道去哪里看系统状态
-2. 阅读 [安全配置基础](/docs/safety-basics)，避免直接把入口暴露出去
-3. 阅读 [如何持续跟踪 OpenClaw 更新](/docs/release-tracking)，建立最基本的升级意识
+1. 阅读 [Control UI 是什么](/docs/manual/control-ui)，确认自己知道去哪里看系统状态
+2. 阅读 [安全配置基础](/docs/operations/safety-basics)，避免直接把入口暴露出去
+3. 阅读 [如何持续跟踪 OpenClaw 更新](/docs/operations/release-tracking)，建立最基本的升级意识
 
 ## 推荐的第一次使用顺序
 
-1. 阅读 [OpenClaw 是什么](/docs/what-is-openclaw)
-2. 阅读 [安装与环境](/docs/installation)
+1. 阅读 [OpenClaw 是什么](/docs/getting-started/what-is-openclaw)
+2. 阅读 [安装与环境](/docs/setup/installation)
 3. 完成最小 onboarding
-4. 打开 [Control UI 是什么](/docs/control-ui)
+4. 打开 [Control UI 是什么](/docs/manual/control-ui)
 5. 再决定是否扩展渠道和 hooks
 6. 开始整理自己的排错和更新跟踪习惯

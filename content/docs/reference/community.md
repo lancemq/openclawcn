@@ -69,11 +69,11 @@ category: 社区
 ## 中文用户的参与建议
 
 - 阅读官方 release 后，把关键变化翻译成团队内部可执行的提醒
-- 遇到不确定的问题，先查 [故障排除与诊断思路](/docs/troubleshooting)
-- 如果涉及版本变化，先看 [版本迁移与升级检查单](/docs/migration-guide)
+- 遇到不确定的问题，先查 [故障排除与诊断思路](/docs/reference/troubleshooting)
+- 如果涉及版本变化，先看 [版本迁移与升级检查单](/docs/setup/migration-guide)
 
 ## 下一步推荐
 
-- [如何持续跟踪 OpenClaw 更新](/docs/release-tracking)
-- [故障排除与诊断思路](/docs/troubleshooting)
-- [版本迁移与升级检查单](/docs/migration-guide)
+- [如何持续跟踪 OpenClaw 更新](/docs/operations/release-tracking)
+- [故障排除与诊断思路](/docs/reference/troubleshooting)
+- [版本迁移与升级检查单](/docs/setup/migration-guide)

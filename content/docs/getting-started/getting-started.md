@@ -25,7 +25,7 @@ category: 入门
 - 本机浏览器可正常打开本地地址
 - 你准备先在本地完成第一次使用，而不是直接部署到远程服务器
 
-如果你还没确认这些前置条件，先看 [安装与环境](/docs/installation)。
+如果你还没确认这些前置条件，先看 [安装与环境](/docs/setup/installation)。
 
 ## 第 1 步：安装 OpenClaw
 
@@ -60,7 +60,7 @@ openclaw onboard --install-daemon
 - onboarding 是否顺利完成
 - 当前是否已经提示你继续进入 dashboard 或下一步状态检查
 
-如果这里失败，不要立刻去接渠道，先看 [Onboarding 引导流程说明](/docs/onboarding-guide) 和 [故障排除与诊断思路](/docs/troubleshooting)。
+如果这里失败，不要立刻去接渠道，先看 [Onboarding 引导流程说明](/docs/getting-started/onboarding-guide) 和 [故障排除与诊断思路](/docs/reference/troubleshooting)。
 
 ## 第 3 步：检查运行状态
 
@@ -87,7 +87,7 @@ openclaw dashboard
 - 检查还缺哪些配置
 - 从一个更可见、可控的入口开始第一次使用
 
-如果你更关心 Control UI 的角色，可以继续看 [Control UI 是什么](/docs/control-ui)。
+如果你更关心 Control UI 的角色，可以继续看 [Control UI 是什么](/docs/manual/control-ui)。
 
 ## 第 5 步：完成第一次最小体验
 
@@ -103,11 +103,11 @@ openclaw dashboard
 
 根据你的目标，下一步建议这样选：
 
-- 想理解整体结构：看 [OpenClaw 核心能力总览](/docs/core-capabilities)
-- 想继续理解初始化流程：看 [Onboarding 引导流程说明](/docs/onboarding-guide)
-- 想理解控制台作用：看 [Control UI 是什么](/docs/control-ui)
-- 想准备扩展入口：看 [渠道能力概览](/docs/channels-overview)
-- 想先降低风险：看 [安全配置基础](/docs/safety-basics)
+- 想理解整体结构：看 [OpenClaw 核心能力总览](/docs/manual/core-capabilities)
+- 想继续理解初始化流程：看 [Onboarding 引导流程说明](/docs/getting-started/onboarding-guide)
+- 想理解控制台作用：看 [Control UI 是什么](/docs/manual/control-ui)
+- 想准备扩展入口：看 [渠道能力概览](/docs/manual/channels-overview)
+- 想先降低风险：看 [安全配置基础](/docs/operations/safety-basics)
 
 ## 快速入门常见问题
 

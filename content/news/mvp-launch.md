@@ -56,4 +56,4 @@ tags: ["release", "version", "changelog"]
 
 - [GitHub Releases](https://github.com/openclaw/openclaw/releases)
 - [官方文档](https://docs.openclaw.ai)
-- [更新跟踪指南](/docs/release-tracking)
+- [更新跟踪指南](/docs/operations/release-tracking)

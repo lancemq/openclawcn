@@ -462,6 +462,6 @@ browser.launch(
 
 ## 下一步
 
-- [核心能力总览](/docs/core-capabilities)
+- [核心能力总览](/docs/manual/core-capabilities)
 - [技能开发指南](/best-practices/skills-development)
-- [安全配置基础](/docs/safety-basics)
+- [安全配置基础](/docs/operations/safety-basics)

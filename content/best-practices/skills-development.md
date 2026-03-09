@@ -360,6 +360,6 @@ description:
 
 ## 下一步
 
-- [核心能力总览](/docs/core-capabilities)
-- [API 参考文档](/docs/api-reference-overview)
-- [Hooks 机制](/docs/hooks-overview)
+- [核心能力总览](/docs/manual/core-capabilities)
+- [API 参考文档](/docs/reference/api-reference-overview)
+- [Hooks 机制](/docs/manual/hooks-overview)

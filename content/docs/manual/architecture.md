@@ -136,7 +136,7 @@ Nodes 是另一类通过 WebSocket 接入 Gateway 的设备。官方文档当前
 
 ## 下一步推荐
 
-- [OpenClaw 安装与环境](/docs/installation)
-- [渠道能力概览](/docs/channels-overview)
-- [Control UI 是什么](/docs/control-ui)
-- [安全配置基础](/docs/safety-basics)
+- [OpenClaw 安装与环境](/docs/setup/installation)
+- [渠道能力概览](/docs/manual/channels-overview)
+- [Control UI 是什么](/docs/manual/control-ui)
+- [安全配置基础](/docs/operations/safety-basics)

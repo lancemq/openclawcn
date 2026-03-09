@@ -42,12 +42,16 @@ OpenClaw 不是“每个聊天应用单独跑一套代理”，而是：
 
 ### 其他平台
 - **Matrix** - 去中心化通讯协议
-- **Nostr** - 的去中心化社交协议
+- **Nostr** - 去中心化社交协议
 - **Synology Chat** - 群晖 NAS 用户
 - **Tlon** - 分布式协作平台
 - **Twitch** - 直播平台聊天
 - **Zalo** - 越南常用通讯软件
 - **WebChat** - 自定义网页聊天
+
+### 语音与视频
+- **Twilio** - 电话和短信集成
+- **Zoom** - 视频会议集成
 
 不同渠道在文本、媒体、反应、群组和机器人能力上的支持并不完全一样，但文本能力是普遍支持的。
 
@@ -154,7 +158,7 @@ openclaw gateway --port 18789
 
 ## 下一步推荐
 
-- [Gateway 架构概览](/docs/architecture)
-- [Control UI 是什么](/docs/control-ui)
-- [安全配置基础](/docs/safety-basics)
-- [故障排除与诊断思路](/docs/troubleshooting)
+- [Gateway 架构概览](/docs/manual/architecture)
+- [Control UI 是什么](/docs/manual/control-ui)
+- [安全配置基础](/docs/operations/safety-basics)
+- [故障排除与诊断思路](/docs/reference/troubleshooting)

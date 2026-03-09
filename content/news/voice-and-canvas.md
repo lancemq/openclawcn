@@ -113,6 +113,6 @@ Canvas 是由 AI 驱动的可视化工作区，支持 A2UI 语法，可以生成
 
 ## 下一步
 
-- [OpenClaw 核心能力总览](/docs/core-capabilities)
-- [快速入门指南](/docs/getting-started)
-- [Control UI 使用说明](/docs/control-ui)
+- [OpenClaw 核心能力总览](/docs/manual/core-capabilities)
+- [快速入门指南](/docs/getting-started/getting-started)
+- [Control UI 使用说明](/docs/manual/control-ui)

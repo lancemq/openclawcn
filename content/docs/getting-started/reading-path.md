@@ -24,8 +24,8 @@ date: 2026-03-06
 
 ## 快速入口
 
-- [OpenClaw 是什么？](/docs/what-is-openclaw)
-- [核心能力总览](/docs/core-capabilities)
-- [安装指南](/docs/installation)
-- [Onboarding 指南](/docs/onboarding-guide)
-- [Control UI 使用说明](/docs/control-ui)
+- [OpenClaw 是什么？](/docs/getting-started/what-is-openclaw)
+- [核心能力总览](/docs/manual/core-capabilities)
+- [安装指南](/docs/setup/installation)
+- [Onboarding 指南](/docs/getting-started/onboarding-guide)
+- [Control UI 使用说明](/docs/manual/control-ui)
