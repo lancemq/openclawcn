@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { actionOverview, bestPracticeOverview, docsOverview, newsOverview } from '~/data/site'
+import { actionOverview, bestPracticeOverview, docsOverview, extensionOverview, newsOverview } from '~/data/site'
 
 useSeo({
   title: 'OpenClaw 中文官网',
@@ -63,6 +63,25 @@ useSeo({
         <div class="grid news-grid">
           <ContentCard
             v-for="item in newsOverview"
+            :key="item.to"
+            :title="item.title"
+            :description="item.description"
+            :to="item.to"
+            :meta="item.meta"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section extension-section">
+      <div class="container">
+        <div class="home-head">
+          <p class="eyebrow">技能与配置</p>
+          <p class="home-head-note">把常用 skills、SOUL 和关键配置项单独整理，减少在社区帖和零散文档里来回翻找。</p>
+        </div>
+        <div class="grid extension-grid">
+          <ContentCard
+            v-for="item in extensionOverview"
             :key="item.to"
             :title="item.title"
             :description="item.description"
@@ -158,6 +177,11 @@ useSeo({
   grid-column: span 2;
 }
 
+.extension-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 14px;
+}
+
 .subscribe-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
@@ -181,6 +205,7 @@ useSeo({
 
   .news-grid,
   .practice-grid,
+  .extension-grid,
   .action-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -199,6 +224,7 @@ useSeo({
   .docs-grid,
   .news-grid,
   .practice-grid,
+  .extension-grid,
   .action-grid {
     grid-template-columns: 1fr;
   }

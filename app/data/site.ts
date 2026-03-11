@@ -97,6 +97,21 @@ export const actionOverview = [
   },
 ]
 
+export const extensionOverview = [
+  {
+    title: '热门技能',
+    description: '整理 OpenClaw 当前常见、实用且讨论度高的 skills，给出适用场景、安装命令和使用提醒。',
+    to: '/skills',
+    meta: 'Skills',
+  },
+  {
+    title: '关键配置',
+    description: '把 SOUL、基础 openclaw.json、skills 配置和常见高频项整理成更易查阅的中文入口。',
+    to: '/configurations',
+    meta: 'Config',
+  },
+]
+
 export const newsOverview = [
   {
     title: 'OpenClaw 2026.3.7 版本观察',
