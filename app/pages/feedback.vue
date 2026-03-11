@@ -3,6 +3,7 @@ useSeo({
   title: '提交反馈',
   description: '向 OpenClawCN 提交文档问题、站点问题和社区建议。',
   path: '/feedback',
+  noindex: true,
 })
 </script>
 

@@ -3,6 +3,7 @@ useSeo({
   title: '页面不存在',
   description: '请求的页面不存在，请返回 OpenClawCN 首页继续浏览。',
   path: '/404',
+  noindex: true,
 })
 </script>
 

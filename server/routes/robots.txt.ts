@@ -11,6 +11,11 @@ export default defineEventHandler((event) => {
     'Disallow: /api/',
     'Disallow: /search',
     '',
+    'User-agent: Baiduspider',
+    'Allow: /',
+    'Disallow: /api/',
+    'Disallow: /search',
+    '',
     `Sitemap: ${siteUrl}/sitemap.xml`,
   ].join('\n')
 })

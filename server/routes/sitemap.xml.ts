@@ -3,6 +3,8 @@ import { queryCollection } from '@nuxt/content/server'
 type SitemapUrl = {
   loc: string
   lastmod?: string
+  changefreq?: string
+  priority?: string
 }
 
 function toAbsoluteUrl(siteUrl: string, path: string) {
@@ -29,26 +31,31 @@ export default defineEventHandler(async (event) => {
   ])
 
   const urls: SitemapUrl[] = [
-    { loc: toAbsoluteUrl(siteUrl, '/') },
-    { loc: toAbsoluteUrl(siteUrl, '/paths') },
-    { loc: toAbsoluteUrl(siteUrl, '/topics') },
-    { loc: toAbsoluteUrl(siteUrl, '/docs') },
-    { loc: toAbsoluteUrl(siteUrl, '/videos') },
-    { loc: toAbsoluteUrl(siteUrl, '/news') },
-    { loc: toAbsoluteUrl(siteUrl, '/best-practices') },
-    { loc: toAbsoluteUrl(siteUrl, '/community') },
-    { loc: toAbsoluteUrl(siteUrl, '/search') },
-    { loc: toAbsoluteUrl(siteUrl, '/feedback') },
-    { loc: toAbsoluteUrl(siteUrl, '/faq') },
+    { loc: toAbsoluteUrl(siteUrl, '/'), changefreq: 'daily', priority: '1.0' },
+    { loc: toAbsoluteUrl(siteUrl, '/paths'), changefreq: 'weekly', priority: '0.8' },
+    { loc: toAbsoluteUrl(siteUrl, '/topics'), changefreq: 'weekly', priority: '0.8' },
+    { loc: toAbsoluteUrl(siteUrl, '/docs'), changefreq: 'weekly', priority: '0.9' },
+    { loc: toAbsoluteUrl(siteUrl, '/videos'), changefreq: 'weekly', priority: '0.8' },
+    { loc: toAbsoluteUrl(siteUrl, '/news'), changefreq: 'daily', priority: '0.9' },
+    { loc: toAbsoluteUrl(siteUrl, '/best-practices'), changefreq: 'weekly', priority: '0.8' },
+    { loc: toAbsoluteUrl(siteUrl, '/community'), changefreq: 'monthly', priority: '0.6' },
+    { loc: toAbsoluteUrl(siteUrl, '/feedback'), changefreq: 'monthly', priority: '0.4' },
+    { loc: toAbsoluteUrl(siteUrl, '/faq'), changefreq: 'weekly', priority: '0.6' },
     ...docs.map((item) => ({
       loc: toAbsoluteUrl(siteUrl, String(item.path || '')),
+      changefreq: 'monthly',
+      priority: '0.7',
     })),
     ...news.map((item) => ({
       loc: toAbsoluteUrl(siteUrl, String(item.path || '')),
       lastmod: String(item.date || ''),
+      changefreq: 'daily',
+      priority: '0.8',
     })),
     ...bestPractices.map((item) => ({
       loc: toAbsoluteUrl(siteUrl, String(item.path || '')),
+      changefreq: 'weekly',
+      priority: '0.7',
     })),
   ]
 
@@ -62,6 +69,14 @@ export default defineEventHandler(async (event) => {
 
       if (item.lastmod) {
         lines.push(`    <lastmod>${escapeXml(item.lastmod)}</lastmod>`)
+      }
+
+      if (item.changefreq) {
+        lines.push(`    <changefreq>${escapeXml(item.changefreq)}</changefreq>`)
+      }
+
+      if (item.priority) {
+        lines.push(`    <priority>${escapeXml(item.priority)}</priority>`)
       }
 
       lines.push('  </url>')
