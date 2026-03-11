@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getPrevNext, sortDocs } from '~/data/content'
+import { getPrevNext, normalizeTags, sharedTagCount, sortDocs } from '~/data/content'
 
 const route = useRoute()
 const slug = computed(() => {
@@ -25,11 +25,32 @@ const orderedDocs = computed(() => sortDocs((allDocs.value || []) as any[]))
 
 const docNav = computed(() => getPrevNext(orderedDocs.value, pagePath.value))
 
+const pageTags = computed(() => normalizeTags(page.value?.tags as string[] | undefined))
+
+const pageToc = computed(() => {
+  const links = (page.value?.body as any)?.toc?.links
+  return Array.isArray(links) ? links : []
+})
+
 const relatedDocs = computed(() => {
   const category = String(page.value?.category || '')
+  const tags = pageTags.value
+
   return orderedDocs.value
     .filter(item => item.path !== pagePath.value)
-    .filter(item => String(item.category || '') === category || item.path.startsWith('/docs/getting-started/'))
+    .map((item) => {
+      const score =
+        (String(item.category || '') === category ? 5 : 0) +
+        sharedTagCount(tags, item.tags) * 3 +
+        (String(item.path).startsWith('/docs/getting-started/') ? 1 : 0)
+
+      return {
+        ...item,
+        score,
+      }
+    })
+    .filter(item => item.score > 0)
+    .sort((left, right) => right.score - left.score)
     .slice(0, 3)
     .map(item => ({
       title: item.title,
@@ -50,6 +71,9 @@ useSeo({
   title: page.value.title as string,
   description: (page.value.description as string) || 'OpenClawCN 文档页面',
   path: pagePath.value,
+  type: 'article',
+  section: String(page.value.category || '文档'),
+  publishedTime: typeof page.value.date === 'string' ? page.value.date : undefined,
 })
 </script>
 
@@ -58,14 +82,44 @@ useSeo({
     <div class="container">
       <AppBreadcrumbs :items="breadcrumbItems" />
 
-      <article class="card prose">
-        <p class="eyebrow">{{ page?.category || '文档' }}</p>
-        <h1>{{ page?.title }}</h1>
-        <p class="muted">{{ page?.description }}</p>
-        <div class="markdown-content">
-          <ContentRenderer v-if="page" :value="page" />
+      <div class="content-detail-layout">
+        <article class="card prose">
+          <div class="content-header">
+            <p class="eyebrow">{{ page?.category || '文档' }}</p>
+            <div v-if="pageTags.length" class="content-tag-list">
+              <span v-for="tag in pageTags" :key="tag" class="tag">#{{ tag }}</span>
+            </div>
+          </div>
+          <h1>{{ page?.title }}</h1>
+          <p class="muted">{{ page?.description }}</p>
+          <div class="markdown-content">
+            <ContentRenderer v-if="page" :value="page" />
+          </div>
+        </article>
+
+        <div class="content-side">
+          <ContentOutline title="本页目录" :links="pageToc" />
+
+          <aside class="card content-side-card">
+            <p class="eyebrow">Read Next</p>
+            <h2>这一组的推荐入口</h2>
+            <div class="content-side-links">
+              <NuxtLink to="/docs/getting-started/reading-path" class="content-side-link">
+                <strong>阅读路径</strong>
+                <span>第一次访问时，先建立整体地图。</span>
+              </NuxtLink>
+              <NuxtLink to="/search" class="content-side-link">
+                <strong>站内搜索</strong>
+                <span>按安装、渠道、gateway、排错快速定位。</span>
+              </NuxtLink>
+              <NuxtLink to="/community" class="content-side-link">
+                <strong>社区支持</strong>
+                <span>搜不到答案时，直接转到社区入口。</span>
+              </NuxtLink>
+            </div>
+          </aside>
         </div>
-      </article>
+      </div>
 
       <ContentNavigator
         section-label="继续阅读"
@@ -78,3 +132,72 @@ useSeo({
     </div>
   </section>
 </template>
+
+<style scoped>
+.content-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 16px;
+  align-items: start;
+}
+
+.content-header,
+.content-tag-list,
+.content-side,
+.content-side-links {
+  display: grid;
+  gap: 10px;
+}
+
+.content-tag-list {
+  grid-template-columns: repeat(auto-fit, minmax(0, max-content));
+}
+
+.content-side {
+  gap: 14px;
+}
+
+.content-side-card {
+  display: grid;
+  gap: 10px;
+}
+
+.content-side-card h2 {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+
+.content-side-link {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.44);
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.content-side-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.22);
+}
+
+.content-side-link strong {
+  font-size: 0.92rem;
+}
+
+.content-side-link span {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 980px) {
+  .content-detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

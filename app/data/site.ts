@@ -18,22 +18,22 @@ export const docsOverview = [
     meta: '安装',
   },
   {
-    title: '内容结构与系统架构',
-    description: '从入口层、控制层、能力层到运维层，建立理解 OpenClaw 的核心心智图。',
+    title: 'Gateway 架构概览',
+    description: '从 Gateway、Nodes、Control UI 到入口层，建立理解 OpenClaw 的核心心智图。',
     to: '/docs/manual/architecture',
     meta: '架构',
   },
   {
-    title: '故障排除与诊断思路',
-    description: '把环境、渠道、模型、认证和运行状态拆开排，避免一上来就盲改配置。',
-    to: '/docs/reference/troubleshooting',
-    meta: '排错',
+    title: 'Models 应该怎么理解',
+    description: '先区分模型层、工具层和 Gateway 层，再决定如何选择提供方与默认配置。',
+    to: '/docs/manual/models-overview',
+    meta: '模型',
   },
   {
-    title: '版本迁移与升级检查单',
-    description: '升级前后优先检查 CLI、配置、认证和渠道边界，降低版本切换风险。',
-    to: '/docs/setup/migration-guide',
-    meta: '迁移',
+    title: 'Gateway 运维与日常检查',
+    description: '围绕状态检查、访问方式、日志与升级窗口，建立长期运行的最小运维习惯。',
+    to: '/docs/operations/gateway-operations',
+    meta: '运维',
   },
 ]
 

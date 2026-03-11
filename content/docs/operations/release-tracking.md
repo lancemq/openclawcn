@@ -2,6 +2,7 @@
 title: 如何持续跟踪 OpenClaw 更新
 description: 建立一套低成本的更新跟踪方法，并把官方 release 和文档变化转化成真正可执行的中文维护动作。
 category: 更新
+tags: [release, changelog, updates, maintenance]
 ---
 
 # 如何持续跟踪 OpenClaw 更新

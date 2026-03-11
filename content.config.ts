@@ -9,6 +9,8 @@ export default defineContentConfig({
         title: z.string(),
         description: z.string(),
         category: z.string(),
+        date: z.string().optional(),
+        tags: z.array(z.string()).optional(),
       }),
     }),
     news: defineCollection({
@@ -19,6 +21,9 @@ export default defineContentConfig({
         description: z.string(),
         category: z.string(),
         date: z.string(),
+        author: z.string().optional(),
+        source: z.string().optional(),
+        tags: z.array(z.string()).optional(),
       }),
     }),
     bestPractices: defineCollection({
@@ -29,6 +34,7 @@ export default defineContentConfig({
         description: z.string(),
         category: z.string(),
         difficulty: z.string(),
+        tags: z.array(z.string()).optional(),
       }),
     }),
   },

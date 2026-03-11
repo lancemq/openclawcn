@@ -2,6 +2,7 @@
 title: Onboarding 引导流程说明
 description: 基于官方 Onboarding 思路，说明第一次配置 OpenClaw 时应该先做什么、后做什么，以及哪些事情不要过早展开。
 category: 入门
+tags: [onboarding, daemon, setup, gateway]
 ---
 
 # Onboarding 引导流程说明

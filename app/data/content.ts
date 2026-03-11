@@ -5,6 +5,7 @@ export type NavItem = {
   category?: string
   date?: string
   difficulty?: string
+  tags?: string[]
 }
 
 const docsReadingOrder = [
@@ -15,11 +16,14 @@ const docsReadingOrder = [
   '/docs/setup/installation',
   '/docs/getting-started/onboarding-guide',
   '/docs/manual/core-capabilities',
+  '/docs/manual/models-overview',
+  '/docs/manual/tools-overview',
   '/docs/manual/control-ui',
   '/docs/manual/channels-overview',
   '/docs/manual/hooks-overview',
   '/docs/manual/architecture',
   '/docs/operations/safety-basics',
+  '/docs/operations/gateway-operations',
   '/docs/operations/openclaw-security-best-practices',
   '/docs/operations/release-tracking',
   '/docs/reference/troubleshooting',
@@ -76,4 +80,13 @@ export function getPrevNext(items: NavItem[], currentPath: string) {
     previous: currentIndex > 0 ? items[currentIndex - 1] : null,
     next: currentIndex >= 0 && currentIndex < items.length - 1 ? items[currentIndex + 1] : null,
   }
+}
+
+export function normalizeTags(tags?: string[]) {
+  return Array.isArray(tags) ? tags.filter(Boolean) : []
+}
+
+export function sharedTagCount(left?: string[], right?: string[]) {
+  const leftTags = new Set(normalizeTags(left))
+  return normalizeTags(right).filter(tag => leftTags.has(tag)).length
 }

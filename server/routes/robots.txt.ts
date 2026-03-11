@@ -9,6 +9,7 @@ export default defineEventHandler((event) => {
     'Allow: /',
     '',
     'Disallow: /api/',
+    'Disallow: /search',
     '',
     `Sitemap: ${siteUrl}/sitemap.xml`,
   ].join('\n')

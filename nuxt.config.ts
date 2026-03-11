@@ -42,6 +42,11 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-02-20',
   srcDir: 'app/',
   modules: ['@nuxt/content', '@nuxt/image'],
+  content: {
+    experimental: {
+      sqliteConnector: 'native',
+    },
+  },
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   app: {

@@ -2,6 +2,7 @@
 title: Gateway 架构概览
 description: 理解 OpenClaw 的 Gateway、Control-plane 客户端和 Nodes 如何协作，以及为什么它是一个单一长连接网关系统。
 category: 架构
+tags: [gateway, nodes, architecture, control-plane]
 ---
 
 # Gateway 架构概览

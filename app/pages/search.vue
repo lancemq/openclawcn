@@ -3,6 +3,7 @@ useSeo({
   title: '站内搜索',
   description: '搜索 OpenClawCN 的文档、新闻和社区资料。',
   path: '/search',
+  noindex: true,
 })
 
 const route = useRoute()
@@ -17,12 +18,16 @@ const { data: bestPractices } = await useAsyncData('search:best-practices', () =
 )
 
 const normalizedQuery = computed(() => searchInput.value.trim().toLowerCase())
+const selectedKind = computed(() =>
+  typeof route.query.kind === 'string' ? route.query.kind : '全部',
+)
 
 const allItems = computed(() => {
   const docItems = (docs.value || []).map((item) => ({
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '文档'),
+    tags: Array.isArray(item.tags) ? (item.tags as string[]) : [],
     path: String(item.path || ''),
     kind: '文档',
   }))
@@ -31,6 +36,7 @@ const allItems = computed(() => {
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '新闻'),
+    tags: Array.isArray(item.tags) ? (item.tags as string[]) : [],
     path: String(item.path || ''),
     kind: '新闻',
   }))
@@ -39,6 +45,7 @@ const allItems = computed(() => {
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '最佳实践'),
+    tags: Array.isArray(item.tags) ? (item.tags as string[]) : [],
     path: String(item.path || ''),
     kind: '最佳实践',
   }))
@@ -48,15 +55,56 @@ const allItems = computed(() => {
 
 const filteredItems = computed(() => {
   const keyword = normalizedQuery.value
+  const kind = selectedKind.value
 
-  if (!keyword) {
+  if (!keyword && kind === '全部') {
     return allItems.value
   }
 
-  return allItems.value.filter((item) => {
-    const target = `${item.title} ${item.description} ${item.category} ${item.kind}`.toLowerCase()
-    return target.includes(keyword)
-  })
+  return allItems.value
+    .map((item) => {
+      const title = item.title.toLowerCase()
+      const description = item.description.toLowerCase()
+      const category = item.category.toLowerCase()
+      const kindText = item.kind.toLowerCase()
+      const tags = item.tags.join(' ').toLowerCase()
+      const target = `${title} ${description} ${category} ${kindText} ${tags}`
+
+      let score = 0
+
+      if (!keyword) {
+        score = 1
+      } else if (title.includes(keyword)) {
+        score += title.startsWith(keyword) ? 14 : 10
+      }
+
+      if (description.includes(keyword)) {
+        score += 4
+      }
+
+      if (category.includes(keyword) || kindText.includes(keyword)) {
+        score += 3
+      }
+
+      if (tags.includes(keyword)) {
+        score += 5
+      }
+
+      if (!target.includes(keyword) && keyword) {
+        score = 0
+      }
+
+      if (kind !== '全部' && item.kind !== kind) {
+        score = 0
+      }
+
+      return {
+        ...item,
+        score,
+      }
+    })
+    .filter(item => item.score > 0)
+    .sort((left, right) => right.score - left.score || left.title.localeCompare(right.title, 'zh-CN'))
 })
 
 const hasQuery = computed(() => normalizedQuery.value.length > 0)
@@ -72,6 +120,8 @@ const groupedResults = computed(() => {
     .filter(group => group.items.length > 0)
 })
 
+const kindFilters = ['全部', '文档', '最佳实践', '新闻']
+
 const searchTips = [
   '先搜产品定位和阅读路径，再搜具体功能名词',
   '排错时优先搜安装、gateway、control、channels 等关键词',
@@ -82,11 +132,24 @@ watch(
   searchInput,
   (value) => {
     router.replace({
-      query: value ? { q: value } : {},
+      query: {
+        ...route.query,
+        q: value || undefined,
+      },
     })
   },
   { flush: 'post' },
 )
+
+function updateKindFilter(kind: string) {
+  router.replace({
+    query: {
+      ...route.query,
+      kind: kind === '全部' ? undefined : kind,
+      q: searchInput.value || undefined,
+    },
+  })
+}
 </script>
 
 <template>
@@ -133,6 +196,19 @@ watch(
           <span>关键词</span>
           <input v-model="searchInput" type="text" placeholder="例如：安装、社区、OpenClaw" />
         </label>
+        <div class="filter-group">
+          <span class="filter-label">类型</span>
+          <button
+            v-for="kind in kindFilters"
+            :key="kind"
+            type="button"
+            class="filter-chip"
+            :class="{ active: selectedKind === kind }"
+            @click="updateKindFilter(kind)"
+          >
+            {{ kind }}
+          </button>
+        </div>
         <p class="muted">共找到 {{ filteredItems.length }} 条结果</p>
       </div>
 
@@ -178,6 +254,44 @@ watch(
   display: grid;
   gap: 12px;
   margin-top: 0;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.filter-label {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.filter-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.66);
+  color: var(--ink);
+  padding: 6px 12px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.filter-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(166, 111, 44, 0.22);
+}
+
+.filter-chip.active {
+  color: #fff8ef;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
 }
 
 .search-field {

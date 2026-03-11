@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getPrevNext, sortBestPractices, sortNews } from '~/data/content'
+import { getPrevNext, normalizeTags, sharedTagCount, sortBestPractices, sortNews } from '~/data/content'
 
 const route = useRoute()
 const slug = computed(() => {
@@ -36,6 +36,30 @@ const breadcrumbItems = computed(() => [
 const orderedNews = computed(() => sortNews((allNews.value || []) as any[]))
 
 const newsNav = computed(() => getPrevNext(orderedNews.value, pagePath.value))
+
+const pageTags = computed(() => normalizeTags(page.value?.tags as string[] | undefined))
+
+const relatedNewsCards = computed(() => {
+  const category = String(page.value?.category || '')
+
+  return orderedNews.value
+    .filter(item => item.path !== pagePath.value)
+    .map((item) => ({
+      ...item,
+      score:
+        (String(item.category || '') === category ? 4 : 0) +
+        sharedTagCount(pageTags.value, item.tags) * 3,
+    }))
+    .filter(item => item.score > 0)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 3)
+    .map(item => ({
+      title: item.title,
+      path: item.path,
+      description: item.description,
+      meta: `${item.category || '新闻'} / ${item.date || ''}`,
+    }))
+})
 
 const curatedPractices = computed(() =>
   sortBestPractices((relatedPractices.value || []) as any[])
@@ -75,6 +99,9 @@ useSeo({
           <span class="eyebrow">{{ page?.category || '动态' }}</span>
           <span class="tag">{{ page?.date }}</span>
         </div>
+        <div v-if="pageTags.length" class="tag-row">
+          <span v-for="tag in pageTags" :key="tag" class="tag">#{{ tag }}</span>
+        </div>
         <h1>{{ page?.title }}</h1>
         <p class="muted">{{ page?.description }}</p>
         <div class="markdown-content">
@@ -88,7 +115,7 @@ useSeo({
         section-description="新闻适合快速掌握变化，实践和文档更适合沉淀长期方法。看完动态后，建议继续进入相关实践或更早一篇更新。"
         :previous="newsNav.previous"
         :next="newsNav.next"
-        :related="curatedPractices"
+        :related="[...relatedNewsCards, ...curatedPractices].slice(0, 3)"
       />
 
       <div class="cta-row">
@@ -105,6 +132,12 @@ useSeo({
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tag-row {
+  display: flex;
+  gap: 8px;
   flex-wrap: wrap;
 }
 

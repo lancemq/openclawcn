@@ -3,6 +3,7 @@ title: 如何开始系统理解 OpenClaw
 description: 给第一次接触 OpenClaw 的中文用户一条更清晰的阅读顺序，先建立整体认知，再进入安装、接入和运维细节。
 category: 使用指南
 date: 2026-03-06
+tags: [reading-path, overview, docs, onboarding]
 ---
 
 # 如何开始系统理解 OpenClaw

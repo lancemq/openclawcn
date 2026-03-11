@@ -2,6 +2,7 @@
 title: Control UI 是什么
 description: 理解 Control UI 在 OpenClaw 中承担的角色，以及首次安装、排错和长期运行时应该如何使用它。
 category: 入门
+tags: [dashboard, control-ui, gateway, operations]
 ---
 
 # Control UI 是什么

@@ -2,6 +2,7 @@
 title: 快速入门
 description: 按官方推荐链路，在本机完成 OpenClaw 的安装、初始化、状态检查和第一次进入 Control UI。
 category: 入门
+tags: [quickstart, installation, onboarding, dashboard]
 ---
 
 # 快速入门

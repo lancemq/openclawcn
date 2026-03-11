@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getPrevNext, sortBestPractices } from '~/data/content'
+import { getPrevNext, normalizeTags, sharedTagCount, sortBestPractices } from '~/data/content'
 
 const route = useRoute()
 const slug = computed(() => {
@@ -36,13 +36,24 @@ const orderedPractices = computed(() =>
 
 const practiceNav = computed(() => getPrevNext(orderedPractices.value, pagePath.value))
 
+const pageTags = computed(() => normalizeTags(page.value?.tags as string[] | undefined))
+
 const relatedCards = computed(() =>
-  (relatedPractices.value || []).slice(0, 3).map(item => ({
-    title: item.title,
-    path: item.path,
-    description: item.description,
-    meta: `${item.category || '实践'} / ${item.difficulty || '未分级'}`,
-  })),
+  sortBestPractices((relatedPractices.value || []) as any[])
+    .map((item) => ({
+      ...item,
+      score:
+        (String(item.category || '') === String(page.value?.category || '') ? 4 : 0) +
+        sharedTagCount(pageTags.value, item.tags) * 3,
+    }))
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 3)
+    .map(item => ({
+      title: item.title,
+      path: item.path,
+      description: item.description,
+      meta: `${item.category || '实践'} / ${item.difficulty || '未分级'}`,
+    })),
 )
 
 if (!page.value) {
@@ -70,6 +81,9 @@ useSeo({
         <div class="practice-meta">
           <span class="eyebrow">{{ page?.category || '最佳实践' }}</span>
           <span class="tag">{{ page?.difficulty }}</span>
+        </div>
+        <div v-if="pageTags.length" class="tag-row">
+          <span v-for="tag in pageTags" :key="tag" class="tag">#{{ tag }}</span>
         </div>
         <h1>{{ page?.title }}</h1>
         <p class="muted">{{ page?.description }}</p>
@@ -101,6 +115,12 @@ useSeo({
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.tag-row {
+  display: flex;
+  gap: 8px;
   flex-wrap: wrap;
 }
 

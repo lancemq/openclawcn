@@ -2,6 +2,7 @@
 title: OpenClaw 渠道能力概览
 description: 了解 OpenClaw 当前支持的主要聊天渠道、接入方式，以及第一次应该如何选择和配置渠道。
 category: 功能
+tags: [channels, telegram, whatsapp, discord]
 ---
 
 # OpenClaw 渠道能力概览

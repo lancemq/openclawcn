@@ -12,9 +12,12 @@
 ## 本地启动
 
 ```bash
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 npm install
 npm run dev
 ```
+
+建议使用 `Node 22.x`。项目当前已固定为 `Nuxt Content native sqlite` 路径，以避免 `better-sqlite3` 在不同本机环境里的原生编译差异。
 
 默认访问地址：
 - `http://localhost:3000/`
@@ -26,6 +29,7 @@ npm run dev
 ## 生产构建
 
 ```bash
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 npm run build
 ```
 

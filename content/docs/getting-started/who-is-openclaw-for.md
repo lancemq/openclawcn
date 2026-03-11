@@ -2,6 +2,7 @@
 title: OpenClaw 适合哪些用户
 description: 判断你是否真的需要 OpenClaw，以及它更适合哪类中文用户和团队。
 category: 产品
+tags: [users, teams, scenarios, self-hosted]
 ---
 
 # OpenClaw 适合哪些用户

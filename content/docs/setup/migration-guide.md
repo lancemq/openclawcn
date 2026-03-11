@@ -2,6 +2,7 @@
 title: 版本迁移与升级检查单
 description: 在 OpenClaw 版本升级前后，优先检查配置、CLI、认证和入口层变化，避免把升级直接变成线上事故。
 category: 迁移
+tags: [migration, upgrade, release, checklist]
 ---
 
 # 版本迁移与升级检查单

@@ -11,6 +11,10 @@ const selectedCategory = computed(() =>
   typeof route.query.category === 'string' ? route.query.category : '全部',
 )
 
+const selectedTag = computed(() =>
+  typeof route.query.tag === 'string' ? route.query.tag : '全部',
+)
+
 // 子目录作为分类
 const categories = computed(() => {
   const cats = ['全部']
@@ -31,6 +35,17 @@ const categories = computed(() => {
     }
   })
   return cats
+})
+
+const tags = computed(() => {
+  const values = new Set<string>(['全部'])
+
+  ;(items.value || []).forEach((item: any) => {
+    const itemTags = Array.isArray(item.tags) ? item.tags : []
+    itemTags.forEach((tag: string) => values.add(tag))
+  })
+
+  return Array.from(values)
 })
 
 // 过滤文档
@@ -55,8 +70,10 @@ const filteredItems = computed(() => {
   return itemsList.filter((item) => {
     const categoryMatch =
       selectedCategory.value === '全部' || pathCategoryMap[String(item.path)] === selectedCategory.value
+    const itemTags = Array.isArray(item.tags) ? (item.tags as string[]) : []
+    const tagMatch = selectedTag.value === '全部' || itemTags.includes(selectedTag.value)
 
-    return categoryMatch
+    return categoryMatch && tagMatch
   })
 })
 
@@ -87,10 +104,9 @@ const docStats = computed(() => [
   },
 ])
 
-function updateFilters(key: 'category', value: string) {
+function updateFilters(key: 'category' | 'tag', value: string) {
   const query = {
     ...route.query,
-    tag: undefined,
     [key]: value === '全部' ? undefined : value,
   }
   router.replace({ query })
@@ -169,6 +185,20 @@ useSeo({
             @click="updateFilters('category', category)"
           >
             {{ category }}
+          </button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">标签</span>
+          <button
+            v-for="tag in tags"
+            :key="tag"
+            type="button"
+            class="filter-chip"
+            :class="{ active: selectedTag === tag }"
+            @click="updateFilters('tag', tag)"
+          >
+            {{ tag }}
           </button>
         </div>
       </div>
@@ -295,7 +325,7 @@ useSeo({
 .tag-item {
   font-size: 0.68rem;
   color: var(--ink-soft);
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.62);
   padding: 2px 6px;
   border-radius: 4px;
 }

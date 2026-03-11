@@ -2,6 +2,7 @@
 title: 故障排除与诊断思路
 description: 把 OpenClaw 常见问题按环境、入口、配置、认证和运行状态拆开，建立更高效的排查顺序。
 category: 排错
+tags: [troubleshooting, doctor, status, logs]
 ---
 
 # 故障排除与诊断思路
