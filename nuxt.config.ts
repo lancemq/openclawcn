@@ -123,6 +123,7 @@ export default defineNuxtConfig({
     '/paths': { prerender: true },
     '/topics': { prerender: true },
     '/docs': { prerender: true },
+    '/docs/getting-started': { redirect: '/docs/getting-started/getting-started' },
     '/videos': { prerender: true },
     '/derivatives': { prerender: true },
     '/news': { prerender: true },

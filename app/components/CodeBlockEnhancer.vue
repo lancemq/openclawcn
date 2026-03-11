@@ -4,8 +4,8 @@ function enhanceCodeBlocks() {
   const codeBlocks = document.querySelectorAll('pre')
 
   codeBlocks.forEach((pre) => {
-    // 避免重复添加
-    if (pre.querySelector('.code-block-header')) return
+    // 避免重复包装同一个代码块
+    if (pre.closest('.code-block-wrapper')) return
 
     const code = pre.querySelector('code')
     if (!code) return
@@ -24,19 +24,10 @@ function enhanceCodeBlocks() {
     langLabel.className = 'code-lang'
     langLabel.textContent = lang
 
-    // 创建复制按钮容器
     const copyContainer = document.createElement('div')
     copyContainer.className = 'code-copy-container'
-
     header.appendChild(langLabel)
     header.appendChild(copyContainer)
-
-    // 将头部插入到 pre 之前
-    pre.parentNode?.insertBefore(header, pre)
-
-    // 创建 Vue 组件挂载点
-    const buttonMount = document.createElement('div')
-    copyContainer.appendChild(buttonMount)
 
     // 使用原生按钮实现复制功能
     const button = document.createElement('button')
