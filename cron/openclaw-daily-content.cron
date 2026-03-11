@@ -1,0 +1,3 @@
+# OpenClaw 每4小时内容抓取任务
+# 每天的 00:00, 04:00, 08:00, 12:00, 16:00, 20:00 运行
+0 */4 * * * /root/.openclaw/workspace/projects/openclawcn/cron/fetch-content-daily.sh >> /root/.openclaw/workspace/projects/openclawcn/logs/cron.log 2>&1
