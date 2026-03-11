@@ -19,10 +19,12 @@ const year = new Date().getFullYear()
           <li><NuxtLink to="/paths">学习路径</NuxtLink></li>
           <li><NuxtLink to="/topics">主题中心</NuxtLink></li>
           <li><NuxtLink to="/videos">视频教程</NuxtLink></li>
-          <li><NuxtLink to="/derivatives">衍生品</NuxtLink></li>
           <li><NuxtLink to="/best-practices">最佳实践</NuxtLink></li>
           <li><NuxtLink to="/news">新闻</NuxtLink></li>
           <li><NuxtLink to="/community">社区支持</NuxtLink></li>
+          <li><NuxtLink to="/skills">热门技能</NuxtLink></li>
+          <li><NuxtLink to="/configurations">关键配置</NuxtLink></li>
+          <li><NuxtLink to="/derivatives">衍生品</NuxtLink></li>
           <li><NuxtLink to="/search">站内搜索</NuxtLink></li>
           <li><a href="/rss.xml" target="_blank" rel="noreferrer">RSS 订阅</a></li>
         </ul>
