@@ -461,16 +461,16 @@ img {
   overflow: auto;
   margin: 0;
   padding: 18px 20px 20px;
-  border: 1px solid rgba(25, 40, 36, 0.2);
+  border: 1px solid rgba(67, 73, 60, 0.16);
   border-top: none;
   border-radius: 0 0 18px 18px;
-  color: #eaf5f1;
+  color: #1f2d28;
   background:
-    linear-gradient(180deg, rgba(12, 26, 23, 0.98), rgba(10, 20, 18, 0.98)),
-    #0c1614;
+    linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(245, 239, 227, 0.98)),
+    #fffaf1;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.02),
-    0 14px 28px rgba(16, 20, 18, 0.16);
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    0 12px 24px rgba(74, 56, 28, 0.08);
 }
 
 .prose pre code {
@@ -501,10 +501,10 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px;
-  border: 1px solid rgba(25, 40, 36, 0.2);
+  border: 1px solid rgba(67, 73, 60, 0.16);
   border-bottom: none;
   border-radius: 18px 18px 0 0;
-  background: linear-gradient(180deg, rgba(20, 37, 32, 0.98), rgba(13, 23, 20, 0.98));
+  background: linear-gradient(180deg, rgba(248, 242, 231, 0.98), rgba(238, 231, 217, 0.98));
 }
 
 .prose .code-block-wrapper pre {
@@ -516,7 +516,7 @@ img {
   font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.72rem;
   font-weight: 600;
-  color: rgba(215, 237, 231, 0.78);
+  color: #0c6c69;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -526,19 +526,19 @@ img {
   align-items: center;
   gap: 4px;
   padding: 4px 8px;
-  border: 1px solid rgba(215, 237, 231, 0.18);
+  border: 1px solid rgba(67, 73, 60, 0.12);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(234, 245, 241, 0.76);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink-soft);
   font-size: 0.72rem;
   cursor: pointer;
   transition: all 0.18s ease;
 }
 
 .prose .code-copy-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--brand);
+  border-color: rgba(12, 108, 105, 0.28);
 }
 
 .prose .code-copy-btn.copied {
