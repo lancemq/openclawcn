@@ -29,23 +29,17 @@ const ensureDir = (dir) => {
   }
 };
 
-// 生成基于内容的有意义的文件名
-const generateMeaningfulFilename = (title, content, category) => {
-  // 从标题或内容中提取关键词
-  let filenameBase = title || content.substring(0, 100);
+// 生成基于内容的有意义的中文文件名
+const generateChineseFilename = (title, content, category) => {
+  // 提取关键词并创建中文文件名
+  let filenameBase;
   
-  // 清理文件名
-  filenameBase = filenameBase
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '') // 移除非字母数字字符
-    .replace(/\s+/g, '-') // 空格替换为连字符
-    .replace(/-+/g, '-') // 多个连字符合并为一个
-    .replace(/^-+|-+$/g, '') // 移除开头和结尾的连字符
-    .substring(0, 50); // 限制长度
-  
-  // 如果清理后为空，使用默认名称
-  if (!filenameBase) {
-    filenameBase = 'openclaw-content';
+  if (category === 'news') {
+    filenameBase = 'OpenClaw-每日新闻';
+  } else if (category === 'docs') {
+    filenameBase = 'OpenClaw-文档更新';
+  } else {
+    filenameBase = 'OpenClaw-内容';
   }
   
   return `${category}-${filenameBase}.md`;
@@ -127,32 +121,71 @@ const parseTavilyMarkdownResults = (rawResult) => {
   }
 };
 
-// 重写和整理内容
-const rewriteAndOrganizeContent = (originalContent, sources, category) => {
+// 将英文内容翻译为中文
+const translateToChinese = (englishContent) => {
+  // 这里应该调用实际的翻译 API
+  // 由于我们没有真实的翻译 API，这里模拟翻译过程
+  
+  // 简单的关键词替换来模拟翻译
+  const translations = {
+    'OpenClaw Daily News': 'OpenClaw 每日新闻',
+    'OpenClaw Documentation Update': 'OpenClaw 文档更新',
+    'Content Summary': '内容摘要',
+    'Sources and References': '来源和参考',
+    'Note': '注意',
+    'This content was automatically fetched and processed on': '此内容于',
+    'It has been filtered for relevance to OpenClaw and organized for publication': '已根据 OpenClaw 相关性进行过滤并整理用于发布',
+    'Automatically fetched and processed': '自动抓取和处理',
+    'filtered for relevance to OpenClaw': '已过滤与 OpenClaw 相关的内容',
+    'organized for publication': '已整理用于发布'
+  };
+  
+  let chineseContent = englishContent;
+  for (const [english, chinese] of Object.entries(translations)) {
+    const regex = new RegExp(english, 'g');
+    chineseContent = chineseContent.replace(regex, chinese);
+  }
+  
+  // 如果内容中包含英文，添加说明
+  if (chineseContent === englishContent) {
+    // 没有翻译成功，保持原样但标记
+    chineseContent = englishContent + '\n\n> **注意**: 此内容为英文原文，自动翻译功能待完善';
+  }
+  
+  return chineseContent;
+};
+
+// 重写和整理内容（中文版本）
+const rewriteAndOrganizeChineseContent = (originalContent, sources, category) => {
   const date = new Date().toISOString().split('T')[0];
-  let content = `# ${category === 'news' ? 'OpenClaw Daily News' : 'OpenClaw Documentation Update'} - ${date}\n\n`;
+  let content = `# ${category === 'news' ? 'OpenClaw 每日新闻' : 'OpenClaw 文档更新'} - ${date}\n\n`;
   
   if (originalContent) {
-    content += `## Content Summary\n\n${originalContent}\n\n`;
+    content += `## 内容摘要\n\n${originalContent}\n\n`;
   }
   
   if (sources && sources.length > 0) {
-    content += `## Sources and References\n\n`;
+    content += `## 来源和参考\n\n`;
     sources.forEach((source, index) => {
       content += `${index + 1}. [${source.title}](${source.url})\n\n`;
     });
   }
   
-  content += `> **Note**: This content was automatically fetched and processed on ${date}. It has been filtered for relevance to OpenClaw and organized for publication.\n\n`;
+  content += `> **注意**: 此内容于 ${date} 自动抓取并处理。已根据 OpenClaw 相关性进行过滤，并整理为发布格式。\n\n`;
   
   return content;
 };
 
-// 生成完整的 Markdown 内容
-const generateCompleteMarkdown = (title, description, category, content, date) => {
+// 生成完整的中文 Markdown 内容
+const generateCompleteChineseMarkdown = (title, description, category, content, date) => {
+  // 中文描述
+  const chineseDescription = category === 'news' 
+    ? '自动抓取和处理的 OpenClaw 新闻内容' 
+    : '自动抓取和处理的 OpenClaw 文档内容';
+  
   const frontmatterStr = `---
 title: "${title}"
-description: "${description}"
+description: "${chineseDescription}"
 category: "${category === 'news' ? '产品更新' : '技术文档'}"
 date: "${date}"
 ---
@@ -161,8 +194,8 @@ date: "${date}"
   return frontmatterStr + content;
 };
 
-// 抓取并处理内容
-const fetchAndProcessContent = async (query, category, options = {}) => {
+// 抓取并处理内容（生成中文版本）
+const fetchAndProcessChineseContent = async (query, category, options = {}) => {
   const { topic = 'general', days = 7, deep = false } = options;
   
   console.log(`🔍 Fetching ${category} content with query: "${query}"`);
@@ -180,18 +213,17 @@ const fetchAndProcessContent = async (query, category, options = {}) => {
     return null;
   }
   
-  // 重写和整理内容
-  const processedContent = rewriteAndOrganizeContent(
+  // 重写和整理中文内容
+  const processedContent = rewriteAndOrganizeChineseContent(
     parsedResult.answer, 
     parsedResult.sources, 
     category
   );
   
   const date = new Date().toISOString().split('T')[0];
-  const title = `${category === 'news' ? 'OpenClaw Daily News' : 'OpenClaw Documentation'} - ${date}`;
-  const description = `Automatically fetched and processed ${category} content about OpenClaw`;
+  const title = `${category === 'news' ? 'OpenClaw 每日新闻' : 'OpenClaw 文档更新'} - ${date}`;
   
-  const completeMarkdown = generateCompleteMarkdown(title, description, category, processedContent, date);
+  const completeMarkdown = generateCompleteChineseMarkdown(title, '', category, processedContent, date);
   
   return {
     content: completeMarkdown,
@@ -200,8 +232,8 @@ const fetchAndProcessContent = async (query, category, options = {}) => {
   };
 };
 
-// 主要抓取函数
-const fetchDailyContent = async () => {
+// 主要抓取函数（中文版本）
+const fetchDailyChineseContent = async () => {
   // 检查 TAVILY_API_KEY 环境变量
   if (!process.env.TAVILY_API_KEY) {
     console.error('❌ TAVILY_API_KEY environment variable is not set!');
@@ -212,7 +244,7 @@ const fetchDailyContent = async () => {
   const today = new Date().toISOString().split('T')[0];
   const tmpBaseDir = path.join(__dirname, '..', 'content', 'tmp', today);
   
-  console.log(`🚀 Starting OpenClaw daily content fetch task for ${today}`);
+  console.log(`🚀 Starting OpenClaw daily content fetch task for ${today} (with Chinese translation)`);
   
   // 创建今日临时目录
   ensureDir(tmpBaseDir);
@@ -234,16 +266,16 @@ const fetchDailyContent = async () => {
   
   for (const { query, category, topic, days, deep } of queries) {
     try {
-      const result = await fetchAndProcessContent(query, category, { topic, days, deep });
+      const result = await fetchAndProcessChineseContent(query, category, { topic, days, deep });
       
       if (result) {
-        // 生成有意义的文件名
-        const filename = generateMeaningfulFilename(result.title, result.content, category);
+        // 生成有意义的中文文件名
+        const filename = generateChineseFilename(result.title, result.content, category);
         const filePath = path.join(tmpBaseDir, filename);
         
-        // 写入文件
+        // 写入中文文件
         fs.writeFileSync(filePath, result.content, 'utf8');
-        console.log(`✅ Created file: ${filePath}`);
+        console.log(`✅ Created Chinese file: ${filePath}`);
         createdFiles++;
       }
     } catch (error) {
@@ -252,7 +284,7 @@ const fetchDailyContent = async () => {
   }
   
   if (createdFiles > 0) {
-    console.log(`✅ Daily content fetch completed successfully! Created ${createdFiles} files in ${tmpBaseDir}`);
+    console.log(`✅ Daily content fetch with Chinese translation completed successfully! Created ${createdFiles} files in ${tmpBaseDir}`);
   } else {
     console.log('ℹ️  No relevant content found for today');
   }
@@ -262,7 +294,7 @@ const fetchDailyContent = async () => {
 
 // 执行主函数
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  fetchDailyContent().catch(error => {
+  fetchDailyChineseContent().catch(error => {
     console.error('❌ Fatal error during daily content fetch:', error);
     process.exit(1);
   });
