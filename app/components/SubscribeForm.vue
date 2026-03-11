@@ -71,7 +71,7 @@ async function submitSubscription() {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: rgba(15, 23, 42, 0.72);
-  color: var(--text);
+  color: var(--paper);
   padding: 12px 14px;
   font: inherit;
   font-size: 0.94rem;
