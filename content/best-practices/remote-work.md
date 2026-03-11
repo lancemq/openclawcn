@@ -3,6 +3,9 @@ title: 远程工作场景应用
 description: 使用 OpenClaw 支持远程工作场景，包括分布式团队协作和远程办公。
 category: 应用场景
 difficulty: 初级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [remote-work, collaboration, productivity, teams]
 ---
 
 # 远程工作场景应用

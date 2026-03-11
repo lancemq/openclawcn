@@ -3,6 +3,9 @@ title: API 集成与二次开发
 description: 使用 OpenClaw API 进行二次开发，包括 REST API、WebSocket 和扩展开发。
 category: 开发指南
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [api, integration, websocket, development]
 ---
 
 # API 集成与二次开发

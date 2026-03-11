@@ -3,6 +3,9 @@ title: 知识库管理
 description: 构建和管理 OpenClaw 知识库，包括知识导入、检索和更新。
 category: 进阶指南
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [knowledge, retrieval, memory, content]
 ---
 
 # 知识库管理

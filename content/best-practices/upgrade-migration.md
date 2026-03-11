@@ -3,6 +3,9 @@ title: 版本升级与迁移
 description: OpenClaw 版本升级步骤、迁移指南和回滚方案。
 category: 运维管理
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: official
+tags: [upgrade, migration, rollback, maintenance]
 ---
 
 # 版本升级与迁移

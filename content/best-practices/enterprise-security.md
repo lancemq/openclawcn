@@ -3,6 +3,9 @@ title: 企业级安全配置
 description: 企业环境中的安全配置最佳实践，包括 SSO、审计和合规性。
 category: 企业部署
 difficulty: 高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [enterprise, security, sso, compliance]
 ---
 
 # 企业级安全配置

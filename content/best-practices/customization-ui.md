@@ -3,6 +3,9 @@ title: 界面定制与主题
 description: 定制 OpenClaw Control UI 的界面和主题。
 category: 定制开发
 difficulty: 初级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [ui, customization, themes, control-ui]
 ---
 
 # 界面定制与主题

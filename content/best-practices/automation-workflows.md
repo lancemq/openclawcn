@@ -3,6 +3,9 @@ title: 自动化工作流设计
 description: 使用 OpenClaw 构建自动化工作流，包括定时任务、事件触发和条件分支。
 category: 自动化
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [automation, workflows, scheduling, events]
 ---
 
 # 自动化工作流设计

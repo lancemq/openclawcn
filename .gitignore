@@ -7,9 +7,16 @@ node_modules
 .data
 dist
 .nitro
+.cache
+.vercel/output
+.vercel/cache
+*.tsbuildinfo
 
 # generated site artifacts
 public/generated
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 
 # vercel local/build artifacts
 .vercel/*
@@ -30,5 +37,5 @@ pnpm-debug.log*
 
 # misc caches / local files
 .DS_Store
-.cache
 coverage
+.eslintcache

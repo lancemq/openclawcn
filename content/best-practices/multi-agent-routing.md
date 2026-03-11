@@ -3,6 +3,9 @@ title: 多代理路由配置指南
 description: 学习配置 OpenClaw 的多代理路由，实现按渠道、用户或内容类型分配不同代理。
 category: 代理配置
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [routing, agents, channels, configuration]
 ---
 
 # 多代理路由配置指南

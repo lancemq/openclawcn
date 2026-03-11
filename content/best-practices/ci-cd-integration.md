@@ -3,6 +3,9 @@ title: CI/CD 集成与部署自动化
 description: 将 OpenClaw 集成到 CI/CD 流程，实现自动化构建、测试和部署。
 category: 开发流程
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [ci-cd, deployment, testing, automation]
 ---
 
 # CI/CD 集成与部署自动化

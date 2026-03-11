@@ -3,6 +3,9 @@ title: 技能开发指南
 description: 深入了解 OpenClaw 技能系统，学习如何开发和自定义专属技能。
 category: 进阶指南
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [skills, development, customization, tools]
 ---
 
 # 技能开发指南

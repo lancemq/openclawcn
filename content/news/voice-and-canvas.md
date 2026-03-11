@@ -3,6 +3,10 @@ title: OpenClaw 语音与 Canvas 功能详解
 description: 深入了解 OpenClaw 的语音交互能力和实时 Canvas 可视化功能，如何在日常场景中发挥价值。
 category: 功能介绍
 date: 2026-03-09
+source: openclaw.ai
+updatedAt: 2026-03-11
+sourceType: official
+tags: [voice, canvas, visualization, multimodal]
 ---
 
 # OpenClaw 语音与 Canvas 功能详解

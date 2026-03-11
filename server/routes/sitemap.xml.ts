@@ -36,6 +36,7 @@ export default defineEventHandler(async (event) => {
     { loc: toAbsoluteUrl(siteUrl, '/topics'), changefreq: 'weekly', priority: '0.8' },
     { loc: toAbsoluteUrl(siteUrl, '/docs'), changefreq: 'weekly', priority: '0.9' },
     { loc: toAbsoluteUrl(siteUrl, '/videos'), changefreq: 'weekly', priority: '0.8' },
+    { loc: toAbsoluteUrl(siteUrl, '/derivatives'), changefreq: 'weekly', priority: '0.7' },
     { loc: toAbsoluteUrl(siteUrl, '/news'), changefreq: 'daily', priority: '0.9' },
     { loc: toAbsoluteUrl(siteUrl, '/best-practices'), changefreq: 'weekly', priority: '0.8' },
     { loc: toAbsoluteUrl(siteUrl, '/community'), changefreq: 'monthly', priority: '0.6' },

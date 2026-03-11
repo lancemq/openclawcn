@@ -2,6 +2,8 @@
 title: OpenClaw 是什么
 description: 用中文快速理解 OpenClaw 的定位、使用方式和它与普通聊天产品的差别。
 category: 产品
+updatedAt: 2026-03-11
+sourceType: official
 tags: [overview, self-hosted, channels, assistant]
 ---
 

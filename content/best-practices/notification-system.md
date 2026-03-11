@@ -3,6 +3,9 @@ title: 通知系统配置
 description: 配置 OpenClaw 的通知系统，包括邮件、短信、推送和 Webhook 通知。
 category: 运维管理
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [notifications, webhook, email, operations]
 ---
 
 # 通知系统配置

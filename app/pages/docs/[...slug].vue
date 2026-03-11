@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { getPrevNext, normalizeTags, sharedTagCount, sortDocs } from '~/data/content'
+import { detailPageGuides } from '~/data/information-architecture'
+import { learningPaths, matchesTopic, topicDefinitions } from '~/data/taxonomy'
 
 const route = useRoute()
 const slug = computed(() => {
@@ -60,6 +62,52 @@ const relatedDocs = computed(() => {
     }))
 })
 
+const pageGuide = detailPageGuides.docs
+
+const pageTopic = computed(() =>
+  topicDefinitions.find(topic =>
+    page.value
+      ? matchesTopic(
+          {
+            title: String(page.value.title || ''),
+            description: String(page.value.description || ''),
+            category: String(page.value.category || ''),
+            path: pagePath.value,
+            tags: pageTags.value,
+          },
+          topic,
+        )
+      : false,
+  ) || null,
+)
+
+const matchedPaths = computed(() =>
+  learningPaths.filter(path =>
+    path.steps.some(step => step.to === pagePath.value) || path.next === pagePath.value,
+  ),
+)
+
+const stageRecommendations = computed(() => [
+  pageTopic.value && {
+    label: '同主题',
+    title: pageTopic.value.title,
+    description: pageTopic.value.description,
+    to: `/topics?topic=${pageTopic.value.slug}`,
+  },
+  matchedPaths.value[0] && {
+    label: '同路径',
+    title: matchedPaths.value[0].title,
+    description: matchedPaths.value[0].summary,
+    to: `/paths#${matchedPaths.value[0].slug}`,
+  },
+  {
+    label: '同阶段',
+    title: '文档中心',
+    description: '继续按文档结构查找相邻知识点，不要直接跳到零散技巧。',
+    to: '/docs',
+  },
+].filter(Boolean) as Array<{ label: string; title: string; description: string; to: string }>)
+
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -101,20 +149,18 @@ useSeo({
           <ContentOutline title="本页目录" :links="pageToc" />
 
           <aside class="card content-side-card">
-            <p class="eyebrow">Read Next</p>
-            <h2>这一组的推荐入口</h2>
+            <p class="eyebrow">站点层级</p>
+            <h2>{{ pageGuide.title }}</h2>
+            <p class="content-side-summary">{{ pageGuide.summary }}</p>
             <div class="content-side-links">
-              <NuxtLink to="/docs/getting-started/reading-path" class="content-side-link">
-                <strong>阅读路径</strong>
-                <span>第一次访问时，先建立整体地图。</span>
-              </NuxtLink>
-              <NuxtLink to="/search" class="content-side-link">
-                <strong>站内搜索</strong>
-                <span>按安装、渠道、gateway、排错快速定位。</span>
-              </NuxtLink>
-              <NuxtLink to="/community" class="content-side-link">
-                <strong>社区支持</strong>
-                <span>搜不到答案时，直接转到社区入口。</span>
+              <NuxtLink
+                v-for="item in pageGuide.links"
+                :key="item.to"
+                :to="item.to"
+                class="content-side-link"
+              >
+                <strong>{{ item.title }}</strong>
+                <span>{{ item.description }}</span>
               </NuxtLink>
             </div>
           </aside>
@@ -129,6 +175,18 @@ useSeo({
         :next="docNav.next"
         :related="relatedDocs"
       />
+
+      <section class="card stage-card">
+        <p class="eyebrow">关联入口</p>
+        <h2>同主题、同路径、同阶段</h2>
+        <div class="stage-grid">
+          <NuxtLink v-for="item in stageRecommendations" :key="item.to" :to="item.to" class="stage-link">
+            <span class="tag">{{ item.label }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
+      </section>
     </div>
   </section>
 </template>
@@ -170,6 +228,13 @@ useSeo({
   letter-spacing: -0.03em;
 }
 
+.content-side-summary {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
+}
+
 .content-side-link {
   display: grid;
   gap: 4px;
@@ -195,8 +260,53 @@ useSeo({
   line-height: 1.55;
 }
 
+.stage-card,
+.stage-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.stage-card {
+  margin-top: 18px;
+}
+
+.stage-card h2 {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.stage-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stage-link {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.stage-link strong {
+  font-size: 0.94rem;
+}
+
+.stage-link p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
+}
+
 @media (max-width: 980px) {
   .content-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-grid {
     grid-template-columns: 1fr;
   }
 }

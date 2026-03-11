@@ -3,6 +3,9 @@ title: 移动端使用指南
 description: 在 iOS 和 Android 设备上使用 OpenClaw 的完整指南。
 category: 入门指南
 difficulty: 初级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [mobile, ios, android, usage]
 ---
 
 # 移动端使用指南

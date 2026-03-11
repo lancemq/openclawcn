@@ -5,6 +5,8 @@ category: 生态动态
 date: "2026-03-09"
 author: "OpenClaw Team"
 source: "openclaw.ai"
+updatedAt: "2026-03-11"
+sourceType: official
 tags: ["integrations", "channels", "ecosystem"]
 ---
 

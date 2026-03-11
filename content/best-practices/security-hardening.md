@@ -3,6 +3,9 @@ title: OpenClaw 安全加固指南
 description: 生产环境中 OpenClaw 的安全加固最佳实践，包括认证、授权和网络配置。
 category: 安全配置
 difficulty: 高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [security, hardening, auth, networking]
 ---
 
 # OpenClaw 安全加固指南

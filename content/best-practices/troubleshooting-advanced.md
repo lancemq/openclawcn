@@ -3,6 +3,9 @@ title: 高级故障排除与诊断
 description: 深入排查 OpenClaw 复杂问题，包括性能问题、渠道故障和系统崩溃。
 category: 故障排除
 difficulty: 高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [troubleshooting, diagnostics, performance, channels]
 ---
 
 # 高级故障排除与诊断

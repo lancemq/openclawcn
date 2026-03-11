@@ -3,6 +3,9 @@ title: 如何高质量反馈 OpenClaw 问题
 description: 把自助排查、站内反馈和 GitHub Issues 用在正确阶段，减少无效沟通并提高问题处理效率。
 category: 社区协作
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: community
+tags: [feedback, issues, community, diagnostics]
 ---
 
 # 如何高质量反馈 OpenClaw 问题

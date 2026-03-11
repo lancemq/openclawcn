@@ -22,6 +22,9 @@ const year = new Date().getFullYear()
           <li><NuxtLink to="/best-practices">最佳实践</NuxtLink></li>
           <li><NuxtLink to="/news">新闻</NuxtLink></li>
           <li><NuxtLink to="/community">社区支持</NuxtLink></li>
+          <li><NuxtLink to="/skills">热门技能</NuxtLink></li>
+          <li><NuxtLink to="/configurations">关键配置</NuxtLink></li>
+          <li><NuxtLink to="/derivatives">衍生品</NuxtLink></li>
           <li><NuxtLink to="/search">站内搜索</NuxtLink></li>
           <li><a href="/rss.xml" target="_blank" rel="noreferrer">RSS 订阅</a></li>
         </ul>
@@ -33,6 +36,7 @@ const year = new Date().getFullYear()
           <li><NuxtLink to="/docs/getting-started/what-is-openclaw">产品介绍</NuxtLink></li>
           <li><NuxtLink to="/paths">学习路径</NuxtLink></li>
           <li><NuxtLink to="/docs/getting-started/onboarding-guide">入门路径</NuxtLink></li>
+          <li><NuxtLink to="/derivatives">衍生生态</NuxtLink></li>
           <li><NuxtLink to="/docs/operations/release-tracking">更新跟踪</NuxtLink></li>
           <li><NuxtLink to="/feedback">内容反馈</NuxtLink></li>
         </ul>

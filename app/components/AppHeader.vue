@@ -7,11 +7,12 @@ const navItems = [
   { label: '主题', to: '/topics' },
   { label: '文档', to: '/docs' },
   { label: '视频', to: '/videos' },
-  { label: '技能', to: '/skills' },
-  { label: '配置', to: '/configurations' },
   { label: '实践', to: '/best-practices' },
   { label: '新闻', to: '/news' },
   { label: '社区', to: '/community' },
+  { label: '技能', to: '/skills' },
+  { label: '配置', to: '/configurations' },
+  { label: '衍生品', to: '/derivatives' },
   { label: '搜索', to: '/search' },
 ]
 

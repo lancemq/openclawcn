@@ -2,6 +2,8 @@
 title: OpenClaw 核心能力总览
 description: 用一页理解 OpenClaw 当前最重要的能力结构，包括渠道、控制台、扩展和运行边界。
 category: 产品
+updatedAt: 2026-03-11
+sourceType: official
 tags: [capabilities, channels, skills, voice]
 ---
 

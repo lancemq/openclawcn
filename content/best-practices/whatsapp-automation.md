@@ -3,6 +3,9 @@ title: WhatsApp 自动化工作流实战
 description: 利用 OpenClaw 的 WhatsApp 渠道实现自动化工作流，包括自动回复、消息转发和定时提醒。
 category: 渠道实践
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [whatsapp, automation, channels, workflow]
 ---
 
 # WhatsApp 自动化工作流实战

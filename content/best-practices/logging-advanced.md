@@ -3,6 +3,9 @@ title: 日志管理与分析
 description: 集中式日志管理、日志分析和日志可视化。
 category: 运维管理
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [logs, observability, analysis, operations]
 ---
 
 # 日志管理与分析

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeo({
   title: '关键配置',
-  description: '系统整理 OpenClaw 的基础配置、工作区与身份、Skills 加载、SOUL、Hooks、安全边界和多环境配置重点。',
+  description: 'OpenClaw 完整配置指南：主配置、渠道接入（WhatsApp/Telegram/Discord/飞书）、模型选择、会话管理、Skills、Hooks、SOUL人格、沙箱、热重载、Secret安全和多环境配置。',
   path: '/configurations',
 })
 
@@ -9,17 +9,17 @@ const configSignals = [
   {
     label: '主配置文件',
     value: '~/.openclaw/openclaw.json',
-    note: '官方文档当前说明 OpenClaw 使用 JSON5 配置，可通过 onboard、configure、Control UI 或手动编辑维护。',
+    note: '使用 JSON5 格式（支持注释和尾随逗号），支持 onboard、configure、Control UI 或直接编辑。',
   },
   {
     label: '人格文件',
     value: 'SOUL.md',
-    note: 'SOUL.md 不是装饰项，而是 agent 行为、语气、偏好和边界的长期描述入口。',
+    note: '定义 agent 行为、语气、偏好和边界，是长期行为描述的核心入口。',
   },
   {
-    label: '配置方式',
-    value: '先跑通，再分层扩展',
-    note: '第一次应该先解决 workspace、模型、入口和认证，再去加 Skills、Hooks 和实验型人格玩法。',
+    label: '编辑方式',
+    value: 'CLI / Control UI / 直接编辑',
+    note: '支持 openclaw onboard、openclaw configure、Control UI 或直接编辑 JSON5 文件。',
   },
 ]
 
@@ -27,7 +27,7 @@ const configPresets = [
   {
     title: '极简启动配置',
     focus: '先让系统稳定可用',
-    summary: '保留 workspace 和渠道白名单，先验证最小链路，不急着同时配置多个入口。',
+    summary: '保留 workspace 和渠道白名单，先验证最小链路。',
     snippet: `{
   agents: {
     defaults: { workspace: "~/.openclaw/workspace" }
@@ -38,42 +38,131 @@ const configPresets = [
 }`,
   },
   {
-    title: 'Starter 配置',
-    focus: '补 identity、model 和群组规则',
-    summary: '在最小配置上补齐 name、theme、emoji、primary model 和 requireMention。',
+    title: '完整渠道配置',
+    focus: '多渠道接入与权限控制',
+    summary: '配置 WhatsApp、Telegram、Discord 等多渠道，支持 dmPolicy 和群组规则。',
     snippet: `{
-  identity: {
-    name: "Clawd",
-    theme: "helpful assistant",
-    emoji: "🦞"
-  },
-  agent: {
-    workspace: "~/.openclaw/workspace",
-    model: { primary: "anthropic/claude-sonnet-4-5" }
-  },
   channels: {
-    whatsapp: {
-      allowFrom: ["+15555550123"],
+    telegram: {
+      enabled: true,
+      botToken: "123:abc",
+      dmPolicy: "pairing",
+      allowFrom: ["tg:123"],
       groups: { "*": { requireMention: true } }
+    },
+    discord: { dmPolicy: "allowlist", allowFrom: ["*"] }
+  }
+}`,
+  },
+  {
+    title: '模型配置',
+    focus: '主模型 + Fallback + 多模型目录',
+    summary: '设置主模型、备用模型、模型别名和 imageMaxDimensionPx 控制视觉 token 消耗。',
+    snippet: `{
+  agents: {
+    defaults: {
+      model: {
+        primary: "anthropic/claude-sonnet-4-5",
+        fallbacks: ["openai/gpt-5.2"]
+      },
+      imageMaxDimensionPx: 1200
+    },
+    models: {
+      "anthropic/claude-sonnet-4-5": { alias: "Sonnet" }
     }
+  }
+}`,
+  },
+  {
+    title: '多智能体路由',
+    focus: '多 Agent 隔离与工作区分离',
+    summary: '运行多个隔离的 agent，每个有独立的 workspace 和 session。',
+    snippet: `{
+  agents: {
+    list: [
+      { id: "home", default: true, workspace: "~/.openclaw/workspace-home" },
+      { id: "work", workspace: "~/.openclaw/workspace-work" }
+    ]
+  },
+  bindings: [
+    { agentId: "home", match: { channel: "whatsapp", accountId: "personal" } },
+    { agentId: "work", match: { channel: "whatsapp", accountId: "biz" } }
+  ]
+}`,
+  },
+  {
+    title: '会话管理配置',
+    focus: '会话隔离与自动重置',
+    summary: '控制会话范围、thread bindings 和自动重置策略。',
+    snippet: `{
+  session: {
+    dmScope: "per-channel-peer",
+    threadBindings: { enabled: true, idleHours: 24, maxAgeHours: 0 },
+    reset: { mode: "daily", atHour: 4, idleMinutes: 120 }
   }
 }`,
   },
   {
     title: 'Skills 加载配置',
     focus: '控制来源、监听和单项开关',
-    summary: '技能变多后，要把来源、目录监听和逐项启停纳入正式配置，而不是全靠手动记忆。',
+    summary: '配置技能来源目录、监听和逐项启停控制。',
     snippet: `{
   skills: {
     allowBundled: ["gemini", "peekaboo"],
-    load: {
-      extraDirs: ["~/Projects/openclaw-skills"],
-      watch: true
-    },
-    entries: {
-      peekaboo: { enabled: true },
-      sag: { enabled: false }
+    load: { extraDirs: ["~/Projects/openclaw-skills"], watch: true },
+    entries: { peekaboo: { enabled: true }, sag: { enabled: false } }
+  }
+}`,
+  },
+  {
+    title: '心跳配置',
+    focus: '定期主动唤醒',
+    summary: '设置 heartbeat 让 agent 主动找你汇报，适合需要定时任务的场景。',
+    snippet: `{
+  agents: {
+    defaults: {
+      heartbeat: { every: "30m", target: "last", directPolicy: "allow" }
     }
+  }
+}`,
+  },
+  {
+    title: '定时任务配置',
+    focus: 'Cron jobs 与自动执行',
+    summary: '配置定时任务、会话保留和运行日志管理。',
+    snippet: `{
+  cron: {
+    enabled: true,
+    maxConcurrentRuns: 2,
+    sessionRetention: "24h",
+    runLog: { maxBytes: "2mb", keepLines: 2000 }
+  }
+}`,
+  },
+  {
+    title: '沙箱配置',
+    focus: 'Docker 隔离运行',
+    summary: '在隔离的 Docker 容器中运行 agent sessions，提高安全性。',
+    snippet: `{
+  agents: {
+    defaults: {
+      sandbox: { mode: "non-main", scope: "agent" }
+    }
+  }
+}`,
+  },
+  {
+    title: 'Hooks 配置',
+    focus: 'Webhooks 与自动化',
+    summary: '启用 HTTP webhook 端点，配置 mappings 进行自定义自动化。',
+    snippet: `{
+  hooks: {
+    enabled: true,
+    token: "shared-secret",
+    path: "/hooks",
+    mappings: [
+      { match: { path: "gmail" }, action: "agent", agentId: "main", deliver: true }
+    ]
   }
 }`,
   },
@@ -82,15 +171,23 @@ const configPresets = [
 const configLayers = [
   {
     title: 'identity',
-    description: '控制名字、语气和主题，是你第一次让 OpenClaw“像谁”的入口。',
+    description: '控制名字、语气和主题，是让 OpenClaw"像谁"的入口。',
   },
   {
     title: 'agent / agents.defaults',
-    description: '决定默认 workspace、模型和一些全局行为，是最该先稳定下来的层。',
+    description: '决定默认 workspace、模型、sandbox、heartbeat 等全局行为。',
   },
   {
     title: 'channels',
-    description: '配置 WhatsApp、Telegram、飞书等入口，同时决定 allowFrom、群组 mention 等边界。',
+    description: '配置 WhatsApp、Telegram、Discord、飞书、钉钉等入口及 allowFrom、群组规则。',
+  },
+  {
+    title: 'models / agents.models',
+    description: '定义模型目录、别名、imageMaxDimensionPx 等模型相关配置。',
+  },
+  {
+    title: 'session',
+    description: '控制会话隔离范围、thread bindings、自动重置策略。',
   },
   {
     title: 'skills',
@@ -98,37 +195,49 @@ const configLayers = [
   },
   {
     title: 'hooks',
-    description: '用来在关键时机插入规则、流程或内容替换，适合做更进阶的工作流控制。',
+    description: '在关键时机插入规则、流程或内容替换，实现自定义自动化。',
   },
   {
-    title: 'auth / gateway 边界',
-    description: '决定谁能接入你的系统、哪些入口对外开放，是长期运行阶段必须补上的层。',
+    title: 'auth / gateway',
+    description: '决定谁能接入、端口、认证、远程访问和 TLS 配置。',
+  },
+  {
+    title: 'cron / heartbeat',
+    description: '定时任务和主动唤醒机制的配置。',
+  },
+  {
+    title: 'sandbox',
+    description: 'Docker 隔离运行配置，适合高安全要求场景。',
   },
 ]
 
 const configChecklist = [
   {
     title: '第 1 层',
-    items: 'workspace、primary model、allowFrom、dashboard 可访问性',
+    items: 'workspace、primary model、allowFrom、dashboard 可访问性、端口配置',
   },
   {
     title: '第 2 层',
-    items: 'identity、group mention 规则、日志与状态检查、版本信息',
+    items: 'identity、group mention 规则、dmPolicy、session.dmScope、日志配置',
   },
   {
     title: '第 3 层',
-    items: 'skills.entries、extraDirs、SOUL.md、自定义 hooks 和远程访问',
+    items: 'skills.entries、extraDirs、SOUL.md、hooks、multi-agent 路由',
+  },
+  {
+    title: '第 4 层',
+    items: 'sandbox、cron、heartbeat、远程访问 (Tailscale)、TLS 配置',
   },
 ]
 
 const soulDirections = [
   {
     title: '基础助手型 SOUL',
-    description: '适合作为第一版人格，强调 helpful、resourceful、trustworthy 和 clear boundaries。',
+    description: '适合第一版人格，强调 helpful、resourceful、trustworthy 和清晰边界。',
   },
   {
     title: '工程执行型 SOUL',
-    description: '更强调清晰任务拆解、变更最小化、验证优先和谨慎操作。',
+    description: '强调清晰任务拆解、变更最小化、验证优先和谨慎操作。',
   },
   {
     title: '文档与解释型 SOUL',
@@ -151,34 +260,54 @@ const soulDirections = [
 const soulGuides = [
   {
     title: 'Bootstrapping 会写入 SOUL.md',
-    description: '首次引导阶段会把身份和偏好沉淀进 SOUL，因此它属于长期行为描述，不是一次性临时文本。',
+    description: '首次引导阶段会把身份和偏好沉淀进 SOUL，属于长期行为描述。',
   },
   {
     title: 'SOUL 与 Skills 是两层',
-    description: 'SOUL 决定“像谁、怎么判断、怎样表达”，Skills 决定“能做什么、调用什么工具”。',
+    description: 'SOUL 决定"像谁、怎么判断"，Skills 决定"能做什么、调用什么工具"。',
   },
   {
     title: 'SOUL Evil Hook 更适合实验',
-    description: '这类玩法能在特定条件下替换 SOUL 内容，但更适合创作和测试，不适合稳定生产。',
+    description: '在特定条件下替换 SOUL 内容，适合创作和测试，不适合稳定生产。',
+  },
+  {
+    title: '记忆系统三层架构',
+    description: 'SOUL（人格）、TOOLS（工具）、MEMORY（记忆）构成完整的记忆系统。',
   },
 ]
 
 const hookAndOps = [
   {
     title: '用 Hooks 管流程',
-    description: 'Hooks 更适合做流程约束、提示补充、特定场景的规则注入，而不是把所有人格都塞进主配置。',
+    description: 'Hooks 适合做流程约束、提示补充、特定场景的规则注入。',
   },
   {
     title: '用 workspace 做隔离',
-    description: '把实验型 Skills、SOUL 和高风险渠道先放进独立 workspace，验证后再进入正式环境。',
+    description: '把实验型 Skills、SOUL 和高风险渠道先放进独立 workspace 验证。',
   },
   {
     title: '版本升级先看配置影响',
-    description: 'OpenClaw 迭代快，每次升级都应先看配置字段、路径和认证边界有没有变化。',
+    description: 'OpenClaw 迭代快，每次升级应先看配置字段、路径和认证边界变化。',
   },
   {
     title: 'Control UI 用于确认结果',
-    description: 'onboarding 负责第一次整理配置，Control UI 更适合确认配置是否真正生效。',
+    description: 'onboarding 负责首次整理配置，Control UI 更适合确认配置是否生效。',
+  },
+  {
+    title: '热重载模式',
+    description: 'gateway.reload 支持 hybrid/hot/restart/off 模式，hybrid 会自动处理需要重启的配置。',
+  },
+  {
+    title: '配置拆分 ($include)',
+    description: '使用 $include 将大配置文件拆分为多个文件，支持深度合并。',
+  },
+  {
+    title: '环境变量支持',
+    description: '支持 .env 文件、~/.openclaw/.env 和配置内联 env var。',
+  },
+  {
+    title: 'Secret 安全存储',
+    description: '支持 env/file/exec 三种 secret 来源，避免 API key 硬编码。',
   },
 ]
 </script>

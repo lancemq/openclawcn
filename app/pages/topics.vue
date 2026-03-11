@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { informationLayers } from '~/data/information-architecture'
 import { pickTopicItems, topicDefinitions } from '~/data/taxonomy'
 import { sortBestPractices, sortDocs, sortNews } from '~/data/content'
 import { videoSections } from '~/data/videos'
@@ -83,6 +84,12 @@ const topicPractices = computed(() => pickTopicItems(sortedPractices.value as an
       <section class="card topic-summary">
         <p class="eyebrow">{{ activeTopic.title }}</p>
         <p class="section-copy">{{ activeTopic.description }}</p>
+        <div class="layer-summary-grid">
+          <article v-for="layer in informationLayers" :key="layer.id" class="layer-summary-card">
+            <strong>{{ layer.title }}</strong>
+            <p>{{ layer.summary }}</p>
+          </article>
+        </div>
       </section>
 
       <section class="topic-block">
@@ -158,6 +165,32 @@ const topicPractices = computed(() => pickTopicItems(sortedPractices.value as an
   gap: 12px;
 }
 
+.layer-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.layer-summary-card {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.layer-summary-card strong {
+  font-size: 0.92rem;
+}
+
+.layer-summary-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
 .filter-group {
   display: flex;
   flex-wrap: wrap;
@@ -216,6 +249,7 @@ const topicPractices = computed(() => pickTopicItems(sortedPractices.value as an
 @media (max-width: 980px) {
   .topic-grid,
   .topic-grid.compact,
+  .layer-summary-grid,
   .topic-dual-grid {
     grid-template-columns: 1fr;
   }

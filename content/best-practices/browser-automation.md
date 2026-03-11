@@ -3,6 +3,9 @@ title: 浏览器自动化实战
 description: 利用 OpenClaw 的浏览器控制能力实现网页自动化，提升工作效率。
 category: 进阶指南
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [browser, automation, chromium, workflows]
 ---
 
 # 浏览器自动化实战

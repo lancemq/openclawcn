@@ -8,6 +8,7 @@ import {
   newsOverview,
   userRouteOverview,
 } from '~/data/site'
+import { informationLayers } from '~/data/information-architecture'
 import { featuredVideos } from '~/data/videos'
 import { learningPaths, topicDefinitions } from '~/data/taxonomy'
 
@@ -76,6 +77,23 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
     <section class="section content-section routes-section">
       <div class="container">
         <div class="stack-shell">
+          <div class="layer-ribbon">
+            <div v-for="layer in informationLayers" :key="layer.id" class="card layer-card">
+              <span class="eyebrow">{{ layer.title }}</span>
+              <p class="home-head-note">{{ layer.summary }}</p>
+              <div class="layer-link-row">
+                <NuxtLink
+                  v-for="item in layer.items"
+                  :key="item.to"
+                  :to="item.to"
+                  class="tag-item layer-link"
+                >
+                  {{ item.title }}
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+
           <div class="home-head head-inline">
             <p class="eyebrow">用户分流</p>
             <p class="section-title compact-title">先判断当前阶段，再进入对应入口。</p>
@@ -271,8 +289,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
         <div class="stack-shell">
           <div class="home-head head-inline">
-            <p class="eyebrow">技能与配置</p>
-            <p class="home-head-note">把常用 skills、SOUL 和关键配置项单独整理，减少在社区帖和零散文档里来回翻找。</p>
+            <p class="eyebrow">扩展生态</p>
+            <p class="home-head-note">把常用 skills、SOUL、关键配置和国内衍生项目单独整理，减少在社区帖和零散资料里来回翻找。</p>
           </div>
           <div class="grid extension-grid">
             <ContentCard
@@ -339,6 +357,29 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 
 .stack-shell {
   gap: 6px;
+}
+
+.layer-ribbon {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.layer-card {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+}
+
+.layer-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.layer-link {
+  background: rgba(19, 129, 125, 0.08);
 }
 
 .path-rail {
@@ -562,6 +603,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 @media (max-width: 980px) {
   .docs-grid,
   .spotlight-grid,
+  .layer-ribbon,
   .route-grid,
   .practice-grid,
   .extension-grid,

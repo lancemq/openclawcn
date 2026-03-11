@@ -3,6 +3,9 @@ title: Telegram Bot 开发进阶指南
 description: 深入学习 Telegram Bot 的高级功能，包括自定义键盘、Inline 模式和群组管理。
 category: 渠道实践
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [telegram, bot, channels, advanced]
 ---
 
 # Telegram Bot 开发进阶指南

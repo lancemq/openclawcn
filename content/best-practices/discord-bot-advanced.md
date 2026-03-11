@@ -3,6 +3,9 @@ title: Discord Bot 高级功能开发
 description: 深入学习 Discord Bot 的高级功能，包括 Slash 命令、Embed 消息和语音频道集成。
 category: 渠道实践
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [discord, bot, channels, advanced]
 ---
 
 # Discord Bot 高级功能开发

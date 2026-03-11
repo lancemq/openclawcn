@@ -5,6 +5,8 @@ category: 运维
 date: "2026-03-09"
 author: "Security Team"
 source: "openclaw.ai/docs"
+updatedAt: 2026-03-11
+sourceType: official
 tags: ["security", "best-practices", "guide"]
 ---
 

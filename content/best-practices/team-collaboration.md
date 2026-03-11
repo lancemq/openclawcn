@@ -3,6 +3,9 @@ title: 团队协作与工作区管理
 description: 配置团队工作区，实现多用户协作、权限管理和团队知识共享。
 category: 团队协作
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [teams, workspace, permissions, collaboration]
 ---
 
 # 团队协作与工作区管理

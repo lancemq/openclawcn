@@ -2,6 +2,8 @@
 title: OpenClaw 安装与环境
 description: 按官方推荐方式安装 OpenClaw，并根据本地开发、WSL2 和生产部署场景选择合适的安装路径。
 category: 安装
+updatedAt: 2026-03-11
+sourceType: official
 tags: [installation, npm, install-script, wsl2]
 ---
 

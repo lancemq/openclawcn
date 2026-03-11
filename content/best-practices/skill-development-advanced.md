@@ -3,6 +3,9 @@ title: 技能开发进阶：Hook 与事件处理
 description: 学习 OpenClaw 技能系统的高级用法，包括 Hook、事件监听和自定义工作流。
 category: 技能开发
 difficulty: 高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [skills, hooks, events, advanced]
 ---
 
 # 技能开发进阶：Hook 与事件处理
