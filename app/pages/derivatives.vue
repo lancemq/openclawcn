@@ -116,7 +116,7 @@ const totalProjects = computed(() => derivativeSections.reduce((count, section) 
               target="_blank"
               rel="noreferrer"
             >
-              查看公开入口
+              {{ item.sourceLabel || '查看公开入口' }}
             </a>
             <span v-else class="pending-text">目前以社区讨论和公开报道为主，适合先观察。</span>
           </article>
