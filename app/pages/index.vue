@@ -12,8 +12,8 @@ useSeo({
 <template>
   <div>
     <HeroSection />
-    <FeatureGrid />
     <QuickStartSection />
+    <FeatureGrid />
     <ContentSpotlight />
 
     <section class="section content-section docs-section">
@@ -35,15 +35,15 @@ useSeo({
       </div>
     </section>
 
-    <section class="section content-section news-section">
+    <section class="section content-section practice-section">
       <div class="container">
         <div class="home-head">
-          <p class="eyebrow">最新动态</p>
-          <p class="home-head-note">聚焦版本变化、能力更新和需要及时关注的使用提醒。</p>
+          <p class="eyebrow">最佳实践</p>
+          <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法。</p>
         </div>
-        <div class="grid news-grid">
+        <div class="grid practice-grid">
           <ContentCard
-            v-for="item in newsOverview"
+            v-for="item in bestPracticeOverview"
             :key="item.to"
             :title="item.title"
             :description="item.description"
@@ -54,15 +54,15 @@ useSeo({
       </div>
     </section>
 
-    <section class="section content-section practice-section">
+    <section class="section content-section news-section">
       <div class="container">
         <div class="home-head">
-          <p class="eyebrow">最佳实践</p>
-          <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法。</p>
+          <p class="eyebrow">最新动态</p>
+          <p class="home-head-note">聚焦版本变化、能力更新和需要及时关注的使用提醒。</p>
         </div>
-        <div class="grid practice-grid">
+        <div class="grid news-grid">
           <ContentCard
-            v-for="item in bestPracticeOverview"
+            v-for="item in newsOverview"
             :key="item.to"
             :title="item.title"
             :description="item.description"

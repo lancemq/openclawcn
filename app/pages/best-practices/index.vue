@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { sortBestPractices } from '~/data/content'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -24,8 +26,10 @@ const difficulties = computed(() => [
   ...new Set((items.value || []).map((item) => String(item.difficulty || '未分级'))),
 ])
 
+const orderedItems = computed(() => sortBestPractices((items.value || []) as any[]))
+
 const filteredItems = computed(() =>
-  (items.value || []).filter((item) => {
+  orderedItems.value.filter((item) => {
     const categoryMatch =
       selectedCategory.value === '全部' || String(item.category || '') === selectedCategory.value
     const difficultyMatch =
@@ -34,6 +38,21 @@ const filteredItems = computed(() =>
     return categoryMatch && difficultyMatch
   }),
 )
+
+const featuredPractices = computed(() => orderedItems.value.slice(0, 3))
+
+const practiceStats = computed(() => [
+  {
+    label: '更适合谁',
+    value: '已跑通基础链路的人',
+    note: '实践内容更偏长期使用、协作和升级策略',
+  },
+  {
+    label: '推荐读法',
+    value: '先基础，再进阶',
+    note: '优先按难度看入门与基础，再决定是否深入高级专题',
+  },
+])
 
 function updateFilters(key: 'category' | 'difficulty', value: string) {
   const query = {
@@ -54,14 +73,45 @@ useSeo({
 
 <template>
   <section class="section">
-    <div class="container">
-      <p class="eyebrow">Best Practices</p>
-      <h1 class="section-title">最佳实践</h1>
-      <p class="section-copy">
-        这里整理的是更偏长期使用和维护的经验，包括接入节奏、更新跟踪、安全基础和社区协作方式。
-      </p>
+    <div class="container collection-page">
+      <section class="collection-hero">
+        <div class="card collection-main">
+          <p class="eyebrow">Best Practices</p>
+          <h1 class="section-title">最佳实践</h1>
+          <p class="section-copy">
+            这里整理的是更偏长期使用和维护的经验，包括接入节奏、更新跟踪、安全基础和社区协作方式。它更适合已经理解 OpenClaw 基本结构，准备进入稳定使用阶段的读者。
+          </p>
 
-      <div class="filters card">
+          <div class="collection-utility">
+            <article v-for="stat in practiceStats" :key="stat.label" class="collection-utility-item">
+              <span class="mini-label">{{ stat.label }}</span>
+              <strong>{{ stat.value }}</strong>
+              <p>{{ stat.note }}</p>
+            </article>
+          </div>
+        </div>
+
+        <aside class="card collection-side">
+          <div class="collection-summary">
+            <span class="mini-label">阅读建议</span>
+            <strong>先按难度过滤，再看和自己场景最接近的专题</strong>
+            <p>如果你还处在第一次安装和初次验证阶段，建议先回到文档；实践页更适合跑通基础链路后再来补方法。</p>
+          </div>
+
+          <NuxtLink
+            v-for="item in featuredPractices"
+            :key="item.path"
+            :to="item.path"
+            class="collection-utility-item utility-link"
+          >
+            <span class="mini-label">{{ item.difficulty || '未分级' }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </aside>
+      </section>
+
+      <div class="filters card collection-filters">
         <div class="filter-group">
           <span class="filter-label">分类</span>
           <button
@@ -91,16 +141,15 @@ useSeo({
         </div>
       </div>
 
-      <!-- 瀑布流布局 -->
-      <div class="masonry-grid">
+      <div class="masonry-grid collection-grid">
         <NuxtLink
           v-for="item in filteredItems"
           :key="item.path"
           :to="item.path"
-          class="masonry-item card"
+          class="masonry-item card collection-card"
         >
-          <div class="item-content">
-            <div class="item-meta">
+          <div class="item-content collection-card-body">
+            <div class="item-meta collection-meta">
               <span class="tag">{{ item.category }}</span>
               <span class="difficulty">{{ item.difficulty }}</span>
             </div>
@@ -116,7 +165,7 @@ useSeo({
         </NuxtLink>
       </div>
 
-      <div v-if="filteredItems.length === 0" class="empty-state">
+      <div v-if="filteredItems.length === 0" class="empty-state collection-empty">
         <p>没有找到匹配的实践内容，请尝试其他筛选条件。</p>
       </div>
     </div>
@@ -124,10 +173,26 @@ useSeo({
 </template>
 
 <style scoped>
+.mini-label {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.utility-link {
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.utility-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.22);
+  box-shadow: 0 12px 26px rgba(74, 56, 28, 0.08);
+}
+
 .filters {
-  display: grid;
-  gap: 12px;
-  margin-top: 18px;
+  margin-top: 0;
 }
 
 .filter-group {
@@ -168,37 +233,10 @@ useSeo({
   background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
 }
 
-/* 瀑布流布局 */
 .masonry-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
-  margin-top: 20px;
-}
-
-.masonry-item {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.masonry-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
-}
-
-.item-content {
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.item-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .item-meta .tag {
@@ -214,19 +252,7 @@ useSeo({
   color: var(--ink-soft);
 }
 
-.masonry-item h2 {
-  margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.04rem;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-}
-
 .masonry-item p {
-  margin: 0;
-  color: var(--ink-soft);
-  line-height: 1.55;
-  font-size: 0.88rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -246,12 +272,6 @@ useSeo({
   background: var(--surface);
   padding: 2px 6px;
   border-radius: 4px;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 36px 18px;
-  color: var(--ink-soft);
 }
 
 @media (max-width: 1200px) {

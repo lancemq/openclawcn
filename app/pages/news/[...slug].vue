@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { getPrevNext, sortBestPractices, sortNews } from '~/data/content'
+
 const route = useRoute()
 const slug = computed(() => {
   const param = route.params.slug
@@ -18,6 +20,8 @@ const { data: relatedNews } = await useAsyncData(`news:related:${slug.value}`, a
     .slice(0, 3)
 })
 
+const { data: allNews } = await useAsyncData('news:all', () => queryCollection('news').all())
+
 const { data: relatedPractices } = await useAsyncData(`news:related-practices:${slug.value}`, async () => {
   const items = await queryCollection('bestPractices').all()
   return items.slice(0, 2)
@@ -28,6 +32,21 @@ const breadcrumbItems = computed(() => [
   { label: '新闻', to: '/news' },
   { label: String(page.value?.title || '新闻详情') },
 ])
+
+const orderedNews = computed(() => sortNews((allNews.value || []) as any[]))
+
+const newsNav = computed(() => getPrevNext(orderedNews.value, pagePath.value))
+
+const curatedPractices = computed(() =>
+  sortBestPractices((relatedPractices.value || []) as any[])
+    .slice(0, 3)
+    .map(item => ({
+      title: item.title,
+      path: item.path,
+      description: item.description,
+      meta: `最佳实践 / ${item.category || '专题'}`,
+    })),
+)
 
 if (!page.value) {
   throw createError({
@@ -63,42 +82,20 @@ useSeo({
         </div>
       </article>
 
-      <section class="related-block">
-        <div class="related-head">
-          <h2>继续阅读</h2>
-          <p class="muted">看完这条动态后，可以继续进入相关更新或更稳定的最佳实践专题。</p>
-        </div>
+      <ContentNavigator
+        section-label="继续阅读"
+        section-title="先跟踪动态，再回到稳定方法"
+        section-description="新闻适合快速掌握变化，实践和文档更适合沉淀长期方法。看完动态后，建议继续进入相关实践或更早一篇更新。"
+        :previous="newsNav.previous"
+        :next="newsNav.next"
+        :related="curatedPractices"
+      />
 
-        <div class="cta-row">
-          <NuxtLink class="button secondary" to="/community">进入社区支持</NuxtLink>
-          <NuxtLink class="button ghost" to="/feedback">提交反馈</NuxtLink>
-          <a class="button secondary" href="/rss.xml" target="_blank" rel="noreferrer">订阅更新</a>
-        </div>
-
-        <div class="related-grid">
-          <NuxtLink
-            v-for="item in relatedNews"
-            :key="item.path"
-            :to="item.path"
-            class="card related-card"
-          >
-            <span class="tag">新闻 / {{ item.category }}</span>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
-
-          <NuxtLink
-            v-for="item in relatedPractices"
-            :key="item.path"
-            :to="item.path"
-            class="card related-card"
-          >
-            <span class="tag">最佳实践 / {{ item.category }}</span>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
-        </div>
-      </section>
+      <div class="cta-row">
+        <NuxtLink class="button secondary" to="/community">进入社区支持</NuxtLink>
+        <NuxtLink class="button ghost" to="/feedback">提交反馈</NuxtLink>
+        <a class="button secondary" href="/rss.xml" target="_blank" rel="noreferrer">订阅更新</a>
+      </div>
     </div>
   </section>
 </template>
@@ -111,46 +108,10 @@ useSeo({
   flex-wrap: wrap;
 }
 
-.related-block {
-  margin-top: 24px;
-}
-
-.related-head h2 {
-  margin: 0 0 10px;
-}
-
-.related-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 18px;
-}
-
 .cta-row {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 18px;
-}
-
-.related-card {
-  display: grid;
-  gap: 10px;
-}
-
-.related-card h3,
-.related-card p {
-  margin: 0;
-}
-
-.related-card p {
-  color: var(--ink-soft);
-  line-height: 1.7;
-}
-
-@media (max-width: 760px) {
-  .related-grid {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

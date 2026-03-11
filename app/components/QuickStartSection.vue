@@ -10,36 +10,36 @@
         <div class="step">
           <span class="step-number">1</span>
           <div class="step-body">
-            <h3>理解 OpenClaw 是什么</h3>
-            <p>先建立对产品定位、适用人群和核心能力的整体认识，避免一开始就陷入配置细节。</p>
+            <h3>先确定你属于哪类读者</h3>
+            <p>先判断自己是第一次了解、准备安装，还是已经开始使用后需要排错和长期维护。</p>
             <div class="step-links">
-              <NuxtLink to="/docs/what-is-openclaw">产品定位</NuxtLink>
-              <NuxtLink to="/docs/who-is-openclaw-for">适用人群</NuxtLink>
-              <NuxtLink to="/docs/core-capabilities">核心能力</NuxtLink>
+              <NuxtLink to="/docs/getting-started/what-is-openclaw">产品定位</NuxtLink>
+              <NuxtLink to="/docs/getting-started/who-is-openclaw-for">适用人群</NuxtLink>
+              <NuxtLink to="/docs/getting-started/reading-path">阅读路径</NuxtLink>
             </div>
           </div>
         </div>
         <div class="step">
           <span class="step-number">2</span>
           <div class="step-body">
-            <h3>完成安装与初始化</h3>
-            <p>再进入安装、Onboarding 和 Control UI，先跑通最小链路，再决定是否扩展渠道和工具。</p>
+            <h3>只跑通一条最小链路</h3>
+            <p>先完成安装、Onboarding 和 Control UI 的最小验证，不要一开始就并行接多条渠道。</p>
             <div class="step-links">
-              <NuxtLink to="/docs/installation">安装与环境</NuxtLink>
-              <NuxtLink to="/docs/onboarding-guide">Onboarding</NuxtLink>
-              <NuxtLink to="/docs/control-ui">Control UI</NuxtLink>
+              <NuxtLink to="/docs/setup/installation">安装与环境</NuxtLink>
+              <NuxtLink to="/docs/getting-started/onboarding-guide">Onboarding</NuxtLink>
+              <NuxtLink to="/docs/manual/control-ui">Control UI</NuxtLink>
             </div>
           </div>
         </div>
         <div class="step">
           <span class="step-number">3</span>
           <div class="step-body">
-            <h3>再扩展渠道与排错</h3>
-            <p>完成基础使用后，再看渠道、安全、升级和排错内容，建立长期使用和维护的基本方法。</p>
+            <h3>再进入扩展、排错和升级</h3>
+            <p>基础链路稳定后，再补渠道、安全、升级和排错方法，建立长期使用的维护节奏。</p>
             <div class="step-links">
-              <NuxtLink to="/docs/channels-overview">渠道能力</NuxtLink>
-              <NuxtLink to="/docs/safety-basics">安全基础</NuxtLink>
-              <NuxtLink to="/docs/troubleshooting">故障排除</NuxtLink>
+              <NuxtLink to="/docs/manual/channels-overview">渠道能力</NuxtLink>
+              <NuxtLink to="/docs/operations/safety-basics">安全基础</NuxtLink>
+              <NuxtLink to="/docs/reference/troubleshooting">故障排除</NuxtLink>
             </div>
           </div>
         </div>

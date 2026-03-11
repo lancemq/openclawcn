@@ -1,5 +1,23 @@
 <script setup lang="ts">
 const { public: publicConfig } = useRuntimeConfig()
+
+const primaryRoutes = [
+  {
+    title: '第一次认识 OpenClaw',
+    detail: '先看定位、适用人群和阅读顺序，避免直接陷入配置细节。',
+    to: '/docs/getting-started/reading-path',
+  },
+  {
+    title: '准备开始安装与验证',
+    detail: '先跑通最小链路，再进入 Control UI、渠道和长期运维。',
+    to: '/docs/setup/installation',
+  },
+  {
+    title: '持续跟踪变化与协作',
+    detail: '通过新闻、FAQ、反馈和社区页掌握更新与提问路径。',
+    to: '/community',
+  },
+]
 </script>
 
 <template>
@@ -39,6 +57,13 @@ const { public: publicConfig } = useRuntimeConfig()
             <strong>持续关注什么</strong>
             <p>版本变化、能力更新、排错路径。</p>
           </article>
+        </div>
+
+        <div class="route-strip">
+          <NuxtLink v-for="route in primaryRoutes" :key="route.to" :to="route.to" class="route-item">
+            <strong>{{ route.title }}</strong>
+            <p>{{ route.detail }}</p>
+          </NuxtLink>
         </div>
       </div>
 
@@ -162,6 +187,41 @@ const { public: publicConfig } = useRuntimeConfig()
   line-height: 1.55;
 }
 
+.route-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.route-item {
+  display: grid;
+  gap: 5px;
+  padding: 12px 13px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  background: rgba(255, 255, 255, 0.48);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.route-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.2);
+  box-shadow: 0 12px 22px rgba(74, 56, 28, 0.08);
+}
+
+.route-item strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 0.96rem;
+  line-height: 1.3;
+}
+
+.route-item p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
 .hero-panel-header {
   display: flex;
   justify-content: space-between;
@@ -228,6 +288,10 @@ const { public: publicConfig } = useRuntimeConfig()
   }
 
   .hero-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .route-strip {
     grid-template-columns: 1fr;
   }
 }

@@ -27,9 +27,9 @@ const year = new Date().getFullYear()
       <div>
         <h3>关注</h3>
         <ul>
-          <li><NuxtLink to="/docs/what-is-openclaw">产品介绍</NuxtLink></li>
-          <li><NuxtLink to="/docs/onboarding-guide">入门路径</NuxtLink></li>
-          <li><NuxtLink to="/docs/release-tracking">更新跟踪</NuxtLink></li>
+          <li><NuxtLink to="/docs/getting-started/what-is-openclaw">产品介绍</NuxtLink></li>
+          <li><NuxtLink to="/docs/getting-started/onboarding-guide">入门路径</NuxtLink></li>
+          <li><NuxtLink to="/docs/operations/release-tracking">更新跟踪</NuxtLink></li>
           <li><NuxtLink to="/feedback">内容反馈</NuxtLink></li>
         </ul>
       </div>

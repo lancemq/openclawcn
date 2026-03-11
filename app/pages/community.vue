@@ -302,7 +302,7 @@ const faqs = [
           </div>
 
           <div class="button-row status-actions">
-            <NuxtLink class="button secondary" to="/docs/community">查看协作说明</NuxtLink>
+            <NuxtLink class="button secondary" to="/docs/reference/community">查看协作说明</NuxtLink>
             <NuxtLink class="button ghost" to="/news">查看新闻动态</NuxtLink>
           </div>
         </div>

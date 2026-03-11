@@ -1,20 +1,20 @@
 <script setup lang="ts">
 const features = [
   {
-    title: '快速理解定位',
-    description: '先用中文说明 OpenClaw 是什么、适合谁、和普通聊天工具有什么区别。',
+    title: '先建立阅读顺序',
+    description: '首页和文档优先回答先看什么、后看什么，而不是把所有入口并排堆在一起。',
   },
   {
-    title: '更稳地开始使用',
-    description: '把安装、Onboarding、Control UI 和渠道接入按更容易上手的顺序整理清楚。',
+    title: '按阶段组织内容',
+    description: '把入门、部署、运维、排错和长期跟踪拆成不同层次，减少新手误入高级细节。',
   },
   {
-    title: '聚焦关键能力',
-    description: '围绕渠道、Hooks、安全、升级和排错等真正会影响使用体验的主题展开说明。',
+    title: '列表页统一承接',
+    description: '文档、实践、新闻用一致的卡片层级和筛选逻辑承接不同类型内容。',
   },
   {
-    title: '跟踪版本变化',
-    description: '通过新闻、FAQ 和社区入口，持续了解 OpenClaw 的版本更新和使用提醒。',
+    title: '内容可持续查阅',
+    description: '通过阅读路径、内容尾部导航、FAQ 和搜索，把零散信息串成可长期使用的体系。',
   },
 ]
 </script>
@@ -23,8 +23,8 @@ const features = [
   <section class="section">
     <div class="container">
       <div class="section-head compact-head">
-        <p class="eyebrow">核心价值</p>
-        <p class="head-note">先回答中文用户最关心的四件事。</p>
+        <p class="eyebrow">站点方向</p>
+        <p class="head-note">把中文资料站做成可持续查阅的 OpenClaw 入口，而不是内容堆叠页。</p>
       </div>
 
       <div class="feature-grid">

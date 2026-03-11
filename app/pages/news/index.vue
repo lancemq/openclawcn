@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { sortNews } from '~/data/content'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -22,8 +24,10 @@ const archives = computed(() => [
   ...new Set((items.value || []).map((item) => String(item.date || '').slice(0, 7))),
 ])
 
+const orderedItems = computed(() => sortNews((items.value || []) as any[]))
+
 const filteredItems = computed(() =>
-  (items.value || []).filter((item) => {
+  orderedItems.value.filter((item) => {
     const categoryMatch =
       selectedCategory.value === '全部' || String(item.category || '') === selectedCategory.value
 
@@ -33,6 +37,21 @@ const filteredItems = computed(() =>
     return categoryMatch && archiveMatch
   }),
 )
+
+const featuredNews = computed(() => orderedItems.value.slice(0, 3))
+
+const newsStats = computed(() => [
+  {
+    label: '最新视角',
+    value: '版本变化',
+    note: '优先承接版本更新、能力变化与使用提醒',
+  },
+  {
+    label: '浏览方式',
+    value: '按月份归档',
+    note: '适合回看某一段时间内的连续变化',
+  },
+])
 
 function updateFilters(key: 'category' | 'archive', value: string) {
   const query = {
@@ -53,14 +72,45 @@ useSeo({
 
 <template>
   <section class="section">
-    <div class="container">
-      <p class="eyebrow">News</p>
-      <h1 class="section-title">新闻动态</h1>
-      <p class="section-copy">
-        这里主要发布 OpenClaw 的版本更新、功能变化、使用提醒和中文解读，帮助你持续跟踪产品演进。
-      </p>
+    <div class="container collection-page">
+      <section class="collection-hero">
+        <div class="card collection-main">
+          <p class="eyebrow">News</p>
+          <h1 class="section-title">新闻动态</h1>
+          <p class="section-copy">
+            这里主要发布 OpenClaw 的版本更新、功能变化、使用提醒和中文解读。更适合已经开始关注产品变化、希望持续跟踪版本节奏的读者。
+          </p>
 
-      <div class="filters card">
+          <div class="collection-utility">
+            <article v-for="stat in newsStats" :key="stat.label" class="collection-utility-item">
+              <span class="mini-label">{{ stat.label }}</span>
+              <strong>{{ stat.value }}</strong>
+              <p>{{ stat.note }}</p>
+            </article>
+          </div>
+        </div>
+
+        <aside class="card collection-side">
+          <div class="collection-summary">
+            <span class="mini-label">重点更新</span>
+            <strong>先看最近发布，再决定是否深入专题</strong>
+            <p>如果你只想快速判断哪些变化和自己有关，优先看最近几条动态，再通过最佳实践和文档补长期方案。</p>
+          </div>
+
+          <NuxtLink
+            v-for="item in featuredNews"
+            :key="item.path"
+            :to="item.path"
+            class="collection-utility-item utility-link"
+          >
+            <span class="mini-label">{{ item.date }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </aside>
+      </section>
+
+      <div class="filters card collection-filters">
         <div class="filter-group">
           <span class="filter-label">分类</span>
           <button
@@ -90,15 +140,15 @@ useSeo({
         </div>
       </div>
 
-      <div class="masonry-grid">
+      <div class="masonry-grid collection-grid">
         <NuxtLink
           v-for="item in filteredItems"
           :key="item.path"
           :to="item.path"
-          class="masonry-item card"
+          class="masonry-item card collection-card"
         >
-          <div class="item-content">
-            <div class="item-meta">
+          <div class="item-content collection-card-body">
+            <div class="item-meta collection-meta">
               <span class="date">{{ item.date }}</span>
               <span class="tag">{{ item.category }}</span>
             </div>
@@ -114,7 +164,7 @@ useSeo({
         </NuxtLink>
       </div>
 
-      <div v-if="filteredItems.length === 0" class="empty-state">
+      <div v-if="filteredItems.length === 0" class="empty-state collection-empty">
         <p>没有找到匹配的新闻，请尝试其他筛选条件。</p>
       </div>
     </div>
@@ -122,10 +172,26 @@ useSeo({
 </template>
 
 <style scoped>
+.mini-label {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.utility-link {
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.utility-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.22);
+  box-shadow: 0 12px 26px rgba(74, 56, 28, 0.08);
+}
+
 .filters {
-  display: grid;
-  gap: 12px;
-  margin-top: 18px;
+  margin-top: 0;
 }
 
 .filter-group {
@@ -170,32 +236,6 @@ useSeo({
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin-top: 20px;
-}
-
-.masonry-item {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.masonry-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
-}
-
-.item-content {
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.item-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .date {
@@ -211,19 +251,7 @@ useSeo({
   border-radius: 999px;
 }
 
-.masonry-item h2 {
-  margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.04rem;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-}
-
 .masonry-item p {
-  margin: 0;
-  color: var(--ink-soft);
-  line-height: 1.55;
-  font-size: 0.88rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -243,12 +271,6 @@ useSeo({
   background: rgba(166, 111, 44, 0.1);
   padding: 2px 6px;
   border-radius: 4px;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 36px 18px;
-  color: var(--ink-soft);
 }
 
 @media (max-width: 1000px) {

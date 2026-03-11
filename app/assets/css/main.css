@@ -266,6 +266,110 @@ img {
   line-height: 1.75;
 }
 
+.collection-page {
+  display: grid;
+  gap: 18px;
+}
+
+.collection-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.collection-main,
+.collection-side,
+.collection-summary,
+.collection-utility {
+  display: grid;
+  gap: 10px;
+}
+
+.collection-utility {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.collection-summary,
+.collection-utility-item {
+  padding: 14px 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.collection-summary strong,
+.collection-utility-item strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.collection-summary p,
+.collection-utility-item p {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
+.collection-filters {
+  display: grid;
+  gap: 12px;
+}
+
+.collection-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.collection-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.collection-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+}
+
+.collection-card-body {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+}
+
+.collection-card h2 {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.04rem;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+}
+
+.collection-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  font-size: 0.88rem;
+}
+
+.collection-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.collection-empty {
+  text-align: center;
+  padding: 36px 18px;
+  color: var(--ink-soft);
+}
+
 .prose h1,
 .prose h2,
 .prose h3 {
@@ -343,6 +447,11 @@ img {
 
   .container {
     width: min(var(--max-width), calc(100% - 24px));
+  }
+
+  .collection-hero,
+  .collection-utility {
+    grid-template-columns: 1fr;
   }
 
   .site-shell::after {

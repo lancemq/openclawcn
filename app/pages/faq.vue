@@ -39,21 +39,54 @@ const faqs = [
 ]
 
 const quickLinks = [
-  { title: '快速入门', to: '/docs/getting-started', desc: '5分钟建立整体认识' },
-  { title: '安装配置', to: '/docs/installation', desc: '环境准备与首次安装' },
+  { title: '快速入门', to: '/docs/getting-started/getting-started', desc: '5分钟建立整体认识' },
+  { title: '安装配置', to: '/docs/setup/installation', desc: '环境准备与首次安装' },
   { title: '提交反馈', to: '/feedback', desc: '报告问题或建议' },
   { title: '社区支持', to: '/community', desc: '获取更多帮助' },
 ]
+
+const groupedFaqs = Object.entries(
+  faqs.reduce<Record<string, typeof faqs>>((acc, item) => {
+    acc[item.category] ||= []
+    acc[item.category].push(item)
+    return acc
+  }, {}),
+)
 </script>
 
 <template>
   <section class="section">
-    <div class="container">
-      <p class="eyebrow">FAQ</p>
-      <h1 class="section-title">常见问题</h1>
-      <p class="section-copy">
-        这里整理的是最常见的入门疑问、反馈路径和信息查找方式，适合第一次进入站点时快速扫一遍。
-      </p>
+    <div class="container collection-page">
+      <section class="collection-hero">
+        <div class="card collection-main">
+          <p class="eyebrow">FAQ</p>
+          <h1 class="section-title">常见问题</h1>
+          <p class="section-copy">
+            这里整理的是最常见的入门疑问、反馈路径和信息查找方式。它更适合在你问题还比较模糊时，先快速判断下一步该看哪里或去哪提问。
+          </p>
+
+          <div class="collection-utility">
+            <article class="collection-utility-item">
+              <span class="mini-label">适合什么时候看</span>
+              <strong>第一次访问或入口不清时</strong>
+              <p>FAQ 负责快速分流，而不是替代完整文档。</p>
+            </article>
+            <article class="collection-utility-item">
+              <span class="mini-label">如果问题更具体</span>
+              <strong>转到搜索或对应专题</strong>
+              <p>一旦你已经知道自己要找什么，文档和搜索通常更高效。</p>
+            </article>
+          </div>
+        </div>
+
+        <aside class="card collection-side">
+          <div class="collection-summary">
+            <span class="mini-label">FAQ 结构</span>
+            <strong>先按问题类型分组，再给出下一步入口</strong>
+            <p>这里把入门、内容、社区、导航和订阅问题拆开，避免所有问题混在同一块里。</p>
+          </div>
+        </aside>
+      </section>
 
       <div class="quick-links">
         <NuxtLink v-for="link in quickLinks" :key="link.to" :to="link.to" class="quick-link card">
@@ -62,23 +95,39 @@ const quickLinks = [
         </NuxtLink>
       </div>
 
-      <div class="grid faq-grid">
-        <article v-for="faq in faqs" :key="faq.question" class="card faq-card">
-          <span class="faq-category">{{ faq.category }}</span>
-          <h2>{{ faq.question }}</h2>
-          <p>{{ faq.answer }}</p>
-        </article>
-      </div>
+      <section class="faq-sections">
+        <div v-for="[category, items] in groupedFaqs" :key="category" class="faq-section">
+          <div class="result-group-head">
+            <p class="eyebrow">{{ category }}</p>
+            <p class="muted">{{ items.length }} 个问题</p>
+          </div>
+
+          <div class="faq-list">
+            <details v-for="faq in items" :key="faq.question" class="card faq-item">
+              <summary>{{ faq.question }}</summary>
+              <p>{{ faq.answer }}</p>
+            </details>
+          </div>
+        </div>
+      </section>
     </div>
   </section>
 </template>
 
 <style scoped>
+.mini-label {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .quick-links {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 0;
 }
 
 .quick-link {
@@ -105,39 +154,50 @@ const quickLinks = [
   font-size: 0.82rem;
 }
 
-.faq-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.faq-card {
+.faq-sections {
   display: grid;
+  gap: 18px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.result-group-head {
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  padding: 16px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.faq-category {
-  display: inline-flex;
-  width: fit-content;
-  padding: 3px 8px;
-  background: rgba(166, 111, 44, 0.1);
-  color: var(--brand);
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+.faq-item {
+  padding: 0;
 }
 
-.faq-card h2 {
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 20px;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item[open] summary {
+  border-bottom: 1px solid rgba(67, 73, 60, 0.12);
+}
+
+.faq-item p {
   margin: 0;
-  font-size: 1.08rem;
-}
-
-.faq-card p {
-  margin: 0;
-  color: var(--muted);
+  padding: 16px 20px 20px;
+  color: var(--ink-soft);
   line-height: 1.65;
   font-size: 0.92rem;
 }
@@ -149,10 +209,6 @@ const quickLinks = [
 }
 
 @media (max-width: 760px) {
-  .faq-grid {
-    grid-template-columns: 1fr;
-  }
-
   .quick-links {
     grid-template-columns: 1fr;
   }
