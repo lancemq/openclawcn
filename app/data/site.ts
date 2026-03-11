@@ -131,6 +131,12 @@ export const extensionOverview = [
     to: '/configurations',
     meta: 'Config',
   },
+  {
+    title: '衍生品聚合',
+    description: '汇总国内围绕 OpenClaw 的二次开发、轻量封装、本地化分发和实验工具，方便快速判断该看哪一支生态。',
+    to: '/derivatives',
+    meta: 'Derivative',
+  },
 ]
 
 export const newsOverview = [

@@ -9,6 +9,7 @@ const navItems = [
   { label: '视频', to: '/videos' },
   { label: '技能', to: '/skills' },
   { label: '配置', to: '/configurations' },
+  { label: '衍生品', to: '/derivatives' },
   { label: '实践', to: '/best-practices' },
   { label: '新闻', to: '/news' },
   { label: '社区', to: '/community' },

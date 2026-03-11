@@ -271,8 +271,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
         <div class="stack-shell">
           <div class="home-head head-inline">
-            <p class="eyebrow">技能与配置</p>
-            <p class="home-head-note">把常用 skills、SOUL 和关键配置项单独整理，减少在社区帖和零散文档里来回翻找。</p>
+            <p class="eyebrow">扩展生态</p>
+            <p class="home-head-note">把常用 skills、SOUL、关键配置和国内衍生项目单独整理，减少在社区帖和零散资料里来回翻找。</p>
           </div>
           <div class="grid extension-grid">
             <ContentCard

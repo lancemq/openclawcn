@@ -124,6 +124,7 @@ export default defineNuxtConfig({
     '/topics': { prerender: true },
     '/docs': { prerender: true },
     '/videos': { prerender: true },
+    '/derivatives': { prerender: true },
     '/news': { prerender: true },
     '/community': { prerender: true },
     '/search': { prerender: true },
