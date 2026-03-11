@@ -97,6 +97,27 @@ export const actionOverview = [
   },
 ]
 
+export const userRouteOverview = [
+  {
+    title: '我是新手，想先跑通',
+    description: '从产品定位、安装、Onboarding 到第一条最小链路，一条路径走完。',
+    to: '/paths',
+    meta: '新手路径',
+  },
+  {
+    title: '我已经部署，想继续扩展',
+    description: '从 Skills、Tools、视频教程和最佳实践进入更实战的能力扩展。',
+    to: '/topics?topic=skills-tools',
+    meta: '扩展路径',
+  },
+  {
+    title: '我在长期运行，需要稳态方法',
+    description: '聚合 Gateway 运维、安全、升级和监控相关内容。',
+    to: '/topics?topic=gateway-ops',
+    meta: '运维路径',
+  },
+]
+
 export const extensionOverview = [
   {
     title: '热门技能',

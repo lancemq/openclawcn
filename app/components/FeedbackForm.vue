@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const form = reactive({
   type: 'content',
+  topic: 'docs',
+  expectation: 'missing-guide',
   name: '',
   email: '',
   page: '',
@@ -37,6 +39,8 @@ async function submitFeedback() {
     form.page = ''
     form.message = ''
     form.type = 'content'
+    form.topic = 'docs'
+    form.expectation = 'missing-guide'
   } catch (error) {
     errorMessage.value = error instanceof Error ? error.message : '提交失败，请稍后重试。'
   } finally {
@@ -52,8 +56,33 @@ async function submitFeedback() {
         <span>反馈类型</span>
         <select v-model="form.type">
           <option value="content">内容建议</option>
+          <option value="request">想看什么教程</option>
           <option value="bug">站点问题</option>
           <option value="community">社区诉求</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>相关模块</span>
+        <select v-model="form.topic">
+          <option value="docs">文档</option>
+          <option value="videos">视频教程</option>
+          <option value="best-practices">最佳实践</option>
+          <option value="news">新闻</option>
+          <option value="site">整站体验</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="field-grid">
+      <label class="field">
+        <span>你希望得到什么</span>
+        <select v-model="form.expectation">
+          <option value="missing-guide">补一篇教程</option>
+          <option value="fix-content">修正文案或链接</option>
+          <option value="add-video">补充视频教程</option>
+          <option value="clarify-steps">把步骤写清楚</option>
+          <option value="report-bug">修站点问题</option>
         </select>
       </label>
 

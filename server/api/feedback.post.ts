@@ -1,5 +1,7 @@
 type FeedbackPayload = {
   type?: string
+  topic?: string
+  expectation?: string
   name?: string
   email?: string
   page?: string
@@ -15,6 +17,8 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
 
   const type = String(body.type || '').trim()
+  const topic = String(body.topic || '').trim()
+  const expectation = String(body.expectation || '').trim()
   const name = String(body.name || '').trim()
   const email = String(body.email || '').trim()
   const page = String(body.page || '').trim()
@@ -44,6 +48,8 @@ export default defineEventHandler(async (event) => {
   const payload = {
     id: `fb_${Date.now()}`,
     type,
+    topic,
+    expectation,
     name,
     email,
     page,

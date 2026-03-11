@@ -3,6 +3,8 @@ const route = useRoute()
 
 const navItems = [
   { label: '首页', to: '/' },
+  { label: '路径', to: '/paths' },
+  { label: '主题', to: '/topics' },
   { label: '文档', to: '/docs' },
   { label: '视频', to: '/videos' },
   { label: '技能', to: '/skills' },

@@ -91,6 +91,8 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { prerender: true },
+    '/paths': { prerender: true },
+    '/topics': { prerender: true },
     '/docs': { prerender: true },
     '/videos': { prerender: true },
     '/news': { prerender: true },

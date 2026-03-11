@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { videoSections } from '~/data/videos'
+import { topicDefinitions } from '~/data/taxonomy'
 
 useSeo({
   title: '视频教程',
@@ -13,6 +14,86 @@ const quickFacts = [
   { label: '覆盖方向', value: '安装 / Skills / 渠道 / 模型', note: '从第一次部署到更进阶的接入路径' },
   { label: '更适合谁', value: '先看视频再上手的用户', note: '尤其适合第一次接触 OpenClaw 的中文用户' },
 ]
+
+const config = useRuntimeConfig()
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'OpenClaw 视频教程',
+        description: '整理 OpenClaw 官方 Showcase、YouTube 演示和 Bilibili 中文教程。',
+        url: `${config.public.siteUrl}/videos`,
+      }),
+    },
+  ],
+})
+
+const route = useRoute()
+const router = useRouter()
+const selectedPlatform = computed(() => typeof route.query.platform === 'string' ? route.query.platform : '全部')
+const selectedLevel = computed(() => typeof route.query.level === 'string' ? route.query.level : '全部')
+const selectedTopic = computed(() => typeof route.query.topic === 'string' ? route.query.topic : '全部')
+
+const platforms = ['全部', 'Official', 'YouTube', 'Bilibili']
+const levels = ['全部', '入门', '基础', '进阶']
+
+const allVideos = computed(() =>
+  videoSections.flatMap(section =>
+    section.items.map(item => ({
+      ...item,
+      sectionTitle: section.title,
+    })),
+  ),
+)
+
+const filteredSections = computed(() =>
+  videoSections
+    .map(section => {
+      const items = section.items.filter((item) => {
+        const platformMatch = selectedPlatform.value === '全部' || item.platform === selectedPlatform.value
+        const levelMatch = selectedLevel.value === '全部' || item.level === selectedLevel.value
+        const currentTopic = topicDefinitions.find(topic => topic.slug === selectedTopic.value)
+        const topicMatch =
+          selectedTopic.value === '全部' ||
+          (currentTopic
+            ? item.tags.some(tag => currentTopic.tags.includes(tag)) ||
+              currentTopic.keywords.some(keyword =>
+                `${item.title} ${item.description} ${item.tags.join(' ')}`.toLowerCase().includes(keyword.toLowerCase()),
+              )
+            : true)
+
+        return platformMatch && levelMatch && topicMatch
+      })
+
+      return {
+        ...section,
+        items,
+      }
+    })
+    .filter(section => section.items.length > 0),
+)
+
+const relatedTopics = computed(() =>
+  topicDefinitions.map(topic => ({
+    ...topic,
+    count: allVideos.value.filter(item =>
+      item.tags.some(tag => topic.tags.includes(tag) || topic.keywords.some(keyword => tag.includes(keyword.toLowerCase()))),
+    ).length,
+  })),
+)
+
+function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
+  router.replace({
+    query: {
+      ...route.query,
+      [key]: value === '全部' ? undefined : value,
+    },
+  })
+}
 </script>
 
 <template>
@@ -58,7 +139,51 @@ const quickFacts = [
         </article>
       </div>
 
-      <section v-for="section in videoSections" :id="section.id" :key="section.id" class="video-section">
+      <div class="filters card">
+        <div class="filter-group">
+          <span class="filter-label">平台</span>
+          <button
+            v-for="platform in platforms"
+            :key="platform"
+            type="button"
+            class="filter-chip"
+            :class="{ active: selectedPlatform === platform }"
+            @click="updateFilter('platform', platform)"
+          >
+            {{ platform }}
+          </button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">难度</span>
+          <button
+            v-for="level in levels"
+            :key="level"
+            type="button"
+            class="filter-chip"
+            :class="{ active: selectedLevel === level }"
+            @click="updateFilter('level', level)"
+          >
+            {{ level }}
+          </button>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">主题</span>
+          <button
+            v-for="topic in ['全部', ...topicDefinitions.map(item => item.slug)]"
+            :key="topic"
+            type="button"
+            class="filter-chip"
+            :class="{ active: selectedTopic === topic }"
+            @click="updateFilter('topic', topic)"
+          >
+            {{ topic === '全部' ? '全部' : topicDefinitions.find(item => item.slug === topic)?.title }}
+          </button>
+        </div>
+      </div>
+
+      <section v-for="section in filteredSections" :id="section.id" :key="section.id" class="video-section">
         <div class="home-head">
           <p class="eyebrow">{{ section.title }}</p>
           <p class="home-head-note">{{ section.description }}</p>
@@ -113,6 +238,17 @@ const quickFacts = [
             <p>先确认本地最小链路已跑通，再进入飞书、钉钉、QQ、Ollama 或 Skills 类视频。</p>
           </article>
         </div>
+
+        <div class="related-topic-row">
+          <NuxtLink
+            v-for="topic in relatedTopics.filter(item => item.count > 0)"
+            :key="topic.slug"
+            class="tag-item related-topic-link"
+            :to="`/topics?topic=${topic.slug}`"
+          >
+            {{ topic.title }} · {{ topic.count }}
+          </NuxtLink>
+        </div>
       </section>
     </div>
   </section>
@@ -129,13 +265,50 @@ const quickFacts = [
 
 .video-overview-grid,
 .video-grid,
-.tips-grid {
+.tips-grid,
+.filter-group {
   display: grid;
   gap: 14px;
 }
 
 .video-overview-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.filters {
+  display: grid;
+  gap: 12px;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-label {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.filter-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.66);
+  color: var(--ink);
+  padding: 6px 12px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+}
+
+.filter-chip.active {
+  color: #fff8ef;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
 }
 
 .overview-card,
@@ -233,6 +406,16 @@ const quickFacts = [
 
 .tips-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.related-topic-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.related-topic-link {
+  border: 1px solid rgba(67, 73, 60, 0.12);
 }
 
 @media (max-width: 980px) {
