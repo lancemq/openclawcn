@@ -4,14 +4,14 @@ import { topicDefinitions } from '~/data/taxonomy'
 
 useSeo({
   title: '视频教程',
-  description: '整理 OpenClaw 官方 Showcase、YouTube 演示和 Bilibili 中文教程，覆盖安装、部署、Skills、渠道接入和模型扩展。',
+  description: '整理 OpenClaw 官方 Showcase、Bilibili 高播放教程和 YouTube 演示，覆盖安装部署、Ollama本地模型、Skills扩展、渠道接入（飞书/钉钉/微信/QQ）和进阶实战案例。',
   path: '/videos',
   type: 'website',
 })
 
 const quickFacts = [
-  { label: '内容来源', value: '官方 + YouTube + Bilibili', note: '优先保留可直接上手的高信息密度教程' },
-  { label: '覆盖方向', value: '安装 / Skills / 渠道 / 模型', note: '从第一次部署到更进阶的接入路径' },
+  { label: '内容来源', value: '官方 + Bilibili + YouTube', note: '收录30+高质量视频，涵盖安装到进阶实战' },
+  { label: '覆盖方向', value: '安装 / 模型 / Skills / 渠道', note: '从零部署到多Agent协作全链路覆盖' },
   { label: '更适合谁', value: '先看视频再上手的用户', note: '尤其适合第一次接触 OpenClaw 的中文用户' },
 ]
 
@@ -38,7 +38,7 @@ const selectedPlatform = computed(() => typeof route.query.platform === 'string'
 const selectedLevel = computed(() => typeof route.query.level === 'string' ? route.query.level : '全部')
 const selectedTopic = computed(() => typeof route.query.topic === 'string' ? route.query.topic : '全部')
 
-const platforms = ['全部', 'Official', 'YouTube', 'Bilibili']
+const platforms = ['全部', 'Official', 'Bilibili', 'YouTube']
 const levels = ['全部', '入门', '基础', '进阶']
 
 const allVideos = computed(() =>
