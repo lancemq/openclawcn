@@ -45,6 +45,12 @@ const weeklyFocus = computed(() => [
     to: latestPractices.value[0].path,
     meta: `实践 / ${latestPractices.value[0].difficulty || ''}`,
   },
+  featuredVideos[0] && {
+    title: featuredVideos[0].title,
+    description: featuredVideos[0].description,
+    to: featuredVideos[0].to,
+    meta: featuredVideos[0].meta,
+  },
 ].filter(Boolean) as Array<{ title: string; description: string; to: string; meta: string }>)
 
 const topicOverview = computed(() =>
@@ -55,6 +61,9 @@ const topicOverview = computed(() =>
     meta: '主题聚合',
   })),
 )
+
+const featuredTopic = computed(() => topicOverview.value[0])
+const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 </script>
 
 <template>
@@ -66,190 +75,236 @@ const topicOverview = computed(() =>
 
     <section class="section content-section routes-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">用户分流</p>
-          <p class="home-head-note">先判断自己处于哪个阶段，再选对应入口，不要第一次进入就把所有入口一起打开。</p>
-        </div>
-        <div class="grid route-grid">
-          <ContentCard
-            v-for="item in userRouteOverview"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="stack-shell">
+          <div class="home-head head-inline">
+            <p class="eyebrow">用户分流</p>
+            <p class="section-title compact-title">先判断当前阶段，再进入对应入口。</p>
+            <p class="home-head-note">不要第一次进入就把所有入口一起打开。先决定自己是新手、扩展阶段还是长期运维阶段，再走对应路线。</p>
+          </div>
+          <div class="grid route-grid">
+            <ContentCard
+              v-for="item in userRouteOverview"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section paths-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">学习路径</p>
-          <p class="home-head-note">从部署、Windows、Skills 扩展到团队运维，把零散内容接成连续路线。</p>
-        </div>
-        <div class="grid route-grid">
-          <ContentCard
-            v-for="path in learningPaths"
-            :key="path.slug"
-            :title="path.title"
-            :description="path.summary"
-            :to="path.next"
-            :meta="'路径'"
-          />
+        <div class="feature-band card">
+          <div class="home-head">
+            <p class="eyebrow">学习路径</p>
+            <p class="home-head-note">从部署、Windows、Skills 扩展到团队运维，把零散内容接成连续路线。</p>
+          </div>
+          <div class="path-rail">
+            <NuxtLink
+              v-for="(path, index) in learningPaths"
+              :key="path.slug"
+              :to="path.next"
+              class="path-step"
+            >
+              <span class="path-index">{{ String(index + 1).padStart(2, '0') }}</span>
+              <div class="path-copy">
+                <strong>{{ path.title }}</strong>
+                <p>{{ path.summary }}</p>
+              </div>
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section week-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">本周推荐</p>
-          <p class="home-head-note">如果你只想快速知道最近最值得看的内容，从这里开始。</p>
-        </div>
-        <div class="grid practice-grid">
-          <ContentCard
-            v-for="item in weeklyFocus"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="stagger-shell">
+          <div class="home-head">
+            <p class="eyebrow">本周推荐</p>
+            <p class="home-head-note">如果你只想快速知道最近最值得看的内容，从这里开始。</p>
+          </div>
+          <div class="grid spotlight-grid">
+            <ContentCard
+              v-for="item in weeklyFocus"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section topics-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">主题中心</p>
-          <p class="home-head-note">按安装、Gateway、渠道、Skills、模型和安全跨模块聚合内容。</p>
-        </div>
-        <div class="grid action-grid">
-          <ContentCard
-            v-for="item in topicOverview"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="editorial-shell">
+          <div class="home-head head-inline">
+            <p class="eyebrow">主题中心</p>
+            <p class="home-head-note">按安装、Gateway、渠道、Skills、模型和安全跨模块聚合内容。</p>
+          </div>
+          <div class="editorial-columns">
+            <NuxtLink v-if="featuredTopic" :to="featuredTopic.to" class="card editorial-feature">
+              <span class="eyebrow">主栏目</span>
+              <h3>{{ featuredTopic.title }}</h3>
+              <p>{{ featuredTopic.description }}</p>
+              <span class="more-link">进入主题</span>
+            </NuxtLink>
+
+            <div class="editorial-side-grid">
+              <NuxtLink
+                v-for="item in supportingTopics"
+                :key="item.to"
+                :to="item.to"
+                class="card editorial-mini"
+              >
+                <span class="tag">{{ item.meta }}</span>
+                <strong>{{ item.title }}</strong>
+                <p>{{ item.description }}</p>
+              </NuxtLink>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section docs-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">文档入口</p>
-          <p class="home-head-note">从定位、安装到架构与排错，按顺序建立完整理解。</p>
-        </div>
-        <div class="grid docs-grid">
-          <ContentCard
-            v-for="item in docsOverview"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="stack-shell">
+          <div class="home-head head-inline">
+            <p class="eyebrow">文档入口</p>
+            <p class="section-title compact-title">先建立完整地图，再钻进细节。</p>
+            <p class="home-head-note">从定位、安装到架构与排错，按顺序建立理解，不要一开始就跳进零散配置。</p>
+          </div>
+          <div class="grid docs-grid">
+            <ContentCard
+              v-for="item in docsOverview"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section practice-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">最佳实践</p>
-          <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法。</p>
-        </div>
-        <div class="grid practice-grid">
-          <ContentCard
-            v-for="item in bestPracticeOverview"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="feature-band subtle-band">
+          <div class="home-head">
+            <p class="eyebrow">最佳实践</p>
+            <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法。</p>
+          </div>
+          <div class="grid practice-grid">
+            <ContentCard
+              v-for="item in bestPracticeOverview"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section videos-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">视频教程</p>
-          <p class="home-head-note">把官方 Showcase、YouTube 演示和 Bilibili 中文教程聚合在一个入口里，更适合先看演示再动手的人。</p>
-        </div>
-        <div class="grid extension-grid">
-          <ContentCard
-            v-for="item in featuredVideos"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="stack-shell">
+          <div class="home-head head-inline">
+            <p class="eyebrow">视频教程</p>
+            <p class="section-title compact-title">更适合先看演示，再回头确认细节。</p>
+            <p class="home-head-note">把官方 Showcase、YouTube 演示和 Bilibili 中文教程聚合在一个入口里，优先帮助你建立使用直觉。</p>
+          </div>
+          <div class="grid extension-grid">
+            <ContentCard
+              v-for="item in featuredVideos"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section news-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">最近更新</p>
-          <p class="home-head-note">聚焦版本变化、能力更新和需要及时关注的使用提醒。</p>
-        </div>
-        <div class="grid news-grid">
-          <ContentCard
-            v-for="item in latestNews"
-            :key="item.path"
-            :title="item.title"
-            :description="item.description"
-            :to="item.path"
-            :meta="item.date"
-          />
+        <div class="ticker-shell">
+          <div class="home-head head-inline">
+            <p class="eyebrow">最近更新</p>
+            <p class="home-head-note">聚焦版本变化、能力更新和需要及时关注的使用提醒。</p>
+          </div>
+          <div class="news-timeline">
+            <NuxtLink
+              v-for="item in latestNews"
+              :key="item.path"
+              :to="item.path"
+              class="timeline-item"
+            >
+              <div class="timeline-stem">
+                <span class="timeline-dot" />
+                <span class="timeline-line" />
+              </div>
+              <div class="card timeline-card">
+                <span class="tag">{{ item.date }}</span>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
+              </div>
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section extension-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">技能与配置</p>
-          <p class="home-head-note">把常用 skills、SOUL 和关键配置项单独整理，减少在社区帖和零散文档里来回翻找。</p>
-        </div>
-        <div class="grid extension-grid">
-          <ContentCard
-            v-for="item in extensionOverview"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="stack-shell">
+          <div class="home-head head-inline">
+            <p class="eyebrow">技能与配置</p>
+            <p class="home-head-note">把常用 skills、SOUL 和关键配置项单独整理，减少在社区帖和零散文档里来回翻找。</p>
+          </div>
+          <div class="grid extension-grid">
+            <ContentCard
+              v-for="item in extensionOverview"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section content-section action-section">
       <div class="container">
-        <div class="home-head">
-          <p class="eyebrow">互动入口</p>
-          <p class="home-head-note">通过搜索、FAQ、反馈和社区入口更快找到下一步动作。</p>
-        </div>
-        <div class="grid action-grid">
-          <ContentCard
-            v-for="item in actionOverview"
-            :key="item.to"
-            :title="item.title"
-            :description="item.description"
-            :to="item.to"
-            :meta="item.meta"
-          />
+        <div class="feature-band">
+          <div class="home-head head-inline">
+            <p class="eyebrow">互动入口</p>
+            <p class="home-head-note">通过搜索、FAQ、反馈和社区入口更快找到下一步动作。</p>
+          </div>
+          <div class="grid action-grid">
+            <ContentCard
+              v-for="item in actionOverview"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -269,8 +324,186 @@ const topicOverview = computed(() =>
 
 <style scoped>
 .content-section {
-  padding-top: 14px;
-  padding-bottom: 8px;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+.stack-shell,
+.feature-band,
+.ticker-shell,
+.stagger-shell,
+.editorial-shell {
+  display: grid;
+  gap: 10px;
+}
+
+.stack-shell {
+  gap: 6px;
+}
+
+.path-rail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.path-step {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.42);
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.path-step:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.22);
+}
+
+.path-index {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: #fff8ef;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.path-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.path-copy strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.3;
+}
+
+.path-copy p,
+.editorial-feature p,
+.editorial-mini p,
+.timeline-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.48;
+}
+
+.feature-band {
+  padding: 10px 12px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.editorial-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
+  gap: 10px;
+}
+
+.editorial-feature,
+.editorial-mini,
+.timeline-card {
+  display: grid;
+  gap: 8px;
+}
+
+.editorial-feature {
+  padding: 14px;
+  align-content: start;
+}
+
+.editorial-feature h3,
+.timeline-card h3 {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.1rem;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.more-link {
+  color: var(--brand);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.editorial-side-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.editorial-mini strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.28;
+}
+
+.news-timeline {
+  display: grid;
+  gap: 8px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
+
+.timeline-stem {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 16px 1fr;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--brand);
+  box-shadow: 0 0 0 4px rgba(19, 129, 125, 0.12);
+}
+
+.timeline-line {
+  width: 1px;
+  background: rgba(67, 73, 60, 0.18);
+  min-height: 100%;
+}
+
+.timeline-item:last-child .timeline-line {
+  opacity: 0;
+}
+
+.timeline-card {
+  padding: 12px 14px;
+}
+
+.subtle-band {
+  background: linear-gradient(180deg, rgba(255, 250, 241, 0.58), rgba(255, 255, 255, 0.18));
+}
+
+.head-inline {
+  margin-bottom: 2px;
+}
+
+.compact-title {
+  margin: 0;
+  font-size: 1.16rem;
+  line-height: 1.06;
 }
 
 .home-head {
@@ -278,50 +511,46 @@ const topicOverview = computed(() =>
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .home-head-note {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.88rem;
-  line-height: 1.5;
+  font-size: 0.82rem;
+  line-height: 1.42;
 }
 
 .docs-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.docs-grid > :first-child {
-  grid-column: span 2;
+.spotlight-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .route-grid,
 .action-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.news-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: 10px;
 }
 
 .practice-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .extension-grid {
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .subscribe-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 .subscribe-copy {
@@ -332,16 +561,18 @@ const topicOverview = computed(() =>
 
 @media (max-width: 980px) {
   .docs-grid,
+  .spotlight-grid,
   .route-grid,
-  .news-grid,
   .practice-grid,
   .extension-grid,
   .action-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .docs-grid > :first-child {
-    grid-column: span 2;
+  .path-rail,
+  .editorial-columns,
+  .editorial-side-grid {
+    grid-template-columns: 1fr;
   }
 
   .subscribe-grid {
@@ -351,16 +582,31 @@ const topicOverview = computed(() =>
 
 @media (max-width: 760px) {
   .docs-grid,
+  .spotlight-grid,
   .route-grid,
-  .news-grid,
+  .practice-grid,
+  .extension-grid,
+  .action-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-band {
+    padding: 8px;
+  }
+
+  .path-rail {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .docs-grid,
+  .spotlight-grid,
+  .route-grid,
   .practice-grid,
   .extension-grid,
   .action-grid {
     grid-template-columns: 1fr;
-  }
-
-  .docs-grid > :first-child {
-    grid-column: span 1;
   }
 }
 </style>

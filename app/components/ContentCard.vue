@@ -40,28 +40,28 @@ defineProps<{
 
 .card-content {
   display: grid;
-  gap: 10px;
-  padding: 16px;
+  gap: 8px;
+  padding: 12px;
   flex: 1;
 }
 
 h3 {
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: -0.03em;
-  line-height: 1.4;
+  line-height: 1.32;
 }
 
 p {
   margin: 0;
   color: var(--ink-soft);
-  line-height: 1.65;
+  line-height: 1.52;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
 }
 
 .card-tags {
@@ -84,6 +84,6 @@ p {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
 }
 </style>

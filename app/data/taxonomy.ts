@@ -76,6 +76,20 @@ export const learningPaths = [
     next: '/docs/getting-started/getting-started',
   },
   {
+    slug: 'channels-integration',
+    title: '渠道接入路径',
+    audience: '已经跑通基础链路，准备连接 Telegram、WhatsApp、飞书等渠道的用户。',
+    summary: '先确认渠道能力和登录方式，再结合视频与最佳实践完成第一次稳定接入。',
+    steps: [
+      { title: '渠道概览', to: '/docs/manual/channels-overview' },
+      { title: '安全边界', to: '/docs/operations/safety-basics' },
+      { title: '接入视频', to: '/videos#channels' },
+      { title: '渠道案例', to: '/topics?topic=channels' },
+      { title: '高级实践', to: '/best-practices/integration-development' },
+    ],
+    next: '/docs/manual/channels-overview',
+  },
+  {
     slug: 'windows',
     title: 'Windows / WSL 路径',
     audience: '主要在 Windows 环境使用，想避免环境差异带来的卡点。',
