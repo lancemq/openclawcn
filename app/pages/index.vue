@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { actionOverview, bestPracticeOverview, docsOverview, extensionOverview, newsOverview } from '~/data/site'
+import { featuredVideos } from '~/data/videos'
 
 useSeo({
   title: 'OpenClaw 中文官网',
@@ -82,6 +83,25 @@ useSeo({
         <div class="grid extension-grid">
           <ContentCard
             v-for="item in extensionOverview"
+            :key="item.to"
+            :title="item.title"
+            :description="item.description"
+            :to="item.to"
+            :meta="item.meta"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section videos-section">
+      <div class="container">
+        <div class="home-head">
+          <p class="eyebrow">视频教程</p>
+          <p class="home-head-note">把官方 Showcase、YouTube 演示和 Bilibili 中文教程聚合在一个入口里，更适合先看演示再动手的人。</p>
+        </div>
+        <div class="grid extension-grid">
+          <ContentCard
+            v-for="item in featuredVideos"
             :key="item.to"
             :title="item.title"
             :description="item.description"

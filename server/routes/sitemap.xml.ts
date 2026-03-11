@@ -31,6 +31,7 @@ export default defineEventHandler(async (event) => {
   const urls: SitemapUrl[] = [
     { loc: toAbsoluteUrl(siteUrl, '/') },
     { loc: toAbsoluteUrl(siteUrl, '/docs') },
+    { loc: toAbsoluteUrl(siteUrl, '/videos') },
     { loc: toAbsoluteUrl(siteUrl, '/news') },
     { loc: toAbsoluteUrl(siteUrl, '/best-practices') },
     { loc: toAbsoluteUrl(siteUrl, '/community') },

@@ -16,6 +16,7 @@ const year = new Date().getFullYear()
         <h3>内容</h3>
         <ul>
           <li><NuxtLink to="/docs">文档</NuxtLink></li>
+          <li><NuxtLink to="/videos">视频教程</NuxtLink></li>
           <li><NuxtLink to="/best-practices">最佳实践</NuxtLink></li>
           <li><NuxtLink to="/news">新闻</NuxtLink></li>
           <li><NuxtLink to="/community">社区支持</NuxtLink></li>

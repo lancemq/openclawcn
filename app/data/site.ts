@@ -66,6 +66,12 @@ export const bestPracticeOverview = [
 
 export const actionOverview = [
   {
+    title: '视频教程',
+    description: '汇总官方 Showcase、YouTube 与 Bilibili 教程，覆盖安装、Skills 与渠道接入。',
+    to: '/videos',
+    meta: '视频',
+  },
+  {
     title: '站内搜索',
     description: '按关键词快速查找文档、新闻、最佳实践和常见问题。',
     to: '/search',
@@ -88,12 +94,6 @@ export const actionOverview = [
     description: '快速查看“先看哪里、怎么反馈、去哪里提问”等高频问题。',
     to: '/faq',
     meta: 'FAQ',
-  },
-  {
-    title: 'RSS 订阅',
-    description: '订阅新闻更新，持续跟踪 OpenClaw 的版本变化和中文解读。',
-    to: '/rss.xml',
-    meta: '订阅',
   },
 ]
 

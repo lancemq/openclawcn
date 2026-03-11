@@ -4,6 +4,7 @@ const route = useRoute()
 const navItems = [
   { label: '首页', to: '/' },
   { label: '文档', to: '/docs' },
+  { label: '视频', to: '/videos' },
   { label: '技能', to: '/skills' },
   { label: '配置', to: '/configurations' },
   { label: '实践', to: '/best-practices' },
