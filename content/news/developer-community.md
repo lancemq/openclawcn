@@ -5,6 +5,8 @@ category: 社区动态
 date: "2026-03-09"
 author: "OpenClaw Team"
 source: "discord.gg/openclaw"
+updatedAt: "2026-03-11"
+sourceType: community
 tags: ["community", "discord", "developers", "growth"]
 ---
 

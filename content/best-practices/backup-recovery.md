@@ -3,6 +3,9 @@ title: 备份、恢复与灾难恢复
 description: 建立完善的备份策略，包括配置备份、数据备份和灾难恢复方案。
 category: 运维管理
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [backup, recovery, disaster-recovery, operations]
 ---
 
 # 备份、恢复与灾难恢复

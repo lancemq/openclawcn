@@ -3,6 +3,9 @@ title: AI 提示词工程指南
 description: 优化与 AI 助手的交互效果，包括提示词技巧、角色设定和上下文管理。
 category: 进阶指南
 difficulty: 初级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [prompting, context, workflow, ai]
 ---
 
 # AI 提示词工程指南

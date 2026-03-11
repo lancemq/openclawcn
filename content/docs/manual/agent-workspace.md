@@ -2,6 +2,8 @@
 title: Agent 工作区结构说明
 description: 了解 OpenClaw 工作区里各类核心文件的作用，包括 AGENTS、SOUL、USER、MEMORY、日志、skills 和 sessions。
 category: 功能
+updatedAt: 2026-03-11
+sourceType: third-party
 tags: [workspace, soul, memory, skills]
 ---
 

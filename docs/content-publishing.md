@@ -19,7 +19,11 @@ npm run content:check
 
 校验内容包括：
 - Markdown frontmatter 必填字段是否完整
+- 推荐字段是否缺失
 - 新闻 `date` 是否符合 `YYYY-MM-DD`
+- `updatedAt` 是否符合 `YYYY-MM-DD`
+- `sourceType` 是否属于允许枚举
+- `tags` 是否为数组格式
 - 正文是否为空
 - 内容路径是否重复
 
@@ -41,6 +45,7 @@ public/generated/content-manifest.json
 - 内容生成时间
 - 文档 / 新闻 / 最佳实践数量
 - 每个集合的路径与基础元信息
+- `updatedAt / sourceType / tags / source`
 
 可以通过以下接口查看运行时状态：
 - `/api/health`
@@ -99,3 +104,32 @@ CONTENT_REBUILD_TOKEN=
 4. 提交代码后由 Vercel Preview 验证
 5. 合并主分支后发布到正式环境
 6. 如果后续接外部内容源，则改为由外部系统调用 `/api/rebuild`
+
+## 6. 推荐元数据标准
+
+建议所有公开内容逐步统一到以下字段：
+
+```yaml
+title:
+description:
+category:
+tags: [tag-a, tag-b]
+updatedAt: 2026-03-11
+sourceType: official
+```
+
+其中 `sourceType` 当前允许的值为：
+
+```text
+official
+github
+community
+media
+third-party
+internal
+```
+
+补充说明：
+- `news` 继续要求 `date`
+- `news` 建议补 `source`
+- `docs` 和 `best-practices` 建议逐步补齐 `updatedAt` 与 `sourceType`

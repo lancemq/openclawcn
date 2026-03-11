@@ -2,6 +2,8 @@
 title: OpenClaw 安全配置基础
 description: 从 Gateway auth、allowlist、Control UI 暴露方式和 Tailscale/SSH 接入策略理解 OpenClaw 的基础安全边界。
 category: 运维
+updatedAt: 2026-03-11
+sourceType: official
 tags: [security, auth, tailscale, dashboard]
 ---
 

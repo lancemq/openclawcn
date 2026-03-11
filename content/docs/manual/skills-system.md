@@ -2,6 +2,8 @@
 title: Skills 系统怎么工作
 description: 理解 OpenClaw Skills 的三层来源、加载流程、ClawHub 风险，以及为什么不应该一次安装过多技能。
 category: 功能
+updatedAt: 2026-03-11
+sourceType: third-party
 tags: [skills, clawhub, tools, security]
 ---
 

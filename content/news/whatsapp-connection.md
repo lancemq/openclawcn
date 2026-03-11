@@ -5,6 +5,8 @@ category: 渠道指南
 date: "2026-03-09"
 author: "OpenClaw Team"
 source: "openclaw.ai"
+updatedAt: "2026-03-11"
+sourceType: official
 tags: ["whatsapp", "channel", "baileys", "tutorial"]
 ---
 

@@ -2,6 +2,8 @@
 title: API 与参考资料阅读入口
 description: 说明 OpenClaw 的参考资料应如何阅读，以及中文用户在查 CLI、配置、诊断和模块说明时该怎么找信息。
 category: 参考
+updatedAt: 2026-03-11
+sourceType: official
 tags: [reference, cli, config, diagnostics]
 ---
 

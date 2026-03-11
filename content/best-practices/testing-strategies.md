@@ -3,6 +3,9 @@ title: 测试策略与质量保障
 description: 建立 OpenClaw 的测试策略，包括单元测试、集成测试和端到端测试。
 category: 开发流程
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [testing, quality, integration, workflow]
 ---
 
 # 测试策略与质量保障

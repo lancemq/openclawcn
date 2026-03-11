@@ -3,6 +3,9 @@ title: 自定义技能开发实战
 description: 从零开发一个完整的 OpenClaw 技能，包括结构设计、API 集成和发布流程。
 category: 技能开发
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [skills, development, api, publishing]
 ---
 
 # 自定义技能开发实战

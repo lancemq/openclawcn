@@ -5,6 +5,8 @@ category: 项目动态
 date: "2026-03-09"
 author: "OpenClaw Team"
 source: "github.com/openclaw"
+updatedAt: "2026-03-11"
+sourceType: github
 tags: ["github", "stars", "community", "growth"]
 ---
 

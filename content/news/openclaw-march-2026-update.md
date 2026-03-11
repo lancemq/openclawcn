@@ -5,6 +5,8 @@ category: 产品更新
 date: "2026-03-09"
 author: "OpenClaw Team"
 source: "github.com/openclaw/openclaw"
+updatedAt: "2026-03-11"
+sourceType: github
 tags: ["release", "update", "changelog", "skills", "security"]
 ---
 

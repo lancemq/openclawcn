@@ -3,6 +3,9 @@ title: 数据分析与可视化
 description: 使用 OpenClaw 进行数据分析，包括数据收集、处理和可视化展示。
 category: 数据处理
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [data, analysis, visualization, workflows]
 ---
 
 # 数据分析与可视化

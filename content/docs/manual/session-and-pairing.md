@@ -2,6 +2,8 @@
 title: Session 与配对机制
 description: 理解 OpenClaw 如何通过配对、allowFrom、群组提及规则和 session 隔离来识别用户并保护上下文边界。
 category: 功能
+updatedAt: 2026-03-11
+sourceType: third-party
 tags: [session, pairing, channels, auth]
 ---
 

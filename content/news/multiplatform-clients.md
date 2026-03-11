@@ -3,6 +3,10 @@ title: OpenClaw 多平台客户端详解
 description: 了解 OpenClaw 在 macOS、iOS、Android 等多平台上的客户端能力，以及如何实现跨设备无缝使用。
 category: 功能介绍
 date: 2026-03-09
+source: openclaw.ai
+updatedAt: 2026-03-11
+sourceType: official
+tags: [clients, macos, ios, android, platforms]
 ---
 
 # OpenClaw 多平台客户端详解

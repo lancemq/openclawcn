@@ -2,6 +2,8 @@
 title: OpenClaw 的 Tools 与扩展能力概览
 description: 从中文用户角度理解 OpenClaw 的工具层、技能层和自动化扩展边界，知道它为什么不只是聊天助手。
 category: 功能
+updatedAt: 2026-03-11
+sourceType: official
 tags: [tools, skills, hooks, automation]
 ---
 

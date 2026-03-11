@@ -2,6 +2,8 @@
 title: Gateway 运维与日常检查
 description: 围绕状态检查、访问方式、日志与升级窗口，建立 OpenClaw Gateway 的日常运维习惯。
 category: 运维
+updatedAt: 2026-03-11
+sourceType: official
 tags: [gateway, operations, status, logs]
 ---
 

@@ -3,6 +3,9 @@ title: 性能优化与监控
 description: 优化 OpenClaw 性能，包括缓存策略、资源管理和监控配置。
 category: 运维优化
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [performance, tuning, caching, monitoring]
 ---
 
 # 性能优化与监控

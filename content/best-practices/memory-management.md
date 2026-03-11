@@ -3,6 +3,9 @@ title: 记忆系统配置与使用
 description: 深入了解 OpenClaw 的记忆系统，包括短期记忆、长期记忆和上下文管理。
 category: 进阶指南
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [memory, context, sessions, soul]
 ---
 
 # 记忆系统配置与使用

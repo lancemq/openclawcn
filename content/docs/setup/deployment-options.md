@@ -2,6 +2,8 @@
 title: 部署方式怎么选
 description: 从本地安装、Docker、国内云模板和海外一键部署四类路径理解 OpenClaw 的部署选择，而不是只追求“最快装上”。
 category: 安装
+updatedAt: 2026-03-11
+sourceType: official
 tags: [deployment, local, docker, cloud, wsl2]
 ---
 

@@ -3,6 +3,9 @@ title: 语音功能最佳实践
 description: 如何在日常场景中高效使用 OpenClaw 的语音功能，提升工作和生活效率。
 category: 使用技巧
 difficulty: 初级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [voice, usage, productivity, assistant]
 ---
 
 # 语音功能最佳实践

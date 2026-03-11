@@ -5,6 +5,8 @@ category: 媒体报道
 date: "2026-03-09"
 author: "OpenClaw Team"
 source: "openclaw.ai"
+updatedAt: "2026-03-11"
+sourceType: media
 tags: ["media", "macstories", "coverage", "press"]
 ---
 

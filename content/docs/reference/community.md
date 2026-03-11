@@ -2,6 +2,8 @@
 title: 社区支持
 description: 汇总 OpenClaw 的官方社区入口、反馈方式、提问建议和中文用户更适合的参与路径。
 category: 社区
+updatedAt: 2026-03-11
+sourceType: community
 tags: [community, github, issues, feedback]
 ---
 

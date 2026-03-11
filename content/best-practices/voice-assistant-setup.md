@@ -3,6 +3,9 @@ title: 语音助手配置与使用指南
 description: 全面了解 OpenClaw 语音功能的配置和使用，包括语音唤醒、连续对话和语音合成。
 category: 语音交互
 difficulty: 初级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [voice, wakeword, speech, setup]
 ---
 
 # 语音助手配置与使用指南

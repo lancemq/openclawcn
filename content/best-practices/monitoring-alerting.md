@@ -3,6 +3,9 @@ title: 监控与告警系统
 description: 建立完整的监控和告警系统，包括指标收集、告警规则和通知渠道。
 category: 运维管理
 difficulty: 中高级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [monitoring, alerting, metrics, operations]
 ---
 
 # 监控与告警系统

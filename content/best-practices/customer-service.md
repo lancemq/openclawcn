@@ -3,6 +3,9 @@ title: 客户服务场景应用
 description: 使用 OpenClaw 构建智能客服系统，包括自动回复、工单管理和满意度调查。
 category: 应用场景
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [customer-service, workflows, automation, support]
 ---
 
 # 客户服务场景应用

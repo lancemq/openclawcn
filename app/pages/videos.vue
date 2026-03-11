@@ -4,14 +4,14 @@ import { topicDefinitions } from '~/data/taxonomy'
 
 useSeo({
   title: '视频教程',
-  description: '整理 OpenClaw 官方 Showcase、Bilibili 高播放教程和 YouTube 演示，覆盖安装部署、Ollama本地模型、Skills扩展、渠道接入（飞书/钉钉/微信/QQ）和进阶实战案例。',
+  description: '整理 OpenClaw 官网 Showcase、官方引用 YouTube 视频和中文高质量教程，覆盖总览、安装部署、Ollama 本地模型、Skills 扩展、渠道接入和进阶实战案例。',
   path: '/videos',
   type: 'website',
 })
 
 const quickFacts = [
-  { label: '内容来源', value: '官方 + Bilibili + YouTube', note: '收录30+高质量视频，涵盖安装到进阶实战' },
-  { label: '覆盖方向', value: '安装 / 模型 / Skills / 渠道', note: '从零部署到多Agent协作全链路覆盖' },
+  { label: '优先来源', value: '官网 + YouTube + Bilibili', note: '先官网与官方引用视频，再补中文部署教程' },
+  { label: '覆盖方向', value: '总览 / 安装 / 模型 / Skills / 渠道', note: '从总览判断到部署、扩展和接入全链路覆盖' },
   { label: '更适合谁', value: '先看视频再上手的用户', note: '尤其适合第一次接触 OpenClaw 的中文用户' },
 ]
 
@@ -104,8 +104,8 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
           <p class="eyebrow">Video Tutorials</p>
           <h1 class="section-title">视频教程</h1>
           <p class="section-copy">
-            这一页把 OpenClaw 相关的视频资料按“官方总览、安装部署、Skills 扩展、渠道接入”拆成几组，避免你在 Bilibili、
-            YouTube 和官方文档之间来回搜索。第一次接触 OpenClaw，建议先看官方 Showcase，再选一条与你设备环境最接近的部署视频。
+            这一页把 OpenClaw 相关的视频资料按“官方入口、YouTube 英文主线、中文部署教程、Skills 扩展、渠道接入”拆成几组，
+            避免你在官网、YouTube 和 Bilibili 之间来回搜索。第一次接触 OpenClaw，建议先看官网 Showcase 和官方引用视频，再选一条与你设备环境最接近的部署教程。
           </p>
 
           <div class="collection-utility">
@@ -120,8 +120,8 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
         <aside class="card collection-side">
           <div class="collection-summary">
             <span class="mini-label">推荐观看顺序</span>
-            <strong>先官方总览，再按设备路径选择部署教程</strong>
-            <p>如果你是第一次上手，优先看 Showcase 和完整安装视频；如果已经部署完成，再进入 Skills、渠道与模型接入。</p>
+            <strong>先官网入口，再看 YouTube 主线，最后补中文实操</strong>
+            <p>如果你是第一次上手，优先看 Showcase 和完整 setup 视频；如果已经部署完成，再进入 Skills、渠道与模型接入。</p>
           </div>
 
           <div class="collection-summary">

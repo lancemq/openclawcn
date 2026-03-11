@@ -2,6 +2,8 @@
 title: OpenClaw 记忆系统怎么工作
 description: 理解 OpenClaw 的 SOUL、Tools、用户长期记忆和会话上下文如何协作，以及为什么它更像持续运行的系统而不是一次性聊天窗口。
 category: 功能
+updatedAt: 2026-03-11
+sourceType: third-party
 tags: [memory, soul, session, logs]
 ---
 

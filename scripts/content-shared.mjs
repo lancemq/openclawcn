@@ -8,16 +8,21 @@ export const collectionRules = {
   docs: {
     dir: path.join(contentDir, 'docs'),
     requiredFields: ['title', 'description', 'category'],
+    recommendedFields: ['tags', 'sourceType', 'updatedAt'],
   },
   news: {
     dir: path.join(contentDir, 'news'),
     requiredFields: ['title', 'description', 'category', 'date'],
+    recommendedFields: ['tags', 'source', 'sourceType', 'updatedAt'],
   },
   bestPractices: {
     dir: path.join(contentDir, 'best-practices'),
     requiredFields: ['title', 'description', 'category', 'difficulty'],
+    recommendedFields: ['tags', 'sourceType', 'updatedAt'],
   },
 }
+
+export const allowedSourceTypes = ['official', 'github', 'community', 'media', 'third-party', 'internal']
 
 export function resolvePath(...parts) {
   return path.join(rootDir, ...parts)
@@ -41,6 +46,26 @@ async function walkMarkdownFiles(dir) {
 
 function parseScalar(rawValue) {
   const value = rawValue.trim()
+  if (value.startsWith('[') && value.endsWith(']')) {
+    const inner = value.slice(1, -1).trim()
+    if (!inner) {
+      return []
+    }
+
+    return inner
+      .split(',')
+      .map(item => parseScalar(item))
+      .filter(Boolean)
+  }
+
+  if (value === 'true') {
+    return true
+  }
+
+  if (value === 'false') {
+    return false
+  }
+
   if (
     (value.startsWith('"') && value.endsWith('"')) ||
     (value.startsWith("'") && value.endsWith("'"))

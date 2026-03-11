@@ -3,6 +3,9 @@ title: 版本升级与内容运营节奏
 description: 如何持续跟踪 OpenClaw 的版本变化，并建立稳定的内容运营节奏。
 category: 更新跟踪
 difficulty: 初级
+updatedAt: 2026-03-11
+sourceType: official
+tags: [release, updates, workflow, maintenance]
 ---
 
 # 版本升级与内容运营节奏

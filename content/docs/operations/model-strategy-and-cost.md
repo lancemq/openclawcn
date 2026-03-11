@@ -2,6 +2,8 @@
 title: 模型选型与成本控制
 description: 从主力模型、fallback、本地模型和低价值任务分流四个角度理解 OpenClaw 的模型配置策略与成本控制方法。
 category: 运维
+updatedAt: 2026-03-11
+sourceType: third-party
 tags: [models, cost, providers, fallback]
 ---
 

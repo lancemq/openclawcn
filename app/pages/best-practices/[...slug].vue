@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { getPrevNext, normalizeTags, sharedTagCount, sortBestPractices } from '~/data/content'
+import { detailPageGuides } from '~/data/information-architecture'
+import { learningPaths, matchesTopic, topicDefinitions } from '~/data/taxonomy'
 
 const route = useRoute()
 const slug = computed(() => {
@@ -56,6 +58,52 @@ const relatedCards = computed(() =>
     })),
 )
 
+const pageGuide = detailPageGuides.bestPractices
+
+const pageTopic = computed(() =>
+  topicDefinitions.find(topic =>
+    page.value
+      ? matchesTopic(
+          {
+            title: String(page.value.title || ''),
+            description: String(page.value.description || ''),
+            category: String(page.value.category || ''),
+            path: pagePath.value,
+            tags: pageTags.value,
+          },
+          topic,
+        )
+      : false,
+  ) || null,
+)
+
+const matchedPaths = computed(() =>
+  learningPaths.filter(path =>
+    path.steps.some(step => step.to === pagePath.value) || path.next === pagePath.value,
+  ),
+)
+
+const stageRecommendations = computed(() => [
+  pageTopic.value && {
+    label: '同主题',
+    title: pageTopic.value.title,
+    description: pageTopic.value.description,
+    to: `/topics?topic=${pageTopic.value.slug}`,
+  },
+  matchedPaths.value[0] && {
+    label: '同路径',
+    title: matchedPaths.value[0].title,
+    description: matchedPaths.value[0].summary,
+    to: `/paths#${matchedPaths.value[0].slug}`,
+  },
+  {
+    label: '同阶段',
+    title: '最佳实践列表',
+    description: '继续按场景和难度扩展方法，而不是跳回零散新闻。',
+    to: '/best-practices',
+  },
+].filter(Boolean) as Array<{ label: string; title: string; description: string; to: string }>)
+
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -101,6 +149,30 @@ useSeo({
         :related="relatedCards"
       />
 
+      <aside class="card guide-card">
+        <p class="eyebrow">站点层级</p>
+        <h2>{{ pageGuide.title }}</h2>
+        <p class="guide-copy">{{ pageGuide.summary }}</p>
+        <div class="guide-links">
+          <NuxtLink v-for="item in pageGuide.links" :key="item.to" :to="item.to" class="guide-link">
+            <strong>{{ item.title }}</strong>
+            <span>{{ item.description }}</span>
+          </NuxtLink>
+        </div>
+      </aside>
+
+      <section class="card stage-card">
+        <p class="eyebrow">关联入口</p>
+        <h2>同主题、同路径、同阶段</h2>
+        <div class="stage-grid">
+          <NuxtLink v-for="item in stageRecommendations" :key="item.to" :to="item.to" class="stage-link">
+            <span class="tag">{{ item.label }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
+      </section>
+
       <div class="cta-row">
         <NuxtLink class="button secondary" to="/community">进入社区支持</NuxtLink>
         <NuxtLink class="button ghost" to="/feedback">提交反馈</NuxtLink>
@@ -129,5 +201,82 @@ useSeo({
   gap: 12px;
   flex-wrap: wrap;
   margin: 18px 0;
+}
+
+.guide-card,
+.guide-links {
+  display: grid;
+  gap: 10px;
+}
+
+.guide-card h2 {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.guide-copy,
+.guide-link span {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.guide-link {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.guide-link strong {
+  font-size: 0.92rem;
+}
+
+.stage-card,
+.stage-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.stage-card h2 {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.stage-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stage-link {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.stage-link strong {
+  font-size: 0.94rem;
+}
+
+.stage-link p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .stage-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

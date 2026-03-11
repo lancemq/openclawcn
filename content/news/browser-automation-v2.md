@@ -5,6 +5,8 @@ category: 产品更新
 date: "2026-03-09"
 author: "OpenClaw Team"
 source: "openclaw.ai"
+updatedAt: "2026-03-11"
+sourceType: official
 tags: ["browser", "automation", "release", "update"]
 ---
 

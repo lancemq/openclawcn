@@ -3,6 +3,9 @@ title: 飞书 Bot 开发实战
 description: 学习飞书开放平台的集成开发，包括消息卡片、审批流和定时任务。
 category: 渠道实践
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [feishu, lark, bot, channels]
 ---
 
 # 飞书 Bot 开发实战

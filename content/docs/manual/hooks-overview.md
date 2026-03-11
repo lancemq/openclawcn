@@ -2,6 +2,8 @@
 title: Hooks 能做什么
 description: 从中文用户角度理解 OpenClaw 里的 hooks，不把它只看成技术细节，而看成自动化扩展点。
 category: 功能
+updatedAt: 2026-03-11
+sourceType: official
 tags: [hooks, automation, workflows, events]
 ---
 

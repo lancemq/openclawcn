@@ -3,6 +3,9 @@ title: Canvas 交互式界面开发
 description: 学习使用 A2UI 语法创建交互式 Canvas 界面，包括表单、图表和数据展示。
 category: 可视化开发
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [canvas, a2ui, ui, visualization]
 ---
 
 # Canvas 交互式界面开发

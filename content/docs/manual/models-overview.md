@@ -2,6 +2,8 @@
 title: OpenClaw 的 Models 应该怎么理解
 description: 理解 OpenClaw 里模型层的角色、选择思路和常见配置边界，避免把所有问题都误判成模型问题。
 category: 功能
+updatedAt: 2026-03-11
+sourceType: official
 tags: [models, llm, providers, routing]
 ---
 

@@ -3,6 +3,9 @@ title: Docker 部署与容器化运行
 description: 使用 Docker 部署 OpenClaw，包括镜像构建、docker-compose 配置和 Kubernetes 部署。
 category: 部署运维
 difficulty: 中级
+updatedAt: 2026-03-11
+sourceType: third-party
+tags: [docker, deployment, containers, operations]
 ---
 
 # Docker 部署与容器化运行

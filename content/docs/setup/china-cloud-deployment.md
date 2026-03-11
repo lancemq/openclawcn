@@ -2,6 +2,8 @@
 title: 国内云部署思路
 description: 面向中文用户整理 OpenClaw 在国内云环境里的部署判断标准，包括模型成本、IM 生态、长期在线与合规侧重点。
 category: 安装
+updatedAt: 2026-03-11
+sourceType: third-party
 tags: [china, cloud, deployment, feishu, qq]
 ---
 
