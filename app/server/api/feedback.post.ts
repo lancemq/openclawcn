@@ -1,4 +1,5 @@
 import { mkdir, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 type FeedbackPayload = {
@@ -65,7 +66,7 @@ function getRateLimitState(key: string) {
 
 async function persistFeedback(payload: Record<string, unknown>) {
   const datePrefix = new Date().toISOString().slice(0, 10)
-  const targetDir = join(process.cwd(), '.data', 'feedback', datePrefix)
+  const targetDir = join(tmpdir(), 'openclawcn', 'feedback', datePrefix)
   await mkdir(targetDir, { recursive: true })
   const filePath = join(targetDir, `${payload.id}.json`)
   await writeFile(filePath, JSON.stringify(payload, null, 2), 'utf8')
@@ -182,8 +183,6 @@ export default defineEventHandler(async (event) => {
     receivedAt: new Date().toISOString(),
   }
 
-  const storedAt = await persistFeedback(payload)
-
   if (config.feedbackWebhookUrl) {
     try {
       await $fetch(config.feedbackWebhookUrl, {
@@ -204,16 +203,31 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  console.info('[feedback.accepted]', {
-    ...payload,
-    storedAt,
-  })
+  try {
+    const storedAt = await persistFeedback(payload)
 
-  return {
-    ok: true,
-    id: payload.id,
-    receivedAt: payload.receivedAt,
-    delivery: config.feedbackWebhookUrl ? 'local-file-fallback' : 'local-file',
-    stored: true,
+    console.info('[feedback.accepted]', {
+      ...payload,
+      storedAt,
+    })
+
+    return {
+      ok: true,
+      id: payload.id,
+      receivedAt: payload.receivedAt,
+      delivery: config.feedbackWebhookUrl ? 'local-file-fallback' : 'local-file',
+      stored: true,
+    }
+  }
+  catch (error) {
+    console.error('[feedback.persist_failed]', error)
+
+    return {
+      ok: true,
+      id: payload.id,
+      receivedAt: payload.receivedAt,
+      delivery: config.feedbackWebhookUrl ? 'accepted-without-fallback' : 'accepted-without-storage',
+      stored: false,
+    }
   }
 })

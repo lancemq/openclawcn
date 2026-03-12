@@ -43,6 +43,14 @@ export const topicDefinitions: TopicDefinition[] = [
     categories: ['功能', '自动化'],
   },
   {
+    slug: 'context-sessions',
+    title: '上下文与会话',
+    description: '围绕 system prompt、context、compaction、session pruning 和长期会话运行。',
+    keywords: ['system prompt', 'context', 'compaction', 'session', 'pruning'],
+    tags: ['system-prompt', 'context', 'compaction', 'pruning', 'sessions'],
+    categories: ['功能'],
+  },
+  {
     slug: 'plugins',
     title: '插件与扩展',
     description: '围绕插件安装、启停、升级、配置入口，以及它和 Skills / Tools 的边界。',
@@ -59,6 +67,14 @@ export const topicDefinitions: TopicDefinition[] = [
     categories: ['功能'],
   },
   {
+    slug: 'providers',
+    title: '模型提供商',
+    description: '围绕 provider 认证、默认模型写法、fallback 和本地/云端模型组合。',
+    keywords: ['provider', 'providers', 'fallback', 'openrouter', 'ollama'],
+    tags: ['providers', 'models', 'fallback', 'openrouter', 'ollama'],
+    categories: ['功能', '运维'],
+  },
+  {
     slug: 'models',
     title: '模型与本地推理',
     description: '围绕 Models、Provider 选择、Ollama 和本地模型接入。',
@@ -73,6 +89,14 @@ export const topicDefinitions: TopicDefinition[] = [
     keywords: ['security', 'auth', '安全', 'tailscale', 'ssh'],
     tags: ['security', 'auth', 'tailscale', 'dashboard', 'best-practices'],
     categories: ['运维'],
+  },
+  {
+    slug: 'debugging',
+    title: '调试与排障',
+    description: '覆盖 doctor、logs、/debug、watch 模式和常见运行时排障顺序。',
+    keywords: ['debug', 'debugging', 'doctor', 'logs', 'runtime overrides'],
+    tags: ['debugging', 'debug', 'doctor', 'logs', 'runtime-overrides'],
+    categories: ['排错', '运维'],
   },
   {
     slug: 'network',
@@ -133,6 +157,7 @@ export const learningPaths = [
     summary: '先理解 Tools 与 Hooks，再通过视频和最佳实践进入更实战的扩展方法。',
     steps: [
       { title: 'Tools 概览', to: '/docs/manual/tools-overview' },
+      { title: 'Exec 与审批', to: '/docs/manual/exec-tools-and-approvals' },
       { title: '插件系统', to: '/docs/manual/plugins-overview' },
       { title: 'Hooks 概览', to: '/docs/manual/hooks-overview' },
       { title: '热门技能', to: '/skills' },
@@ -163,6 +188,7 @@ export const learningPaths = [
       { title: 'Gateway 架构', to: '/docs/manual/architecture' },
       { title: 'Gateway 运维', to: '/docs/operations/gateway-operations' },
       { title: '安全基础', to: '/docs/operations/safety-basics' },
+      { title: '调试与排障', to: '/docs/reference/debugging-and-runtime-overrides' },
       { title: '更新跟踪', to: '/docs/operations/release-tracking' },
       { title: '内容与问题反馈', to: '/feedback' },
     ],
