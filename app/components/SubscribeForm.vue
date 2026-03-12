@@ -1,13 +1,17 @@
 <script setup lang="ts">
+const { public: publicConfig } = useRuntimeConfig()
+const rssUrl = computed(() => new URL('/rss.xml', publicConfig.siteUrl).toString())
 const email = ref('')
 const pending = ref(false)
 const successMessage = ref('')
 const errorMessage = ref('')
+const rssMessage = ref('')
 
 async function submitSubscription() {
   pending.value = true
   successMessage.value = ''
   errorMessage.value = ''
+  rssMessage.value = ''
 
   try {
     const response = await $fetch<{
@@ -32,10 +36,36 @@ async function submitSubscription() {
     pending.value = false
   }
 }
+
+async function copyRssUrl() {
+  rssMessage.value = ''
+
+  try {
+    await navigator.clipboard.writeText(rssUrl.value)
+    rssMessage.value = 'RSS 链接已复制，可以直接粘贴到阅读器里。'
+  } catch {
+    rssMessage.value = '复制失败，请手动复制下方 RSS 链接。'
+  }
+}
 </script>
 
 <template>
   <form class="subscribe-form" @submit.prevent="submitSubscription">
+    <div class="rss-panel">
+      <div class="rss-copy">
+        <span>RSS 订阅</span>
+        <p>适合直接添加到 Feedly、Follow、NetNewsWire 等阅读器，不需要提交邮箱。</p>
+      </div>
+
+      <div class="rss-actions">
+        <a class="button secondary" :href="rssUrl" target="_blank" rel="noreferrer">打开 RSS</a>
+        <button class="button ghost" type="button" @click="copyRssUrl">复制链接</button>
+      </div>
+
+      <code class="rss-url">{{ rssUrl }}</code>
+      <p v-if="rssMessage" class="notice rss-note">{{ rssMessage }}</p>
+    </div>
+
     <label class="subscribe-field">
       <span>邮箱订阅</span>
       <input v-model="email" type="email" placeholder="输入邮箱，接收后续更新" />
@@ -54,6 +84,48 @@ async function submitSubscription() {
 .subscribe-form {
   display: grid;
   gap: 10px;
+}
+
+.rss-panel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(67, 73, 60, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.rss-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.rss-copy span {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.rss-copy p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.rss-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rss-url {
+  display: block;
+  overflow-wrap: anywhere;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(19, 129, 125, 0.08);
+  color: var(--ink);
+  font-size: 0.82rem;
 }
 
 .subscribe-field {
@@ -95,5 +167,11 @@ async function submitSubscription() {
   color: #fecaca;
   background: rgba(239, 68, 68, 0.14);
   border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.rss-note {
+  color: var(--ink);
+  background: rgba(19, 129, 125, 0.08);
+  border: 1px solid rgba(19, 129, 125, 0.14);
 }
 </style>

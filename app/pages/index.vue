@@ -331,7 +331,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container subscribe-grid card">
         <div class="subscribe-copy">
           <p class="eyebrow">订阅更新</p>
-          <p class="home-head-note">通过订阅和 RSS 持续跟踪版本动态、重点功能变化和新的中文资料。</p>
+          <p class="home-head-note">这里分成两种方式：RSS 适合直接加到阅读器，邮箱订阅适合接收后续站点更新提醒。</p>
         </div>
 
         <SubscribeForm />
