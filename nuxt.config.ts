@@ -38,10 +38,20 @@ const contentRoutes = [
   ...collectMarkdownRoutes(join(process.cwd(), 'content', 'best-practices'), '/best-practices'),
 ]
 
+const toolRoutes = [
+  '/tools',
+  '/tools/plugins',
+  '/tools/exec-and-approvals',
+  '/tools/hooks-and-webhooks',
+  '/tools/automation',
+  '/tools/troubleshooting',
+  '/tools/stacks',
+]
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-02-20',
   srcDir: 'app/',
-  modules: ['@nuxt/content', '@nuxt/image', '@vercel/analytics/nuxt'],
+  modules: ['@nuxt/content', '@nuxt/image'],
   content: {
     experimental: {
       sqliteConnector: 'native',
@@ -154,7 +164,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'vercel',
     prerender: {
-      routes: contentRoutes,
+      routes: [...contentRoutes, ...toolRoutes],
     },
   },
 })
