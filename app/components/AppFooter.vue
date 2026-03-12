@@ -13,34 +13,35 @@ const year = new Date().getFullYear()
       </div>
 
       <div>
-        <h3>内容</h3>
+        <h3>学习</h3>
         <ul>
-          <li><NuxtLink to="/docs">文档</NuxtLink></li>
           <li><NuxtLink to="/paths">学习路径</NuxtLink></li>
           <li><NuxtLink to="/topics">主题中心</NuxtLink></li>
+          <li><NuxtLink to="/docs">文档中心</NuxtLink></li>
           <li><NuxtLink to="/videos">视频教程</NuxtLink></li>
           <li><NuxtLink to="/best-practices">最佳实践</NuxtLink></li>
-          <li><NuxtLink to="/news">新闻</NuxtLink></li>
-          <li><NuxtLink to="/community">社区支持</NuxtLink></li>
-          <li><NuxtLink to="/tools">工具系列</NuxtLink></li>
-          <li><NuxtLink to="/skills">热门技能</NuxtLink></li>
-          <li><NuxtLink to="/configurations">关键配置</NuxtLink></li>
-          <li><NuxtLink to="/derivatives">衍生品</NuxtLink></li>
-          <li><NuxtLink to="/search">站内搜索</NuxtLink></li>
-          <li><a href="/rss.xml" target="_blank" rel="noreferrer">RSS 订阅</a></li>
         </ul>
       </div>
 
       <div>
-        <h3>关注</h3>
+        <h3>扩展与资讯</h3>
         <ul>
-          <li><NuxtLink to="/docs/getting-started/what-is-openclaw">产品介绍</NuxtLink></li>
-          <li><NuxtLink to="/paths">学习路径</NuxtLink></li>
           <li><NuxtLink to="/tools">工具系列</NuxtLink></li>
-          <li><NuxtLink to="/docs/getting-started/onboarding-guide">入门路径</NuxtLink></li>
+          <li><NuxtLink to="/skills">Skills</NuxtLink></li>
+          <li><NuxtLink to="/configurations">关键配置</NuxtLink></li>
+          <li><NuxtLink to="/news">新闻动态</NuxtLink></li>
           <li><NuxtLink to="/derivatives">衍生生态</NuxtLink></li>
-          <li><NuxtLink to="/docs/operations/release-tracking">更新跟踪</NuxtLink></li>
-          <li><NuxtLink to="/feedback">内容反馈</NuxtLink></li>
+          <li><NuxtLink to="/community">社区支持</NuxtLink></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>辅助</h3>
+        <ul>
+          <li><NuxtLink to="/search">站内搜索</NuxtLink></li>
+          <li><NuxtLink to="/faq">常见问题</NuxtLink></li>
+          <li><NuxtLink to="/feedback">提交反馈</NuxtLink></li>
+          <li><a href="/rss.xml" target="_blank" rel="noreferrer">RSS 订阅</a></li>
         </ul>
       </div>
     </div>

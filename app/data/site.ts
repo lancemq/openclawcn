@@ -66,16 +66,16 @@ export const bestPracticeOverview = [
 
 export const actionOverview = [
   {
-    title: '视频教程',
-    description: '汇总官方 Showcase、YouTube 与 Bilibili 教程，覆盖安装、Skills 与渠道接入。',
-    to: '/videos',
-    meta: '视频',
-  },
-  {
     title: '站内搜索',
     description: '按关键词快速查找文档、新闻、最佳实践和常见问题。',
     to: '/search',
     meta: '搜索',
+  },
+  {
+    title: '常见问题',
+    description: '快速查看“先看哪里、怎么反馈、去哪里提问”等高频问题。',
+    to: '/faq',
+    meta: 'FAQ',
   },
   {
     title: '提交反馈',
@@ -84,16 +84,10 @@ export const actionOverview = [
     meta: '反馈',
   },
   {
-    title: '进入社区',
-    description: '查看 GitHub、FAQ、反馈入口和当前可用的社区支持路径。',
+    title: '社区支持',
+    description: '查看 GitHub、反馈入口和当前可用的社区支持路径。',
     to: '/community',
     meta: '社区',
-  },
-  {
-    title: '常见问题',
-    description: '快速查看“先看哪里、怎么反馈、去哪里提问”等高频问题。',
-    to: '/faq',
-    meta: 'FAQ',
   },
 ]
 
@@ -126,7 +120,7 @@ export const extensionOverview = [
     meta: 'Tools',
   },
   {
-    title: '热门技能',
+    title: 'Skills',
     description: '整理 OpenClaw 当前常见、实用且讨论度高的 skills，给出适用场景、安装命令和使用提醒。',
     to: '/skills',
     meta: 'Skills',
@@ -136,12 +130,6 @@ export const extensionOverview = [
     description: '把 SOUL、基础 openclaw.json、skills 配置和常见高频项整理成更易查阅的中文入口。',
     to: '/configurations',
     meta: 'Config',
-  },
-  {
-    title: '衍生品聚合',
-    description: '汇总国内围绕 OpenClaw 的二次开发、轻量封装、本地化分发和实验工具，方便快速判断该看哪一支生态。',
-    to: '/derivatives',
-    meta: 'Derivative',
   },
 ]
 

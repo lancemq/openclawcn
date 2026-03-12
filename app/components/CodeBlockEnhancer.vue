@@ -9,6 +9,34 @@ function getCopyButtonMarkup(copied = false) {
   `
 }
 
+function normalizeLanguageLabel(raw: string) {
+  const label = raw.toLowerCase()
+  const aliases: Record<string, string> = {
+    js: 'JavaScript',
+    jsx: 'React JSX',
+    ts: 'TypeScript',
+    tsx: 'React TSX',
+    vue: 'Vue',
+    html: 'HTML',
+    css: 'CSS',
+    scss: 'SCSS',
+    bash: 'Bash',
+    sh: 'Shell',
+    shell: 'Shell',
+    zsh: 'Zsh',
+    json: 'JSON',
+    yaml: 'YAML',
+    yml: 'YAML',
+    md: 'Markdown',
+    mdc: 'MDC',
+    diff: 'Diff',
+    plaintext: 'Text',
+    text: 'Text',
+  }
+
+  return aliases[label] || raw.toUpperCase()
+}
+
 // 为代码块添加复制按钮
 function enhanceCodeBlocks() {
   const codeBlocks = document.querySelectorAll('pre')
@@ -27,12 +55,12 @@ function enhanceCodeBlocks() {
     header.className = 'code-block-header'
 
     // 检测语言
-    const langClass = code.className.match(/language-(\w+)/)
+    const langClass = code.className.match(/language-([A-Za-z0-9_-]+)/)
     const lang = langClass ? langClass[1] : 'code'
 
     const langLabel = document.createElement('span')
     langLabel.className = 'code-lang'
-    langLabel.textContent = lang
+    langLabel.textContent = normalizeLanguageLabel(lang)
 
     const copyContainer = document.createElement('div')
     copyContainer.className = 'code-copy-container'

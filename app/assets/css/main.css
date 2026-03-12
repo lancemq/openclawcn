@@ -448,13 +448,18 @@ img {
 }
 
 .prose :not(pre) > code {
-  padding: 0.15em 0.5em;
-  border: 1px solid rgba(12, 108, 105, 0.12);
-  border-radius: 7px;
+  padding: 0.14em 0.52em;
+  border: 1px solid rgba(12, 108, 105, 0.14);
+  border-radius: 8px;
   color: #0a5a57;
-  background: linear-gradient(180deg, rgba(19, 129, 125, 0.1), rgba(19, 129, 125, 0.06));
-  font-size: 0.88em;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.34)),
+    linear-gradient(180deg, rgba(19, 129, 125, 0.12), rgba(19, 129, 125, 0.07));
+  font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.84em;
   font-weight: 700;
+  letter-spacing: -0.01em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
 }
 
 .prose pre {
@@ -471,6 +476,8 @@ img {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.82),
     0 12px 24px rgba(74, 56, 28, 0.08);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(214, 197, 171, 0.5) transparent;
 }
 
 .prose pre code {
@@ -483,8 +490,10 @@ img {
   font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.92rem;
   font-weight: 550;
-  line-height: 1.75;
+  line-height: 1.78;
   white-space: pre;
+  tab-size: 2;
+  text-rendering: optimizeLegibility;
 }
 
 .prose pre code span {
@@ -494,14 +503,26 @@ img {
 .code-block-wrapper {
   position: relative;
   margin: 1.35em 0 1.5em;
-  border-radius: 20px;
+  border-radius: 22px;
   overflow: hidden;
-  border: 1px solid rgba(42, 48, 39, 0.16);
+  border: 1px solid rgba(42, 48, 39, 0.14);
   background:
-    linear-gradient(180deg, rgba(39, 43, 38, 0.98), rgba(24, 27, 24, 0.98));
+    radial-gradient(circle at top right, rgba(224, 171, 92, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(34, 38, 34, 0.99), rgba(18, 21, 18, 0.98));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 16px 34px rgba(35, 28, 20, 0.18);
+}
+
+.code-block-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 50px auto 0 0;
+  width: 48px;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 22%);
+  pointer-events: none;
+  opacity: 0.8;
 }
 
 .code-block-header {
@@ -509,20 +530,41 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  min-height: 48px;
+  min-height: 50px;
   padding: 10px 14px 10px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(180deg, rgba(61, 67, 60, 0.88), rgba(34, 38, 34, 0.94));
+    linear-gradient(180deg, rgba(67, 73, 66, 0.96), rgba(35, 39, 35, 0.94));
 }
 
 .code-block-wrapper pre {
   margin: 0;
-  padding: 16px 18px 18px;
+  padding: 18px 18px 20px 22px;
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: #f6f1e8;
+  color: #f7f1e5;
+}
+
+.code-block-wrapper pre::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(214, 197, 171, 0.32);
+  background-clip: padding-box;
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 211, 163, 0.44);
+  background-clip: padding-box;
 }
 
 .prose .code-block-wrapper pre {
@@ -533,16 +575,16 @@ img {
   display: inline-flex;
   align-items: center;
   min-height: 26px;
-  padding: 0 10px;
+  padding: 0 11px;
   border-radius: 999px;
   border: 1px solid rgba(214, 197, 171, 0.14);
-  background: rgba(246, 238, 225, 0.08);
+  background:
+    linear-gradient(180deg, rgba(246, 238, 225, 0.12), rgba(246, 238, 225, 0.04));
   font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.72rem;
   font-weight: 700;
   color: #f0d3a3;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
 }
 
 .code-copy-container {
@@ -589,6 +631,13 @@ img {
   border-color: rgba(114, 214, 150, 0.3);
   background:
     linear-gradient(180deg, rgba(48, 104, 72, 0.7), rgba(35, 78, 54, 0.74));
+}
+
+.prose pre::selection,
+.prose pre code::selection,
+.prose pre code span::selection {
+  color: #fff6e7;
+  background: rgba(232, 178, 93, 0.32);
 }
 
 .code-copy-btn-mark {

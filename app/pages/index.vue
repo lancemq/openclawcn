@@ -97,7 +97,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
           <div class="home-head head-inline">
             <p class="eyebrow">用户分流</p>
             <p class="section-title compact-title">先判断当前阶段，再进入对应入口。</p>
-            <p class="home-head-note">不要第一次进入就把所有入口一起打开。先决定自己是新手、扩展阶段还是长期运维阶段，再走对应路线。</p>
+            <p class="home-head-note">不要第一次进入就把所有入口一起打开。先判断自己是在学习、扩展还是长期运行阶段，再走对应路线。</p>
           </div>
           <div class="grid route-grid">
             <ContentCard
@@ -164,7 +164,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
         <div class="editorial-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">主题中心</p>
-            <p class="home-head-note">按安装、Gateway、渠道、Skills、模型和安全跨模块聚合内容。</p>
+            <p class="home-head-note">按安装、Gateway、渠道、扩展、模型和安全跨模块聚合内容。</p>
           </div>
           <div class="editorial-columns">
             <NuxtLink v-if="featuredTopic" :to="featuredTopic.to" class="card editorial-feature">
@@ -289,8 +289,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
         <div class="stack-shell">
           <div class="home-head head-inline">
-            <p class="eyebrow">扩展生态</p>
-            <p class="home-head-note">把工具系列、常用 skills、关键配置和国内衍生项目单独整理，减少在社区帖和零散资料里来回翻找。</p>
+            <p class="eyebrow">扩展入口</p>
+            <p class="home-head-note">把工具系列、Skills 和关键配置单独整理，减少在零散文档和社区讨论里来回翻找。</p>
           </div>
           <div class="grid extension-grid">
             <ContentCard
@@ -308,12 +308,12 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 
     <section class="section content-section action-section">
       <div class="container">
-        <div class="feature-band">
-          <div class="home-head head-inline">
-            <p class="eyebrow">互动入口</p>
-            <p class="home-head-note">通过搜索、FAQ、反馈和社区入口更快找到下一步动作。</p>
-          </div>
-          <div class="grid action-grid">
+          <div class="feature-band">
+            <div class="home-head head-inline">
+            <p class="eyebrow">辅助入口</p>
+            <p class="home-head-note">通过搜索、FAQ、反馈和社区支持更快找到下一步动作。</p>
+            </div>
+            <div class="grid action-grid">
             <ContentCard
               v-for="item in actionOverview"
               :key="item.to"
@@ -361,7 +361,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 
 .layer-ribbon {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin-bottom: 4px;
 }
