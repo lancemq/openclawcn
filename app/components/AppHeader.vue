@@ -17,6 +17,7 @@ const navGroups = [
     label: '工具',
     slug: 'tools',
     items: [
+      { label: '工具系列', to: '/tools' },
       { label: '技能', to: '/skills' },
       { label: '配置', to: '/configurations' },
     ],

@@ -37,7 +37,7 @@ export const topicDefinitions: TopicDefinition[] = [
   {
     slug: 'skills-tools',
     title: 'Skills 与 Tools',
-    description: '适合已经跑通基础链路，准备理解 Skills、Tools、Hooks 与自动化扩展的人。',
+    description: '适合已经跑通基础链路，准备理解 Skills、Tools、Hooks、插件与自动化扩展的人。',
     keywords: ['skills', 'tools', 'hooks', 'automation'],
     tags: ['skills', 'tools', 'hooks', 'automation', 'workflows'],
     categories: ['功能', '自动化'],
@@ -154,8 +154,9 @@ export const learningPaths = [
     slug: 'expansion',
     title: 'Skills 与扩展路径',
     audience: '已经部署完成，准备往 Skills、Tools、自动化和渠道接入扩展的人。',
-    summary: '先理解 Tools 与 Hooks，再通过视频和最佳实践进入更实战的扩展方法。',
+    summary: '先通过工具系列理解边界，再进入 Skills、Hooks、插件和更实战的扩展方法。',
     steps: [
+      { title: '工具系列总览', to: '/tools' },
       { title: 'Tools 概览', to: '/docs/manual/tools-overview' },
       { title: 'Exec 与审批', to: '/docs/manual/exec-tools-and-approvals' },
       { title: '插件系统', to: '/docs/manual/plugins-overview' },
@@ -164,7 +165,7 @@ export const learningPaths = [
       { title: 'Skills 视频', to: '/videos#skills' },
       { title: '自动化实践', to: '/best-practices/automation-workflows' },
     ],
-    next: '/topics?topic=skills-tools',
+    next: '/tools',
   },
   {
     slug: 'remote-network',

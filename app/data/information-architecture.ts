@@ -12,11 +12,11 @@ export const informationLayers = [
   {
     id: 'support',
     title: '第二层：补充深化',
-    summary: '视频、最佳实践和衍生品适合作为理解加深、场景扩展和生态观察入口。',
+    summary: '视频、最佳实践和工具系列适合作为理解加深、能力扩展和长期使用入口。',
     items: [
       { title: '视频教程', to: '/videos', meta: '视频' },
       { title: '最佳实践', to: '/best-practices', meta: '实践' },
-      { title: '衍生品', to: '/derivatives', meta: '生态' },
+      { title: '工具系列', to: '/tools', meta: '工具' },
     ],
   },
   {

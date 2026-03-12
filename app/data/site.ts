@@ -106,8 +106,8 @@ export const userRouteOverview = [
   },
   {
     title: '我已经部署，想继续扩展',
-    description: '从 Skills、Tools、视频教程和最佳实践进入更实战的能力扩展。',
-    to: '/topics?topic=skills-tools',
+    description: '从工具系列、Skills、视频教程和最佳实践进入更实战的能力扩展。',
+    to: '/tools',
     meta: '扩展路径',
   },
   {
@@ -119,6 +119,12 @@ export const userRouteOverview = [
 ]
 
 export const extensionOverview = [
+  {
+    title: '工具系列',
+    description: '把插件、Exec、审批、Hooks、自动化和排障整理成一组连续入口，帮助你先理解能力边界再扩展。',
+    to: '/tools',
+    meta: 'Tools',
+  },
   {
     title: '热门技能',
     description: '整理 OpenClaw 当前常见、实用且讨论度高的 skills，给出适用场景、安装命令和使用提醒。',

@@ -290,7 +290,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
         <div class="stack-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">扩展生态</p>
-            <p class="home-head-note">把常用 skills、SOUL、关键配置和国内衍生项目单独整理，减少在社区帖和零散资料里来回翻找。</p>
+            <p class="home-head-note">把工具系列、常用 skills、关键配置和国内衍生项目单独整理，减少在社区帖和零散资料里来回翻找。</p>
           </div>
           <div class="grid extension-grid">
             <ContentCard
