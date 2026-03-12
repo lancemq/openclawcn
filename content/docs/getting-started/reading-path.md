@@ -75,9 +75,22 @@ tags: [reading-path, overview, docs, onboarding]
 - [Channels 概览](/docs/manual/channels-overview)
 - [Hooks 概览](/docs/manual/hooks-overview)
 
+如果你最关心的是扩展机制，继续看：
+
+- [OpenClaw 的 Tools 与扩展能力概览](/docs/manual/tools-overview)
+- [OpenClaw 插件系统怎么用](/docs/manual/plugins-overview)
+- [Skills 系统怎么工作](/docs/manual/skills-system)
+
+如果你最关心的是长期记忆和召回，继续看：
+
+- [OpenClaw 记忆系统怎么工作](/docs/manual/memory-system)
+- [记忆搜索与索引机制](/docs/manual/memory-search-and-indexing)
+
 如果你最关心的是长期维护，继续看：
 
 - [安全基础](/docs/operations/safety-basics)
+- [网络模型、发现与配对](/docs/operations/network-and-pairing)
+- [Tailscale Serve / Funnel 怎么选](/docs/operations/tailscale-serve-and-funnel)
 - [版本与更新跟踪](/docs/operations/release-tracking)
 - [OpenClaw 安全最佳实践](/docs/operations/openclaw-security-best-practices)
 
@@ -126,3 +139,4 @@ tags: [reading-path, overview, docs, onboarding]
 - [安装指南](/docs/setup/installation)
 - [Onboarding 指南](/docs/getting-started/onboarding-guide)
 - [Control UI 使用说明](/docs/manual/control-ui)
+- [主题页：按安装、扩展、网络和安全继续深入](/topics)

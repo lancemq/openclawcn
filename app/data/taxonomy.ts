@@ -43,6 +43,22 @@ export const topicDefinitions: TopicDefinition[] = [
     categories: ['功能', '自动化'],
   },
   {
+    slug: 'plugins',
+    title: '插件与扩展',
+    description: '围绕插件安装、启停、升级、配置入口，以及它和 Skills / Tools 的边界。',
+    keywords: ['plugin', 'plugins', '扩展', 'voice-call', 'msteams', 'openclaw plugins'],
+    tags: ['plugins', 'extensions', 'skills', 'tools', 'cli'],
+    categories: ['功能'],
+  },
+  {
+    slug: 'memory-search',
+    title: '记忆与搜索',
+    description: '覆盖 MEMORY、每日日志、语义索引、embeddings provider 和长期记忆召回。',
+    keywords: ['memory', 'memory_search', 'index', 'embeddings', 'lancedb'],
+    tags: ['memory', 'search', 'indexing', 'embeddings', 'lancedb'],
+    categories: ['功能'],
+  },
+  {
     slug: 'models',
     title: '模型与本地推理',
     description: '围绕 Models、Provider 选择、Ollama 和本地模型接入。',
@@ -57,6 +73,14 @@ export const topicDefinitions: TopicDefinition[] = [
     keywords: ['security', 'auth', '安全', 'tailscale', 'ssh'],
     tags: ['security', 'auth', 'tailscale', 'dashboard', 'best-practices'],
     categories: ['运维'],
+  },
+  {
+    slug: 'network',
+    title: '网络与配对',
+    description: '围绕 localhost、tailnet、设备发现、配对审批和远程节点接入。',
+    keywords: ['network', 'pairing', 'identity', 'tailnet', 'discovery', 'mdns'],
+    tags: ['network', 'pairing', 'identity', 'tailnet', 'mdns'],
+    categories: ['运维', '功能'],
   },
 ]
 
@@ -109,12 +133,26 @@ export const learningPaths = [
     summary: '先理解 Tools 与 Hooks，再通过视频和最佳实践进入更实战的扩展方法。',
     steps: [
       { title: 'Tools 概览', to: '/docs/manual/tools-overview' },
+      { title: '插件系统', to: '/docs/manual/plugins-overview' },
       { title: 'Hooks 概览', to: '/docs/manual/hooks-overview' },
       { title: '热门技能', to: '/skills' },
       { title: 'Skills 视频', to: '/videos#skills' },
       { title: '自动化实践', to: '/best-practices/automation-workflows' },
     ],
     next: '/topics?topic=skills-tools',
+  },
+  {
+    slug: 'remote-network',
+    title: '远程网络与节点路径',
+    audience: '准备把 OpenClaw 放到远程主机、tailnet 或多设备环境中长期运行的人。',
+    summary: '先理解网络模型和配对，再选择远程访问方式，最后进入多 Gateway 和环境隔离。',
+    steps: [
+      { title: '网络与配对', to: '/docs/operations/network-and-pairing' },
+      { title: '远程访问', to: '/docs/operations/remote-access' },
+      { title: 'Tailscale 选择', to: '/docs/operations/tailscale-serve-and-funnel' },
+      { title: '多 Gateway 隔离', to: '/docs/operations/multiple-gateways' },
+    ],
+    next: '/topics?topic=network',
   },
   {
     slug: 'team-ops',

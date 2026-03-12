@@ -84,6 +84,8 @@ Tools、Hooks 和 Skills 的价值，不是让 OpenClaw 看起来功能更多，
 
 ## 下一步建议
 
+- 想理解插件这层：看 [OpenClaw 插件系统怎么用](/docs/manual/plugins-overview)
 - 想理解扩展触发点：看 [Hooks 能做什么](/docs/manual/hooks-overview)
+- 想理解长期记忆召回：看 [记忆搜索与索引机制](/docs/manual/memory-search-and-indexing)
 - 想理解长期运行边界：看 [OpenClaw 安全配置基础](/docs/operations/safety-basics)
 - 想排查扩展问题：看 [故障排除与诊断思路](/docs/reference/troubleshooting)
