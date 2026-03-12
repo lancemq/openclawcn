@@ -19,10 +19,9 @@ async function copyCode() {
 </script>
 
 <template>
-  <button class="copy-button" :class="{ copied }" @click="copyCode">
-    <span v-if="copied" class="copy-icon">✓</span>
-    <span v-else class="copy-icon">📋</span>
-    <span class="copy-text">{{ copied ? '已复制' : '复制' }}</span>
+  <button class="copy-button" :class="{ copied }" type="button" @click="copyCode">
+    <span class="copy-icon">{{ copied ? 'done' : 'copy' }}</span>
+    <span class="copy-text">{{ copied ? '已复制' : '复制代码' }}</span>
   </button>
 </template>
 
@@ -30,34 +29,49 @@ async function copyCode() {
 .copy-button {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.8rem;
-  font-weight: 500;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(67, 73, 60, 0.14);
+  background: rgba(255, 251, 244, 0.92);
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
 .copy-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  transform: translateY(-1px);
+  color: var(--brand);
+  border-color: rgba(12, 108, 105, 0.28);
+  background: rgba(255, 255, 255, 0.98);
 }
 
 .copy-button.copied {
-  background: rgba(34, 197, 94, 0.3);
-  border-color: rgba(34, 197, 94, 0.5);
-  color: #4ade80;
+  color: #0d6d53;
+  border-color: rgba(13, 109, 83, 0.24);
+  background: rgba(224, 248, 232, 0.96);
 }
 
 .copy-icon {
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(12, 108, 105, 0.08);
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .copy-text {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
 }
 </style>

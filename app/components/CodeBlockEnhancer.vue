@@ -31,16 +31,17 @@ function enhanceCodeBlocks() {
 
     // 使用原生按钮实现复制功能
     const button = document.createElement('button')
+    button.type = 'button'
     button.className = 'code-copy-btn'
-    button.innerHTML = '<span>📋</span><span>复制</span>'
+    button.innerHTML = '<span class="code-copy-btn-icon">copy</span><span class="code-copy-btn-label">复制代码</span>'
     button.onclick = async () => {
       try {
         await navigator.clipboard.writeText(codeText)
         button.classList.add('copied')
-        button.innerHTML = '<span>✓</span><span>已复制</span>'
+        button.innerHTML = '<span class="code-copy-btn-icon">done</span><span class="code-copy-btn-label">已复制</span>'
         setTimeout(() => {
           button.classList.remove('copied')
-          button.innerHTML = '<span>📋</span><span>复制</span>'
+          button.innerHTML = '<span class="code-copy-btn-icon">copy</span><span class="code-copy-btn-label">复制代码</span>'
         }, 2000)
       } catch (err) {
         console.error('复制失败:', err)

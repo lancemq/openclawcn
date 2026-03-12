@@ -1,101 +1,208 @@
 <script setup lang="ts">
 useSeo({
   title: 'Skills 与扩展能力',
-  description: '系统整理 OpenClaw 的 Skills 生态、安装方式、加载位置、常见能力类型、配置边界与安全注意点。',
+  description: '系统整理 OpenClaw 的热门技能方向、安装方式、加载位置、适用场景、风险边界与配置重点。',
   path: '/skills',
 })
 
-const skillSignals = [
+const marketSignals = [
   {
-    label: '官方入口',
+    label: '公开入口',
     value: 'ClawHub',
-    note: '官方文档把 ClawHub 作为公开技能注册表，用于搜索、安装、同步和发现新技能。',
+    note: '官方把公开技能发现、安装和同步集中在 ClawHub 这条路径里。',
   },
   {
-    label: '本地来源',
-    value: 'bundled + extraDirs',
-    note: '除了官方或社区分发，也可以从本地目录加载 skills，适合团队私有技能和实验技能。',
+    label: '私有来源',
+    value: 'extraDirs',
+    note: '团队技能和实验技能更适合从本地目录加载，而不是混进公共环境。',
   },
   {
-    label: '管理方式',
+    label: '正式管理',
     value: 'configure + JSON5',
-    note: '技能是否启用、从哪里加载、是否监听目录变化，最终都落到 OpenClaw 配置层。',
+    note: 'Skills 的加载、监听、单项开关最终都落在配置层，不应该只靠安装命令记忆。',
+  },
+  {
+    label: '最重要原则',
+    value: '少量高频优先',
+    note: '第一次接触不要追求装得多，优先验证高频技能对当前工作流是否真的有帮助。',
   },
 ]
 
-const quickCommands = [
+const quickStart = [
   {
-    title: '搜索与发现',
+    step: '01',
+    title: '先查而不是先装',
+    detail: '先用 search 确认能力方向、维护来源和说明质量，再决定是否安装。',
     command: 'openclaw skills search',
-    note: '先查能力名和来源，再决定是否安装。',
   },
   {
-    title: '列出已装技能',
+    step: '02',
+    title: '列出当前技能面',
+    detail: '先知道当前环境已经有哪些能力，避免重复安装和误判“没生效”。',
     command: 'openclaw skills list',
-    note: '适合排查“明明装了但没生效”的问题。',
   },
   {
-    title: '安装技能',
+    step: '03',
+    title: '只装一小批',
+    detail: '第一次建议只装 3 到 5 个高频方向，先在独立 workspace 验证。',
     command: 'openclaw skills install <skill>',
-    note: '从 ClawHub 或配置好的来源安装到当前环境。',
   },
   {
-    title: '打开 Skills 配置',
+    step: '04',
+    title: '回到配置层收口',
+    detail: '安装完成后进 configure，把来源目录、监听和启停都纳入正式配置。',
     command: 'openclaw configure',
-    note: '把 skills 的加载和单项开关纳入正式配置。',
   },
 ]
 
-const skillFamilies = [
+const skillTracks = [
   {
-    title: '检索与调研类',
-    examples: '网页检索、文档索引、问答回溯、结果汇总',
-    value: '最适合先装的第一批',
-    why: '门槛低、风险相对可控，能很快体现 Tools + 记忆 + 输出结构化的价值。',
+    title: '第一次扩展',
+    badge: '推荐起点',
+    summary: '优先选择低副作用、易验证收益的技能。',
+    items: ['网页检索与资料归纳', '文档写作与 FAQ 整理', '代码审查与 diff 总结', '日报 / 周报摘要'],
   },
   {
-    title: '代码与工程类',
-    examples: '代码审查、diff 总结、测试辅助、发布检查',
-    value: '开发者最容易感知价值',
-    why: '和终端、Git、测试、编辑等工具链契合度高，但一定要注意执行权限范围。',
+    title: '开发与交付',
+    badge: '开发者高频',
+    summary: '更适合已经接上代码仓库、测试和终端工具链的使用者。',
+    items: ['PR 复核', '测试补洞建议', '发布前检查', '回归清单生成'],
   },
   {
-    title: '办公与生产力类',
-    examples: '日程摘要、日报、记账、消息归档、任务回顾',
-    value: '高频但依赖上下文',
-    why: '一旦接上本地数据或日历，就会形成很强的长期使用粘性。',
+    title: '研究与知识沉淀',
+    badge: '长期价值高',
+    summary: '适合把信息查找、比较和归档整理成固定工作流。',
+    items: ['主题研究', '来源比较', '知识摘要', '会议纪要与行动项'],
   },
   {
-    title: '自动化与运维类',
-    examples: '健康检查、部署巡检、告警摘要、日志提炼',
-    value: '最需要审查权限边界',
-    why: '这类技能常常会碰到生产地址、Webhook、密钥或服务器状态，不适合盲装。',
-  },
-  {
-    title: '多模态与浏览器类',
-    examples: '截图理解、页面巡检、视觉 QA、录屏分析',
-    value: '体验强但依赖环境',
-    why: '通常需要浏览器、截图或图像能力，适合在桌面环境或专用工作区使用。',
-  },
-  {
-    title: '人格与工作流联动类',
-    examples: 'SOUL 切换、角色化写作、不同人格协同',
-    value: '适合二阶段尝试',
-    why: '这类能力更像“改变行为风格”，不适合作为第一次接触 Skills 的入口。',
+    title: '运维与自动化',
+    badge: '谨慎启用',
+    summary: '收益很强，但必须先看权限边界、日志和回滚方式。',
+    items: ['部署巡检', '站点健康检查', '告警归类', '日志提炼'],
   },
 ]
 
-const installPaths = [
+const popularSkills = [
   {
-    title: '从 ClawHub 直接安装',
-    summary: '最适合先试用公开生态里的常见技能。',
+    title: 'Research Assistant',
+    stage: '新手 / 二阶段都适合',
+    category: '调研',
+    description: '用于资料检索、来源对比、长文摘要、问题清单整理，是最容易快速体现 Skills 价值的方向。',
+    outcome: '更适合拿来做主题调研、竞品梳理和问题前置分析。',
+  },
+  {
+    title: 'Docs Writer',
+    stage: '高频推荐',
+    category: '文档',
+    description: '把 README、FAQ、更新说明、教程草稿和内容清洗组织成稳定输出结构。',
+    outcome: '适合站点内容维护、项目知识库和中文说明整理。',
+  },
+  {
+    title: 'Code Review',
+    stage: '开发工作台',
+    category: '代码',
+    description: '聚焦 PR 风险、行为回归、测试缺口和变更摘要，适合和终端、Git、测试链路一起使用。',
+    outcome: '更容易形成可复用的“提交前复核”流程。',
+  },
+  {
+    title: 'Test Sensei',
+    stage: '开发二阶段',
+    category: '测试',
+    description: '帮助发现边界条件、补测试清单和回归风险，适合前端和服务端都有一定代码量的项目。',
+    outcome: '适合把“写完了”推进到“更有把握上线”。',
+  },
+  {
+    title: 'Deploy Check',
+    stage: '运维谨慎启用',
+    category: '交付',
+    description: '围绕构建、健康检查、部署结果和上线前 checklist 做自动确认。',
+    outcome: '适合固定发布节奏的项目，但必须配清权限和审批。',
+  },
+  {
+    title: 'DevOps Pilot',
+    stage: '高权限方向',
+    category: '运维',
+    description: '更偏长期运维助手，适合处理状态汇总、巡检建议和告警阅读，但不适合盲装。',
+    outcome: '适合有独立测试环境和高权限审查流程的团队。',
+  },
+  {
+    title: 'Browser QA',
+    stage: '桌面环境更强',
+    category: '浏览器',
+    description: '配合截图、浏览器和页面理解能力做巡检、视觉检查和基础体验验证。',
+    outcome: '适合产品页、运营页和表单流的反复检查。',
+  },
+  {
+    title: 'Briefing',
+    stage: '个人生产力',
+    category: '摘要',
+    description: '做日程简报、邮件摘要、会议要点和轻量工作简报，适合日常高频使用。',
+    outcome: '更适合个人或小团队的固定工作节奏。',
+  },
+  {
+    title: 'Expense / Ledger',
+    stage: '轻量事务',
+    category: '事务',
+    description: '用于消费记录、日常台账和个人事务归档，适合和长期记忆一起使用。',
+    outcome: '适合个人工作台，而不是大规模团队协作。',
+  },
+  {
+    title: 'ClawSouls Integration',
+    stage: '二阶段尝试',
+    category: '人格',
+    description: '适合把人格模板、SOUL 切换和能力风格调整接进同一套工作流。',
+    outcome: '适合已经理解 SOUL 和 Skills 边界之后再使用。',
+  },
+  {
+    title: 'Release Notes',
+    stage: '内容与发布',
+    category: '发布',
+    description: '把提交记录、变更摘要和用户可读说明整理成正式发布内容。',
+    outcome: '非常适合中文站点、项目更新和版本周报。',
+  },
+  {
+    title: 'Inbox Triage',
+    stage: '高频协作',
+    category: '协作',
+    description: '围绕消息归类、待办拆解和后续动作建议做轻量分流。',
+    outcome: '更适合把混乱入口收成可执行清单。',
+  },
+]
+
+const scenarios = [
+  {
+    title: '如果你在维护中文文档站',
+    picks: ['Docs Writer', 'Research Assistant', 'Release Notes'],
+    note: '先把调研、写作和更新摘要接起来，收益远高于一开始接复杂自动化。',
+  },
+  {
+    title: '如果你主要在写代码和发版本',
+    picks: ['Code Review', 'Test Sensei', 'Deploy Check'],
+    note: '把“代码复核 + 测试提醒 + 发布前检查”串成一个闭环最稳。',
+  },
+  {
+    title: '如果你想把 OpenClaw 当个人工作台',
+    picks: ['Briefing', 'Inbox Triage', 'Expense / Ledger'],
+    note: '先从日常高频事务入手，更容易形成粘性，而不是一开始挑战高权限技能。',
+  },
+  {
+    title: '如果你准备做长期运维',
+    picks: ['Deploy Check', 'DevOps Pilot', 'Browser QA'],
+    note: '这组一定要放在隔离环境试，尤其要确认审批、日志和回滚路径。',
+  },
+]
+
+const loadingPatterns = [
+  {
+    title: '公共市场试用',
+    summary: '适合先摸清能力方向和社区常见技能。',
     snippet: `openclaw skills search
 openclaw skills install <skill-name>
 openclaw skills list`,
   },
   {
-    title: '从本地目录加载',
-    summary: '更适合团队私有技能或你自己写的实验技能。',
+    title: '本地团队目录',
+    summary: '适合团队私有技能和实验技能，不必混进公共来源。',
     snippet: `{
   skills: {
     load: {
@@ -106,100 +213,70 @@ openclaw skills list`,
 }`,
   },
   {
-    title: '按条目单独开关',
-    summary: '技能太多时，不要一次全开，先逐个启用验证。',
+    title: '单项逐个启停',
+    summary: '技能数量上来后，更稳的是逐个开关，而不是整包全开。',
     snippet: `{
   skills: {
     entries: {
-      peekaboo: { enabled: true },
-      sag: { enabled: false }
+      reviewer: { enabled: true },
+      deployPilot: { enabled: false }
     }
   }
 }`,
   },
 ]
 
-const skillConfigPoints = [
+const configGuide = [
   {
-    title: 'allowBundled',
-    description: '控制官方或随附技能是否允许加载，适合限制默认暴露面。',
+    name: 'allowBundled',
+    detail: '控制默认 bundled skills 的暴露面，适合做最小能力收口。',
   },
   {
-    title: 'load.extraDirs',
-    description: '把团队自建技能目录接进 OpenClaw，便于长期维护私有扩展。',
+    name: 'load.extraDirs',
+    detail: '接团队技能目录时最常用的入口，比手动复制文件更稳。',
   },
   {
-    title: 'load.watch',
-    description: '本地开发时监听技能目录变化，减少反复重启或手动重载。',
+    name: 'load.watch',
+    detail: '本地迭代技能时很有用，减少反复重启和手工刷新。',
   },
   {
-    title: 'entries.<name>.enabled',
-    description: '对单个技能逐条开关，是比“全目录开放”更稳的做法。',
+    name: 'entries.<name>.enabled',
+    detail: '给单个技能做启停，是控制复杂度最有效的开关。',
   },
   {
-    title: 'install.nodeManager',
-    description: '安装依赖较多的技能时，需要明确 Node 管理方式，避免版本漂移。',
+    name: 'workspace 隔离',
+    detail: '实验技能、高权限技能和日常稳定环境要分开，不要混在一个 workspace。',
   },
   {
-    title: 'workspace 隔离',
-    description: '不同 workspace 可配不同技能集合，避免把实验技能直接带进长期环境。',
-  },
-]
-
-const popularDirections = [
-  {
-    title: '文档写作与整理',
-    install: '适合搭配 docs-writer 一类方向',
-    useCase: 'README、FAQ、操作说明、版本摘要、翻译润色。',
-  },
-  {
-    title: '代码审查与测试',
-    install: '适合搭配 code-review / test-sensei 方向',
-    useCase: 'PR 复核、回归清单、边界条件提醒、测试补洞。',
-  },
-  {
-    title: '部署与运维巡检',
-    install: '适合搭配 deploy-check / devops-pilot 方向',
-    useCase: '构建结果确认、站点状态检查、部署清单、告警归类。',
-  },
-  {
-    title: 'SOUL 切换与人格控制',
-    install: '适合搭配 ClawSouls 方向',
-    useCase: '把技能工作流和人格模板切换放进同一入口中管理。',
-  },
-  {
-    title: 'Research 与知识提炼',
-    install: '适合搭配 research-assistant 方向',
-    useCase: '做一轮主题调研、来源梳理、问答补充和后续行动项整理。',
-  },
-  {
-    title: '个人事务与摘要',
-    install: '适合搭配 briefing / expense 等生产力方向',
-    useCase: '日程、简报、归档、轻量记账和个人信息回顾。',
+    name: 'install.nodeManager',
+    detail: '依赖多的技能要确认 Node 管理方式，避免版本漂移或构建失败。',
   },
 ]
 
-const safetyNotes = [
-  '不要把来源不清楚的 skill 直接连到生产地址、钱包、私有仓库或高权限终端。',
-  '先读 skill 的说明、脚本和依赖，再决定是否安装；不要把它当成普通内容页。',
-  '新技能先放在独立 workspace 测试，验证输入、输出和副作用后再进入常用环境。',
-  '涉及浏览器、终端、Webhook、文件写入的技能，要优先确认权限边界和日志留存方式。',
+const reviewChecklist = [
+  '先看技能说明和依赖，再看安装命令，不要反过来。',
+  '凡是涉及终端、浏览器、Webhook、写文件的技能，都按“可执行能力”审查。',
+  '新技能先放到独立 workspace 验证，不要直接带进长期生产环境。',
+  '技能数量一多，就回到配置层做逐项开关，不要继续无边界累加。',
 ]
 </script>
 
 <template>
-  <section class="section">
-    <div class="container collection-page">
-      <section class="collection-hero">
-        <div class="card collection-main">
-          <p class="eyebrow">Skills</p>
-          <h1 class="section-title">Skills 与扩展能力</h1>
-          <p class="section-copy">
-            OpenClaw 的 Skills 不只是“插件列表”，更像把特定任务能力、工具调用和工作流约束打包成可复用模块。真正值得先掌握的，不是装得越多越好，而是知道哪些技能适合当前阶段、应该从哪里加载，以及怎样把权限边界控制在可接受范围内。
-          </p>
+  <section class="section skills-page">
+    <div class="container">
+      <section class="skills-hero">
+        <div class="card hero-main">
+          <div class="hero-copy">
+            <p class="eyebrow">Skills Atlas</p>
+            <h1 class="section-title">把热门 Skills、安装路径和风险边界放进同一张技能地图。</h1>
+            <p class="section-copy">
+              Skills 不是越多越强，而是要知道哪些值得先装、哪些适合当前阶段、哪些会把权限边界明显抬高。
+              这页把 OpenClaw 常见技能方向、安装方式、使用场景和配置重点收成一套更适合中文用户判断的工作台。
+            </p>
+          </div>
 
-          <div class="collection-utility">
-            <article v-for="item in skillSignals" :key="item.label" class="collection-utility-item">
+          <div class="signal-grid">
+            <article v-for="item in marketSignals" :key="item.label" class="signal-card">
               <span class="mini-label">{{ item.label }}</span>
               <strong>{{ item.value }}</strong>
               <p>{{ item.note }}</p>
@@ -207,92 +284,131 @@ const safetyNotes = [
           </div>
         </div>
 
-        <aside class="card collection-side">
-          <div class="collection-summary">
-            <span class="mini-label">先装什么</span>
-            <strong>优先从检索、写作、代码审查这类低风险高回报技能开始</strong>
-            <p>第一次接触 Skills，不建议直接从自动部署、改配置、外部 webhook 这类高副作用能力下手。先从调研、摘要、代码审查和文档整理切入，更容易验证价值。</p>
+        <aside class="card hero-side">
+          <div class="side-block">
+            <span class="mini-label">第一批建议</span>
+            <strong>先从调研、写作、代码审查和摘要类技能开始</strong>
+            <p>这些方向通常副作用更低，回报更快，也更容易判断“这个技能到底值不值得留在长期环境里”。</p>
           </div>
 
-          <div class="collection-summary">
-            <span class="mini-label">一个原则</span>
-            <p>技能市场是开放生态，不是天然可信白名单。所有第三方 skills 都应该按“可执行能力”审查，而不是按“内容资源”对待。</p>
+          <div class="side-block">
+            <span class="mini-label">不建议一开始就装</span>
+            <p>自动部署、生产巡检、改配置、外部 webhook、钱包或高权限终端相关技能。它们价值很高，但也更容易把风险直接带进环境。</p>
           </div>
         </aside>
       </section>
 
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Quick Commands</p>
-          <p class="section-copy">先掌握发现、安装、列出和配置四个基本动作，再去扩展技能数量。</p>
+      <section class="card desk-panel">
+        <div class="panel-head">
+          <p class="eyebrow">四步上手</p>
+          <p class="section-copy">把搜索、确认、安装、收口走成固定动作，比到处零散装技能更稳。</p>
         </div>
 
-        <div class="command-grid">
-          <article v-for="item in quickCommands" :key="item.title" class="command-card">
-            <span class="mini-label">{{ item.title }}</span>
+        <div class="quick-grid">
+          <article v-for="item in quickStart" :key="item.step" class="quick-card">
+            <span class="step-chip">{{ item.step }}</span>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.detail }}</p>
             <code>{{ item.command }}</code>
-            <p>{{ item.note }}</p>
           </article>
         </div>
       </section>
 
-      <section class="family-grid">
-        <article v-for="item in skillFamilies" :key="item.title" class="card family-card">
-          <span class="mini-label">{{ item.value }}</span>
-          <h2>{{ item.title }}</h2>
-          <p class="family-examples">{{ item.examples }}</p>
-          <p>{{ item.why }}</p>
-        </article>
-      </section>
-
-      <section class="path-grid">
-        <article v-for="item in installPaths" :key="item.title" class="card path-card">
-          <span class="mini-label">安装与接入</span>
-          <h2>{{ item.title }}</h2>
-          <p>{{ item.summary }}</p>
-          <pre><code>{{ item.snippet }}</code></pre>
-        </article>
-      </section>
-
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">配置要点</p>
-          <p class="section-copy">真正决定技能怎么工作的，往往不是“装没装”，而是这些配置项有没有被正确组织。</p>
+      <section class="track-shell">
+        <div class="panel-head inline-head">
+          <p class="eyebrow">技能赛道</p>
+          <p class="section-copy">按使用阶段看技能，而不是按“名字够不够酷”来装。</p>
         </div>
 
-        <div class="points-grid">
-          <article v-for="item in skillConfigPoints" :key="item.title" class="point-card">
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
+        <div class="track-grid">
+          <article v-for="item in skillTracks" :key="item.title" class="card track-card">
+            <span class="track-badge">{{ item.badge }}</span>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.summary }}</p>
+            <ul class="track-list">
+              <li v-for="entry in item.items" :key="entry">{{ entry }}</li>
+            </ul>
           </article>
         </div>
       </section>
 
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">热门方向</p>
-          <p class="section-copy">下面这些不是“唯一正确的技能名”，而是当前社区中更常被拿来讨论和安装的能力方向。</p>
+      <section class="selection-shell">
+        <div class="selection-copy">
+          <div class="panel-head inline-head">
+            <p class="eyebrow">热门方向</p>
+            <p class="section-copy">这里不是死记技能名，而是看哪些方向最常见、最容易带来实际收益。</p>
+          </div>
+
+          <div class="skill-grid">
+            <article v-for="item in popularSkills" :key="item.title" class="card skill-card">
+              <div class="skill-meta">
+                <span class="tag">{{ item.category }}</span>
+                <span class="skill-stage">{{ item.stage }}</span>
+              </div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.description }}</p>
+              <strong>{{ item.outcome }}</strong>
+            </article>
+          </div>
         </div>
 
-        <div class="direction-grid">
-          <article v-for="item in popularDirections" :key="item.title" class="direction-card">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.useCase }}</p>
-            <span class="direction-note">{{ item.install }}</span>
+        <aside class="card scenario-panel">
+          <div class="panel-head">
+            <p class="eyebrow">怎么选第一批</p>
+            <p class="section-copy">如果你不想从十几个方向里自己猜，先按下面这几种常见场景选。</p>
+          </div>
+
+          <div class="scenario-list">
+            <article v-for="item in scenarios" :key="item.title" class="scenario-card">
+              <strong>{{ item.title }}</strong>
+              <p>{{ item.note }}</p>
+              <div class="scenario-tags">
+                <span v-for="pick in item.picks" :key="pick" class="tag">{{ pick }}</span>
+              </div>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="loading-shell">
+        <div class="panel-head inline-head">
+          <p class="eyebrow">安装与加载</p>
+          <p class="section-copy">真正决定体验的，不只是装没装，而是来源、监听和单项启停有没有组织清楚。</p>
+        </div>
+
+        <div class="loading-grid">
+          <article v-for="item in loadingPatterns" :key="item.title" class="card loading-card">
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.summary }}</p>
+            <pre><code>{{ item.snippet }}</code></pre>
           </article>
         </div>
       </section>
 
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">安全边界</p>
-          <p class="section-copy">如果你准备把 Skills 接进长期环境，下面这几个原则比“多装几个技能”更重要。</p>
+      <section class="card config-panel">
+        <div class="panel-head">
+          <p class="eyebrow">配置重点</p>
+          <p class="section-copy">下面这些字段比“装了多少技能”更值得经常回头看。</p>
         </div>
 
-        <div class="safety-list">
-          <article v-for="note in safetyNotes" :key="note" class="safety-item">
-            <span class="safety-dot" />
-            <p>{{ note }}</p>
+        <div class="config-grid">
+          <article v-for="item in configGuide" :key="item.name" class="config-card">
+            <strong>{{ item.name }}</strong>
+            <p>{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card review-panel">
+        <div class="panel-head">
+          <p class="eyebrow">审查清单</p>
+          <p class="section-copy">如果你准备把 Skills 接进长期环境，下面这 4 条通常比“多装一个技能”更重要。</p>
+        </div>
+
+        <div class="review-list">
+          <article v-for="item in reviewChecklist" :key="item" class="review-item">
+            <span class="review-dot" />
+            <p>{{ item }}</p>
           </article>
         </div>
       </section>
@@ -301,6 +417,111 @@ const safetyNotes = [
 </template>
 
 <style scoped>
+.skills-page {
+  padding-top: 36px;
+}
+
+.skills-page .container {
+  display: grid;
+  gap: 18px;
+}
+
+.skills-hero,
+.selection-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(320px, 0.95fr);
+  gap: 14px;
+}
+
+.hero-main,
+.hero-side,
+.desk-panel,
+.track-card,
+.skill-card,
+.scenario-panel,
+.loading-card,
+.config-panel,
+.review-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.hero-main {
+  padding: 26px;
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 241, 0.98), rgba(241, 234, 219, 0.94)),
+    var(--panel);
+}
+
+.hero-copy {
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+}
+
+.hero-side {
+  align-content: start;
+  padding: 22px;
+}
+
+.side-block {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(67, 73, 60, 0.1);
+}
+
+.side-block:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.side-block strong,
+.quick-card h2,
+.track-card h2,
+.loading-card h2,
+.skill-card h3,
+.scenario-card strong,
+.config-card strong {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  line-height: 1.24;
+  letter-spacing: -0.03em;
+}
+
+.side-block p,
+.quick-card p,
+.track-card p,
+.skill-card p,
+.scenario-card p,
+.config-card p,
+.review-item p,
+.signal-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.signal-card {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.signal-card strong {
+  font-size: 0.96rem;
+}
+
 .mini-label {
   color: var(--accent);
   font-size: 0.72rem;
@@ -309,155 +530,250 @@ const safetyNotes = [
   text-transform: uppercase;
 }
 
-.section-panel,
-.collection-main,
-.collection-side,
-.family-card,
-.path-card {
+.panel-head {
+  display: grid;
+  gap: 6px;
+}
+
+.inline-head {
+  margin-bottom: 2px;
+}
+
+.quick-grid,
+.track-grid,
+.skill-grid,
+.loading-grid,
+.config-grid {
   display: grid;
   gap: 12px;
 }
 
-.section-head {
-  display: grid;
-  gap: 4px;
-}
-
-.command-grid,
-.family-grid,
-.path-grid,
-.points-grid,
-.direction-grid {
-  display: grid;
-  gap: 12px;
-}
-
-.command-grid {
+.quick-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.family-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.quick-card {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.4);
 }
 
-.path-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.step-chip {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
+  color: #f8f7f2;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
-.points-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.quick-card code,
+.loading-card code {
+  display: inline-block;
+  padding: 9px 10px;
+  border: 1px solid rgba(12, 108, 105, 0.14);
+  border-radius: 12px;
+  background: rgba(19, 129, 125, 0.08);
+  color: #0d5f5b;
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
 }
 
-.direction-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.track-shell,
+.loading-shell {
+  display: grid;
+  gap: 12px;
 }
 
-.command-card,
-.point-card,
-.direction-card,
-.safety-item {
+.track-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.track-card {
+  padding: 18px;
+}
+
+.track-badge,
+.skill-stage {
+  color: var(--brand);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.track-list,
+.review-list {
   display: grid;
   gap: 8px;
-}
-
-.command-card {
-  padding: 12px 14px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.42);
-}
-
-.family-card h2,
-.path-card h2,
-.direction-card h3,
-.point-card strong {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  line-height: 1.28;
-  letter-spacing: -0.03em;
+  padding: 0;
+  list-style: none;
 }
 
-.family-card h2,
-.path-card h2 {
-  font-size: 1.05rem;
-}
-
-.direction-card h3 {
-  font-size: 0.98rem;
-}
-
-.family-card p,
-.path-card p,
-.point-card p,
-.direction-card p,
-.command-card p,
-.safety-item p {
-  margin: 0;
+.track-list li {
+  position: relative;
+  padding-left: 14px;
   color: var(--ink-soft);
-  line-height: 1.56;
+  line-height: 1.5;
 }
 
-.family-examples,
-.direction-note {
-  color: var(--brand);
+.track-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
 }
 
-pre {
-  overflow: auto;
-  margin: 0;
-  padding: 14px;
-  border: 1px solid rgba(67, 73, 60, 0.14);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.56);
+.selection-copy {
+  display: grid;
+  gap: 12px;
 }
 
-code {
-  font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.84rem;
+.skill-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.command-card code {
-  padding: 8px 10px;
-  border: 1px solid rgba(12, 108, 105, 0.14);
-  border-radius: 10px;
-  color: #0d5f5b;
-  background: rgba(19, 129, 125, 0.08);
+.skill-card {
+  padding: 18px;
+  min-height: 220px;
 }
 
-.safety-list {
+.skill-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.skill-card strong {
+  font-size: 0.88rem;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.scenario-panel {
+  padding: 22px;
+  align-content: start;
+}
+
+.scenario-list {
   display: grid;
   gap: 10px;
 }
 
-.safety-item {
+.scenario-card {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.scenario-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.loading-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.loading-card pre {
+  margin: 0;
+  padding: 14px;
+  overflow: auto;
+  border: 1px solid rgba(67, 73, 60, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.config-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.config-card {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.review-item {
+  display: grid;
   grid-template-columns: 14px minmax(0, 1fr);
+  gap: 10px;
   align-items: start;
 }
 
-.safety-dot {
+.review-dot {
   width: 8px;
   height: 8px;
-  margin-top: 7px;
+  margin-top: 8px;
   border-radius: 999px;
   background: var(--brand);
 }
 
-@media (max-width: 1100px) {
-  .command-grid,
-  .family-grid,
-  .path-grid,
-  .points-grid,
-  .direction-grid {
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.46);
+}
+
+@media (max-width: 1180px) {
+  .skills-hero,
+  .selection-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-grid,
+  .quick-grid,
+  .track-grid,
+  .skill-grid,
+  .loading-grid,
+  .config-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
-  .command-grid,
-  .family-grid,
-  .path-grid,
-  .points-grid,
-  .direction-grid {
+  .skills-page {
+    padding-top: 18px;
+  }
+
+  .hero-main,
+  .hero-side,
+  .desk-panel,
+  .scenario-panel,
+  .review-panel,
+  .config-panel {
+    padding: 18px;
+  }
+
+  .signal-grid,
+  .quick-grid,
+  .track-grid,
+  .skill-grid,
+  .loading-grid,
+  .config-grid {
     grid-template-columns: 1fr;
   }
 }
