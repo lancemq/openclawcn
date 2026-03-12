@@ -105,7 +105,7 @@ export default defineNuxtConfig({
     vercelDeployHookUrl: process.env.VERCEL_DEPLOY_HOOK_URL || '',
     contentRebuildToken: process.env.CONTENT_REBUILD_TOKEN || '',
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.openclawcn.xyz',
       githubUrl: process.env.NUXT_PUBLIC_GITHUB_URL || 'https://github.com/openclaw/openclaw',
       siteName: process.env.NUXT_PUBLIC_SITE_NAME || 'OpenClawCN',
       siteDescription: process.env.NUXT_PUBLIC_SITE_DESCRIPTION || 'OpenClaw 中文官网，提供新闻资讯、文档教程、最佳实践与中文社区支持入口。',

@@ -158,15 +158,16 @@ async function copyRssUrl() {
 }
 
 .success {
-  color: #bbf7d0;
-  background: rgba(34, 197, 94, 0.14);
-  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #0f5132;
+  background: rgba(226, 248, 232, 0.96);
+  border: 1px solid rgba(63, 134, 88, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
 .error {
-  color: #fecaca;
-  background: rgba(239, 68, 68, 0.14);
-  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #8f1d1d;
+  background: rgba(254, 238, 238, 0.98);
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
 .rss-note {
