@@ -14,7 +14,7 @@ tags: [knowledge-management, notes, personal, productivity]
 
 ## 系统架构
 
-```
+```text
 ┌─────────────────────────────────────────────┐
 │              OpenClaw 知识助手               │
 │                                             │

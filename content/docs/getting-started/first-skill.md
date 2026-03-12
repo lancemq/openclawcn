@@ -152,7 +152,7 @@ SEARCH_ENGINE_ID=your-engine-id
 
 ### 技能结构
 
-```
+```text
 my-skill/
 ├── skill.json       # 技能元数据
 ├── prompt.md        # 提示词模板

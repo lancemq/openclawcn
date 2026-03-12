@@ -48,7 +48,7 @@ tags: [agent, quickstart, tutorial, basics]
 
 如果你更喜欢用配置文件管理，可以直接编辑 `~/.openclaw/agents/` 目录：
 
-```bash
+```text
 ~/.openclaw/agents/
 ├── default.json
 ├── work-assistant.json

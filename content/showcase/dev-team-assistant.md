@@ -26,7 +26,7 @@ tags: [development, productivity, code-assistant, team]
 
 ### 系统架构
 
-```
+```text
 ┌─────────────────────────────────────────────┐
 │              开发者交互入口                  │
 │  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────────┐    │
@@ -283,17 +283,15 @@ async def explain_code(code, language):
     """解释代码逻辑"""
     prompt = f"""
     请用中文解释以下 {language} 代码：
-    
-    ```
+
     {code}
-    ```
-    
+
     请包含：
     1. 代码功能概述
     2. 关键逻辑解释
     3. 可能的改进建议
     """
-    
+
     return await generate_response(prompt)
 ```
 
