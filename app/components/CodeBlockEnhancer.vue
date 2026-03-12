@@ -1,4 +1,14 @@
 <script setup lang="ts">
+function getCopyButtonMarkup(copied = false) {
+  return `
+    <span class="code-copy-btn-mark" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </span>
+    <span class="code-copy-btn-label">${copied ? '已复制' : '复制代码'}</span>
+  `
+}
+
 // 为代码块添加复制按钮
 function enhanceCodeBlocks() {
   const codeBlocks = document.querySelectorAll('pre')
@@ -33,15 +43,15 @@ function enhanceCodeBlocks() {
     const button = document.createElement('button')
     button.type = 'button'
     button.className = 'code-copy-btn'
-    button.innerHTML = '<span class="code-copy-btn-icon">copy</span><span class="code-copy-btn-label">复制代码</span>'
+    button.innerHTML = getCopyButtonMarkup()
     button.onclick = async () => {
       try {
         await navigator.clipboard.writeText(codeText)
         button.classList.add('copied')
-        button.innerHTML = '<span class="code-copy-btn-icon">done</span><span class="code-copy-btn-label">已复制</span>'
+        button.innerHTML = getCopyButtonMarkup(true)
         setTimeout(() => {
           button.classList.remove('copied')
-          button.innerHTML = '<span class="code-copy-btn-icon">copy</span><span class="code-copy-btn-label">复制代码</span>'
+          button.innerHTML = getCopyButtonMarkup()
         }, 2000)
       } catch (err) {
         console.error('复制失败:', err)
