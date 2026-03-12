@@ -73,7 +73,7 @@ export const actionOverview = [
   },
   {
     title: '常见问题',
-    description: '快速查看“先看哪里、怎么反馈、去哪里提问”等高频问题。',
+    description: '快速查看"先看哪里、怎么反馈、去哪里提问"等高频问题。',
     to: '/faq',
     meta: 'FAQ',
   },
@@ -88,6 +88,33 @@ export const actionOverview = [
     description: '查看 GitHub、反馈入口和当前可用的社区支持路径。',
     to: '/community',
     meta: '社区',
+  },
+]
+
+export const ecosystemOverview = [
+  {
+    title: '生态中心',
+    description: '探索 ClawHub 技能市场、插件生态、第三方集成和社区项目。',
+    to: '/ecosystem',
+    meta: '生态',
+  },
+  {
+    title: '案例展示',
+    description: '真实的企业和个人使用案例，展示 OpenClaw 的实际应用效果。',
+    to: '/showcase',
+    meta: '案例',
+  },
+  {
+    title: '下载中心',
+    description: '各平台安装包下载、一键安装命令和系统要求说明。',
+    to: '/download',
+    meta: '下载',
+  },
+  {
+    title: '产品路线图',
+    description: '了解 OpenClaw 的发展方向和即将到来的新功能。',
+    to: '/roadmap',
+    meta: '路线图',
   },
 ]
 
@@ -130,6 +157,24 @@ export const extensionOverview = [
     description: '把 SOUL、基础 openclaw.json、skills 配置和常见高频项整理成更易查阅的中文入口。',
     to: '/configurations',
     meta: 'Config',
+  },
+  {
+    title: '生态中心',
+    description: '探索 ClawHub 技能市场、插件生态、第三方集成和社区项目，了解 OpenClaw 的扩展能力。',
+    to: '/ecosystem',
+    meta: 'Ecosystem',
+  },
+  {
+    title: '案例展示',
+    description: '真实的企业和个人使用案例，展示 OpenClaw 在不同场景中的实际应用效果。',
+    to: '/showcase',
+    meta: 'Showcase',
+  },
+  {
+    title: '下载中心',
+    description: '各平台安装包下载、一键安装命令和系统要求说明。',
+    to: '/download',
+    meta: 'Download',
   },
 ]
 

@@ -51,5 +51,21 @@ export default defineContentConfig({
         tags: z.array(z.string()).optional(),
       }),
     }),
+    showcase: defineCollection({
+      type: 'page',
+      source: 'showcase/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        industry: z.string(),
+        scale: z.string(),
+        scenario: z.string(),
+        outcomes: z.array(z.string()).optional(),
+        featured: z.boolean().optional(),
+        date: z.string().optional(),
+        updatedAt: z.string().optional(),
+        tags: z.array(z.string()).optional(),
+      }),
+    }),
   },
 })

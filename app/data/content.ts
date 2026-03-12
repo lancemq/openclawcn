@@ -88,6 +88,20 @@ export function sortBestPractices(items: NavItem[]) {
   })
 }
 
+export function sortShowcase(items: NavItem[]) {
+  return [...items].sort((left, right) => {
+    // 置顶的排在前面
+    const leftFeatured = (left as any).featured ? 0 : 1
+    const rightFeatured = (right as any).featured ? 0 : 1
+    if (leftFeatured !== rightFeatured) {
+      return leftFeatured - rightFeatured
+    }
+
+    // 按日期排序
+    return String(right.date || '').localeCompare(String(left.date || ''))
+  })
+}
+
 export function getPrevNext(items: NavItem[], currentPath: string) {
   const currentIndex = items.findIndex(item => item.path === currentPath)
 

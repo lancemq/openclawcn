@@ -23,11 +23,21 @@ const navGroups = [
     ],
   },
   {
-    label: '资讯',
+    label: '生态',
     slug: 'ecosystem',
     items: [
-      { label: '新闻动态', to: '/news' },
+      { label: '生态中心', to: '/ecosystem' },
+      { label: '案例展示', to: '/showcase' },
+      { label: '下载中心', to: '/download' },
+      { label: '产品路线图', to: '/roadmap' },
       { label: '衍生生态', to: '/derivatives' },
+    ],
+  },
+  {
+    label: '资讯',
+    slug: 'news',
+    items: [
+      { label: '新闻动态', to: '/news' },
       { label: '社区支持', to: '/community' },
     ],
   },

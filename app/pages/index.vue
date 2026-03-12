@@ -4,6 +4,7 @@ import {
   actionOverview,
   bestPracticeOverview,
   docsOverview,
+  ecosystemOverview,
   extensionOverview,
   newsOverview,
   userRouteOverview,
@@ -306,6 +307,27 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       </div>
     </section>
 
+    <section class="section content-section ecosystem-section">
+      <div class="container">
+        <div class="feature-band">
+          <div class="home-head head-inline">
+            <p class="eyebrow">生态入口</p>
+            <p class="home-head-note">探索 OpenClaw 的生态系统，包括技能市场、案例展示、下载中心和产品路线图。</p>
+          </div>
+          <div class="grid ecosystem-grid">
+            <ContentCard
+              v-for="item in ecosystemOverview"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section content-section action-section">
       <div class="container">
           <div class="feature-band">
@@ -588,6 +610,11 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   gap: 10px;
 }
 
+.ecosystem-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .subscribe-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
@@ -607,6 +634,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   .route-grid,
   .practice-grid,
   .extension-grid,
+  .ecosystem-grid,
   .action-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -628,6 +656,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   .route-grid,
   .practice-grid,
   .extension-grid,
+  .ecosystem-grid,
   .action-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -647,6 +676,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   .route-grid,
   .practice-grid,
   .extension-grid,
+  .ecosystem-grid,
   .action-grid {
     grid-template-columns: 1fr;
   }
