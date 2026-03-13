@@ -40,10 +40,6 @@ const footerLinks = {
   },
 }
 
-const socialLinks = [
-  { label: 'GitHub', icon: 'github', to: 'https://github.com/openclawcn' },
-]
-
 const { public: publicConfig } = useRuntimeConfig()
 </script>
 
@@ -76,21 +72,6 @@ const { public: publicConfig } = useRuntimeConfig()
         <p class="brand-desc">
           面向中文用户的 OpenClaw 新闻、文档、最佳实践与社区支持入口，助力开发者高效使用 OpenClaw。
         </p>
-        <div class="social-links">
-          <a
-            v-for="link in socialLinks"
-            :key="link.icon"
-            :href="link.to"
-            target="_blank"
-            rel="noreferrer"
-            class="social-link"
-            :aria-label="link.label"
-          >
-            <svg v-if="link.icon === 'github'" class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-          </a>
-        </div>
       </div>
 
       <div class="footer-links">
@@ -223,36 +204,6 @@ const { public: publicConfig } = useRuntimeConfig()
   color: var(--ink-soft);
   font-size: 0.9rem;
   line-height: 1.75;
-}
-
-.social-links {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.social-link {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  border: 1px solid rgba(67, 73, 60, 0.14);
-  background: rgba(255, 251, 244, 0.6);
-  color: var(--ink-soft);
-  transition: all 0.2s ease;
-}
-
-.social-link:hover {
-  color: var(--brand);
-  border-color: rgba(19, 129, 125, 0.3);
-  background: rgba(19, 129, 125, 0.08);
-  transform: translateY(-2px);
-}
-
-.social-icon {
-  width: 18px;
-  height: 18px;
 }
 
 .footer-links {
