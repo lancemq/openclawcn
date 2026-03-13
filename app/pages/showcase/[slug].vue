@@ -17,6 +17,26 @@ const sortedItems = computed(() => sortShowcase((allItems.value || []) as any[])
 
 const navigation = computed(() => getPrevNext(sortedItems.value, `/showcase/${slug.value}`))
 
+const prevNav = computed(() =>
+  navigation.value.previous
+    ? {
+        title: navigation.value.previous.title,
+        path: navigation.value.previous.path,
+        description: navigation.value.previous.description || '查看上一个案例',
+      }
+    : null,
+)
+
+const nextNav = computed(() =>
+  navigation.value.next
+    ? {
+        title: navigation.value.next.title,
+        path: navigation.value.next.path,
+        description: navigation.value.next.description || '查看下一个案例',
+      }
+    : null,
+)
+
 useSeo({
   title: item.value?.title || '案例详情',
   description: item.value?.description || '',
@@ -55,25 +75,13 @@ useSeo({
           <MarkdownContent :content="item" />
         </div>
 
-        <nav class="article-nav">
-          <NuxtLink v-if="navigation.previous" :to="navigation.previous.path" class="nav-link prev">
-            <span class="nav-label">上一个案例</span>
-            <span class="nav-title">{{ navigation.previous.title }}</span>
-          </NuxtLink>
-          <span v-else class="nav-link prev disabled">
-            <span class="nav-label">上一个案例</span>
-            <span class="nav-title">没有更多</span>
-          </span>
-
-          <NuxtLink v-if="navigation.next" :to="navigation.next.path" class="nav-link next">
-            <span class="nav-label">下一个案例</span>
-            <span class="nav-title">{{ navigation.next.title }}</span>
-          </NuxtLink>
-          <span v-else class="nav-link next disabled">
-            <span class="nav-label">下一个案例</span>
-            <span class="nav-title">没有更多</span>
-          </span>
-        </nav>
+        <ContentNavigator
+          section-label="案例导航"
+          section-title="继续浏览案例"
+          section-description="按顺序查看相邻案例，了解不同场景下的实际应用效果。"
+          :previous="prevNav"
+          :next="nextNav"
+        />
       </article>
 
       <div v-else class="empty-state card">
@@ -176,48 +184,6 @@ useSeo({
   padding: 24px;
 }
 
-.article-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.nav-link {
-  display: grid;
-  gap: 4px;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  background: rgba(255, 255, 255, 0.6);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.nav-link:hover:not(.disabled) {
-  transform: translateY(-2px);
-  border-color: rgba(12, 108, 105, 0.2);
-}
-
-.nav-link.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.nav-label {
-  font-size: 0.78rem;
-  color: var(--ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.nav-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.next {
-  text-align: right;
-}
-
 .empty-state {
   padding: 40px;
   text-align: center;
@@ -226,11 +192,5 @@ useSeo({
 .empty-state p {
   margin-bottom: 16px;
   color: var(--ink-soft);
-}
-
-@media (max-width: 760px) {
-  .article-nav {
-    grid-template-columns: 1fr;
-  }
 }
 </style>
