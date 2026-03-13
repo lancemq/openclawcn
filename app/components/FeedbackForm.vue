@@ -299,11 +299,13 @@ async function submitFeedback() {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  align-items: start;
 }
 
 .field {
   display: grid;
   gap: 8px;
+  grid-template-rows: auto auto auto;
 }
 
 .field span {
@@ -322,6 +324,10 @@ textarea {
   font: inherit;
 }
 
+select {
+  cursor: pointer;
+}
+
 textarea {
   resize: vertical;
 }
@@ -329,6 +335,7 @@ textarea {
 small {
   color: var(--ink-soft);
   line-height: 1.5;
+  min-height: 1.5em;
 }
 
 .field-error {
