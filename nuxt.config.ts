@@ -51,7 +51,7 @@ const toolRoutes = [
 export default defineNuxtConfig({
   compatibilityDate: '2025-02-20',
   srcDir: 'app/',
-  modules: ['@nuxt/content', '@nuxt/image'],
+  modules: ['@nuxt/content', '@nuxt/image', '@vercel/analytics/nuxt'],
   content: {
     experimental: {
       sqliteConnector: 'native',
