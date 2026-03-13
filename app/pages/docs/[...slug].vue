@@ -131,7 +131,7 @@ useSeo({
       <AppBreadcrumbs :items="breadcrumbItems" />
 
       <div class="content-detail-layout">
-        <article class="card prose">
+        <article class="card">
           <div class="content-header">
             <p class="eyebrow">{{ page?.category || '文档' }}</p>
             <div v-if="pageTags.length" class="content-tag-list">
@@ -140,9 +140,7 @@ useSeo({
           </div>
           <h1>{{ page?.title }}</h1>
           <p class="muted">{{ page?.description }}</p>
-          <div class="markdown-content">
-            <ContentRenderer v-if="page" :value="page" />
-          </div>
+          <MarkdownContent :content="page" />
         </article>
 
         <div class="content-side">

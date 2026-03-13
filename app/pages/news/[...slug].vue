@@ -142,7 +142,7 @@ useSeo({
     <div class="container">
       <AppBreadcrumbs :items="breadcrumbItems" />
 
-      <article class="card prose">
+      <article class="card">
         <div class="news-meta">
           <span class="eyebrow">{{ page?.category || '动态' }}</span>
           <span class="tag">{{ page?.date }}</span>
@@ -152,9 +152,7 @@ useSeo({
         </div>
         <h1>{{ page?.title }}</h1>
         <p class="muted">{{ page?.description }}</p>
-        <div class="markdown-content">
-          <ContentRenderer v-if="page" :value="page" />
-        </div>
+        <MarkdownContent :content="page" />
       </article>
 
       <ContentNavigator

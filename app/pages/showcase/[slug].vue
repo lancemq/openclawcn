@@ -52,9 +52,7 @@ useSeo({
         </header>
 
         <div class="article-body card">
-          <ContentRenderer :value="item">
-            <ContentRendererMarkdown :value="item" />
-          </ContentRenderer>
+          <MarkdownContent :content="item" />
         </div>
 
         <nav class="article-nav">
@@ -176,87 +174,6 @@ useSeo({
 
 .article-body {
   padding: 24px;
-}
-
-.article-body :deep(h2) {
-  margin-top: 32px;
-  margin-bottom: 16px;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.35rem;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-}
-
-.article-body :deep(h3) {
-  margin-top: 24px;
-  margin-bottom: 12px;
-  font-size: 1.1rem;
-  line-height: 1.35;
-}
-
-.article-body :deep(p) {
-  margin-bottom: 16px;
-  color: var(--ink);
-  font-size: 0.98rem;
-  line-height: 1.7;
-}
-
-.article-body :deep(ul),
-.article-body :deep(ol) {
-  margin-bottom: 16px;
-  padding-left: 24px;
-}
-
-.article-body :deep(li) {
-  margin-bottom: 8px;
-  font-size: 0.98rem;
-  line-height: 1.6;
-}
-
-.article-body :deep(code) {
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: rgba(67, 73, 60, 0.08);
-  font-family: "SF Mono", "Monaco", monospace;
-  font-size: 0.88em;
-}
-
-.article-body :deep(pre) {
-  margin-bottom: 16px;
-  padding: 16px;
-  border-radius: 12px;
-  background: rgba(67, 73, 60, 0.06);
-  overflow-x: auto;
-}
-
-.article-body :deep(pre code) {
-  padding: 0;
-  background: transparent;
-  font-size: 0.88rem;
-  line-height: 1.6;
-}
-
-.article-body :deep(table) {
-  width: 100%;
-  margin-bottom: 16px;
-  border-collapse: collapse;
-}
-
-.article-body :deep(th),
-.article-body :deep(td) {
-  padding: 12px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  text-align: left;
-}
-
-.article-body :deep(th) {
-  background: rgba(67, 73, 60, 0.04);
-  font-weight: 600;
-}
-
-.article-body :deep(a) {
-  color: var(--brand);
-  text-decoration: underline;
 }
 
 .article-nav {
