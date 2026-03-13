@@ -83,6 +83,14 @@ const skillTracks = [
 ]
 
 const popularSkills = [
+  // 信息获取类
+  {
+    title: 'Web Search',
+    stage: '新手必备',
+    category: '搜索',
+    description: '让 Agent 能够搜索互联网获取最新信息，突破模型知识截止日期限制。支持多种搜索引擎后端。',
+    outcome: '适合需要实时信息的场景，如新闻查询、价格对比、技术文档检索。',
+  },
   {
     title: 'Research Assistant',
     stage: '新手 / 二阶段都适合',
@@ -91,6 +99,14 @@ const popularSkills = [
     outcome: '更适合拿来做主题调研、竞品梳理和问题前置分析。',
   },
   {
+    title: 'Wikipedia',
+    stage: '知识查询',
+    category: '百科',
+    description: '直接查询维基百科获取结构化知识，适合事实核查和背景了解。',
+    outcome: '适合需要权威来源引用的场景。',
+  },
+  // 生产力工具类
+  {
     title: 'Docs Writer',
     stage: '高频推荐',
     category: '文档',
@@ -98,19 +114,63 @@ const popularSkills = [
     outcome: '适合站点内容维护、项目知识库和中文说明整理。',
   },
   {
+    title: 'Briefing',
+    stage: '个人生产力',
+    category: '摘要',
+    description: '做日程简报、邮件摘要、会议要点和轻量工作简报，适合日常高频使用。',
+    outcome: '更适合个人或小团队的固定工作节奏。',
+  },
+  {
+    title: 'Inbox Triage',
+    stage: '高频协作',
+    category: '协作',
+    description: '围绕消息归类、待办拆解和后续动作建议做轻量分流。',
+    outcome: '更适合把混乱入口收成可执行清单。',
+  },
+  {
+    title: 'Calendar',
+    stage: '日常管理',
+    category: '日程',
+    description: '管理日程安排、会议提醒和时间冲突检测。支持 Google Calendar 等主流日历服务。',
+    outcome: '适合需要时间管理的个人和团队。',
+  },
+  {
+    title: 'Task Manager',
+    stage: '任务管理',
+    category: '任务',
+    description: '创建、跟踪和管理任务列表，支持优先级设置和进度追踪。',
+    outcome: '适合项目管理和个人待办管理。',
+  },
+  // 开发者工具类
+  {
     title: 'Code Review',
     stage: '开发工作台',
     category: '代码',
     description: '聚焦 PR 风险、行为回归、测试缺口和变更摘要，适合和终端、Git、测试链路一起使用。',
-    outcome: '更容易形成可复用的“提交前复核”流程。',
+    outcome: '更容易形成可复用的"提交前复核"流程。',
   },
   {
     title: 'Test Sensei',
     stage: '开发二阶段',
     category: '测试',
     description: '帮助发现边界条件、补测试清单和回归风险，适合前端和服务端都有一定代码量的项目。',
-    outcome: '适合把“写完了”推进到“更有把握上线”。',
+    outcome: '适合把"写完了"推进到"更有把握上线"。',
   },
+  {
+    title: 'GitHub',
+    stage: '开发者必备',
+    category: 'Git',
+    description: '直接操作 GitHub：创建 Issue、管理 PR、查看仓库状态、处理 CI/CD 结果。',
+    outcome: '适合需要频繁与 GitHub 交互的开发者。',
+  },
+  {
+    title: 'Docker',
+    stage: 'DevOps',
+    category: '容器',
+    description: '管理 Docker 容器、镜像和 compose 项目，支持启动、停止、日志查看等操作。',
+    outcome: '适合容器化部署和运维场景。',
+  },
+  // 运维与自动化类
   {
     title: 'Deploy Check',
     stage: '运维谨慎启用',
@@ -132,19 +192,49 @@ const popularSkills = [
     description: '配合截图、浏览器和页面理解能力做巡检、视觉检查和基础体验验证。',
     outcome: '适合产品页、运营页和表单流的反复检查。',
   },
+  // 数据处理类
   {
-    title: 'Briefing',
-    stage: '个人生产力',
-    category: '摘要',
-    description: '做日程简报、邮件摘要、会议要点和轻量工作简报，适合日常高频使用。',
-    outcome: '更适合个人或小团队的固定工作节奏。',
+    title: 'Spreadsheet',
+    stage: '数据处理',
+    category: '表格',
+    description: '读取、分析和处理 Excel/CSV 文件，支持数据清洗、格式转换和基础统计。',
+    outcome: '适合需要处理表格数据的办公场景。',
   },
+  {
+    title: 'Analytics',
+    stage: '数据分析',
+    category: '分析',
+    description: '数据可视化和分析报告生成，支持多种图表类型和数据源。',
+    outcome: '适合需要数据洞察的业务场景。',
+  },
+  // 其他实用技能
   {
     title: 'Expense / Ledger',
     stage: '轻量事务',
     category: '事务',
     description: '用于消费记录、日常台账和个人事务归档，适合和长期记忆一起使用。',
     outcome: '适合个人工作台，而不是大规模团队协作。',
+  },
+  {
+    title: 'Weather',
+    stage: '日常查询',
+    category: '天气',
+    description: '查询实时天气、预报和空气质量，支持全球城市。',
+    outcome: '适合日常信息查询和行程规划。',
+  },
+  {
+    title: 'Translator',
+    stage: '多语言',
+    category: '翻译',
+    description: '多语言翻译支持，结合上下文提供更准确的翻译结果。',
+    outcome: '适合跨语言沟通和文档翻译。',
+  },
+  {
+    title: 'Calculator',
+    stage: '基础工具',
+    category: '计算',
+    description: '数学计算和单位换算，支持复杂表达式和科学计算。',
+    outcome: '适合需要精确计算的场景。',
   },
   {
     title: 'ClawSouls Integration',
@@ -159,13 +249,6 @@ const popularSkills = [
     category: '发布',
     description: '把提交记录、变更摘要和用户可读说明整理成正式发布内容。',
     outcome: '非常适合中文站点、项目更新和版本周报。',
-  },
-  {
-    title: 'Inbox Triage',
-    stage: '高频协作',
-    category: '协作',
-    description: '围绕消息归类、待办拆解和后续动作建议做轻量分流。',
-    outcome: '更适合把混乱入口收成可执行清单。',
   },
 ]
 
