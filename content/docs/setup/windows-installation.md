@@ -88,7 +88,29 @@ openclaw onboard --install-daemon
 openclaw dashboard
 ```
 
-## 方式二：原生 Windows 安装
+## 方式二：PowerShell 安装脚本（推荐原生用户）
+
+如果你选择原生 Windows 安装，可以使用官方 PowerShell 脚本：
+
+```powershell
+# 一键安装
+irm https://openclaw.ai/install.ps1 | iex
+```
+
+这个脚本会：
+- 检测并安装 Node.js 22+
+- 安装 Git（如果需要）
+- 安装 OpenClaw CLI
+- 引导完成首次配置
+
+### 查看脚本选项
+
+```powershell
+# 查看帮助
+irm https://openclaw.ai/install.ps1 | iex -Help
+```
+
+## 方式三：手动安装
 
 如果你必须使用原生 Windows：
 

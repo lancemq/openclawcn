@@ -11,6 +11,30 @@ tags: [installation, npm, install-script, wsl2]
 
 这一页讲的是 OpenClaw 本身应该如何安装，而不是泛泛的环境准备。根据官方当前文档，最推荐的安装方式是使用官网提供的安装脚本，它会自动处理 Node 检测、OpenClaw CLI 安装，以及首次 onboarding。
 
+## 系统要求
+
+### 最低配置
+
+| 要求 | macOS | Windows | Linux |
+|------|-------|---------|-------|
+| **操作系统** | macOS 12 (Monterey) | Windows 10 1809+ | Ubuntu 20.04 / Debian 11 |
+| **推荐系统** | macOS 14 (Sonoma) | Windows 11 + WSL2 | Ubuntu 22.04 / Debian 12 |
+| **Node.js** | 20 LTS | 20 LTS | 20 LTS |
+| **推荐 Node.js** | 22 LTS | 22 LTS | 22 LTS |
+| **内存** | 4 GB | 4 GB | 2 GB |
+| **推荐内存** | 8 GB+ | 8 GB+ | 4 GB+ |
+| **存储空间** | 5 GB | 5 GB | 5 GB |
+| **推荐存储** | 10 GB+ | 10 GB+ | 20 GB+ |
+
+### 硬件建议
+
+| 场景 | CPU | 内存 | 存储 |
+|------|-----|------|------|
+| 基础使用 | 2 核 | 4 GB | 10 GB |
+| 日常使用 | 4 核 | 8 GB | 20 GB |
+| 长期运行 | 4 核+ | 8 GB+ | 50 GB+ |
+| 本地模型 | 8 核+ | 16 GB+ | 100 GB+ |
+
 ## 官方推荐的系统要求
 
 OpenClaw 当前的安装前提主要是：
