@@ -262,13 +262,6 @@ function getKindIcon(kind: string) {
               </div>
             </div>
           </div>
-
-          <div class="search-footer">
-            <span class="footer-item">
-              <kbd>⌘</kbd><kbd>K</kbd>
-              <span>打开搜索</span>
-            </span>
-          </div>
         </div>
       </div>
     </Transition>
@@ -503,40 +496,6 @@ function getKindIcon(kind: string) {
   color: #374151;
 }
 
-.search-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  padding: 12px 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  background: #fafafa;
-}
-
-.footer-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-.footer-item kbd {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 6px;
-  border-radius: 5px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  font-size: 0.7rem;
-  font-weight: 600;
-  font-family: inherit;
-  color: #374151;
-}
-
 /* Transition */
 .search-enter-active,
 .search-leave-active {
@@ -619,17 +578,6 @@ function getKindIcon(kind: string) {
     background: #374151;
     color: #d1d5db;
   }
-
-  .search-footer {
-    border-top-color: rgba(255, 255, 255, 0.1);
-    background: #1f2937;
-  }
-
-  .footer-item kbd {
-    background: #374151;
-    border-color: #4b5563;
-    color: #d1d5db;
-  }
 }
 
 /* Mobile */
@@ -644,10 +592,6 @@ function getKindIcon(kind: string) {
 
   .search-input {
     font-size: 1rem;
-  }
-
-  .search-footer {
-    display: none;
   }
 }
 </style>
