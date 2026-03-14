@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
+const { openSearch } = useGlobalSearch()
 
 const navGroups = [
   {
@@ -108,6 +109,14 @@ const activeGroup = computed(() =>
         </div>
 
         <div class="header-actions">
+          <button type="button" class="search-trigger" title="搜索 (⌘K)" @click="openSearch">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <span class="search-trigger-text">搜索</span>
+            <kbd>⌘K</kbd>
+          </button>
           <a class="button secondary compact" :href="publicConfig.githubUrl" target="_blank" rel="noreferrer">
             GitHub
           </a>
@@ -279,6 +288,63 @@ const activeGroup = computed(() =>
   min-height: 32px;
   padding-inline: 10px;
   font-size: 0.86rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid rgba(67, 73, 60, 0.15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-trigger:hover {
+  border-color: rgba(67, 73, 60, 0.25);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--ink);
+}
+
+.search-trigger svg {
+  width: 16px;
+  height: 16px;
+}
+
+.search-trigger-text {
+  display: none;
+}
+
+.search-trigger kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+@media (min-width: 768px) {
+  .search-trigger-text {
+    display: inline;
+  }
 }
 
 @media (max-width: 980px) {
