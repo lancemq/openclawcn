@@ -58,44 +58,38 @@ export const toolSeriesSignals = [
 
 export const toolSeriesOverview = [
   {
-    title: '总入口',
-    description: '先弄清楚 Tools、Plugins、Hooks、Exec、Approvals 和 Automation 的分工，再进入具体专题。',
-    to: '/tools',
-    meta: 'Map',
-  },
-  {
     title: '插件系统',
-    description: '回答“什么时候该装插件，而不是继续写 skills 或改配置”。',
+    description: '深入理解插件安装、配置、启停、更新和回滚，区分插件与 Skills、Tools 的边界。',
     to: '/tools/plugins',
     meta: 'Plugins',
   },
   {
-    title: 'Exec 与审批',
-    description: '把高权限工具、apply_patch、审批和 sandbox 讲清楚，这是工具层最关键的边界页。',
-    to: '/tools/exec-and-approvals',
-    meta: 'Risk',
-  },
-  {
-    title: 'Hooks 与 Webhooks',
-    description: '回答“什么时候触发动作”，把事件触发和时间触发区分开。',
-    to: '/tools/hooks-and-webhooks',
-    meta: 'Trigger',
+    title: '触发机制',
+    description: '理解 Hooks、Webhooks、Cron、Heartbeat 四种触发方式的区别和应用场景。',
+    to: '/tools/triggers',
+    meta: 'Triggers',
   },
   {
     title: '自动化与定时任务',
-    description: '把 cron、heartbeat、会话保留、日志和长期运行注意事项整理成一层。',
+    description: '掌握 Cron 定时任务、Heartbeat 心跳、会话管理和长期运行策略。',
     to: '/tools/automation',
     meta: 'Automation',
   },
   {
-    title: '工具排障',
-    description: '处理“装了没生效、能调用但失败、远程环境和本地不一致”等高频问题。',
-    to: '/tools/troubleshooting',
-    meta: 'Debug',
+    title: '诊断与排障',
+    description: '建立系统化的诊断流程，快速定位和解决工具层问题。',
+    to: '/tools/diagnostics',
+    meta: 'Diagnostics',
+  },
+  {
+    title: 'Exec 与审批',
+    description: '理解高权限工具、审批机制和 Sandbox 边界，这是工具层最关键的边界页。',
+    to: '/tools/exec-and-approvals',
+    meta: 'Risk',
   },
   {
     title: '组合方案',
-    description: '按内容站、开发交付、运维巡检、个人工作台等场景给出可以直接照搬的工具栈。',
+    description: '按内容站、开发交付、运维巡检等场景给出可以直接照搬的工具栈。',
     to: '/tools/stacks',
     meta: 'Stacks',
   },
@@ -138,12 +132,12 @@ export const toolRiskBands = [
 ]
 
 export const toolReadingPath = [
-  { title: '先看全局地图', to: '/tools', meta: '总入口' },
-  { title: '区分插件和技能', to: '/tools/plugins', meta: '边界' },
-  { title: '理解执行与审批', to: '/tools/exec-and-approvals', meta: '权限' },
-  { title: '理解触发机制', to: '/tools/hooks-and-webhooks', meta: '触发' },
-  { title: '最后再做长期自动化', to: '/tools/automation', meta: '长期运行' },
-  { title: '遇到问题回到排障', to: '/tools/troubleshooting', meta: '诊断' },
+  { title: '理解插件系统', to: '/tools/plugins', meta: 'Plugins' },
+  { title: '掌握触发机制', to: '/tools/triggers', meta: 'Triggers' },
+  { title: '配置自动化任务', to: '/tools/automation', meta: 'Automation' },
+  { title: '学习诊断排障', to: '/tools/diagnostics', meta: 'Diagnostics' },
+  { title: '理解执行边界', to: '/tools/exec-and-approvals', meta: 'Risk' },
+  { title: '参考组合方案', to: '/tools/stacks', meta: 'Stacks' },
 ]
 
 export const toolPages: ToolPageConfig[] = [
