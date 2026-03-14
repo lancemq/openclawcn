@@ -38,14 +38,23 @@ const categories = computed(() => {
 })
 
 const tags = computed(() => {
-  const values = new Set<string>(['全部'])
+  const tagCounts: Record<string, number> = {}
 
   ;(items.value || []).forEach((item: any) => {
     const itemTags = Array.isArray(item.tags) ? item.tags : []
-    itemTags.forEach((tag: string) => values.add(tag))
+    itemTags.forEach((tag: string) => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1
+    })
   })
 
-  return Array.from(values)
+  // 只展示出现在至少3篇文章中的tag
+  const MIN_TAG_COUNT = 3
+  const filteredTags = Object.entries(tagCounts)
+    .filter(([, count]) => count >= MIN_TAG_COUNT)
+    .sort((a, b) => b[1] - a[1]) // 按文章数量降序排列
+    .map(([tag]) => tag)
+
+  return ['全部', ...filteredTags]
 })
 
 // 过滤文档
