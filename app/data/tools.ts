@@ -41,22 +41,28 @@ export type ToolPageConfig = {
 export const toolSeriesSignals = [
   {
     label: '这一组解决什么',
-    value: '让 OpenClaw 不只会回复',
-    note: '把插件、执行能力、审批、触发和自动化放回同一张地图里，帮助中文用户判断系统真正的能力边界。',
+    value: '把扩展能力整理成清晰层级',
+    note: '不再把插件、触发、自动化、权限和排障混成一组平行概念，而是按“装能力、触发能力、长期运行、诊断边界”重新归位。',
   },
   {
-    label: '最容易混淆的点',
-    value: 'Skills 不等于 Plugins',
-    note: 'Skills 更偏工作法和能力包，Plugins 更偏把新代码能力装进系统；两者可以配合，但不应该混成同一层。',
+    label: '这轮目录调整',
+    value: '合并重复专题，保留清晰主线',
+    note: 'Hooks / Webhooks 归并到“触发机制”，工具排障统一收口到“诊断与排障”，避免同一问题被拆成两套入口。',
   },
   {
     label: '最重要的阅读原则',
     value: '先边界，后扩展',
-    note: '先理解权限、审批和运行位置，再决定是否安装插件、接入 hooks 或做长期自动化。',
+    note: '先理解执行边界和运行位置，再决定是否安装插件、接入事件触发或做长期自动化。',
   },
 ]
 
 export const toolSeriesOverview = [
+  {
+    title: '执行边界',
+    description: '先理解 Exec、审批和 sandbox 边界，知道系统能做到什么程度，以及什么动作不该轻易自动化。',
+    to: '/tools/exec-and-approvals',
+    meta: 'Risk',
+  },
   {
     title: '插件系统',
     description: '深入理解插件安装、配置、启停、更新和回滚，区分插件与 Skills、Tools 的边界。',
@@ -65,7 +71,7 @@ export const toolSeriesOverview = [
   },
   {
     title: '触发机制',
-    description: '理解 Hooks、Webhooks、Cron、Heartbeat 四种触发方式的区别和应用场景。',
+    description: '统一理解 Hooks、Webhooks、Mappings 与事件入口，不再把相近概念拆成两页重复解释。',
     to: '/tools/triggers',
     meta: 'Triggers',
   },
@@ -77,15 +83,9 @@ export const toolSeriesOverview = [
   },
   {
     title: '诊断与排障',
-    description: '建立系统化的诊断流程，快速定位和解决工具层问题。',
+    description: '把“装了没生效、能调用但失败、环境不一致”统一纳入一套排障顺序。',
     to: '/tools/diagnostics',
     meta: 'Diagnostics',
-  },
-  {
-    title: 'Exec 与审批',
-    description: '理解高权限工具、审批机制和 Sandbox 边界，这是工具层最关键的边界页。',
-    to: '/tools/exec-and-approvals',
-    meta: 'Risk',
   },
   {
     title: '组合方案',
@@ -98,18 +98,18 @@ export const toolSeriesOverview = [
 export const toolAudienceTracks = [
   {
     title: '刚进入扩展阶段',
-    summary: '先看总入口，再看插件和 Exec 边界，目的是知道自己该在哪一层动手，而不是一下子全配。',
-    picks: ['/tools', '/tools/plugins', '/tools/exec-and-approvals'],
+    summary: '先看总入口和执行边界，再进入插件系统，目的是先分清风险层和能力层。',
+    picks: ['/tools', '/tools/exec-and-approvals', '/tools/plugins'],
   },
   {
     title: '已经准备做流程触发',
-    summary: '优先看 Hooks / Webhooks，再决定是否接 cron 或 heartbeat。先搞清楚事件触发和时间触发的区别。',
-    picks: ['/tools/hooks-and-webhooks', '/tools/automation'],
+    summary: '先看触发机制，再进入自动化任务。先分清事件入口和时间驱动，后面才不会把流程越配越乱。',
+    picks: ['/tools/triggers', '/tools/automation'],
   },
   {
     title: '准备长期运行',
-    summary: '把审批、sandbox、日志、重试和排障方法一起看，不要只盯着“能不能跑”。',
-    picks: ['/tools/exec-and-approvals', '/tools/automation', '/tools/troubleshooting'],
+    summary: '把审批、日志、并发和诊断方法一起看，不要只盯着“能不能跑起来”。',
+    picks: ['/tools/exec-and-approvals', '/tools/automation', '/tools/diagnostics'],
   },
 ]
 
@@ -132,11 +132,11 @@ export const toolRiskBands = [
 ]
 
 export const toolReadingPath = [
+  { title: '先看执行边界', to: '/tools/exec-and-approvals', meta: 'Risk' },
   { title: '理解插件系统', to: '/tools/plugins', meta: 'Plugins' },
   { title: '掌握触发机制', to: '/tools/triggers', meta: 'Triggers' },
   { title: '配置自动化任务', to: '/tools/automation', meta: 'Automation' },
   { title: '学习诊断排障', to: '/tools/diagnostics', meta: 'Diagnostics' },
-  { title: '理解执行边界', to: '/tools/exec-and-approvals', meta: 'Risk' },
   { title: '参考组合方案', to: '/tools/stacks', meta: 'Stacks' },
 ]
 
@@ -332,104 +332,7 @@ export const toolPages: ToolPageConfig[] = [
       { title: '工具系列总入口', to: '/tools', meta: '总览' },
       { title: '关键配置', to: '/configurations', meta: 'sandbox / config' },
       { title: '工具文档', to: '/docs/manual/exec-tools-and-approvals', meta: '文档' },
-      { title: '工具排障', to: '/tools/troubleshooting', meta: '下一步' },
-    ],
-  },
-  {
-    slug: 'hooks-and-webhooks',
-    path: '/tools/hooks-and-webhooks',
-    title: 'Hooks 与 Webhooks',
-    heroTitle: 'Hooks 与 Webhooks',
-    description: '理解 OpenClaw 的触发机制，知道 hooks、webhooks、mappings 与 cron / heartbeat 的边界。',
-    eyebrow: 'Triggers',
-    summary: 'Tools 解决“能做什么”，Hooks 和 Webhooks 解决“什么时候把动作插进来”。如果不先把触发条件讲清楚，自动化很容易变成一堆难以追踪的链路。',
-    signals: [
-      {
-        label: '触发本质',
-        value: '事件驱动',
-        note: '它更适合“某件事发生了就处理”，而不是固定时间轮询。',
-      },
-      {
-        label: '最常见误区',
-        value: '把 hook 当 cron 用',
-        note: 'hook 适合响应事件，cron 适合定时任务，两者不应该混着理解。',
-      },
-      {
-        label: '最重要前提',
-        value: '先定义输入和出口',
-        note: '先知道事件从哪里进来、被路由给谁、失败后去哪看，比写复杂规则更重要。',
-      },
-    ],
-    sections: [
-      {
-        title: '触发模型',
-        eyebrow: '先分清三种入口',
-        description: '很多混乱都来自把事件触发、时间触发和主动唤醒混成一层。',
-        items: [
-          {
-            title: 'Hooks',
-            description: '在系统内部关键时机插入规则、流程或动作，偏生命周期扩展。',
-          },
-          {
-            title: 'Webhooks',
-            description: '让外部系统把事件推送进来，适合邮件、工单、表单、内容发布等场景。',
-          },
-          {
-            title: 'Mappings',
-            description: '把路径或事件映射到 agent、动作和投递方式上，是入口分发的关键配置。',
-          },
-        ],
-      },
-      {
-        title: '适合的场景',
-        eyebrow: '先选小而清晰的工作流',
-        description: '事件触发最适合那些输入明确、输出明确、失败容易人工接手的流程。',
-        items: [
-          {
-            title: '消息或表单触发',
-            description: '收到某类输入后自动归类、摘要、提醒或投递给指定 agent。',
-          },
-          {
-            title: '内容系统联动',
-            description: '发布、同步、通知、收集反馈这类有固定来源和固定动作的流程，适合从 webhook 起步。',
-          },
-          {
-            title: '外部系统桥接',
-            description: '把现有系统的事件送进 OpenClaw，而不是让 OpenClaw 主动轮询一切。',
-          },
-        ],
-      },
-      {
-        title: '不适合的场景',
-        eyebrow: '别从复杂链路起手',
-        description: '下面这些情况更容易把 hook 用成一团难以诊断的隐形逻辑。',
-        items: [
-          {
-            title: '多步且无日志的流程',
-            description: '步骤一多、依赖一多，但没有统一观察入口，后期几乎一定难排障。',
-          },
-          {
-            title: '强依赖人工确认的动作',
-            description: '如果关键节点本来就需要人工判断，就不要把它伪装成完全自动流程。',
-          },
-          {
-            title: '混合职责的入口',
-            description: '一个 webhook 同时承担路由、审批、业务判断和通知，通常是设计过重的信号。',
-          },
-        ],
-      },
-    ],
-    checklist: [
-      { title: '先画事件链', detail: '事件从哪里来、交给谁、输出去哪，至少先写成三段。' },
-      { title: '优先做最小 mapping', detail: '先让一个路径只做一件事，再决定要不要扩成复杂流。' },
-      { title: '保留人工兜底', detail: '任何外部事件入口都应该有失败后人工查看和补处理的办法。' },
-      { title: '和 cron / heartbeat 分层', detail: '事件触发、时间触发、主动唤醒三者最好不要揉成一个配置故事。' },
-    ],
-    related: [
-      { title: '工具系列总入口', to: '/tools', meta: '总览' },
-      { title: '自动化与定时任务', to: '/tools/automation', meta: '相邻主题' },
-      { title: '关键配置', to: '/configurations', meta: 'hooks config' },
-      { title: 'Hooks 文档', to: '/docs/manual/hooks-overview', meta: '文档' },
+      { title: '诊断与排障', to: '/tools/diagnostics', meta: '下一步' },
     ],
   },
   {
@@ -524,106 +427,9 @@ export const toolPages: ToolPageConfig[] = [
     ],
     related: [
       { title: '工具系列总入口', to: '/tools', meta: '总览' },
-      { title: 'Hooks 与 Webhooks', to: '/tools/hooks-and-webhooks', meta: '事件触发' },
+      { title: '触发机制', to: '/tools/triggers', meta: '事件触发' },
       { title: '自动化实践', to: '/best-practices/automation-workflows', meta: '实践' },
       { title: '关键配置', to: '/configurations', meta: 'cron / heartbeat' },
-    ],
-  },
-  {
-    slug: 'troubleshooting',
-    path: '/tools/troubleshooting',
-    title: '工具排障',
-    heroTitle: '工具排障',
-    description: '给 OpenClaw 工具层建立一套高频排障顺序，处理装了没生效、能调用但失败、环境不一致等问题。',
-    eyebrow: 'Troubleshooting',
-    summary: '工具排障最忌讳的是一出问题就重新安装。更高效的方法，是先判断问题出在层级、配置、权限、运行环境还是版本变化。',
-    signals: [
-      {
-        label: '最高频问题',
-        value: '装了但没生效',
-        note: '根因通常不是插件本身坏了，而是没启用、没重启、配错位置或装错机器。',
-      },
-      {
-        label: '最稳排障顺序',
-        value: '层级 -> 权限 -> 环境 -> 版本',
-        note: '先判断问题属于哪一层，再动配置或重装，效率更高。',
-      },
-      {
-        label: '最容易漏掉的点',
-        value: 'Gateway 主机和本机不是一回事',
-        note: '远程部署场景里，真正运行插件和任务的，往往不是你手里的这台电脑。',
-      },
-    ],
-    sections: [
-      {
-        title: '第一轮检查',
-        eyebrow: '先看有没有',
-        description: '别急着深挖日志，先确认最基础的状态和入口。',
-        items: [
-          {
-            title: '是否已安装',
-            description: '先确认系统里确实有这个插件、工具或配置项，不要把“看过文档”误判成“已经装好”。',
-          },
-          {
-            title: '是否已启用',
-            description: '很多问题不是缺能力，而是能力处于未启用状态。',
-          },
-          {
-            title: '是否已重启或重载',
-            description: '某些改动不会实时生效，特别是 Gateway 或插件配置相关变化。',
-          },
-        ],
-      },
-      {
-        title: '第二轮检查',
-        eyebrow: '再看为什么不能做',
-        description: '当能力看起来存在，但实际不能执行时，先查权限和边界。',
-        items: [
-          {
-            title: '审批与权限',
-            description: '动作是不是被审批挡住了，或者被 sandbox / allowlist 卡住了。',
-          },
-          {
-            title: '配置位置',
-            description: '配置写错层，往往表现为“看起来很像对的，但系统完全没反应”。',
-          },
-          {
-            title: '环境变量与路径',
-            description: '依赖、路径和密钥只要有一项不一致，就可能出现本地能跑、线上失败的情况。',
-          },
-        ],
-      },
-      {
-        title: '第三轮检查',
-        eyebrow: '最后看环境与版本',
-        description: '当前两轮都过了，才值得进一步判断是不是环境差异或更新引起的行为变化。',
-        items: [
-          {
-            title: '远程与本地差异',
-            description: '插件、依赖和文件是否都安装在真正运行 Gateway 的那台机器上。',
-          },
-          {
-            title: '版本升级影响',
-            description: '新版本可能改变插件形态、配置位置或默认行为，不能只用旧经验判断。',
-          },
-          {
-            title: '诊断命令和日志',
-            description: '把 `doctor`、`health`、日志和状态输出放进固定排查顺序，避免每次都凭感觉乱试。',
-          },
-        ],
-      },
-    ],
-    checklist: [
-      { title: '先验证层级', detail: '这到底是插件问题、技能问题、hook 问题还是配置问题。' },
-      { title: '再验证权限', detail: '审批、sandbox、allowlist、凭证缺一不可。' },
-      { title: '确认运行机器', detail: '远程 Gateway 场景里，别只看本机状态。' },
-      { title: '最后才考虑重装', detail: '重装适合处理损坏，不适合代替定位根因。' },
-    ],
-    related: [
-      { title: '工具系列总入口', to: '/tools', meta: '总览' },
-      { title: 'Exec 与审批', to: '/tools/exec-and-approvals', meta: '权限边界' },
-      { title: '调试与运行时覆盖', to: '/docs/reference/debugging-and-runtime-overrides', meta: '文档' },
-      { title: '故障排除', to: '/docs/reference/troubleshooting', meta: '参考' },
     ],
   },
   {

@@ -107,7 +107,7 @@ export const ecosystemOverview = [
   {
     title: '行业应用',
     description: '法律、电商、教育、金融、医疗等行业的 OpenClaw 应用方案。',
-    to: '/industries',
+    to: '/showcase',
     meta: '行业',
   },
   {

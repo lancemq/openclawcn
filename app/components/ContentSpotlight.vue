@@ -45,7 +45,7 @@ const stacks = [
     desc: '探索 Skills、Hooks、自动化和生态集成，解锁更多高级用法。',
     links: [
       { label: 'Skills 入门', to: '/skills' },
-      { label: 'Hooks 与 Webhooks', to: '/tools/hooks-and-webhooks' },
+      { label: '触发机制', to: '/tools/triggers' },
       { label: '自动化配置', to: '/tools/automation' },
       { label: '生态中心', to: '/ecosystem' },
     ],

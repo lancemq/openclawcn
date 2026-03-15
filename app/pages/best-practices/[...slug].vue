@@ -40,6 +40,22 @@ const practiceNav = computed(() => getPrevNext(orderedPractices.value, pagePath.
 
 const pageTags = computed(() => normalizeTags(page.value?.tags as string[] | undefined))
 
+const metaItems = computed(() => [
+  typeof page.value?.date === 'string' && page.value.date
+    ? { label: '发布时间', value: page.value.date }
+    : null,
+  typeof page.value?.updatedAt === 'string' && page.value.updatedAt
+    ? { label: '最后更新', value: page.value.updatedAt }
+    : null,
+  typeof page.value?.sourceName === 'string' && page.value.sourceName
+    ? {
+        label: '内容来源',
+        value: page.value.sourceName,
+        href: typeof page.value?.source === 'string' ? page.value.source : undefined,
+      }
+    : null,
+].filter(Boolean) as Array<{ label: string; value: string; href?: string }>)
+
 const relatedCards = computed(() =>
   sortBestPractices((relatedPractices.value || []) as any[])
     .map((item) => ({
@@ -135,6 +151,7 @@ useSeo({
         </div>
         <h1>{{ page?.title }}</h1>
         <p class="muted">{{ page?.description }}</p>
+        <ContentMetaPanel :items="metaItems" />
         <MarkdownContent :content="page" />
       </article>
 

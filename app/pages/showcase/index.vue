@@ -22,34 +22,77 @@ const personalCases = computed(() =>
   sortedItems.value.filter((item: any) => item.scale === '个人'),
 )
 
+const industryCount = computed(() =>
+  new Set(sortedItems.value.map((item: any) => item.industry).filter(Boolean)).size,
+)
+
 const stats = computed(() => [
-  { label: '企业案例', value: String(enterpriseCases.value.length), note: '真实企业应用' },
-  { label: '个人案例', value: String(personalCases.value.length), note: '个人使用经验' },
-  { label: '行业覆盖', value: String(new Set(sortedItems.value.map((i: any) => i.industry)).size), note: '跨行业应用' },
-  { label: '平均效率提升', value: '40%+', note: '用户反馈统计' },
+  { label: '企业案例', value: String(enterpriseCases.value.length), note: '组织化部署与团队协作' },
+  { label: '个人案例', value: String(personalCases.value.length), note: '个人工作流与副业实践' },
+  { label: '行业覆盖', value: String(industryCount.value), note: '从专业服务到公共服务' },
+  { label: '典型效率提升', value: '40%+', note: '来自案例页的综合经验值' },
 ])
 
-// 行业应用数据
+const heroSignals = [
+  {
+    title: '先看结果，再理解产品',
+    description: '案例页承担的不是“功能介绍”，而是帮用户在真实场景里建立判断。',
+    kind: 'pulse' as const,
+  },
+  {
+    title: '从行业模板走向组织工作流',
+    description: '好的案例不只展示结果，还要展示输入、边界、协作节点和风险控制。',
+    kind: 'flow' as const,
+  },
+  {
+    title: '给新访客一个“我也能做”的起点',
+    description: '通过场景化叙事，让企业与个人用户都能快速找到代入位置。',
+    kind: 'grid' as const,
+  },
+]
+
 const quickCases = [
-  { industry: '法律', case: '合同审查', time: '2.5小时→15分钟', saving: '90%' },
-  { industry: '电商', case: '客服响应', time: '好评率4.1→4.6', saving: '转化提升' },
-  { industry: '教育', case: '作业批改', time: '节省70%时间', saving: '老师减负' },
-  { industry: '金融', case: '市场报告', time: '每日自动生成', saving: '分析师解放' },
-  { industry: 'HR', case: '简历筛选', time: '批量自动化', saving: '效率20倍' },
-  { industry: '房产', case: '客户跟进', time: '成交率+45%', saving: '佣金增加' },
-  { industry: '制造', case: '库存管理', time: '缺货率12%→3%', saving: '年省¥320万' },
-  { industry: '政务', case: '市民咨询', time: '等待12分钟→30秒', saving: '年省¥280万' },
+  { industry: '法律', case: '合同审查', metric: '2.5 小时 → 15 分钟', impact: '90% 提效' },
+  { industry: '电商', case: '客服响应', metric: '4.1 星 → 4.6 星', impact: '转化提升' },
+  { industry: '教育', case: '作业批改', metric: '节省 70% 时间', impact: '老师减负' },
+  { industry: '金融', case: '市场报告', metric: '日报自动生成', impact: '分析师解放' },
+  { industry: 'HR', case: '简历筛选', metric: '批量自动化', impact: '效率 20 倍' },
+  { industry: '房产', case: '客户跟进', metric: '成交率 +45%', impact: '佣金增加' },
+  { industry: '制造', case: '库存管理', metric: '缺货率 12% → 3%', impact: '年省 ¥320 万' },
+  { industry: '政务', case: '市民咨询', metric: '12 分钟 → 30 秒', impact: '年省 ¥280 万' },
+]
+
+const archetypes = [
+  {
+    title: '替代重复劳动',
+    description: '先把高频、低判断密度、可标准化的任务自动化，是最容易看到结果的一类切入点。',
+    examples: '客服、批改、报告、信息整理',
+    kind: 'stack' as const,
+  },
+  {
+    title: '放大专业判断',
+    description: '把法律、金融、HR 这类专业场景中的资料处理和初筛工作前置给 Agent，人类专注最终判断。',
+    examples: '合同、风险、招聘、政策问答',
+    kind: 'shield' as const,
+  },
+  {
+    title: '重组服务体验',
+    description: '当响应速度、跟进频率和信息完整度显著改善时，OpenClaw 会直接改变用户感知到的服务质量。',
+    examples: '房产跟进、政务服务、健康管理',
+    kind: 'orbit' as const,
+  },
 ]
 
 const industries = [
   {
     id: 'legal',
     title: '法律行业',
-    icon: '⚖️',
     description: '合同审查、案例检索、法律咨询自动化',
+    position: '高专业度、高风险，需要严格边界和人工复核。',
+    kind: 'shield' as const,
     cases: [
-      { title: '合同审查 Agent', pain: '一份标准合同需要2-4小时审查', result: '审查时间从2.5小时→15分钟', roi: '律所月收入增长 +340%' },
-      { title: '案例检索 Agent', pain: '需要在几十个数据库查询', result: '胜诉率评估自动化', roi: '服务客户量从50个/月→200个/月' },
+      { title: '合同审查 Agent', pain: '一份标准合同需要 2-4 小时人工审查', result: '审查时间从 2.5 小时缩短到 15 分钟', roi: '律所月收入增长 +340%' },
+      { title: '案例检索 Agent', pain: '需要在多个数据库间反复切换', result: '胜诉率评估和相似判例检索自动化', roi: '服务客户量从 50 个/月提升到 200 个/月' },
     ],
     soulExample: `你是一个专业的法律合同审查助手。
 
@@ -57,120 +100,126 @@ const industries = [
 本系统的分析仅供律师参考，不构成正式法律意见。
 
 审查标准：
-1. 条款完整性（是否缺少关键条款）
-2. 权利义务对等性（是否明显不公平）
-3. 违约责任（是否清晰可执行）
-4. 争议解决条款（管辖法院/仲裁）
+1. 条款完整性
+2. 权利义务对等性
+3. 违约责任可执行性
+4. 争议解决条款完整度
 
 输出格式：
-- 高风险条款（红色）：需要立即修改
-- 中风险条款（黄色）：建议修改
-- 低风险提示（蓝色）：可以接受但需注意
+- 高风险条款
+- 中风险条款
+- 低风险提示
 - 总体评分：0-100分`,
   },
   {
     id: 'ecommerce',
     title: '电商行业',
-    icon: '🛒',
-    description: '选品分析、Listing优化、客服自动化',
+    description: '选品分析、Listing 优化、客服自动化',
+    position: '标准化流程多，适合快速验证 ROI。',
+    kind: 'flow' as const,
     cases: [
-      { title: '全链路电商 Agent', pain: '运营工作繁琐，客服响应慢', result: '好评率从4.1→4.6星，自然流量+180%', roi: '月净利润增长 ¥15,000' },
+      { title: '全链路电商 Agent', pain: '运营琐碎、客服响应慢、关键词管理分散', result: '好评率从 4.1 提升到 4.6，自然流量增长 180%', roi: '月净利润增长 ¥15,000' },
     ],
     soulExample: `你是一个专业的亚马逊电商运营助手。
 
 核心工作：
-1. 选品分析：查询BSR排名、月销量、竞争度
-2. Listing优化：生成符合A9算法的标题、五点、描述
-3. 关键词研究：找出高搜索量低竞争的关键词
-4. 定价策略：分析竞品价格，给出定价建议
+1. 选品分析
+2. Listing 优化
+3. 关键词研究
+4. 定价策略建议
 
-亚马逊政策合规：
-- 不操纵评价（不刷单）
-- 不使用禁止的关键词
-- 遵守各国消费者保护法规`,
+平台合规要求：
+- 不操纵评价
+- 不使用禁止关键词
+- 遵守消费者保护法规`,
   },
   {
     id: 'education',
     title: '教育行业',
-    icon: '📚',
     description: '个性化教学、作业批改、学情分析',
+    position: '反馈频次高，最容易通过“减轻老师负担”体现价值。',
+    kind: 'spark' as const,
     cases: [
-      { title: '个性化 AI 教师', pain: '一对一辅导成本高', result: '节省70%批改时间', roi: '月收入¥50,000（5所学校）' },
+      { title: '个性化 AI 教师', pain: '一对一辅导成本高，批改与反馈耗时', result: '节省 70% 批改时间，提升个性化反馈覆盖率', roi: '月收入 ¥50,000（服务 5 所学校）' },
     ],
     soulExample: `你是一个专业的中学数学辅导老师。
 
 教学原则：
-1. 苏格拉底式引导：不直接给答案，引导学生思考
-2. 从错误中学习：每道错题深度分析根本原因
-3. 循序渐进：确保前置知识掌握再推进
-4. 积极鼓励：保护学习兴趣，避免打击信心
+1. 苏格拉底式引导
+2. 从错误中学习
+3. 循序渐进
+4. 保护学习兴趣
 
-具体规则：
-- 解题时先问"你有什么思路？"
-- 学生答对时给予具体表扬
-- 一个知识点错误3次，切换教学方式`,
+规则：
+- 先问学生思路
+- 正确时给出具体表扬
+- 同一知识点连续错误三次时切换教学方式`,
   },
   {
     id: 'finance',
     title: '金融行业',
-    icon: '💰',
-    description: '量化投资辅助、风险评估、报告生成',
+    description: '量化研究、风险评估、日报周报生成',
+    position: '高信息密度场景，适合把“信息收集与总结”交给 Agent。',
+    kind: 'pulse' as const,
     cases: [
-      { title: '量化投资辅助 Agent', pain: '市场数据分散，分析耗时', result: '每日市场简报、每周策略报告自动化', roi: '个人版¥2000/月，机构版¥20,000/月' },
+      { title: '量化投资辅助 Agent', pain: '市场数据分散，人工分析周期长', result: '每日市场简报和每周策略报告自动化', roi: '个人版 ¥2,000/月，机构版 ¥20,000/月' },
     ],
     soulExample: `你是一个专业的量化投资分析助手。
 
 核心职责：
-1. 市场分析：读取实时数据，分析技术指标和基本面
-2. 策略研究：基于历史数据回测交易策略
-3. 风险管理：计算VaR、最大回撤、Sharpe比率
+1. 市场分析
+2. 策略研究
+3. 风险管理
 
 重要限制：
-- 你只能提供分析和建议，不能直接执行交易
-- 所有交易决策必须由人类投资者最终确认
-- 不保证任何投资收益`,
+- 只能提供分析建议
+- 不直接执行交易
+- 所有交易决策由人类确认`,
   },
   {
     id: 'hr',
     title: '人力资源',
-    icon: '👥',
     description: '简历筛选、招聘自动化、员工服务',
+    position: '非常适合通过规则明确的评分机制建立第一版系统。',
+    kind: 'grid' as const,
     cases: [
-      { title: 'AI 招聘助手', pain: 'HR筛选简历耗时', result: '分数>80自动发面试邀请', roi: '服务10家企业，月收入¥36,000' },
+      { title: 'AI 招聘助手', pain: 'HR 每天处理大量简历和重复沟通', result: '分数 >80 自动发出面试邀请', roi: '服务 10 家企业，月收入 ¥36,000' },
     ],
-    soulExample: `你是一个专业的HR招聘助手。
+    soulExample: `你是一个专业的 HR 招聘助手。
 
-简历筛选流程：
-→ OpenClaw批量解析简历（PDF/Word/图片格式）
-→ 与JD进行多维度匹配打分：
-  ├── 技能匹配度（40%权重）
-  ├── 工作经历相关性（30%权重）
-  ├── 教育背景（15%权重）
-  └── 工作稳定性（15%权重）
-→ 生成候选人排名表（Excel格式）
-→ 分数>80：自动发邮件预约面试
-→ 分数<60：系统发感谢信`,
+筛选维度：
+- 技能匹配度 40%
+- 经历相关性 30%
+- 教育背景 15%
+- 工作稳定性 15%
+
+执行流程：
+→ 批量解析简历
+→ 与 JD 匹配打分
+→ 生成候选人排序
+→ 自动发面试或感谢信`,
   },
   {
     id: 'healthcare',
     title: '医疗健康',
-    icon: '🏥',
-    description: '健康管理、用药提醒、慢病跟踪',
+    description: '健康管理、用药提醒、慢病随访',
+    position: '必须把服务范围和禁止事项写得非常清楚。',
+    kind: 'shield' as const,
     cases: [
-      { title: '健康管理 Agent', pain: '慢病患者管理困难', result: '血压血糖监测记录自动化', roi: '降低随访成本，提升患者依从性' },
+      { title: '健康管理 Agent', pain: '慢病患者管理和随访依从性差', result: '血压血糖记录与提醒自动化', roi: '降低随访成本，提升患者依从性' },
     ],
     soulExample: `你是健康管理助手，帮助用户管理日常健康。
 
-服务范围（仅限）：
+服务范围：
 1. 健康知识科普
-2. 慢病自我管理指导（血压、血糖监测记录）
-3. 用药提醒和药品信息查询
+2. 慢病自我管理指导
+3. 用药提醒
 4. 预约挂号协助
 
 严格禁止：
 - 提供诊断结论
-- 推荐特定治疗方案
-- 建议调整处方药剂量
+- 推荐治疗方案
+- 调整处方剂量
 
 每次咨询末尾必须声明：
 "以上信息仅供参考，不构成医疗建议。"`,
@@ -178,321 +227,396 @@ const industries = [
   {
     id: 'realestate',
     title: '房产行业',
-    icon: '🏠',
-    description: '置业顾问、客户跟进、房源匹配',
+    description: '置业顾问、客户分层跟进、房源匹配',
+    position: '高价值成交场景，服务体验和跟进节奏直接影响转化。',
+    kind: 'orbit' as const,
     cases: [
-      { title: 'AI 置业顾问', pain: '客户跟进效率低', result: 'S级客户每2天跟进一次', roi: '成交率提升45%，月佣金增加¥25,000' },
+      { title: 'AI 置业顾问', pain: '客户跟进不稳定，房源匹配效率低', result: 'S 级客户每 2 天跟进一次', roi: '成交率提升 45%，月佣金增加 ¥25,000' },
     ],
-    soulExample: `你是一个专业的置业顾问AI助手。
+    soulExample: `你是一个专业的置业顾问 AI 助手。
 
-客户分级管理：
-- S级（成交概率>70%）：每2天跟进，新房源立即推送
-- A级（成交概率30-70%）：每周跟进，市场行情简报
-- B级（成交概率<30%）：每月跟进，保持存在感
+客户分级：
+- S级：每2天跟进
+- A级：每周跟进
+- B级：每月跟进
 
-专业建议原则：
-- 优先考虑客户利益，不强推高佣金房源
-- 客观呈现房源优缺点
+原则：
+- 优先考虑客户利益
+- 客观呈现优缺点
 - 明确告知市场风险`,
   },
   {
     id: 'government',
     title: '政务与公共服务',
-    icon: '🏛️',
-    description: '政务服务、政策解读、市民咨询',
+    description: '政策解读、市民咨询、公共服务分流',
+    position: '重点在于统一口径、透明出处和清晰转人工。',
+    kind: 'stack' as const,
     cases: [
-      { title: '政务服务 AI 助手', pain: '12345热线压力大', result: 'AI解决率67%，等待从12分钟→30秒', roi: '年节省运营成本¥280万' },
+      { title: '政务服务 AI 助手', pain: '12345 热线压力大，排队时间长', result: 'AI 解决率 67%，等待从 12 分钟缩短到 30 秒', roi: '年节省运营成本 ¥280 万' },
     ],
-    soulExample: `你是政务服务AI助手，帮助市民了解政策和办理事项。
+    soulExample: `你是政务服务 AI 助手，帮助市民了解政策和办理事项。
 
 服务承诺：
-- 7×24小时在线
-- 每条信息提供政策依据（文号/日期）
-- 遇到不确定的信息，明确告知并引导转人工
+- 7×24 小时在线
+- 每条信息提供政策依据
+- 不确定时明确说明并转人工
 
 禁止事项：
 - 不提供个人意见影响政策解读
 - 不泄露公民个人信息
-- 不处理超出权限的行政决定`,
+- 不做超出权限的行政决定`,
   },
 ]
 
-const tips = [
-  { title: '从小场景开始', desc: '先选择一个明确的、输入输出固定的场景，验证效果后再扩展', icon: '🎯' },
-  { title: '设置安全边界', desc: '在 SOUL.md 中明确禁止事项，设置审批机制', icon: '🔒' },
-  { title: '保留人工兜底', desc: '关键决策、高风险操作都需要人工介入', icon: '📊' },
-  { title: '持续迭代优化', desc: '收集用户反馈，分析错误案例，持续优化', icon: '🔄' },
+const implementationTips = [
+  {
+    title: '从一个窄场景打样',
+    desc: '优先选输入输出清晰、成本容易量化的流程，不要一开始就覆盖整条业务链。',
+    kind: 'spark' as const,
+  },
+  {
+    title: '先写边界，再写能力',
+    desc: 'SOUL.md 里最重要的往往不是“你会做什么”，而是“你绝对不能做什么”。',
+    kind: 'shield' as const,
+  },
+  {
+    title: '把人工节点设计进去',
+    desc: '高风险决策、对外发送和费用动作都应该保留审批与回滚能力。',
+    kind: 'flow' as const,
+  },
+  {
+    title: '用真实反馈驱动下一轮',
+    desc: '上线后记录失败案例、误判来源和人工接管原因，才会形成真正可复用的行业模板。',
+    kind: 'pulse' as const,
+  },
 ]
 
-const expandedIndustry = ref<string | null>(null)
+const nextLinks = [
+  {
+    to: '/best-practices',
+    tag: 'Playbook',
+    title: '最佳实践',
+    description: '看案例之后，再去理解如何把这些结果稳定地做出来。',
+  },
+  {
+    to: '/videos',
+    tag: 'Demo',
+    title: '视频教程',
+    description: '用真实演示建立直觉，快速理解案例背后的操作方式。',
+  },
+  {
+    to: '/community',
+    tag: 'Community',
+    title: '社区支持',
+    description: '和其他团队或个人创作者交流配置、模板和试错经验。',
+  },
+  {
+    to: '/feedback',
+    tag: 'Submit',
+    title: '提交你的案例',
+    description: '把你的场景、指标和经验补进这份案例库，帮助更多后来者。',
+  },
+]
+
+const expandedIndustry = ref<string>(industries[0]?.id ?? '')
 
 function toggleIndustry(id: string) {
-  expandedIndustry.value = expandedIndustry.value === id ? null : id
+  expandedIndustry.value = expandedIndustry.value === id ? '' : id
 }
 </script>
 
 <template>
-  <section class="section">
-    <div class="container showcase-page">
-      <!-- Hero -->
-      <section class="collection-hero">
-        <div class="card collection-main">
-          <p class="eyebrow">Showcase</p>
-          <h1 class="section-title">案例展示</h1>
-          <p class="section-copy">
-            真实的使用案例比功能列表更有说服力。这里展示 OpenClaw 在企业和个人场景中的实际应用效果，涵盖法律、电商、教育、金融等多个行业。
-          </p>
+  <section class="section showcase-shell">
+    <div class="container showcase-page series-page">
+      <section class="series-hero showcase-hero">
+        <div class="card series-main showcase-main">
+          <div class="showcase-kicker-row">
+            <span class="series-kicker">Showcase Atlas</span>
+            <span class="showcase-note">企业落地 · 个人实践 · 行业模板</span>
+          </div>
 
-          <div class="collection-utility">
-            <article v-for="stat in stats.slice(0, 2)" :key="stat.label" class="collection-utility-item">
-              <span class="mini-label">{{ stat.label }}</span>
-              <strong>{{ stat.value }}</strong>
-              <p>{{ stat.note }}</p>
+          <div class="showcase-headline">
+            <p class="eyebrow">案例展示</p>
+            <h1 class="section-title">把 OpenClaw 放进真实工作里看，价值才会变具体</h1>
+            <p class="section-copy">
+              这个页面不是“成功学陈列馆”，而是帮助你判断 OpenClaw 在什么场景里最值得上、需要哪些边界、能换来什么样的效率和体验变化。
+            </p>
+          </div>
+
+          <div class="showcase-hero-band">
+            <article v-for="item in heroSignals" :key="item.title" class="showcase-hero-card">
+              <SeriesGlyph :kind="item.kind" tone="accent" small />
+              <div>
+                <strong>{{ item.title }}</strong>
+                <p>{{ item.description }}</p>
+              </div>
             </article>
           </div>
         </div>
 
-        <aside class="card collection-side">
-          <div class="collection-summary">
-            <span class="mini-label">案例分类</span>
-            <strong>企业 / 个人 / 行业解决方案</strong>
-            <p>按规模和场景分类，帮助你快速找到与自己情况相近的参考案例。</p>
+        <aside class="card series-side showcase-side">
+          <div class="series-signal">
+            <span class="series-kicker">Coverage</span>
+            <strong>{{ industryCount }} 个行业视角，企业与个人双线展开</strong>
+            <p>你可以先按行业找近似场景，再回到真实案例条目里看更具体的场景与结果。</p>
+          </div>
+
+          <div class="series-signal">
+            <span class="series-kicker">How To Read</span>
+            <strong>先看 archetype，再看案例，再看 SOUL 模板</strong>
+            <p>这样更容易判断一个案例到底是“适合拿来复制”，还是只是值得参考思路。</p>
+          </div>
+
+          <div class="showcase-stat-rail">
+            <article v-for="stat in stats" :key="stat.label" class="series-stat-card">
+              <span class="series-stat-value">{{ stat.value }}</span>
+              <strong>{{ stat.label }}</strong>
+              <p>{{ stat.note }}</p>
+            </article>
           </div>
         </aside>
       </section>
 
-      <!-- 统计数据 -->
-      <div class="grid stats-grid">
-        <article v-for="stat in stats" :key="stat.label" class="card stat-card">
-          <span class="stat-value">{{ stat.value }}</span>
-          <strong class="stat-label">{{ stat.label }}</strong>
-          <p class="stat-note">{{ stat.note }}</p>
-        </article>
-      </div>
-
-      <!-- 效果速览 -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Quick Stats</p>
-          <h2>效果速览</h2>
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">Case Patterns</p>
+            <h2>先把案例看成三类工作重构</h2>
+          </div>
+          <span class="showcase-subnote">很多行业不同，但成功模式其实很相似。</span>
         </div>
 
-        <div class="quick-stats-grid">
-          <article v-for="stat in quickCases" :key="stat.industry + stat.case" class="stat-card-mini">
-            <span class="industry">{{ stat.industry }}</span>
-            <span class="case-name">{{ stat.case }}</span>
-            <span class="time">{{ stat.time }}</span>
-            <span class="saving">{{ stat.saving }}</span>
-          </article>
-        </div>
-      </section>
-
-      <!-- 行业应用详情 -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Industries</p>
-          <h2>行业应用方案</h2>
-          <p class="section-copy">点击展开查看各行业的详细案例和 SOUL.md 配置示例。</p>
-        </div>
-
-        <div class="industries-list">
-          <article 
-            v-for="industry in industries" 
-            :key="industry.id" 
-            class="industry-item"
-            :class="{ expanded: expandedIndustry === industry.id }"
-          >
-            <button class="industry-header" @click="toggleIndustry(industry.id)">
-              <span class="industry-icon">{{ industry.icon }}</span>
-              <div class="industry-info">
-                <h4>{{ industry.title }}</h4>
-                <p>{{ industry.description }}</p>
-              </div>
-              <span class="expand-icon">{{ expandedIndustry === industry.id ? '−' : '+' }}</span>
-            </button>
-
-            <div v-if="expandedIndustry === industry.id" class="industry-content">
-              <div class="cases-grid">
-                <article v-for="c in industry.cases" :key="c.title" class="case-card">
-                  <h5>{{ c.title }}</h5>
-                  <div class="case-details">
-                    <div class="detail-row">
-                      <span class="label">痛点</span>
-                      <span>{{ c.pain }}</span>
-                    </div>
-                    <div class="detail-row">
-                      <span class="label">效果</span>
-                      <span>{{ c.result }}</span>
-                    </div>
-                    <div class="detail-row roi">
-                      <span class="label">收益</span>
-                      <span>{{ c.roi }}</span>
-                    </div>
-                  </div>
-                </article>
-              </div>
-
-              <div class="soul-section">
-                <h5>SOUL.md 示例</h5>
-                <pre class="code-block"><code>{{ industry.soulExample }}</code></pre>
-              </div>
+        <div class="series-grid-3">
+          <article v-for="item in archetypes" :key="item.title" class="series-card showcase-archetype-card">
+            <div class="series-card-top">
+              <SeriesGlyph :kind="item.kind" tone="brand" />
+              <strong>{{ item.title }}</strong>
             </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- 精选案例 -->
-      <section v-if="featuredCases.length" class="featured-section">
-        <div class="home-head">
-          <p class="eyebrow">Featured Cases</p>
-          <p class="home-head-note">精选案例，展示 OpenClaw 的核心价值。</p>
-        </div>
-        <div class="grid featured-grid">
-          <NuxtLink
-            v-for="item in featuredCases"
-            :key="item.path"
-            :to="item.path"
-            class="card featured-card"
-          >
-            <div class="featured-meta">
-              <span class="tag">{{ item.industry }}</span>
-              <span class="tag secondary">{{ item.scale }}</span>
-            </div>
-            <h3>{{ item.title }}</h3>
             <p>{{ item.description }}</p>
-            <div v-if="item.outcomes && item.outcomes.length" class="outcomes-list">
-              <span v-for="outcome in item.outcomes.slice(0, 2)" :key="outcome" class="outcome-item">
-                ✓ {{ outcome }}
-              </span>
-            </div>
-            <div class="featured-tags">
-              <span v-for="tag in (item.tags || []).slice(0, 3)" :key="tag" class="tag-item">{{ tag }}</span>
-            </div>
-          </NuxtLink>
+            <span class="series-tag">{{ item.examples }}</span>
+          </article>
         </div>
       </section>
 
-      <!-- 企业案例 -->
-      <section v-if="enterpriseCases.length" class="showcase-section">
-        <div class="section-heading">
-          <p class="eyebrow">Enterprise</p>
-          <h2 class="section-title">企业应用案例</h2>
-          <p class="section-copy">企业级部署和应用场景，展示 OpenClaw 在组织中的价值。</p>
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">Quick Wins</p>
+            <h2>8 个最容易感知到价值的使用结果</h2>
+          </div>
         </div>
 
-        <div class="grid showcase-grid">
+        <div class="showcase-quick-grid">
+          <article v-for="stat in quickCases" :key="stat.industry + stat.case" class="quick-case-card">
+            <span class="quick-case-industry">{{ stat.industry }}</span>
+            <strong>{{ stat.case }}</strong>
+            <p>{{ stat.metric }}</p>
+            <span class="quick-case-impact">{{ stat.impact }}</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="showcase-split-grid">
+        <section class="card series-panel industry-panel">
+          <div class="series-head">
+            <div>
+              <p class="eyebrow">Industry Blueprints</p>
+              <h2>按行业看场景、收益和 SOUL 模板</h2>
+            </div>
+          </div>
+
+          <div class="industry-list">
+            <article
+              v-for="industry in industries"
+              :key="industry.id"
+              class="industry-entry"
+              :class="{ expanded: expandedIndustry === industry.id }"
+            >
+              <button class="industry-toggle" @click="toggleIndustry(industry.id)">
+                <div class="industry-toggle-main">
+                  <SeriesGlyph :kind="industry.kind" :tone="expandedIndustry === industry.id ? 'brand' : 'muted'" />
+                  <div>
+                    <strong>{{ industry.title }}</strong>
+                    <p>{{ industry.description }}</p>
+                  </div>
+                </div>
+                <span class="industry-toggle-note">{{ expandedIndustry === industry.id ? '收起' : '展开' }}</span>
+              </button>
+
+              <div v-if="expandedIndustry === industry.id" class="industry-body">
+                <div class="industry-position">
+                  <span class="series-kicker">Positioning</span>
+                  <p>{{ industry.position }}</p>
+                </div>
+
+                <div class="industry-cases">
+                  <article v-for="c in industry.cases" :key="c.title" class="industry-case-card">
+                    <h3>{{ c.title }}</h3>
+                    <div class="industry-detail-grid">
+                      <div>
+                        <span>痛点</span>
+                        <p>{{ c.pain }}</p>
+                      </div>
+                      <div>
+                        <span>效果</span>
+                        <p>{{ c.result }}</p>
+                      </div>
+                      <div>
+                        <span>收益</span>
+                        <p class="accent">{{ c.roi }}</p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="industry-soul">
+                  <div class="industry-soul-head">
+                    <span class="series-kicker">SOUL.md</span>
+                    <strong>适合这个行业的边界写法</strong>
+                  </div>
+                  <pre class="industry-code"><code>{{ industry.soulExample }}</code></pre>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="showcase-side-column">
+          <section v-if="featuredCases.length" class="card series-panel">
+            <div class="series-head">
+              <div>
+                <p class="eyebrow">Featured</p>
+                <h2>精选案例</h2>
+              </div>
+            </div>
+
+            <div class="showcase-featured-stack">
+              <NuxtLink
+                v-for="item in featuredCases"
+                :key="item.path"
+                :to="item.path"
+                class="series-link-card feature-case-card"
+              >
+                <div class="series-tag-row">
+                  <span class="series-tag highlight">{{ item.industry }}</span>
+                  <span class="series-tag">{{ item.scale }}</span>
+                </div>
+                <strong>{{ item.title }}</strong>
+                <p>{{ item.description }}</p>
+                <div v-if="item.outcomes && item.outcomes.length" class="feature-outcomes">
+                  <span v-for="outcome in item.outcomes.slice(0, 2)" :key="outcome">{{ outcome }}</span>
+                </div>
+              </NuxtLink>
+            </div>
+          </section>
+
+          <section class="card series-panel">
+            <div class="series-head">
+              <div>
+                <p class="eyebrow">Implementation</p>
+                <h2>落地提醒</h2>
+              </div>
+            </div>
+
+            <div class="implementation-stack">
+              <article v-for="tip in implementationTips" :key="tip.title" class="implementation-card">
+                <SeriesGlyph :kind="tip.kind" tone="accent" small />
+                <div>
+                  <strong>{{ tip.title }}</strong>
+                  <p>{{ tip.desc }}</p>
+                </div>
+              </article>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section v-if="enterpriseCases.length" class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">Enterprise Library</p>
+            <h2>企业案例库</h2>
+          </div>
+          <span class="showcase-subnote">关注部署、流程协作和组织收益。</span>
+        </div>
+
+        <div class="showcase-card-grid">
           <NuxtLink
             v-for="item in enterpriseCases"
             :key="item.path"
             :to="item.path"
-            class="card showcase-card"
+            class="series-link-card showcase-record"
           >
-            <div class="showcase-meta">
-              <span class="tag">{{ item.industry }}</span>
-              <span class="tag secondary">{{ item.scale }}</span>
+            <div class="series-tag-row">
+              <span class="series-tag highlight">{{ item.industry }}</span>
+              <span class="series-tag">{{ item.scale }}</span>
             </div>
-            <h3>{{ item.title }}</h3>
-            <p class="showcase-summary">{{ item.description }}</p>
-
-            <div class="showcase-details">
-              <div class="detail-row">
-                <span class="detail-label">场景</span>
-                <span class="detail-value">{{ item.scenario }}</span>
-              </div>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+            <div class="record-meta">
+              <span>场景</span>
+              <b>{{ item.scenario }}</b>
             </div>
-
-            <div v-if="item.outcomes && item.outcomes.length" class="outcomes-section">
-              <span class="outcomes-label">效果</span>
-              <ul class="outcomes-list-full">
-                <li v-for="outcome in item.outcomes" :key="outcome">{{ outcome }}</li>
-              </ul>
-            </div>
-
-            <div class="showcase-tags">
-              <span v-for="tag in (item.tags || []).slice(0, 4)" :key="tag" class="tag-item">{{ tag }}</span>
+            <ul v-if="item.outcomes && item.outcomes.length" class="record-outcomes">
+              <li v-for="outcome in item.outcomes.slice(0, 3)" :key="outcome">{{ outcome }}</li>
+            </ul>
+            <div class="record-tags">
+              <span v-for="tag in (item.tags || []).slice(0, 4)" :key="tag">{{ tag }}</span>
             </div>
           </NuxtLink>
         </div>
       </section>
 
-      <!-- 个人案例 -->
-      <section v-if="personalCases.length" class="showcase-section">
-        <div class="section-heading">
-          <p class="eyebrow">Personal</p>
-          <h2 class="section-title">个人使用案例</h2>
-          <p class="section-copy">个人用户的创新使用方式，展示 OpenClaw 的灵活性。</p>
+      <section v-if="personalCases.length" class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">Personal Library</p>
+            <h2>个人案例库</h2>
+          </div>
+          <span class="showcase-subnote">关注灵活性、副业价值与个人效率。</span>
         </div>
 
-        <div class="grid showcase-grid">
+        <div class="showcase-card-grid personal-grid">
           <NuxtLink
             v-for="item in personalCases"
             :key="item.path"
             :to="item.path"
-            class="card showcase-card"
+            class="series-link-card showcase-record personal-record"
           >
-            <div class="showcase-meta">
-              <span class="tag">{{ item.industry }}</span>
-              <span class="tag secondary">{{ item.scale }}</span>
+            <div class="series-tag-row">
+              <span class="series-tag">{{ item.industry }}</span>
+              <span class="series-tag">{{ item.scale }}</span>
             </div>
-            <h3>{{ item.title }}</h3>
-            <p class="showcase-summary">{{ item.description }}</p>
-
-            <div v-if="item.outcomes && item.outcomes.length" class="outcomes-section">
-              <span class="outcomes-label">效果</span>
-              <ul class="outcomes-list-full">
-                <li v-for="outcome in item.outcomes" :key="outcome">{{ outcome }}</li>
-              </ul>
-            </div>
-
-            <div class="showcase-tags">
-              <span v-for="tag in (item.tags || []).slice(0, 4)" :key="tag" class="tag-item">{{ tag }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+            <ul v-if="item.outcomes && item.outcomes.length" class="record-outcomes">
+              <li v-for="outcome in item.outcomes.slice(0, 3)" :key="outcome">{{ outcome }}</li>
+            </ul>
+            <div class="record-tags">
+              <span v-for="tag in (item.tags || []).slice(0, 4)" :key="tag">{{ tag }}</span>
             </div>
           </NuxtLink>
         </div>
       </section>
 
-      <!-- 实施建议 -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Tips</p>
-          <h2>实施建议</h2>
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">Next Steps</p>
+            <h2>继续把案例变成你的实施路径</h2>
+          </div>
         </div>
 
-        <div class="tips-grid">
-          <article v-for="tip in tips" :key="tip.title" class="tip-card">
-            <span class="tip-icon">{{ tip.icon }}</span>
-            <h4>{{ tip.title }}</h4>
-            <p>{{ tip.desc }}</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- 相关链接 -->
-      <section class="quick-links-section">
-        <div class="home-head">
-          <p class="eyebrow">Next Steps</p>
-          <p class="home-head-note">继续探索 OpenClaw 的更多内容。</p>
-        </div>
-        <div class="grid quick-links-grid">
-          <NuxtLink to="/best-practices" class="card quick-link-card">
-            <span class="tag">实践指南</span>
-            <strong>最佳实践</strong>
-            <p>学习如何更好地使用 OpenClaw</p>
-          </NuxtLink>
-          <NuxtLink to="/videos" class="card quick-link-card">
-            <span class="tag">教程</span>
-            <strong>视频教程</strong>
-            <p>观看真实使用演示</p>
-          </NuxtLink>
-          <NuxtLink to="/community" class="card quick-link-card">
-            <span class="tag">社区</span>
-            <strong>社区支持</strong>
-            <p>与其他用户交流经验</p>
-          </NuxtLink>
-          <NuxtLink to="/feedback" class="card quick-link-card">
-            <span class="tag">反馈</span>
-            <strong>提交你的案例</strong>
-            <p>分享你的使用经验</p>
+        <div class="series-grid-4 showcase-next-grid">
+          <NuxtLink
+            v-for="link in nextLinks"
+            :key="link.to"
+            :to="link.to"
+            class="series-link-card"
+          >
+            <span class="series-tag">{{ link.tag }}</span>
+            <strong>{{ link.title }}</strong>
+            <p>{{ link.description }}</p>
           </NuxtLink>
         </div>
       </section>
@@ -501,446 +625,334 @@ function toggleIndustry(id: string) {
 </template>
 
 <style scoped>
-.mini-label {
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.showcase-shell {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(12, 108, 105, 0.08), transparent 24%),
+    radial-gradient(circle at 92% 12%, rgba(166, 111, 44, 0.1), transparent 20%),
+    linear-gradient(180deg, rgba(250, 243, 231, 0.45), rgba(255, 251, 244, 0));
 }
 
-.stats-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+.showcase-page {
+  gap: 28px;
 }
 
-.stat-card {
-  display: grid;
-  gap: 6px;
-  padding: 20px;
-  text-align: center;
-}
-
-.stat-value {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--brand);
-  line-height: 1.1;
-}
-
-.stat-label {
-  font-size: 0.95rem;
-}
-
-.stat-note {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.82rem;
-}
-
-.section-panel {
-  display: grid;
-  gap: 16px;
-}
-
-.section-head {
-  display: grid;
-  gap: 4px;
-}
-
-.section-head h2 {
-  margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.4rem;
-  line-height: 1.3;
-}
-
-/* Quick Stats */
-.quick-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.stat-card-mini {
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.stat-card-mini .industry {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--brand);
-  text-transform: uppercase;
-}
-
-.stat-card-mini .case-name {
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.stat-card-mini .time {
-  font-size: 0.8rem;
-  color: var(--success);
-}
-
-.stat-card-mini .saving {
-  font-size: 0.7rem;
-  color: var(--ink-soft);
-}
-
-/* Industries List */
-.industries-list {
-  display: grid;
-  gap: 8px;
-}
-
-.industry-item {
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(67, 73, 60, 0.1);
+.showcase-main {
+  position: relative;
   overflow: hidden;
 }
 
-.industry-item.expanded {
-  border-color: var(--brand);
+.showcase-main::after {
+  content: "";
+  position: absolute;
+  right: -48px;
+  bottom: -64px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166, 111, 44, 0.16), transparent 68%);
+  pointer-events: none;
 }
 
-.industry-header {
+.showcase-kicker-row,
+.record-meta,
+.industry-soul-head {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  width: 100%;
-  padding: 16px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  text-align: left;
 }
 
-.industry-icon {
-  font-size: 1.5rem;
-}
-
-.industry-info {
-  flex: 1;
-}
-
-.industry-info h4 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.industry-info p {
-  margin: 4px 0 0;
-  font-size: 0.85rem;
+.showcase-note,
+.showcase-subnote,
+.industry-toggle-note,
+.record-meta span,
+.industry-detail-grid span {
+  font-size: 0.78rem;
   color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.expand-icon {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--brand);
-}
-
-.industry-content {
-  padding: 0 16px 16px;
-  border-top: 1px solid rgba(67, 73, 60, 0.1);
-}
-
-/* Cases */
-.cases-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.case-card {
-  padding: 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(67, 73, 60, 0.08);
-}
-
-.case-card h5 {
-  margin: 0 0 12px;
-  font-size: 0.95rem;
-  color: var(--brand);
-}
-
-.case-details {
-  display: grid;
-  gap: 8px;
-}
-
-.detail-row {
-  display: flex;
-  gap: 8px;
-  font-size: 0.85rem;
-}
-
-.detail-row .label {
-  color: var(--ink-soft);
-  min-width: 40px;
-}
-
-.detail-row.roi .label {
-  color: var(--success);
-}
-
-.detail-row.roi span:last-child {
-  font-weight: 600;
-  color: var(--success);
-}
-
-/* SOUL */
-.soul-section {
-  margin-top: 16px;
-}
-
-.soul-section h5 {
-  margin: 0 0 8px;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-}
-
-.code-block {
-  margin: 0;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.03);
-  overflow-x: auto;
-}
-
-.code-block code {
-  font-size: 0.75rem;
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-
-/* Featured & Showcase */
-.featured-section,
-.showcase-section,
-.quick-links-section {
-  margin-top: 24px;
-}
-
-.section-heading {
-  margin-bottom: 14px;
-}
-
-.featured-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.featured-card,
-.showcase-card,
-.quick-link-card {
+.showcase-headline {
   display: grid;
   gap: 10px;
-  padding: 18px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 44rem;
 }
 
-.featured-card:hover,
-.showcase-card:hover,
-.quick-link-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(64, 49, 27, 0.1);
+.showcase-hero-band {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.featured-meta,
-.showcase-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.showcase-hero-card,
+.quick-case-card,
+.implementation-card,
+.industry-entry,
+.industry-case-card {
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  background: rgba(255, 255, 255, 0.56);
 }
 
-.tag {
-  font-size: 0.72rem;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(166, 111, 44, 0.1);
-  color: var(--brand);
+.showcase-hero-card,
+.implementation-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
 }
 
-.tag.secondary {
-  background: rgba(67, 73, 60, 0.08);
-  color: var(--ink-soft);
-}
-
-.featured-card h3,
-.showcase-card h3,
-.quick-link-card strong {
+.showcase-hero-card strong,
+.quick-case-card strong,
+.industry-toggle strong,
+.industry-case-card h3,
+.implementation-card strong,
+.feature-case-card strong,
+.showcase-record strong {
   margin: 0;
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.3;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
-.featured-card p,
-.showcase-card p,
-.quick-link-card p {
+.showcase-hero-card p,
+.quick-case-card p,
+.industry-toggle p,
+.industry-position p,
+.industry-case-card p,
+.implementation-card p,
+.record-outcomes,
+.showcase-record p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.9rem;
-  line-height: 1.55;
+  line-height: 1.66;
 }
 
-.outcomes-list {
+.showcase-stat-rail,
+.showcase-featured-stack,
+.implementation-stack,
+.industry-list {
   display: grid;
-  gap: 4px;
+  gap: 12px;
 }
 
-.outcome-item {
-  font-size: 0.84rem;
-  color: var(--brand);
-}
-
-.outcomes-section {
-  margin-top: 8px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(67, 73, 60, 0.1);
-}
-
-.outcomes-label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.outcomes-list-full {
-  margin: 0;
-  padding-left: 16px;
-  font-size: 0.86rem;
-  color: var(--ink-soft);
-  line-height: 1.6;
-}
-
-.outcomes-list-full li {
-  margin-bottom: 4px;
-}
-
-.showcase-details {
+.showcase-quick-grid,
+.showcase-card-grid {
   display: grid;
-  gap: 6px;
-}
-
-.showcase-details .detail-row {
-  display: flex;
-  gap: 8px;
-  font-size: 0.84rem;
-}
-
-.detail-label {
-  color: var(--ink-soft);
-}
-
-.detail-value {
-  font-weight: 600;
-}
-
-.featured-tags,
-.showcase-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: auto;
-}
-
-.tag-item {
-  font-size: 0.74rem;
-  color: var(--ink-soft);
-  background: rgba(255, 255, 255, 0.6);
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-.showcase-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.quick-links-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 
-/* Tips */
-.tips-grid {
+.quick-case-card {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.quick-case-industry {
+  font-size: 0.75rem;
+  color: var(--brand);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.quick-case-impact {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.showcase-split-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.82fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.showcase-side-column {
+  display: grid;
+  gap: 18px;
+}
+
+.industry-entry {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.industry-entry.expanded {
+  border-color: rgba(12, 108, 105, 0.18);
+  box-shadow: 0 16px 30px rgba(64, 49, 27, 0.06);
+}
+
+.industry-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 18px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.industry-toggle-main {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.industry-body {
+  display: grid;
+  gap: 16px;
+  padding: 0 18px 18px;
+}
+
+.industry-position {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(249, 244, 235, 0.84);
+  border: 1px solid rgba(166, 111, 44, 0.1);
+}
+
+.industry-cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
-.tip-card {
+.industry-case-card {
+  display: grid;
+  gap: 12px;
   padding: 16px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  text-align: center;
+  border-radius: 18px;
 }
 
-.tip-icon {
-  font-size: 1.5rem;
-  display: block;
-  margin-bottom: 8px;
+.industry-detail-grid {
+  display: grid;
+  gap: 10px;
 }
 
-.tip-card h4 {
-  margin: 0 0 8px;
+.industry-detail-grid p.accent {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.industry-soul {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(26, 25, 23, 0.96);
+  color: rgba(247, 241, 230, 0.92);
+}
+
+.industry-code {
+  margin: 0;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.feature-outcomes {
+  display: grid;
+  gap: 6px;
+  color: var(--brand);
+  font-size: 0.84rem;
+}
+
+.showcase-record {
+  min-height: 100%;
+}
+
+.record-meta {
+  padding-top: 2px;
+}
+
+.record-meta b {
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.record-outcomes {
+  padding-left: 18px;
   font-size: 0.9rem;
 }
 
-.tip-card p {
-  margin: 0;
-  font-size: 0.8rem;
+.record-outcomes li + li {
+  margin-top: 4px;
+}
+
+.record-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.record-tags span {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
   color: var(--ink-soft);
+  font-size: 0.74rem;
 }
 
-@media (max-width: 1100px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.personal-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
-  .quick-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.personal-record {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(247, 243, 236, 0.78));
+}
 
-  .showcase-grid {
+.showcase-next-grid {
+  align-items: stretch;
+}
+
+@media (max-width: 1180px) {
+  .showcase-hero-band,
+  .showcase-card-grid,
+  .personal-grid,
+  .showcase-next-grid,
+  .showcase-split-grid,
+  .industry-cases {
     grid-template-columns: 1fr;
   }
 
-  .quick-links-grid,
-  .tips-grid {
+  .showcase-quick-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 700px) {
-  .stats-grid,
-  .featured-grid,
-  .showcase-grid,
-  .quick-links-grid,
-  .quick-stats-grid,
-  .tips-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 720px) {
+  .showcase-page {
+    gap: 22px;
   }
 
-  .cases-grid {
+  .showcase-quick-grid,
+  .showcase-kicker-row,
+  .record-meta,
+  .industry-soul-head,
+  .industry-toggle {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .industry-toggle-main,
+  .showcase-hero-card,
+  .implementation-card {
     grid-template-columns: 1fr;
   }
 }

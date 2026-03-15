@@ -8,9 +8,7 @@ const props = defineProps<Props>()
 
 <template>
   <div class="markdown-content">
-    <ContentRenderer v-if="props.content" :value="props.content">
-      <ContentRendererMarkdown :value="props.content" />
-    </ContentRenderer>
+    <ContentRenderer v-if="props.content" :value="props.content" />
     <slot v-else />
   </div>
 </template>

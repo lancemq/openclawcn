@@ -29,6 +29,22 @@ const docNav = computed(() => getPrevNext(orderedDocs.value, pagePath.value))
 
 const pageTags = computed(() => normalizeTags(page.value?.tags as string[] | undefined))
 
+const metaItems = computed(() => [
+  typeof page.value?.updatedAt === 'string' && page.value.updatedAt
+    ? { label: '最后更新', value: page.value.updatedAt }
+    : null,
+  typeof page.value?.sourceName === 'string' && page.value.sourceName
+    ? {
+        label: '内容来源',
+        value: page.value.sourceName,
+        href: typeof page.value?.source === 'string' ? page.value.source : undefined,
+      }
+    : null,
+  typeof page.value?.sourceType === 'string' && page.value.sourceType
+    ? { label: '来源类型', value: page.value.sourceType }
+    : null,
+].filter(Boolean) as Array<{ label: string; value: string; href?: string }>)
+
 const pageToc = computed(() => {
   const links = (page.value?.body as any)?.toc?.links
   return Array.isArray(links) ? links : []
@@ -140,6 +156,7 @@ useSeo({
           </div>
           <h1>{{ page?.title }}</h1>
           <p class="muted">{{ page?.description }}</p>
+          <ContentMetaPanel :items="metaItems" />
           <MarkdownContent :content="page" />
         </article>
 

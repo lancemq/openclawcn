@@ -3,6 +3,15 @@ import { getToolPageBySlug, toolPages } from '~/data/tools'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug || ''))
+
+if (slug.value === 'hooks-and-webhooks') {
+  await navigateTo('/tools/triggers', { redirectCode: 301 })
+}
+
+if (slug.value === 'troubleshooting') {
+  await navigateTo('/tools/diagnostics', { redirectCode: 301 })
+}
+
 const page = computed(() => getToolPageBySlug(slug.value))
 
 if (!page.value) {

@@ -18,11 +18,12 @@ const navGroups = [
     label: '扩展',
     slug: 'tools',
     items: [
-      { label: '工具系列', to: '/tools' },
+      { label: '能力地图', to: '/tools' },
       { label: 'Skills', to: '/skills' },
+      { label: '插件系统', to: '/tools/plugins' },
+      { label: '触发与自动化', to: '/tools/triggers' },
+      { label: '执行边界', to: '/tools/exec-and-approvals' },
       { label: '关键配置', to: '/configurations' },
-      { label: '模型选择', to: '/models' },
-      { label: '安全实践', to: '/security' },
     ],
   },
   {
