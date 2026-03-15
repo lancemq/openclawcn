@@ -21,6 +21,8 @@ const navGroups = [
       { label: '工具系列', to: '/tools' },
       { label: 'Skills', to: '/skills' },
       { label: '关键配置', to: '/configurations' },
+      { label: '模型选择', to: '/models' },
+      { label: '安全实践', to: '/security' },
     ],
   },
   {
@@ -31,7 +33,6 @@ const navGroups = [
       { label: '案例展示', to: '/showcase' },
       { label: '下载中心', to: '/download' },
       { label: '产品路线图', to: '/roadmap' },
-      { label: '衍生生态', to: '/derivatives' },
     ],
   },
   {
@@ -39,6 +40,7 @@ const navGroups = [
     slug: 'news',
     items: [
       { label: '新闻动态', to: '/news' },
+      { label: '背景故事', to: '/story' },
       { label: '社区支持', to: '/community' },
     ],
   },

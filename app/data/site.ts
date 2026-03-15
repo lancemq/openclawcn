@@ -72,6 +72,12 @@ export const actionOverview = [
     meta: '搜索',
   },
   {
+    title: '安全实践',
+    description: '社区踩坑经验、三大灾难事故复盘和防御配置。',
+    to: '/security',
+    meta: '安全',
+  },
+  {
     title: '常见问题',
     description: '快速查看"先看哪里、怎么反馈、去哪里提问"等高频问题。',
     to: '/faq',
@@ -82,12 +88,6 @@ export const actionOverview = [
     description: '如果你遇到文档缺失、理解障碍或翻译问题，可以直接提交反馈。',
     to: '/feedback',
     meta: '反馈',
-  },
-  {
-    title: '社区支持',
-    description: '查看 GitHub、反馈入口和当前可用的社区支持路径。',
-    to: '/community',
-    meta: '社区',
   },
 ]
 
@@ -103,6 +103,18 @@ export const ecosystemOverview = [
     description: '真实的企业和个人使用案例，展示 OpenClaw 的实际应用效果。',
     to: '/showcase',
     meta: '案例',
+  },
+  {
+    title: '行业应用',
+    description: '法律、电商、教育、金融、医疗等行业的 OpenClaw 应用方案。',
+    to: '/industries',
+    meta: '行业',
+  },
+  {
+    title: '背景故事',
+    description: '创始人 Peter Steinberger 的故事、命名大战、加入 OpenAI 的历程。',
+    to: '/story',
+    meta: '故事',
   },
   {
     title: '下载中心',
@@ -159,22 +171,22 @@ export const extensionOverview = [
     meta: 'Config',
   },
   {
+    title: '模型选择指南',
+    description: 'Claude/GPT/Gemini/DeepSeek/国产模型对比、智能路由配置和成本优化技巧。',
+    to: '/models',
+    meta: 'Models',
+  },
+  {
+    title: '安全实践',
+    description: '社区踩坑经验、三大灾难事故复盘和防御配置，避免真金白银的教训。',
+    to: '/security',
+    meta: 'Security',
+  },
+  {
     title: '生态中心',
     description: '探索 ClawHub 技能市场、插件生态、第三方集成和社区项目，了解 OpenClaw 的扩展能力。',
     to: '/ecosystem',
     meta: 'Ecosystem',
-  },
-  {
-    title: '案例展示',
-    description: '真实的企业和个人使用案例，展示 OpenClaw 在不同场景中的实际应用效果。',
-    to: '/showcase',
-    meta: 'Showcase',
-  },
-  {
-    title: '下载中心',
-    description: '各平台安装包下载、一键安装命令和系统要求说明。',
-    to: '/download',
-    meta: 'Download',
   },
 ]
 
