@@ -5,6 +5,40 @@ useSeo({
   path: '/tools/automation',
 })
 
+const iconKind = (icon: string) => ({
+  '⏰': 'pulse',
+  '💓': 'pulse',
+  '🔄': 'flow',
+  '📨': 'stack',
+  '🚨': 'shield',
+  '⏭️': 'flow',
+  '📊': 'grid',
+  '🏥': 'shield',
+  '🔔': 'spark',
+  '🎯': 'spark',
+  '⚡': 'terminal',
+  '📋': 'stack',
+  '🛡️': 'shield',
+  '🔍': 'orbit',
+}[icon] || 'grid')
+
+const iconTone = (icon: string) => ({
+  '⏰': 'accent',
+  '💓': 'brand',
+  '🔄': 'brand',
+  '📨': 'muted',
+  '🚨': 'accent',
+  '⏭️': 'muted',
+  '📊': 'brand',
+  '🏥': 'brand',
+  '🔔': 'accent',
+  '🎯': 'accent',
+  '⚡': 'muted',
+  '📋': 'muted',
+  '🛡️': 'brand',
+  '🔍': 'accent',
+}[icon] || 'brand')
+
 // 自动化类型
 const automationTypes = [
   {
@@ -377,47 +411,48 @@ const faqs = [
     a: '使用任务分组、标签分类，统一配置日志和监控，定期审查和清理无用任务。',
   },
 ]
+
+const heroSignals = [
+  {
+    label: '核心机制',
+    value: 'Cron + Heartbeat',
+    note: '一个偏时间驱动，一个偏主动唤醒；前者像定时任务，后者更像固定节奏的助手回访。',
+  },
+  {
+    label: '关键配套',
+    value: '日志、并发、保留策略',
+    note: '没有 run log、session retention 和并发限制，任务越多越容易把系统拖乱。',
+  },
+]
+
+const relatedLinks = [
+  { to: '/tools', meta: 'Tools', title: '工具系列总览', description: '回到工具系列总入口。' },
+  { to: '/tools/triggers', meta: 'Triggers', title: '触发机制', description: '了解 Hooks 和 Webhooks。' },
+  { to: '/best-practices/automation-workflows', meta: 'Practice', title: '自动化实践', description: '实际案例和最佳实践。' },
+  { to: '/configurations', meta: 'Config', title: '关键配置', description: 'Cron 和 Heartbeat 配置详解。' },
+]
 </script>
 
 <template>
   <section class="section">
     <div class="container tools-detail-page">
-      <!-- Hero -->
-      <section class="detail-hero">
-        <div class="card hero-main">
-          <p class="eyebrow">Automation</p>
-          <h1 class="section-title">自动化与定时任务</h1>
-          <p class="section-copy">
-            从被动响应进入主动运行阶段后，真正重要的就不是"能不能自动跑"，而是运行节奏、日志、失败处理、会话隔离和人工接管。这一页帮你建立长期稳定的自动化能力。
-          </p>
-        </div>
-
-        <aside class="card hero-side">
-          <div class="signal-panel">
-            <span class="mini-label">核心机制</span>
-            <strong>Cron + Heartbeat</strong>
-            <p>一个偏时间驱动，一个偏主动唤醒；前者像定时任务，后者更像固定节奏的助手回访。</p>
-          </div>
-          <div class="signal-panel">
-            <span class="mini-label">关键配套</span>
-            <strong>日志、并发、保留策略</strong>
-            <p>没有 run log、session retention 和并发限制，任务越多越容易把系统拖乱。</p>
-          </div>
-        </aside>
-      </section>
+      <ToolTopicHero
+        eyebrow="Automation"
+        title="自动化与定时任务"
+        summary="从被动响应进入主动运行阶段后，真正重要的就不是&quot;能不能自动跑&quot;，而是运行节奏、日志、失败处理、会话隔离和人工接管。这一页帮你建立长期稳定的自动化能力。"
+        :signals="heroSignals"
+      />
 
       <!-- 自动化类型 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Types</p>
-          <h2>四种自动化类型</h2>
-          <p class="section-copy">根据场景选择合适的自动化方式。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Types" title="四种自动化类型" description="根据场景选择合适的自动化方式。" />
 
         <div class="automation-types-grid">
           <article v-for="t in automationTypes" :key="t.type" class="automation-type-card">
             <div class="type-header">
-              <span class="type-icon">{{ t.icon }}</span>
+              <span class="type-icon">
+                <SeriesGlyph :kind="iconKind(t.icon)" :tone="iconTone(t.icon)" small />
+              </span>
               <h3>{{ t.type }}</h3>
             </div>
             <p class="type-desc">{{ t.description }}</p>
@@ -434,11 +469,7 @@ const faqs = [
 
       <!-- Cron 配置 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Cron</p>
-          <h2>Cron 定时任务配置</h2>
-          <p class="section-copy">Cron 是时间驱动的定时任务，适合固定时间执行的周期性任务。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Cron" title="Cron 定时任务配置" description="Cron 是时间驱动的定时任务，适合固定时间执行的周期性任务。" />
 
         <div class="cron-content">
           <div class="cron-expressions">
@@ -463,11 +494,7 @@ const faqs = [
 
       <!-- Heartbeat 配置 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Heartbeat</p>
-          <h2>Heartbeat 心跳配置</h2>
-          <p class="section-copy">Heartbeat 让 agent 按固定间隔主动联系用户，适合提醒和汇报场景。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Heartbeat" title="Heartbeat 心跳配置" description="Heartbeat 让 agent 按固定间隔主动联系用户，适合提醒和汇报场景。" />
 
         <div class="heartbeat-content">
           <div class="heartbeat-modes">
@@ -489,11 +516,7 @@ const faqs = [
 
       <!-- 会话管理 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Session</p>
-          <h2>会话管理</h2>
-          <p class="section-copy">合理的会话管理是长期稳定运行的关键。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Session" title="会话管理" description="合理的会话管理是长期稳定运行的关键。" />
 
         <div class="session-grid">
           <article v-for="s in sessionManagement" :key="s.title" class="session-card">
@@ -506,11 +529,7 @@ const faqs = [
 
       <!-- 日志与监控 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Logging</p>
-          <h2>日志与监控</h2>
-          <p class="section-copy">完整的日志和监控是排查问题的基础。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Logging" title="日志与监控" description="完整的日志和监控是排查问题的基础。" />
 
         <div class="logging-content">
           <div class="logging-config">
@@ -531,16 +550,14 @@ const faqs = [
 
       <!-- 错误处理 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Error Handling</p>
-          <h2>错误处理策略</h2>
-          <p class="section-copy">任何自动化都可能失败，提前设计好应对方案。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Error Handling" title="错误处理策略" description="任何自动化都可能失败，提前设计好应对方案。" />
 
         <div class="error-grid">
           <article v-for="e in errorHandling" :key="e.strategy" class="error-card">
             <div class="error-header">
-              <span class="error-icon">{{ e.icon }}</span>
+              <span class="error-icon">
+                <SeriesGlyph :kind="iconKind(e.icon)" :tone="iconTone(e.icon)" small />
+              </span>
               <h3>{{ e.strategy }}</h3>
             </div>
             <p>{{ e.description }}</p>
@@ -551,16 +568,14 @@ const faqs = [
 
       <!-- 应用场景 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Use Cases</p>
-          <h2>典型应用场景</h2>
-          <p class="section-copy">这些场景适合作为自动化的起点。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Use Cases" title="典型应用场景" description="这些场景适合作为自动化的起点。" />
 
         <div class="usecases-grid">
           <article v-for="uc in useCases" :key="uc.title" class="usecase-card">
             <div class="usecase-header">
-              <span class="usecase-icon">{{ uc.icon }}</span>
+              <span class="usecase-icon">
+                <SeriesGlyph :kind="iconKind(uc.icon)" :tone="iconTone(uc.icon)" small />
+              </span>
               <div>
                 <h3>{{ uc.title }}</h3>
                 <code class="usecase-schedule">{{ uc.schedule }}</code>
@@ -576,65 +591,21 @@ const faqs = [
 
       <!-- 最佳实践 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Best Practices</p>
-          <h2>最佳实践</h2>
-        </div>
+        <ToolSectionHeading eyebrow="Best Practices" title="最佳实践" />
 
         <div class="practices-grid">
           <article v-for="p in bestPractices" :key="p.title" class="practice-card">
-            <span class="practice-icon">{{ p.icon }}</span>
+            <span class="practice-icon">
+              <SeriesGlyph :kind="iconKind(p.icon)" :tone="iconTone(p.icon)" small />
+            </span>
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
           </article>
         </div>
       </section>
 
-      <!-- FAQ -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">FAQ</p>
-          <h2>常见问题</h2>
-        </div>
-
-        <div class="faq-list">
-          <article v-for="item in faqs" :key="item.q" class="faq-item">
-            <h3>{{ item.q }}</h3>
-            <p>{{ item.a }}</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- 相关链接 -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Related</p>
-          <h2>继续深入</h2>
-        </div>
-
-        <div class="related-grid">
-          <NuxtLink to="/tools" class="related-link">
-            <span class="tag">Tools</span>
-            <strong>工具系列总览</strong>
-            <p>回到工具系列总入口。</p>
-          </NuxtLink>
-          <NuxtLink to="/tools/triggers" class="related-link">
-            <span class="tag">Triggers</span>
-            <strong>触发机制</strong>
-            <p>了解 Hooks 和 Webhooks。</p>
-          </NuxtLink>
-          <NuxtLink to="/best-practices/automation-workflows" class="related-link">
-            <span class="tag">Practice</span>
-            <strong>自动化实践</strong>
-            <p>实际案例和最佳实践。</p>
-          </NuxtLink>
-          <NuxtLink to="/configurations" class="related-link">
-            <span class="tag">Config</span>
-            <strong>关键配置</strong>
-            <p>Cron 和 Heartbeat 配置详解。</p>
-          </NuxtLink>
-        </div>
-      </section>
+      <ToolFaqSection :items="faqs" />
+      <ToolRelatedSection :items="relatedLinks" />
     </div>
   </section>
 </template>
@@ -716,7 +687,8 @@ const faqs = [
 }
 
 .type-icon {
-  font-size: 1.8rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .type-header h3 {
@@ -932,7 +904,8 @@ const faqs = [
 }
 
 .error-icon {
-  font-size: 1.4rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .error-header h3 {
@@ -979,7 +952,8 @@ const faqs = [
 }
 
 .usecase-icon {
-  font-size: 1.8rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .usecase-header h3 {
@@ -1024,8 +998,8 @@ const faqs = [
 }
 
 .practice-icon {
-  font-size: 1.8rem;
-  display: block;
+  display: inline-flex;
+  justify-content: center;
   margin-bottom: 8px;
 }
 

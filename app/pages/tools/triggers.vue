@@ -5,6 +5,40 @@ useSeo({
   path: '/tools/triggers',
 })
 
+const iconKind = (icon: string) => ({
+  '🪝': 'flow',
+  '🌐': 'orbit',
+  '⏰': 'pulse',
+  '💓': 'pulse',
+  '📨': 'stack',
+  '🔗': 'grid',
+  '🔔': 'spark',
+  '📝': 'terminal',
+  '🎯': 'spark',
+  '🛡️': 'shield',
+  '📊': 'grid',
+  '📋': 'stack',
+  '⏱️': 'pulse',
+  '🔒': 'shield',
+}[icon] || 'grid')
+
+const iconTone = (icon: string) => ({
+  '🪝': 'brand',
+  '🌐': 'accent',
+  '⏰': 'accent',
+  '💓': 'brand',
+  '📨': 'muted',
+  '🔗': 'brand',
+  '🔔': 'accent',
+  '📝': 'muted',
+  '🎯': 'accent',
+  '🛡️': 'brand',
+  '📊': 'brand',
+  '📋': 'muted',
+  '⏱️': 'accent',
+  '🔒': 'brand',
+}[icon] || 'brand')
+
 // 触发类型对比
 const triggerTypes = [
   {
@@ -426,47 +460,48 @@ const faqs = [
     a: '通过 priority 字段控制优先级，数值越大越先执行。相同优先级的执行顺序不确定。',
   },
 ]
+
+const heroSignals = [
+  {
+    label: '核心区别',
+    value: '事件驱动 vs 时间驱动',
+    note: 'Hooks 和 Webhooks 是事件驱动，Cron 和 Heartbeat 是时间驱动，两者不应该混着理解。',
+  },
+  {
+    label: '最重要前提',
+    value: '先定义输入和出口',
+    note: '先知道事件从哪里进来、被路由给谁、失败后去哪看，比写复杂规则更重要。',
+  },
+]
+
+const relatedLinks = [
+  { to: '/tools', meta: 'Tools', title: '工具系列总览', description: '回到工具系列总入口。' },
+  { to: '/tools/automation', meta: 'Automation', title: '自动化与定时任务', description: '深入了解 Cron 和 Heartbeat。' },
+  { to: '/configurations', meta: 'Config', title: '关键配置', description: '触发器配置详解。' },
+  { to: '/docs/manual/hooks-overview', meta: 'Docs', title: 'Hooks 文档', description: '官方 Hooks 详细文档。' },
+]
 </script>
 
 <template>
   <section class="section">
     <div class="container tools-detail-page">
-      <!-- Hero -->
-      <section class="detail-hero">
-        <div class="card hero-main">
-          <p class="eyebrow">Triggers</p>
-          <h1 class="section-title">触发机制</h1>
-          <p class="section-copy">
-            触发机制解决的是"什么时候把动作插进来"的问题。理解 Hooks、Webhooks、Cron 和 Heartbeat 的区别，才能设计出清晰可控的自动化流程。
-          </p>
-        </div>
-
-        <aside class="card hero-side">
-          <div class="signal-panel">
-            <span class="mini-label">核心区别</span>
-            <strong>事件驱动 vs 时间驱动</strong>
-            <p>Hooks 和 Webhooks 是事件驱动，Cron 和 Heartbeat 是时间驱动，两者不应该混着理解。</p>
-          </div>
-          <div class="signal-panel">
-            <span class="mini-label">最重要前提</span>
-            <strong>先定义输入和出口</strong>
-            <p>先知道事件从哪里进来、被路由给谁、失败后去哪看，比写复杂规则更重要。</p>
-          </div>
-        </aside>
-      </section>
+      <ToolTopicHero
+        eyebrow="Triggers"
+        title="触发机制"
+        summary="触发机制解决的是&quot;什么时候把动作插进来&quot;的问题。理解 Hooks、Webhooks、Cron 和 Heartbeat 的区别，才能设计出清晰可控的自动化流程。"
+        :signals="heroSignals"
+      />
 
       <!-- 触发类型对比 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Trigger Types</p>
-          <h2>四种触发类型</h2>
-          <p class="section-copy">理解每种触发类型的特点，选择最适合场景的触发方式。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Trigger Types" title="四种触发类型" description="理解每种触发类型的特点，选择最适合场景的触发方式。" />
 
         <div class="trigger-types-grid">
           <article v-for="t in triggerTypes" :key="t.type" class="trigger-type-card">
             <div class="trigger-header">
-              <span class="trigger-icon">{{ t.icon }}</span>
+              <span class="trigger-icon">
+                <SeriesGlyph :kind="iconKind(t.icon)" :tone="iconTone(t.icon)" small />
+              </span>
               <div>
                 <h3>{{ t.type }}</h3>
                 <span class="trigger-risk" :class="t.risk.toLowerCase()">{{ t.risk }}风险</span>
@@ -493,11 +528,7 @@ const faqs = [
 
       <!-- Hooks 详解 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Hooks</p>
-          <h2>生命周期钩子</h2>
-          <p class="section-copy">Hooks 在系统内部关键时机插入规则、流程或动作，是生命周期扩展的核心机制。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Hooks" title="生命周期钩子" description="Hooks 在系统内部关键时机插入规则、流程或动作，是生命周期扩展的核心机制。" />
 
         <div class="hooks-content">
           <div class="hooks-events">
@@ -519,11 +550,7 @@ const faqs = [
 
       <!-- Webhooks 详解 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Webhooks</p>
-          <h2>外部事件入口</h2>
-          <p class="section-copy">Webhooks 让外部系统把事件推送进来，是外部集成的关键入口。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Webhooks" title="外部事件入口" description="Webhooks 让外部系统把事件推送进来，是外部集成的关键入口。" />
 
         <div class="webhooks-content">
           <div class="webhooks-endpoints">
@@ -546,7 +573,9 @@ const faqs = [
           <h3>安全建议</h3>
           <div class="security-list">
             <div v-for="s in webhooksDetail.security" :key="s" class="security-item">
-              <span class="security-icon">🔒</span>
+              <span class="security-icon">
+                <SeriesGlyph :kind="iconKind('🔒')" :tone="iconTone('🔒')" small />
+              </span>
               <span>{{ s }}</span>
             </div>
           </div>
@@ -555,11 +584,7 @@ const faqs = [
 
       <!-- Mappings 配置 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Mappings</p>
-          <h2>事件路由映射</h2>
-          <p class="section-copy">Mappings 把路径或事件映射到 agent、动作和投递方式上，是入口分发的关键配置。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Mappings" title="事件路由映射" description="Mappings 把路径或事件映射到 agent、动作和投递方式上，是入口分发的关键配置。" />
 
         <div class="mappings-grid">
           <article v-for="m in mappingsConfig" :key="m.type" class="mapping-card">
@@ -572,11 +597,7 @@ const faqs = [
 
       <!-- 事件驱动 vs 时间驱动 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Comparison</p>
-          <h2>事件驱动 vs 时间驱动</h2>
-          <p class="section-copy">理解两种触发模式的区别，选择最适合场景的方式。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Comparison" title="事件驱动 vs 时间驱动" description="理解两种触发模式的区别，选择最适合场景的方式。" />
 
         <div class="comparison-table-wrapper">
           <table class="comparison-table">
@@ -600,16 +621,14 @@ const faqs = [
 
       <!-- 应用场景 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Use Cases</p>
-          <h2>典型应用场景</h2>
-          <p class="section-copy">根据场景选择合适的触发方式。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Use Cases" title="典型应用场景" description="根据场景选择合适的触发方式。" />
 
         <div class="usecases-grid">
           <article v-for="uc in useCases" :key="uc.title" class="usecase-card">
             <div class="usecase-header">
-              <span class="usecase-icon">{{ uc.icon }}</span>
+              <span class="usecase-icon">
+                <SeriesGlyph :kind="iconKind(uc.icon)" :tone="iconTone(uc.icon)" small />
+              </span>
               <div>
                 <h3>{{ uc.title }}</h3>
                 <code class="usecase-trigger">{{ uc.trigger }}</code>
@@ -625,11 +644,7 @@ const faqs = [
 
       <!-- 配置示例 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Examples</p>
-          <h2>完整配置示例</h2>
-          <p class="section-copy">参考这些配置示例，快速搭建触发系统。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Examples" title="完整配置示例" description="参考这些配置示例，快速搭建触发系统。" />
 
         <div class="examples-grid">
           <article v-for="ex in configExamples" :key="ex.title" class="example-card">
@@ -642,65 +657,21 @@ const faqs = [
 
       <!-- 最佳实践 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Best Practices</p>
-          <h2>最佳实践</h2>
-        </div>
+        <ToolSectionHeading eyebrow="Best Practices" title="最佳实践" />
 
         <div class="practices-grid">
           <article v-for="p in bestPractices" :key="p.title" class="practice-card">
-            <span class="practice-icon">{{ p.icon }}</span>
+            <span class="practice-icon">
+              <SeriesGlyph :kind="iconKind(p.icon)" :tone="iconTone(p.icon)" small />
+            </span>
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
           </article>
         </div>
       </section>
 
-      <!-- FAQ -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">FAQ</p>
-          <h2>常见问题</h2>
-        </div>
-
-        <div class="faq-list">
-          <article v-for="item in faqs" :key="item.q" class="faq-item">
-            <h3>{{ item.q }}</h3>
-            <p>{{ item.a }}</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- 相关链接 -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Related</p>
-          <h2>继续深入</h2>
-        </div>
-
-        <div class="related-grid">
-          <NuxtLink to="/tools" class="related-link">
-            <span class="tag">Tools</span>
-            <strong>工具系列总览</strong>
-            <p>回到工具系列总入口。</p>
-          </NuxtLink>
-          <NuxtLink to="/tools/automation" class="related-link">
-            <span class="tag">Automation</span>
-            <strong>自动化与定时任务</strong>
-            <p>深入了解 Cron 和 Heartbeat。</p>
-          </NuxtLink>
-          <NuxtLink to="/configurations" class="related-link">
-            <span class="tag">Config</span>
-            <strong>关键配置</strong>
-            <p>触发器配置详解。</p>
-          </NuxtLink>
-          <NuxtLink to="/docs/manual/hooks-overview" class="related-link">
-            <span class="tag">Docs</span>
-            <strong>Hooks 文档</strong>
-            <p>官方 Hooks 详细文档。</p>
-          </NuxtLink>
-        </div>
-      </section>
+      <ToolFaqSection :items="faqs" />
+      <ToolRelatedSection :items="relatedLinks" />
     </div>
   </section>
 </template>
@@ -781,7 +752,8 @@ const faqs = [
 }
 
 .trigger-icon {
-  font-size: 2rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .trigger-header h3 {
@@ -931,7 +903,8 @@ const faqs = [
 }
 
 .security-icon {
-  font-size: 1rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 /* Mappings */
@@ -1030,7 +1003,8 @@ const faqs = [
 }
 
 .usecase-icon {
-  font-size: 1.8rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .usecase-header h3 {
@@ -1099,8 +1073,8 @@ const faqs = [
 }
 
 .practice-icon {
-  font-size: 1.8rem;
-  display: block;
+  display: inline-flex;
+  justify-content: center;
   margin-bottom: 8px;
 }
 

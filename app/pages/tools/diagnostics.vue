@@ -5,6 +5,32 @@ useSeo({
   path: '/tools/diagnostics',
 })
 
+const iconKind = (icon: string) => ({
+  '📦': 'stack',
+  '📡': 'flow',
+  '🔐': 'shield',
+  '⚡': 'terminal',
+  '📝': 'terminal',
+  '🧪': 'pulse',
+  '🔍': 'orbit',
+  '⚖️': 'grid',
+  '📜': 'stack',
+  '📚': 'orbit',
+}[icon] || 'grid')
+
+const iconTone = (icon: string) => ({
+  '📦': 'muted',
+  '📡': 'brand',
+  '🔐': 'brand',
+  '⚡': 'accent',
+  '📝': 'muted',
+  '🧪': 'accent',
+  '🔍': 'accent',
+  '⚖️': 'muted',
+  '📜': 'muted',
+  '📚': 'brand',
+}[icon] || 'brand')
+
 // 诊断流程
 const diagnosticFlow = [
   {
@@ -430,42 +456,41 @@ const faqs = [
     a: '使用版本控制管理配置文件，保留备份。插件可以使用 openclaw plugins update <name>@<version> 回滚。',
   },
 ]
+
+const heroSignals = [
+  {
+    label: '最高频问题',
+    value: '装了但没生效',
+    note: '根因通常不是插件本身坏了，而是没启用、没重启、配错位置或装错机器。',
+  },
+  {
+    label: '最稳排障顺序',
+    value: '层级 → 权限 → 环境 → 版本',
+    note: '先判断问题属于哪一层，再动配置或重装，效率更高。',
+  },
+]
+
+const relatedLinks = [
+  { to: '/tools', meta: 'Tools', title: '工具系列总览', description: '回到工具系列总入口。' },
+  { to: '/tools/plugins', meta: 'Plugins', title: '插件系统', description: '插件安装和管理。' },
+  { to: '/docs/reference/troubleshooting', meta: 'Docs', title: '故障排除文档', description: '官方故障排除指南。' },
+  { to: '/community', meta: 'Community', title: '社区支持', description: '获取社区帮助。' },
+]
 </script>
 
 <template>
   <section class="section">
     <div class="container tools-detail-page">
-      <!-- Hero -->
-      <section class="detail-hero">
-        <div class="card hero-main">
-          <p class="eyebrow">Diagnostics</p>
-          <h1 class="section-title">诊断与排障</h1>
-          <p class="section-copy">
-            工具排障最忌讳的是一出问题就重新安装。更高效的方法，是先判断问题出在层级、配置、权限、运行环境还是版本变化，然后针对性解决。
-          </p>
-        </div>
-
-        <aside class="card hero-side">
-          <div class="signal-panel">
-            <span class="mini-label">最高频问题</span>
-            <strong>装了但没生效</strong>
-            <p>根因通常不是插件本身坏了，而是没启用、没重启、配错位置或装错机器。</p>
-          </div>
-          <div class="signal-panel">
-            <span class="mini-label">最稳排障顺序</span>
-            <strong>层级 → 权限 → 环境 → 版本</strong>
-            <p>先判断问题属于哪一层，再动配置或重装，效率更高。</p>
-          </div>
-        </aside>
-      </section>
+      <ToolTopicHero
+        eyebrow="Diagnostics"
+        title="诊断与排障"
+        summary="工具排障最忌讳的是一出问题就重新安装。更高效的方法，是先判断问题出在层级、配置、权限、运行环境还是版本变化，然后针对性解决。"
+        :signals="heroSignals"
+      />
 
       <!-- 诊断流程 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Process</p>
-          <h2>诊断流程</h2>
-          <p class="section-copy">按照这个流程系统性地定位和解决问题。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Process" title="诊断流程" description="按照这个流程系统性地定位和解决问题。" />
 
         <div class="flow-grid">
           <article v-for="step in diagnosticFlow" :key="step.step" class="flow-card">
@@ -483,11 +508,7 @@ const faqs = [
 
       <!-- 诊断命令 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Commands</p>
-          <h2>诊断命令参考</h2>
-          <p class="section-copy">掌握这些命令，快速收集诊断信息。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Commands" title="诊断命令参考" description="掌握这些命令，快速收集诊断信息。" />
 
         <div class="commands-grid">
           <article v-for="cmd in diagnosticCommands" :key="cmd.command" class="command-card">
@@ -502,16 +523,14 @@ const faqs = [
 
       <!-- 常见问题 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Common Issues</p>
-          <h2>常见问题分类</h2>
-          <p class="section-copy">按类别查找问题和解决方案。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Common Issues" title="常见问题分类" description="按类别查找问题和解决方案。" />
 
         <div class="issues-grid">
           <article v-for="cat in commonIssues" :key="cat.category" class="issue-category">
             <div class="category-header">
-              <span class="category-icon">{{ cat.icon }}</span>
+              <span class="category-icon">
+                <SeriesGlyph :kind="iconKind(cat.icon)" :tone="iconTone(cat.icon)" small />
+              </span>
               <h3>{{ cat.category }}</h3>
             </div>
             <div class="issues-list">
@@ -539,11 +558,7 @@ const faqs = [
 
       <!-- 日志分析 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Log Analysis</p>
-          <h2>日志分析</h2>
-          <p class="section-copy">学会阅读和分析日志，快速定位问题。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Log Analysis" title="日志分析" description="学会阅读和分析日志，快速定位问题。" />
 
         <div class="log-content">
           <div class="log-levels">
@@ -581,14 +596,13 @@ const faqs = [
 
       <!-- 调试技巧 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Tips</p>
-          <h2>调试技巧</h2>
-        </div>
+        <ToolSectionHeading eyebrow="Tips" title="调试技巧" />
 
         <div class="tips-grid">
           <article v-for="tip in debugTips" :key="tip.title" class="tip-card">
-            <span class="tip-icon">{{ tip.icon }}</span>
+            <span class="tip-icon">
+              <SeriesGlyph :kind="iconKind(tip.icon)" :tone="iconTone(tip.icon)" small />
+            </span>
             <h3>{{ tip.title }}</h3>
             <p>{{ tip.description }}</p>
           </article>
@@ -597,10 +611,7 @@ const faqs = [
 
       <!-- 性能优化 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Performance</p>
-          <h2>性能优化建议</h2>
-        </div>
+        <ToolSectionHeading eyebrow="Performance" title="性能优化建议" />
 
         <div class="performance-grid">
           <article v-for="p in performanceTips" :key="p.title" class="performance-card">
@@ -612,51 +623,8 @@ const faqs = [
         </div>
       </section>
 
-      <!-- FAQ -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">FAQ</p>
-          <h2>常见问题</h2>
-        </div>
-
-        <div class="faq-list">
-          <article v-for="item in faqs" :key="item.q" class="faq-item">
-            <h3>{{ item.q }}</h3>
-            <p>{{ item.a }}</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- 相关链接 -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Related</p>
-          <h2>继续深入</h2>
-        </div>
-
-        <div class="related-grid">
-          <NuxtLink to="/tools" class="related-link">
-            <span class="tag">Tools</span>
-            <strong>工具系列总览</strong>
-            <p>回到工具系列总入口。</p>
-          </NuxtLink>
-          <NuxtLink to="/tools/plugins" class="related-link">
-            <span class="tag">Plugins</span>
-            <strong>插件系统</strong>
-            <p>插件安装和管理。</p>
-          </NuxtLink>
-          <NuxtLink to="/docs/reference/troubleshooting" class="related-link">
-            <span class="tag">Docs</span>
-            <strong>故障排除文档</strong>
-            <p>官方故障排除指南。</p>
-          </NuxtLink>
-          <NuxtLink to="/community" class="related-link">
-            <span class="tag">Community</span>
-            <strong>社区支持</strong>
-            <p>获取社区帮助。</p>
-          </NuxtLink>
-        </div>
-      </section>
+      <ToolFaqSection :items="faqs" />
+      <ToolRelatedSection :items="relatedLinks" />
     </div>
   </section>
 </template>
@@ -833,7 +801,8 @@ const faqs = [
 }
 
 .category-icon {
-  font-size: 1.5rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .category-header h3 {
@@ -975,8 +944,8 @@ const faqs = [
 }
 
 .tip-icon {
-  font-size: 1.8rem;
-  display: block;
+  display: inline-flex;
+  justify-content: center;
   margin-bottom: 8px;
 }
 

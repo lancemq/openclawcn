@@ -5,6 +5,40 @@ useSeo({
   path: '/tools/plugins',
 })
 
+const iconKind = (icon: string) => ({
+  '📡': 'flow',
+  '🧠': 'orbit',
+  '🎤': 'pulse',
+  '🔧': 'terminal',
+  '🔗': 'grid',
+  '🔍': 'spark',
+  '📥': 'stack',
+  '⚙️': 'grid',
+  '✅': 'shield',
+  '🔄': 'flow',
+  '📋': 'stack',
+  '🧪': 'pulse',
+  '📝': 'terminal',
+  '⏪': 'orbit',
+}[icon] || 'grid')
+
+const iconTone = (icon: string) => ({
+  '📡': 'brand',
+  '🧠': 'accent',
+  '🎤': 'accent',
+  '🔧': 'muted',
+  '🔗': 'brand',
+  '🔍': 'accent',
+  '📥': 'brand',
+  '⚙️': 'muted',
+  '✅': 'brand',
+  '🔄': 'accent',
+  '📋': 'muted',
+  '🧪': 'accent',
+  '📝': 'muted',
+  '⏪': 'muted',
+}[icon] || 'brand')
+
 // 插件类型分类
 const pluginCategories = [
   {
@@ -337,6 +371,19 @@ const bestPractices = [
   },
 ]
 
+const heroSignals = [
+  {
+    label: '核心区别',
+    value: '插件装能力，Skills 组织能力',
+    note: '插件更接近系统级扩展，Skills 更接近任务打法和提示词层的能力包。',
+  },
+  {
+    label: '典型场景',
+    value: '渠道、语音、记忆、集成',
+    note: '只要涉及 Gateway 里的真实运行代码，通常都更应该先看插件。',
+  },
+]
+
 // 常见问题
 const faqs = [
   {
@@ -364,47 +411,35 @@ const faqs = [
     a: '可以，但需注意资源占用和潜在冲突。建议按需启用，不用的插件及时禁用。',
   },
 ]
+
+const relatedLinks = [
+  { to: '/tools', meta: 'Tools', title: '工具系列总览', description: '回到工具系列总入口，了解完整能力地图。' },
+  { to: '/skills', meta: 'Skills', title: '热门技能', description: '了解 Skills 如何组织能力完成任务。' },
+  { to: '/configurations', meta: 'Config', title: '关键配置', description: '插件配置最终都要落到配置文件中。' },
+  { to: '/docs/manual/plugins-overview', meta: 'Docs', title: '插件文档', description: '查看官方插件系统详细文档。' },
+]
 </script>
 
 <template>
   <section class="section">
     <div class="container tools-detail-page">
-      <!-- Hero -->
-      <section class="detail-hero">
-        <div class="card hero-main">
-          <p class="eyebrow">Plugins</p>
-          <h1 class="section-title">插件系统</h1>
-          <p class="section-copy">
-            插件是 OpenClaw 的系统级扩展机制。它解决的是"把新的代码能力装进系统"，而不是"把工作流写得更长"。理解插件的安装、配置、启停和更新，是扩展 OpenClaw 能力的第一步。
-          </p>
-        </div>
-
-        <aside class="card hero-side">
-          <div class="signal-panel">
-            <span class="mini-label">核心区别</span>
-            <strong>插件装能力，Skills 组织能力</strong>
-            <p>插件更接近系统级扩展，Skills 更接近任务打法和提示词层的能力包。</p>
-          </div>
-          <div class="signal-panel">
-            <span class="mini-label">典型场景</span>
-            <strong>渠道、语音、记忆、集成</strong>
-            <p>只要涉及 Gateway 里的真实运行代码，通常都更应该先看插件。</p>
-          </div>
-        </aside>
-      </section>
+      <ToolTopicHero
+        eyebrow="Plugins"
+        title="插件系统"
+        summary="插件是 OpenClaw 的系统级扩展机制。它解决的是&quot;把新的代码能力装进系统&quot;，而不是&quot;把工作流写得更长&quot;。理解插件的安装、配置、启停和更新，是扩展 OpenClaw 能力的第一步。"
+        :signals="heroSignals"
+      />
 
       <!-- 插件分类 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">插件分类</p>
-          <h2>按功能分类的插件生态</h2>
-          <p class="section-copy">OpenClaw 插件覆盖渠道接入、记忆存储、语音处理、工具执行和第三方集成等多个领域。</p>
-        </div>
+        <ToolSectionHeading eyebrow="插件分类" title="按功能分类的插件生态" description="OpenClaw 插件覆盖渠道接入、记忆存储、语音处理、工具执行和第三方集成等多个领域。" />
 
         <div class="category-grid">
           <article v-for="cat in pluginCategories" :key="cat.title" class="category-card">
             <div class="category-header">
-              <span class="category-icon">{{ cat.icon }}</span>
+              <span class="category-icon">
+                <SeriesGlyph :kind="iconKind(cat.icon)" :tone="iconTone(cat.icon)" small />
+              </span>
               <div>
                 <h3>{{ cat.title }}</h3>
                 <p>{{ cat.description }}</p>
@@ -423,18 +458,16 @@ const faqs = [
 
       <!-- 插件生命周期 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Lifecycle</p>
-          <h2>插件生命周期管理</h2>
-          <p class="section-copy">从发现到维护，插件管理遵循一套完整的生命周期流程。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Lifecycle" title="插件生命周期管理" description="从发现到维护，插件管理遵循一套完整的生命周期流程。" />
 
         <div class="lifecycle-flow">
           <article v-for="(stage, index) in pluginLifecycle" :key="stage.stage" class="lifecycle-stage">
             <div class="stage-number">{{ index + 1 }}</div>
             <div class="stage-content">
               <div class="stage-header">
-                <span class="stage-icon">{{ stage.icon }}</span>
+                <span class="stage-icon">
+                  <SeriesGlyph :kind="iconKind(stage.icon)" :tone="iconTone(stage.icon)" small />
+                </span>
                 <h3>{{ stage.stage }}</h3>
               </div>
               <p class="stage-desc">{{ stage.description }}</p>
@@ -448,11 +481,7 @@ const faqs = [
 
       <!-- CLI 命令参考 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">CLI Reference</p>
-          <h2>命令行参考</h2>
-          <p class="section-copy">掌握这些命令，完成插件的日常管理操作。</p>
-        </div>
+        <ToolSectionHeading eyebrow="CLI Reference" title="命令行参考" description="掌握这些命令，完成插件的日常管理操作。" />
 
         <div class="commands-list">
           <article v-for="cmd in cliCommands" :key="cmd.command" class="command-item">
@@ -467,11 +496,7 @@ const faqs = [
 
       <!-- 配置位置 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Configuration</p>
-          <h2>配置位置说明</h2>
-          <p class="section-copy">插件配置不一定都写在同一个位置，这是最常见的踩坑点之一。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Configuration" title="配置位置说明" description="插件配置不一定都写在同一个位置，这是最常见的踩坑点之一。" />
 
         <div class="config-grid">
           <article v-for="loc in configLocations" :key="loc.location" class="config-card">
@@ -484,11 +509,7 @@ const faqs = [
 
       <!-- 对比表 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Comparison</p>
-          <h2>插件 vs Skills vs Tools</h2>
-          <p class="section-copy">理解三者的区别，才能选择正确的扩展方式。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Comparison" title="插件 vs Skills vs Tools" description="理解三者的区别，才能选择正确的扩展方式。" />
 
         <div class="comparison-table-wrapper">
           <table class="comparison-table">
@@ -514,66 +535,21 @@ const faqs = [
 
       <!-- 最佳实践 -->
       <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Best Practices</p>
-          <h2>最佳实践</h2>
-          <p class="section-copy">遵循这些实践，让插件管理更加稳健。</p>
-        </div>
+        <ToolSectionHeading eyebrow="Best Practices" title="最佳实践" description="遵循这些实践，让插件管理更加稳健。" />
 
         <div class="practices-grid">
           <article v-for="p in bestPractices" :key="p.title" class="practice-card">
-            <span class="practice-icon">{{ p.icon }}</span>
+            <span class="practice-icon">
+              <SeriesGlyph :kind="iconKind(p.icon)" :tone="iconTone(p.icon)" small />
+            </span>
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
           </article>
         </div>
       </section>
 
-      <!-- FAQ -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">FAQ</p>
-          <h2>常见问题</h2>
-        </div>
-
-        <div class="faq-list">
-          <article v-for="item in faqs" :key="item.q" class="faq-item">
-            <h3>{{ item.q }}</h3>
-            <p>{{ item.a }}</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- 相关链接 -->
-      <section class="card section-panel">
-        <div class="section-head">
-          <p class="eyebrow">Related</p>
-          <h2>继续深入</h2>
-        </div>
-
-        <div class="related-grid">
-          <NuxtLink to="/tools" class="related-link">
-            <span class="tag">Tools</span>
-            <strong>工具系列总览</strong>
-            <p>回到工具系列总入口，了解完整能力地图。</p>
-          </NuxtLink>
-          <NuxtLink to="/skills" class="related-link">
-            <span class="tag">Skills</span>
-            <strong>热门技能</strong>
-            <p>了解 Skills 如何组织能力完成任务。</p>
-          </NuxtLink>
-          <NuxtLink to="/configurations" class="related-link">
-            <span class="tag">Config</span>
-            <strong>关键配置</strong>
-            <p>插件配置最终都要落到配置文件中。</p>
-          </NuxtLink>
-          <NuxtLink to="/docs/manual/plugins-overview" class="related-link">
-            <span class="tag">Docs</span>
-            <strong>插件文档</strong>
-            <p>查看官方插件系统详细文档。</p>
-          </NuxtLink>
-        </div>
-      </section>
+      <ToolFaqSection :items="faqs" />
+      <ToolRelatedSection :items="relatedLinks" />
     </div>
   </section>
 </template>
@@ -654,7 +630,8 @@ const faqs = [
 }
 
 .category-icon {
-  font-size: 1.5rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .category-header h3 {
@@ -748,7 +725,8 @@ const faqs = [
 }
 
 .stage-icon {
-  font-size: 1.2rem;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .stage-header h3 {
@@ -908,8 +886,8 @@ const faqs = [
 }
 
 .practice-icon {
-  font-size: 1.8rem;
-  display: block;
+  display: inline-flex;
+  justify-content: center;
   margin-bottom: 8px;
 }
 
