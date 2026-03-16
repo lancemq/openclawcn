@@ -84,6 +84,12 @@ const helperText = computed(() => {
   return map[form.type as keyof typeof map] || map.content
 })
 
+const processNotes = [
+  '内容类反馈更适合说明“哪一页哪里不清楚”。',
+  '站点 bug 更适合附上页面路径、设备或浏览器信息。',
+  '如果是新专题诉求，尽量描述你想解决的具体场景。',
+]
+
 watch(
   () => form.type,
   (value) => {
@@ -148,15 +154,24 @@ async function submitFeedback() {
 
 <template>
   <form class="feedback-form card" @submit.prevent="submitFeedback">
-    <div class="feedback-intro">
-      <div class="intro-item">
-        <span class="intro-label">我们优先处理什么</span>
-        <p>文档错误、链接异常、站点 bug、阅读障碍和高频内容诉求。</p>
+    <div class="feedback-shell-head">
+      <div class="feedback-intro">
+        <div class="intro-item">
+          <span class="intro-label">我们优先处理什么</span>
+          <p>文档错误、链接异常、站点 bug、阅读障碍和高频内容诉求。</p>
+        </div>
+        <div class="intro-item">
+          <span class="intro-label">怎样更容易被处理</span>
+          <p>写清标题、问题现象、相关页面和你期待的结果，越具体越容易直接进入修复。</p>
+        </div>
       </div>
-      <div class="intro-item">
-        <span class="intro-label">怎样更容易被处理</span>
-        <p>写清标题、问题现象、相关页面和你期待的结果，越具体越容易直接进入修复。</p>
-      </div>
+
+      <aside class="process-card">
+        <span class="intro-label">填写提示</span>
+        <ul class="process-list">
+          <li v-for="item in processNotes" :key="item">{{ item }}</li>
+        </ul>
+      </aside>
     </div>
 
     <div class="field-grid">
@@ -266,6 +281,12 @@ async function submitFeedback() {
   gap: 18px;
 }
 
+.feedback-shell-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+  gap: 14px;
+}
+
 .feedback-intro {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -293,6 +314,22 @@ async function submitFeedback() {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.process-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(234, 215, 182, 0.18));
+}
+
+.process-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  line-height: 1.62;
 }
 
 .field-grid {
@@ -395,6 +432,7 @@ small {
 }
 
 @media (max-width: 760px) {
+  .feedback-shell-head,
   .feedback-intro,
   .field-grid {
     grid-template-columns: 1fr;

@@ -45,6 +45,27 @@ const quickLinks = [
   { title: '社区支持', to: '/community', desc: '获取更多帮助' },
 ]
 
+const faqRoutes = [
+  {
+    title: '问题还很模糊',
+    description: '先看 FAQ，确认你该去路径、主题、搜索还是反馈。',
+    to: '/faq',
+    meta: '当前页',
+  },
+  {
+    title: '已经知道关键词',
+    description: '直接进入搜索页，用更短的主题词快速定位内容。',
+    to: '/search',
+    meta: '搜索',
+  },
+  {
+    title: '已经知道阶段',
+    description: '从学习路径选一条主线，避免自己拼阅读顺序。',
+    to: '/paths',
+    meta: '路径',
+  },
+]
+
 const groupedFaqs = Object.entries(
   faqs.reduce<Record<string, typeof faqs>>((acc, item) => {
     acc[item.category] ||= []
@@ -88,12 +109,27 @@ const groupedFaqs = Object.entries(
         </aside>
       </section>
 
-      <div class="quick-links">
-        <NuxtLink v-for="link in quickLinks" :key="link.to" :to="link.to" class="quick-link card">
-          <span class="link-title">{{ link.title }}</span>
-          <span class="link-desc">{{ link.desc }}</span>
-        </NuxtLink>
-      </div>
+      <section class="faq-layout">
+        <div class="quick-links">
+          <NuxtLink v-for="link in quickLinks" :key="link.to" :to="link.to" class="quick-link card">
+            <span class="link-title">{{ link.title }}</span>
+            <span class="link-desc">{{ link.desc }}</span>
+          </NuxtLink>
+        </div>
+
+        <aside class="faq-side-stack">
+          <div class="card route-card">
+            <span class="mini-label">分流方式</span>
+            <div class="route-list">
+              <NuxtLink v-for="item in faqRoutes" :key="item.to" :to="item.to" class="route-item">
+                <span class="tag">{{ item.meta }}</span>
+                <strong>{{ item.title }}</strong>
+                <p>{{ item.description }}</p>
+              </NuxtLink>
+            </div>
+          </div>
+        </aside>
+      </section>
 
       <section class="faq-sections">
         <div v-for="[category, items] in groupedFaqs" :key="category" class="faq-section">
@@ -125,9 +161,21 @@ const groupedFaqs = Object.entries(
 
 .quick-links {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 0;
+}
+
+.faq-layout,
+.faq-side-stack,
+.route-list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-layout {
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  align-items: start;
 }
 
 .quick-link {
@@ -152,6 +200,32 @@ const groupedFaqs = Object.entries(
 .link-desc {
   color: var(--ink-soft);
   font-size: 0.82rem;
+}
+
+.route-card,
+.route-item {
+  display: grid;
+  gap: 8px;
+}
+
+.route-item {
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.route-item strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.route-item p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
 }
 
 .faq-sections {
@@ -203,8 +277,9 @@ const groupedFaqs = Object.entries(
 }
 
 @media (max-width: 900px) {
+  .faq-layout,
   .quick-links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 

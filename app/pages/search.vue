@@ -124,6 +124,27 @@ const searchTips = [
   '如果搜不到合适内容，直接去社区页或反馈页说明你想找什么',
 ]
 
+const searchRoutes = [
+  {
+    title: '先走学习路径',
+    description: '如果你还不确定问题属于哪一层，先从路径页判断阶段。',
+    to: '/paths',
+    meta: '路径',
+  },
+  {
+    title: '按主题进入',
+    description: '如果你只知道自己在找安装、渠道、模型或安全，主题中心更快。',
+    to: '/topics',
+    meta: '主题',
+  },
+  {
+    title: '直接提问或反馈',
+    description: '当搜索不到合适内容时，直接进入社区支持或提交反馈。',
+    to: '/community',
+    meta: '支持',
+  },
+]
+
 watch(
   searchInput,
   (value) => {
@@ -187,26 +208,57 @@ function updateKindFilter(kind: string) {
         </aside>
       </section>
 
-      <div class="card search-shell">
-        <label class="search-field">
-          <span>关键词</span>
-          <input v-model="searchInput" type="text" placeholder="例如：安装、社区、OpenClaw" />
-        </label>
-        <div class="filter-group">
-          <span class="filter-label">类型</span>
-          <button
-            v-for="kind in kindFilters"
-            :key="kind"
-            type="button"
-            class="filter-chip"
-            :class="{ active: selectedKind === kind }"
-            @click="updateKindFilter(kind)"
-          >
-            {{ kind }}
-          </button>
+      <section class="search-layout">
+        <div class="card search-shell search-main-panel">
+          <div class="search-shell-head">
+            <div>
+              <p class="eyebrow">Search Desk</p>
+              <p class="section-copy">先输入主题词，再按类型收窄。当前搜索只覆盖文档、新闻和最佳实践。</p>
+            </div>
+            <div class="search-count-box">
+              <span class="mini-label">当前结果</span>
+              <strong>{{ filteredItems.length }}</strong>
+            </div>
+          </div>
+
+          <label class="search-field">
+            <span>关键词</span>
+            <input v-model="searchInput" type="text" placeholder="例如：安装、社区、OpenClaw" />
+          </label>
+          <div class="filter-group">
+            <span class="filter-label">类型</span>
+            <button
+              v-for="kind in kindFilters"
+              :key="kind"
+              type="button"
+              class="filter-chip"
+              :class="{ active: selectedKind === kind }"
+              @click="updateKindFilter(kind)"
+            >
+              {{ kind }}
+            </button>
+          </div>
         </div>
-        <p class="muted">共找到 {{ filteredItems.length }} 条结果</p>
-      </div>
+
+        <aside class="search-side-stack">
+          <div class="card side-panel">
+            <span class="mini-label">不会搜时</span>
+            <strong>优先用短词，再根据结果跳转</strong>
+            <p>先搜“安装、渠道、模型、安全”这类短词，再逐步缩小，不要一开始就输入完整自然语言问题。</p>
+          </div>
+
+          <div class="card route-panel">
+            <span class="mini-label">辅助入口</span>
+            <div class="route-panel-grid">
+              <NuxtLink v-for="item in searchRoutes" :key="item.to" :to="item.to" class="route-panel-link">
+                <span class="tag">{{ item.meta }}</span>
+                <strong>{{ item.title }}</strong>
+                <p>{{ item.description }}</p>
+              </NuxtLink>
+            </div>
+          </div>
+        </aside>
+      </section>
 
       <section v-if="filteredItems.length" class="results-groups">
         <div v-for="group in groupedResults" :key="group.kind" class="result-group">
@@ -250,6 +302,75 @@ function updateKindFilter(kind: string) {
   display: grid;
   gap: 12px;
   margin-top: 0;
+}
+
+.search-layout,
+.search-side-stack,
+.route-panel-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.search-layout {
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  align-items: start;
+}
+
+.search-main-panel {
+  padding: 18px;
+}
+
+.search-shell-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: end;
+}
+
+.search-count-box {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(234, 215, 182, 0.28));
+  min-width: 110px;
+}
+
+.search-count-box strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.side-panel,
+.route-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.side-panel strong,
+.route-panel-link strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.28;
+}
+
+.side-panel p,
+.route-panel-link p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.58;
+  font-size: 0.84rem;
+}
+
+.route-panel-link {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid rgba(67, 73, 60, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.48);
 }
 
 .filter-group {
@@ -357,8 +478,13 @@ function updateKindFilter(kind: string) {
 }
 
 @media (max-width: 760px) {
+  .search-layout,
   .results {
     grid-template-columns: 1fr;
+  }
+
+  .search-shell-head {
+    display: grid;
   }
 }
 </style>
