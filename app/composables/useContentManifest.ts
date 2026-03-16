@@ -1,6 +1,3 @@
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
-
 export type ManifestDocItem = {
   title: string
   description: string
@@ -64,6 +61,10 @@ export function useContentManifest() {
     'content-manifest',
     async () => {
       if (import.meta.server) {
+        const [{ readFile }, { join }] = await Promise.all([
+          import('node:fs/promises'),
+          import('node:path'),
+        ])
         const manifestPath = join(process.cwd(), 'public', 'generated', 'content-manifest.json')
         const raw = await readFile(manifestPath, 'utf8')
         return JSON.parse(raw) as ContentManifest
