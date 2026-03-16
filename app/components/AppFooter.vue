@@ -15,6 +15,7 @@ const footerLinks = {
   ecosystem: {
     title: '生态',
     items: [
+      { label: '二次开发专题', to: '/ecosystem/secondary-development' },
       { label: '工具系列', to: '/tools' },
       { label: 'Skills', to: '/skills' },
       { label: '关键配置', to: '/configurations' },
@@ -40,7 +41,6 @@ const footerLinks = {
   },
 }
 
-const { public: publicConfig } = useRuntimeConfig()
 </script>
 
 <template>
@@ -130,7 +130,7 @@ const { public: publicConfig } = useRuntimeConfig()
         <div class="footer-legal">
           <NuxtLink to="/privacy" class="legal-link">隐私政策</NuxtLink>
           <NuxtLink to="/terms" class="legal-link">服务条款</NuxtLink>
-          <a :href="publicConfig.githubUrl" target="_blank" rel="noreferrer" class="legal-link">GitHub</a>
+          <NuxtLink to="/disclaimer" class="legal-link">免责声明</NuxtLink>
         </div>
       </div>
       <div class="footer-decoration" aria-hidden="true">

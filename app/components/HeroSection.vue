@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { public: publicConfig } = useRuntimeConfig()
-
 const primaryRoutes = [
   {
     title: '第一次认识 OpenClaw',
@@ -36,9 +34,7 @@ const primaryRoutes = [
         <div class="button-row">
           <NuxtLink class="button primary" to="/docs">查看文档</NuxtLink>
           <NuxtLink class="button secondary" to="/news">浏览最新动态</NuxtLink>
-          <a class="button ghost" :href="publicConfig.githubUrl" target="_blank" rel="noreferrer">
-            查看 GitHub
-          </a>
+          <NuxtLink class="button ghost" to="/feedback">提交反馈</NuxtLink>
         </div>
 
         <div class="hero-tags">
@@ -97,7 +93,7 @@ const primaryRoutes = [
           </li>
           <li>
             <strong>持续跟踪更新与社区讨论</strong>
-            <p>通过新闻、FAQ、反馈和 GitHub 入口持续跟踪版本变化与使用经验。</p>
+            <p>通过新闻、FAQ、反馈和社区页持续跟踪版本变化与使用经验。</p>
           </li>
         </ol>
       </div>

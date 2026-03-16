@@ -34,6 +34,7 @@ const navGroups = [
     to: '/ecosystem',
     items: [
       { label: '生态中心', to: '/ecosystem' },
+      { label: '二次开发专题', to: '/ecosystem/secondary-development' },
       { label: '案例展示', to: '/showcase' },
       { label: '下载中心', to: '/download' },
       { label: '产品路线图', to: '/roadmap' },
@@ -62,8 +63,6 @@ const navGroups = [
 ] as const
 
 const homeItem = { label: '首页', to: '/' }
-
-const { public: publicConfig } = useRuntimeConfig()
 
 function isActive(to: string) {
   if (to === '/') {
@@ -143,9 +142,6 @@ const activeGroup = computed(() =>
             <span class="search-trigger-text">搜索</span>
             <kbd>⌘K</kbd>
           </button>
-          <a class="button secondary compact" :href="publicConfig.githubUrl" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
         </div>
       </div>
 

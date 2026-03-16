@@ -16,7 +16,6 @@ export function useSeo(input: {
       '@type': 'Organization',
       name: config.public.siteName,
       url: config.public.siteUrl,
-      sameAs: [config.public.githubUrl].filter(Boolean),
     },
   ]
   const pageSchema =

@@ -45,7 +45,6 @@ useSeo({
         <p>本站使用以下第三方服务：</p>
         <ul>
           <li><strong>Vercel</strong>：网站托管和分析服务</li>
-          <li><strong>GitHub</strong>：内容托管和社区支持</li>
         </ul>
 
         <h2>您的权利</h2>
