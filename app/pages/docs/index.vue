@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sortDocs } from '~/data/content'
+import { getDocCategoryLabel, sortDocs } from '~/data/content'
 
 const route = useRoute()
 const router = useRouter()
@@ -90,6 +90,33 @@ const orderedItems = computed(() => sortDocs((items.value || []) as any[]))
 
 const featuredDocs = computed(() => orderedItems.value.slice(0, 3))
 
+const learnEntries = [
+  {
+    title: '学习路径',
+    description: '先按阶段选路线，避免第一次进入就自己拼学习顺序。',
+    to: '/paths',
+    meta: '主线',
+  },
+  {
+    title: '主题中心',
+    description: '如果你已经知道自己要看安装、渠道、模型或安全，优先从主题聚合页进入。',
+    to: '/topics',
+    meta: '按问题聚合',
+  },
+  {
+    title: '视频教程',
+    description: '适合先建立直觉，再回到文档确认命令和配置差异。',
+    to: '/videos',
+    meta: '演示',
+  },
+  {
+    title: '最佳实践',
+    description: '适合跑通基础链路后，再把方法沉淀成稳定做法。',
+    to: '/best-practices',
+    meta: '深化',
+  },
+]
+
 const docStats = computed(() => [
   {
     label: '当前文档数',
@@ -119,20 +146,6 @@ function updateFilters(key: 'category' | 'tag', value: string) {
     [key]: value === '全部' ? undefined : value,
   }
   router.replace({ query })
-}
-
-function getCategoryFromPath(path: string): string {
-  const match = String(path).match(/^\/docs\/([^/]+)/)
-  if (!match) return '文档'
-  
-  const catMap: Record<string, string> = {
-    'getting-started': '入门教程',
-    'setup': '安装配置',
-    'manual': '功能手册',
-    'operations': '运维安全',
-    'reference': '参考资料',
-  }
-  return catMap[match[1]] || match[1]
 }
 
 useSeo({
@@ -175,11 +188,28 @@ useSeo({
             :to="item.path"
             class="collection-utility-item utility-link"
           >
-            <span class="mini-label">{{ getCategoryFromPath(String(item.path)) }}</span>
+            <span class="mini-label">{{ getDocCategoryLabel(String(item.path)) }}</span>
             <strong>{{ item.title }}</strong>
             <p>{{ item.description }}</p>
           </NuxtLink>
         </aside>
+      </section>
+
+      <section class="card entry-panel">
+        <div class="section-head compact-head">
+          <div>
+            <p class="eyebrow">交叉访问</p>
+            <p class="section-copy">文档中心负责完整结构，但你也可以随时切回路径、主题、视频和实践页，减少在站内来回找入口的成本。</p>
+          </div>
+        </div>
+
+        <div class="entry-grid">
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="entry-card">
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
       </section>
 
       <div class="filters card collection-filters">
@@ -221,7 +251,7 @@ useSeo({
         >
           <div class="item-content collection-card-body">
             <div class="item-meta collection-meta">
-              <span class="tag">{{ getCategoryFromPath(String(item.path)) }}</span>
+              <span class="tag">{{ getDocCategoryLabel(String(item.path)) }}</span>
             </div>
             <h2>{{ item.title }}</h2>
             <p>{{ item.description }}</p>
@@ -263,6 +293,45 @@ useSeo({
 
 .filters {
   margin-top: 0;
+}
+
+.entry-panel,
+.entry-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.entry-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.entry-card {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.5);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.entry-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.22);
+  box-shadow: 0 12px 26px rgba(74, 56, 28, 0.08);
+}
+
+.entry-card strong {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.28;
+}
+
+.entry-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
 }
 
 .filter-group {
@@ -340,18 +409,21 @@ useSeo({
 }
 
 @media (max-width: 1200px) {
+  .entry-grid,
   .masonry-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 900px) {
+  .entry-grid,
   .masonry-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
+  .entry-grid,
   .masonry-grid {
     grid-template-columns: 1fr;
   }

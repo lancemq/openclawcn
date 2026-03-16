@@ -29,6 +29,7 @@ const pathEditorialMeta: Record<string, {
     checkpoints: ['知道 OpenClaw 是什么', '能完成安装', '能打开 Control UI', '知道问题该去哪排查'],
     related: [
       { title: '快速入门', to: '/docs/getting-started/getting-started', meta: '文档' },
+      { title: '安装主题中心', to: '/topics?topic=installation', meta: '主题' },
       { title: '安装与部署合集', to: '/videos#setup', meta: '视频' },
       { title: '常见问题', to: '/faq', meta: 'FAQ' },
     ],
@@ -53,6 +54,7 @@ const pathEditorialMeta: Record<string, {
     checkpoints: ['判断是否使用 WSL', '完成本地安装', '确认安全边界', '理解升级和迁移注意点'],
     related: [
       { title: '安装与环境', to: '/docs/setup/installation', meta: '文档' },
+      { title: '安装主题中心', to: '/topics?topic=installation', meta: '主题' },
       { title: 'Windows/WSL 视频', to: '/videos#setup', meta: '视频' },
       { title: '迁移指南', to: '/docs/setup/migration-guide', meta: '迁移' },
     ],
@@ -65,8 +67,21 @@ const pathEditorialMeta: Record<string, {
     checkpoints: ['理解 Tools / Hooks 分工', '找到合适的 Skills', '看懂一个工作流案例', '避免高风险扩展方式'],
     related: [
       { title: 'Skills 与扩展能力', to: '/skills', meta: '技能' },
+      { title: 'Skills 与 Tools 主题', to: '/topics?topic=skills-tools', meta: '主题' },
       { title: '关键配置', to: '/configurations', meta: '配置' },
       { title: '自动化实践', to: '/best-practices/automation-workflows', meta: '实践' },
+    ],
+  },
+  'remote-network': {
+    lane: '远程主线',
+    duration: '30-60 分钟',
+    goal: '把远程访问和多设备接入放进同一套边界里理解',
+    outcome: '知道远程访问、Tailnet、配对与多 Gateway 隔离之间的关系，避免把远程化做成新的风险入口。',
+    checkpoints: ['理解网络与配对', '知道远程访问方式', '能判断 serve / funnel 场景', '知道多设备如何隔离'],
+    related: [
+      { title: '网络与配对主题', to: '/topics?topic=network', meta: '主题' },
+      { title: 'Tailscale 文档', to: '/docs/operations/tailscale-serve-and-funnel', meta: '文档' },
+      { title: '团队频道策略', to: '/docs/operations/team-channel-session-strategy', meta: '运维' },
     ],
   },
   'team-ops': {
@@ -77,11 +92,39 @@ const pathEditorialMeta: Record<string, {
     checkpoints: ['理解 Gateway 架构', '知道暴露面和认证边界', '知道怎么升级', '知道怎么回收问题反馈'],
     related: [
       { title: 'Gateway 运维', to: '/docs/operations/gateway-operations', meta: '文档' },
+      { title: '安全与权限主题', to: '/topics?topic=security', meta: '主题' },
       { title: '安全基础', to: '/docs/operations/safety-basics', meta: '安全' },
       { title: '监控与告警', to: '/best-practices/monitoring-alerting', meta: '实践' },
     ],
   },
 }
+
+const learnSwitchboard = [
+  {
+    title: '主题中心',
+    description: '当你已经知道自己要解决安装、渠道、模型或安全问题时，从主题聚合页切入更快。',
+    to: '/topics',
+    meta: '按问题进入',
+  },
+  {
+    title: '文档中心',
+    description: '如果你想回到完整结构查找上下游知识点，直接回文档中心继续读。',
+    to: '/docs',
+    meta: '完整目录',
+  },
+  {
+    title: '视频教程',
+    description: '适合先看演示建立直觉，再回到路径里的具体步骤。',
+    to: '/videos',
+    meta: '演示',
+  },
+  {
+    title: '最佳实践',
+    description: '路径走通后，把做法沉淀成长期可复用的方法。',
+    to: '/best-practices',
+    meta: '深化',
+  },
+]
 
 const pathSignals = [
   {
@@ -247,6 +290,23 @@ const chooserCards = [
         </div>
       </section>
 
+      <section class="card learn-switch-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">和其他学习页交叉访问</p>
+            <p class="section-copy">学习路径负责决定顺序，但你不需要被锁在这一页。每走完一段，都可以切回主题、文档、视频或实践页继续推进。</p>
+          </div>
+        </div>
+
+        <div class="grid learn-switch-grid">
+          <NuxtLink v-for="item in learnSwitchboard" :key="item.to" :to="item.to" class="card resource-card">
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
+      </section>
+
       <section class="path-stack">
         <article
           v-for="path in pathCards"
@@ -354,6 +414,16 @@ const chooserCards = [
 .paths-page {
   display: grid;
   gap: 22px;
+}
+
+.learn-switch-card,
+.learn-switch-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.learn-switch-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .paths-hero {
@@ -637,6 +707,7 @@ const chooserCards = [
 }
 
 @media (max-width: 1180px) {
+  .learn-switch-grid,
   .hero-map,
   .chooser-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -653,6 +724,7 @@ const chooserCards = [
 
 @media (max-width: 780px) {
   .stat-panel,
+  .learn-switch-grid,
   .hero-map,
   .chooser-grid,
   .signal-grid,

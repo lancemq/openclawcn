@@ -131,7 +131,7 @@ export const learningPaths = [
     steps: [
       { title: '渠道概览', to: '/docs/manual/channels-overview' },
       { title: '安全边界', to: '/docs/operations/safety-basics' },
-      { title: '接入视频', to: '/videos#channels' },
+      { title: '接入视频', to: '/videos#integration' },
       { title: '渠道案例', to: '/topics?topic=channels' },
       { title: '高级实践', to: '/best-practices/integration-development' },
     ],

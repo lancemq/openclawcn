@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { informationLayers } from '~/data/information-architecture'
 import { pickTopicItems, topicDefinitions } from '~/data/taxonomy'
-import { sortBestPractices, sortDocs, sortNews } from '~/data/content'
+import { getDocCategoryLabel, sortBestPractices, sortDocs, sortNews } from '~/data/content'
 import { videoSections } from '~/data/videos'
 
 useSeo({
@@ -40,9 +40,166 @@ const filteredVideos = computed(() => {
     .slice(0, 6)
 })
 
-const topicDocs = computed(() => pickTopicItems(sortedDocs.value as any[], activeTopic.value.slug, 6))
 const topicNews = computed(() => pickTopicItems(sortedNews.value as any[], activeTopic.value.slug, 4))
 const topicPractices = computed(() => pickTopicItems(sortedPractices.value as any[], activeTopic.value.slug, 4))
+
+const topicPathMap: Record<string, { title: string; to: string; description: string }> = {
+  installation: {
+    title: '新手首次部署路径',
+    to: '/paths#new-user',
+    description: '先从定位、安装、Onboarding 和 Control UI 跑通一条最小链路。',
+  },
+  'gateway-ops': {
+    title: '团队运维路径',
+    to: '/paths#team-ops',
+    description: '把 Gateway、升级、安全和监控放进长期运行视角里理解。',
+  },
+  channels: {
+    title: '渠道接入路径',
+    to: '/paths#channels-integration',
+    description: '先理解入口边界，再接入 Telegram、WhatsApp、团队频道等真实渠道。',
+  },
+  'skills-tools': {
+    title: 'Skills 与扩展路径',
+    to: '/paths#expansion',
+    description: '先看边界和扩展层，再决定安装技能、插件还是自动化触发。',
+  },
+  'context-sessions': {
+    title: '团队运维路径',
+    to: '/paths#team-ops',
+    description: '优先建立上下文、会话隔离和长期协作的稳态方法。',
+  },
+  plugins: {
+    title: 'Skills 与扩展路径',
+    to: '/paths#expansion',
+    description: '插件属于能力层扩展，适合在基础链路稳定后继续阅读。',
+  },
+  'memory-search': {
+    title: 'Skills 与扩展路径',
+    to: '/paths#expansion',
+    description: '先理解记忆、索引和长期上下文边界，再做更深入的工作流设计。',
+  },
+  providers: {
+    title: '新手首次部署路径',
+    to: '/paths#new-user',
+    description: '先把默认模型和 provider 路径理顺，再进入更复杂的回退和路由配置。',
+  },
+  models: {
+    title: 'Skills 与扩展路径',
+    to: '/paths#expansion',
+    description: '适合在基础部署后，继续进入本地模型、Ollama 和成本优化。',
+  },
+  security: {
+    title: '团队运维路径',
+    to: '/paths#team-ops',
+    description: '安全主题更适合放进长期运行和权限边界里一起理解。',
+  },
+  debugging: {
+    title: '团队运维路径',
+    to: '/paths#team-ops',
+    description: '排障要和版本、状态检查、日志和长期维护方法放在一起看。',
+  },
+  network: {
+    title: '远程网络与节点路径',
+    to: '/paths#remote-network',
+    description: '先理清配对、远程访问和 Tailnet 方案，再考虑多设备协同。',
+  },
+}
+
+const topicVideoAnchorMap: Record<string, string> = {
+  installation: '/videos#setup',
+  'gateway-ops': '/videos#practice',
+  channels: '/videos#integration',
+  'skills-tools': '/videos#skills',
+  'context-sessions': '/videos#practice',
+  plugins: '/videos#skills',
+  'memory-search': '/videos#skills',
+  providers: '/videos#models',
+  models: '/videos#models',
+  security: '/videos#practice',
+  debugging: '/videos#practice',
+  network: '/videos#integration',
+}
+
+const topicDocBuckets = computed(() => {
+  const matched = pickTopicItems(sortedDocs.value as any[], activeTopic.value.slug, 12)
+  const bucketRules = [
+    {
+      id: 'start',
+      title: '先看这些文档',
+      description: '先建立结构和最小操作顺序，再进入更细节的专题。',
+      matcher: (item: any) => String(item.path).startsWith('/docs/getting-started/') || String(item.path).startsWith('/docs/setup/'),
+    },
+    {
+      id: 'build',
+      title: '再看专题与机制',
+      description: '把这个主题放回系统结构里理解，知道真正涉及哪些模块和边界。',
+      matcher: (item: any) => String(item.path).startsWith('/docs/manual/'),
+    },
+    {
+      id: 'run',
+      title: '最后补运维与参考',
+      description: '适合在开始使用后查看长期运行、风险控制和排障细节。',
+      matcher: (item: any) => String(item.path).startsWith('/docs/operations/') || String(item.path).startsWith('/docs/reference/'),
+    },
+  ]
+
+  const used = new Set<string>()
+
+  const buckets = bucketRules.map((bucket) => {
+    const items = matched.filter(item => !used.has(String(item.path)) && bucket.matcher(item)).slice(0, 4)
+    items.forEach(item => used.add(String(item.path)))
+
+    return {
+      ...bucket,
+      items,
+    }
+  })
+
+  const remaining = matched.filter(item => !used.has(String(item.path))).slice(0, 4)
+  if (remaining.length) {
+    buckets.push({
+      id: 'more',
+      title: '同主题补充阅读',
+      description: '如果上面几组已经看完，再继续从这些补充页延伸。',
+      items: remaining,
+    })
+  }
+
+  return buckets.filter(bucket => bucket.items.length)
+})
+
+const crossLinks = computed(() => {
+  const topicPath = topicPathMap[activeTopic.value.slug]
+  const topicVideo = topicVideoAnchorMap[activeTopic.value.slug] || '/videos'
+
+  return [
+    topicPath && {
+      title: topicPath.title,
+      description: topicPath.description,
+      to: topicPath.to,
+      meta: '学习路径',
+    },
+    {
+      title: '文档中心',
+      description: '如果你想回到完整结构，按分类继续查阅相邻文档。',
+      to: '/docs',
+      meta: '完整目录',
+    },
+    {
+      title: '视频教程',
+      description: '先看这一主题的演示，再回到文档确认配置差异。',
+      to: topicVideo,
+      meta: '演示入口',
+    },
+    {
+      title: '最佳实践',
+      description: '把当前主题里的做法沉淀成更稳定的方法，不只停留在“知道怎么配”。',
+      to: '/best-practices',
+      meta: '方法深化',
+    },
+  ].filter(Boolean) as Array<{ title: string; description: string; to: string; meta: string }>
+})
 </script>
 
 <template>
@@ -92,17 +249,41 @@ const topicPractices = computed(() => pickTopicItems(sortedPractices.value as an
         </div>
       </section>
 
-      <section class="topic-block">
-        <div class="home-head">
-          <p class="eyebrow">文档</p>
-          <p class="home-head-note">优先建立结构和操作顺序。</p>
+      <section class="card topic-summary cross-panel">
+        <div class="section-head compact-head">
+          <div>
+            <p class="eyebrow">交叉访问</p>
+            <p class="section-copy">主题中心不是终点。看完当前主题后，可以顺手切回路径、完整文档、视频或最佳实践。</p>
+          </div>
         </div>
-        <div class="topic-grid">
-          <NuxtLink v-for="item in topicDocs" :key="item.path" :to="item.path" class="card topic-card">
-            <span class="tag">{{ item.category }}</span>
+        <div class="cross-grid">
+          <NuxtLink v-for="item in crossLinks" :key="item.to" :to="item.to" class="card topic-card">
+            <span class="tag">{{ item.meta }}</span>
             <strong>{{ item.title }}</strong>
             <p>{{ item.description }}</p>
           </NuxtLink>
+        </div>
+      </section>
+
+      <section class="topic-block">
+        <div class="home-head">
+          <p class="eyebrow">文档安排</p>
+          <p class="home-head-note">不再平铺一组文档，而是按“先看什么、再深化什么、最后补什么”来读。</p>
+        </div>
+        <div class="topic-doc-stack">
+          <article v-for="bucket in topicDocBuckets" :key="bucket.id" class="card topic-doc-bucket">
+            <div class="topic-doc-head">
+              <strong>{{ bucket.title }}</strong>
+              <p>{{ bucket.description }}</p>
+            </div>
+            <div class="topic-grid compact">
+              <NuxtLink v-for="item in bucket.items" :key="item.path" :to="item.path" class="topic-card inner-card">
+                <span class="tag">{{ getDocCategoryLabel(String(item.path)) }}</span>
+                <strong>{{ item.title }}</strong>
+                <p>{{ item.description }}</p>
+              </NuxtLink>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -157,6 +338,10 @@ const topicPractices = computed(() => pickTopicItems(sortedPractices.value as an
 .filters,
 .topic-summary,
 .topic-block,
+.topic-doc-stack,
+.topic-doc-bucket,
+.topic-doc-head,
+.cross-grid,
 .topic-grid,
 .topic-card,
 .topic-dual-grid,
@@ -228,6 +413,27 @@ const topicPractices = computed(() => pickTopicItems(sortedPractices.value as an
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.topic-doc-bucket {
+  padding: 16px;
+}
+
+.topic-doc-head p {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.58;
+}
+
+.cross-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.inner-card {
+  border-radius: 16px;
+  border: 1px solid rgba(67, 73, 60, 0.12);
+  background: rgba(255, 255, 255, 0.4);
+}
+
 .topic-card strong {
   font-family: "Fraunces", "Times New Roman", serif;
   font-size: 1rem;
@@ -247,6 +453,7 @@ const topicPractices = computed(() => pickTopicItems(sortedPractices.value as an
 }
 
 @media (max-width: 980px) {
+  .cross-grid,
   .topic-grid,
   .topic-grid.compact,
   .layer-summary-grid,

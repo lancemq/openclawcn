@@ -325,12 +325,12 @@ const bestPractices = [
         </div>
 
         <div class="related-grid">
-          <NuxtLink to="/docs/operations/security-best-practices" class="related-link">
+          <NuxtLink to="/docs/operations/openclaw-security-best-practices" class="related-link">
             <span class="tag">Docs</span>
             <strong>安全最佳实践</strong>
             <p>详细的安全配置指南。</p>
           </NuxtLink>
-          <NuxtLink to="/docs/manual/soul-md-guide" class="related-link">
+          <NuxtLink to="/configurations" class="related-link">
             <span class="tag">Config</span>
             <strong>SOUL.md 指南</strong>
             <p>系统提示配置详解。</p>
