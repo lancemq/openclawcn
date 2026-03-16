@@ -88,7 +88,26 @@ const activeGroup = computed(() =>
     <div class="container header-inner">
       <div class="header-top">
         <NuxtLink class="brand" to="/">
-          <span class="brand-mark">OC</span>
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="headerBrandBg" x1="8" y1="6" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#13817D" />
+                  <stop offset="1" stop-color="#163938" />
+                </linearGradient>
+                <linearGradient id="headerBrandClaw" x1="36" y1="18" x2="54" y2="36" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#F0DFC2" />
+                  <stop offset="1" stop-color="#A66F2C" />
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="18" fill="url(#headerBrandBg)" />
+              <rect x="2" y="2" width="60" height="60" rx="16" stroke="#EAD7B6" stroke-opacity=".34" />
+              <path d="M38.35 17.5C35.39 14.87 31.52 13.28 27.3 13.28C18.18 13.28 10.79 20.67 10.79 29.79C10.79 38.91 18.18 46.3 27.3 46.3C31.48 46.3 35.32 44.76 38.23 42.19" stroke="#F8F3E9" stroke-width="5.2" stroke-linecap="round" />
+              <path d="M32.98 21.88L47.82 16.26" stroke="url(#headerBrandClaw)" stroke-width="4.1" stroke-linecap="round" />
+              <path d="M35.57 29.97L50.41 24.35" stroke="url(#headerBrandClaw)" stroke-width="4.1" stroke-linecap="round" />
+              <path d="M33.04 38.15L47.88 43.93" stroke="url(#headerBrandClaw)" stroke-width="4.1" stroke-linecap="round" />
+            </svg>
+          </span>
           <span class="brand-copy">
             <strong>OpenClawCN</strong>
             <small>中文资料站</small>
@@ -179,16 +198,17 @@ const activeGroup = computed(() =>
 }
 
 .brand-mark {
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 10px;
-  font-size: 0.84rem;
-  font-weight: 800;
-  color: #fff8ef;
-  background: linear-gradient(135deg, var(--accent) 0%, #c28b44 100%);
-  box-shadow: 0 10px 18px rgba(166, 111, 44, 0.2);
+  flex: none;
+}
+
+.brand-mark svg {
+  width: 34px;
+  height: 34px;
 }
 
 .brand-copy {
