@@ -15,7 +15,7 @@ const { data: page } = await useAsyncData(`docs:${slug.value}`, () =>
   queryCollection('docs').path(pagePath.value).first(),
 )
 
-const { data: allDocs } = await useAsyncData('docs:all', () => queryCollection('docs').all())
+const { data: manifest } = await useContentManifest()
 
 const breadcrumbItems = computed(() => [
   { label: '首页', to: '/' },
@@ -23,7 +23,7 @@ const breadcrumbItems = computed(() => [
   { label: String(page.value?.title || '文档详情') },
 ])
 
-const orderedDocs = computed(() => sortDocs((allDocs.value || []) as any[]))
+const orderedDocs = computed(() => sortDocs((manifest.value?.collections.docs.items || []) as any[]))
 
 const docNav = computed(() => getPrevNext(orderedDocs.value, pagePath.value))
 

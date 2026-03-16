@@ -5,14 +5,10 @@ const selectedIndex = ref(0)
 const inputRef = ref<HTMLInputElement>()
 const resultsContainerRef = ref<HTMLDivElement>()
 
-const { data: docs } = await useAsyncData('global-search:docs', () => queryCollection('docs').all())
-const { data: news } = await useAsyncData('global-search:news', () => queryCollection('news').all())
-const { data: bestPractices } = await useAsyncData('global-search:practices', () =>
-  queryCollection('bestPractices').all(),
-)
+const { data: manifest } = await useContentManifest()
 
 const allItems = computed(() => {
-  const docItems = (docs.value || []).map((item) => ({
+  const docItems = (manifest.value?.collections.docs.items || []).map((item) => ({
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '文档'),
@@ -20,7 +16,7 @@ const allItems = computed(() => {
     kind: '文档',
   }))
 
-  const newsItems = (news.value || []).map((item) => ({
+  const newsItems = (manifest.value?.collections.news.items || []).map((item) => ({
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '新闻'),
@@ -28,7 +24,7 @@ const allItems = computed(() => {
     kind: '新闻',
   }))
 
-  const practiceItems = (bestPractices.value || []).map((item) => ({
+  const practiceItems = (manifest.value?.collections.bestPractices.items || []).map((item) => ({
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '最佳实践'),
@@ -154,22 +150,6 @@ function scrollToSelected() {
     }
   })
 }
-
-// 全局快捷键
-onMounted(() => {
-  window.addEventListener('keydown', (e) => {
-    // Cmd/Ctrl + K
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault()
-      if (isOpen.value) {
-        close()
-      }
-      else {
-        open()
-      }
-    }
-  })
-})
 
 // 点击背景关闭
 function handleBackdropClick(e: MouseEvent) {

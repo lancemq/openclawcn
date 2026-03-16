@@ -6,6 +6,7 @@ const navGroups = [
   {
     label: '学习',
     slug: 'learn',
+    to: '/paths',
     items: [
       { label: '学习路径', to: '/paths' },
       { label: '主题中心', to: '/topics' },
@@ -17,6 +18,7 @@ const navGroups = [
   {
     label: '扩展',
     slug: 'tools',
+    to: '/tools',
     items: [
       { label: '能力地图', to: '/tools' },
       { label: 'Skills', to: '/skills' },
@@ -29,6 +31,7 @@ const navGroups = [
   {
     label: '生态',
     slug: 'ecosystem',
+    to: '/ecosystem',
     items: [
       { label: '生态中心', to: '/ecosystem' },
       { label: '案例展示', to: '/showcase' },
@@ -39,6 +42,7 @@ const navGroups = [
   {
     label: '资讯',
     slug: 'news',
+    to: '/news',
     items: [
       { label: '新闻动态', to: '/news' },
       { label: '背景故事', to: '/story' },
@@ -48,6 +52,7 @@ const navGroups = [
   {
     label: '辅助',
     slug: 'service',
+    to: '/search',
     items: [
       { label: '站内搜索', to: '/search' },
       { label: '常见问题', to: '/faq' },
@@ -99,16 +104,15 @@ const activeGroup = computed(() =>
             {{ homeItem.label }}
           </NuxtLink>
 
-          <button
+          <NuxtLink
             v-for="group in navGroups"
-            :key="group.slug"
-            type="button"
+            :key="group.to"
+            :to="group.to"
             class="group-link"
             :class="{ active: activeGroupSlug === group.slug }"
-            @click="$router.push(group.items[0].to)"
           >
             {{ group.label }}
-          </button>
+          </NuxtLink>
         </div>
 
         <div class="header-actions">

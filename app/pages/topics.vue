@@ -15,12 +15,10 @@ const selectedTopic = computed(() =>
   typeof route.query.topic === 'string' ? route.query.topic : topicDefinitions[0]?.slug || '',
 )
 
-const { data: docs } = await useAsyncData('topics:docs', () => queryCollection('docs').all())
-const { data: news } = await useAsyncData('topics:news', () => queryCollection('news').all())
-const { data: practices } = await useAsyncData('topics:practices', () => queryCollection('bestPractices').all())
-const sortedDocs = computed(() => sortDocs((docs.value || []) as any[]))
-const sortedNews = computed(() => sortNews((news.value || []) as any[]))
-const sortedPractices = computed(() => sortBestPractices((practices.value || []) as any[]))
+const { data: manifest } = await useContentManifest()
+const sortedDocs = computed(() => sortDocs((manifest.value?.collections.docs.items || []) as any[]))
+const sortedNews = computed(() => sortNews((manifest.value?.collections.news.items || []) as any[]))
+const sortedPractices = computed(() => sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[]))
 
 const activeTopic = computed(() =>
   topicDefinitions.find(item => item.slug === selectedTopic.value) || topicDefinitions[0],

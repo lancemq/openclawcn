@@ -11,11 +11,7 @@ const router = useRouter()
 
 const searchInput = ref(typeof route.query.q === 'string' ? route.query.q : '')
 
-const { data: docs } = await useAsyncData('search:docs', () => queryCollection('docs').all())
-const { data: news } = await useAsyncData('search:news', () => queryCollection('news').all())
-const { data: bestPractices } = await useAsyncData('search:best-practices', () =>
-  queryCollection('bestPractices').all(),
-)
+const { data: manifest } = await useContentManifest()
 
 const normalizedQuery = computed(() => searchInput.value.trim().toLowerCase())
 const selectedKind = computed(() =>
@@ -23,7 +19,7 @@ const selectedKind = computed(() =>
 )
 
 const allItems = computed(() => {
-  const docItems = (docs.value || []).map((item) => ({
+  const docItems = (manifest.value?.collections.docs.items || []).map((item) => ({
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '文档'),
@@ -32,7 +28,7 @@ const allItems = computed(() => {
     kind: '文档',
   }))
 
-  const newsItems = (news.value || []).map((item) => ({
+  const newsItems = (manifest.value?.collections.news.items || []).map((item) => ({
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '新闻'),
@@ -41,7 +37,7 @@ const allItems = computed(() => {
     kind: '新闻',
   }))
 
-  const practiceItems = (bestPractices.value || []).map((item) => ({
+  const practiceItems = (manifest.value?.collections.bestPractices.items || []).map((item) => ({
     title: String(item.title || ''),
     description: String(item.description || ''),
     category: String(item.category || '最佳实践'),

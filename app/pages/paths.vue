@@ -9,9 +9,7 @@ useSeo({
   path: '/paths',
 })
 
-const { data: docs } = await useAsyncData('paths:docs', () => queryCollection('docs').all())
-const { data: news } = await useAsyncData('paths:news', () => queryCollection('news').all())
-const { data: practices } = await useAsyncData('paths:practices', () => queryCollection('bestPractices').all())
+const { data: manifest } = await useContentManifest()
 
 const pathEditorialMeta: Record<string, {
   lane: string
@@ -144,9 +142,9 @@ const pathSignals = [
   },
 ]
 
-const nowDocs = computed(() => sortDocs((docs.value || []) as any[]))
-const nowNews = computed(() => sortNews((news.value || []) as any[]))
-const nowPractices = computed(() => sortBestPractices((practices.value || []) as any[]))
+const nowDocs = computed(() => sortDocs((manifest.value?.collections.docs.items || []) as any[]))
+const nowNews = computed(() => sortNews((manifest.value?.collections.news.items || []) as any[]))
+const nowPractices = computed(() => sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[]))
 
 const pathStats = computed(() => [
   { label: '学习路径', value: String(learningPaths.length) },

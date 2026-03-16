@@ -20,13 +20,11 @@ useSeo({
   type: 'website',
 })
 
-const { data: docs } = await useAsyncData('home:docs', () => queryCollection('docs').all())
-const { data: news } = await useAsyncData('home:news', () => queryCollection('news').all())
-const { data: practices } = await useAsyncData('home:practices', () => queryCollection('bestPractices').all())
+const { data: manifest } = await useContentManifest()
 
-const latestDocs = computed(() => sortDocs((docs.value || []) as any[]).slice(0, 3))
-const latestNews = computed(() => sortNews((news.value || []) as any[]).slice(0, 4))
-const latestPractices = computed(() => sortBestPractices((practices.value || []) as any[]).slice(0, 3))
+const latestDocs = computed(() => sortDocs((manifest.value?.collections.docs.items || []) as any[]).slice(0, 3))
+const latestNews = computed(() => sortNews((manifest.value?.collections.news.items || []) as any[]).slice(0, 4))
+const latestPractices = computed(() => sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[]).slice(0, 3))
 
 const weeklyFocus = computed(() => [
   latestNews.value[0] && {

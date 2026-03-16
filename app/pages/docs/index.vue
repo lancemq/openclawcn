@@ -4,7 +4,8 @@ import { getDocCategoryLabel, sortDocs } from '~/data/content'
 const route = useRoute()
 const router = useRouter()
 
-const { data: items } = await useAsyncData('docs:index', () => queryCollection('docs').all())
+const { data: manifest } = await useContentManifest()
+const items = computed(() => manifest.value?.collections.docs.items || [])
 
 // 分类筛选
 const selectedCategory = computed(() =>
@@ -18,7 +19,7 @@ const selectedTag = computed(() =>
 // 子目录作为分类
 const categories = computed(() => {
   const cats = ['全部']
-  const paths = items.value?.map(item => item.path) || []
+  const paths = items.value.map(item => item.path) || []
   paths.forEach(path => {
     const match = path.match(/^\/docs\/([^/]+)/)
     if (match && match[1]) {

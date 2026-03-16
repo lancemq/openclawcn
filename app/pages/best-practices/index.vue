@@ -4,9 +4,8 @@ import { sortBestPractices } from '~/data/content'
 const route = useRoute()
 const router = useRouter()
 
-const { data: items } = await useAsyncData('best-practices:index', () =>
-  queryCollection('bestPractices').all(),
-)
+const { data: manifest } = await useContentManifest()
+const items = computed(() => manifest.value?.collections.bestPractices.items || [])
 
 const selectedCategory = computed(() =>
   typeof route.query.category === 'string' ? route.query.category : '全部',

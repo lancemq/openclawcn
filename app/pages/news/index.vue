@@ -4,7 +4,8 @@ import { sortNews } from '~/data/content'
 const route = useRoute()
 const router = useRouter()
 
-const { data: items } = await useAsyncData('news:index', () => queryCollection('news').all())
+const { data: manifest } = await useContentManifest()
+const items = computed(() => manifest.value?.collections.news.items || [])
 
 const selectedCategory = computed(() =>
   typeof route.query.category === 'string' ? route.query.category : '全部',

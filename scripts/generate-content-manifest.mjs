@@ -14,6 +14,7 @@ const manifest = {
       count: docs.length,
       items: docs.map((entry) => ({
         title: String(entry.data.title || ''),
+        description: String(entry.data.description || ''),
         path: entry.publicPath,
         category: String(entry.data.category || ''),
         updatedAt: String(entry.data.updatedAt || ''),
@@ -28,6 +29,7 @@ const manifest = {
         .sort((left, right) => right.localeCompare(left))[0] || null,
       items: news.map((entry) => ({
         title: String(entry.data.title || ''),
+        description: String(entry.data.description || ''),
         path: entry.publicPath,
         category: String(entry.data.category || ''),
         date: String(entry.data.date || ''),
@@ -41,6 +43,7 @@ const manifest = {
       count: bestPractices.length,
       items: bestPractices.map((entry) => ({
         title: String(entry.data.title || ''),
+        description: String(entry.data.description || ''),
         path: entry.publicPath,
         category: String(entry.data.category || ''),
         difficulty: String(entry.data.difficulty || ''),

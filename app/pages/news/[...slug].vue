@@ -15,19 +15,7 @@ const { data: page } = await useAsyncData(`news:${slug.value}`, () =>
   queryCollection('news').path(pagePath.value).first(),
 )
 
-const { data: relatedNews } = await useAsyncData(`news:related:${slug.value}`, async () => {
-  const items = await queryCollection('news').all()
-  return items
-    .filter((item) => String(item.path) !== pagePath.value)
-    .slice(0, 3)
-})
-
-const { data: allNews } = await useAsyncData('news:all', () => queryCollection('news').all())
-
-const { data: relatedPractices } = await useAsyncData(`news:related-practices:${slug.value}`, async () => {
-  const items = await queryCollection('bestPractices').all()
-  return items.slice(0, 2)
-})
+const { data: manifest } = await useContentManifest()
 
 const breadcrumbItems = computed(() => [
   { label: '首页', to: '/' },
@@ -35,7 +23,7 @@ const breadcrumbItems = computed(() => [
   { label: String(page.value?.title || '新闻详情') },
 ])
 
-const orderedNews = computed(() => sortNews((allNews.value || []) as any[]))
+const orderedNews = computed(() => sortNews((manifest.value?.collections.news.items || []) as any[]))
 
 const newsNav = computed(() => getPrevNext(orderedNews.value, pagePath.value))
 
@@ -80,7 +68,7 @@ const relatedNewsCards = computed(() => {
 })
 
 const curatedPractices = computed(() =>
-  sortBestPractices((relatedPractices.value || []) as any[])
+  sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[])
     .slice(0, 3)
     .map(item => ({
       title: item.title,

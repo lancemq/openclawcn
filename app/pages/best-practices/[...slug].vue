@@ -15,16 +15,7 @@ const { data: page } = await useAsyncData(`best-practices:${slug.value}`, () =>
   queryCollection('bestPractices').path(pagePath.value).first(),
 )
 
-const { data: relatedPractices } = await useAsyncData(`best-practices:related:${slug.value}`, async () => {
-  const items = await queryCollection('bestPractices').all()
-  return items
-    .filter((item) => String(item.path) !== pagePath.value)
-    .slice(0, 3)
-})
-
-const { data: allPractices } = await useAsyncData('best-practices:all', () =>
-  queryCollection('bestPractices').all(),
-)
+const { data: manifest } = await useContentManifest()
 
 const breadcrumbItems = computed(() => [
   { label: '首页', to: '/' },
@@ -33,7 +24,7 @@ const breadcrumbItems = computed(() => [
 ])
 
 const orderedPractices = computed(() =>
-  sortBestPractices((allPractices.value || []) as any[]),
+  sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[]),
 )
 
 const practiceNav = computed(() => getPrevNext(orderedPractices.value, pagePath.value))
@@ -57,7 +48,8 @@ const metaItems = computed(() => [
 ].filter(Boolean) as Array<{ label: string; value: string; href?: string }>)
 
 const relatedCards = computed(() =>
-  sortBestPractices((relatedPractices.value || []) as any[])
+  sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[])
+    .filter(item => String(item.path) !== pagePath.value)
     .map((item) => ({
       ...item,
       score:
