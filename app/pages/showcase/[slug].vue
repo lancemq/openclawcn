@@ -17,6 +17,12 @@ const sortedItems = computed(() => sortShowcase((allItems.value || []) as any[])
 
 const navigation = computed(() => getPrevNext(sortedItems.value, `/showcase/${slug.value}`))
 
+const breadcrumbItems = computed(() => [
+  { label: '首页', to: '/' },
+  { label: '案例展示', to: '/showcase' },
+  { label: item.value?.title || '案例详情' },
+])
+
 const prevNav = computed(() =>
   navigation.value.previous
     ? {
@@ -48,6 +54,8 @@ useSeo({
 <template>
   <section class="section">
     <div class="container article-page">
+      <AppBreadcrumbs :items="breadcrumbItems" />
+
       <article v-if="item" class="article-content">
         <header class="article-header card">
           <div class="article-meta">
