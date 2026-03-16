@@ -1,6 +1,4 @@
-import { mkdir, writeFile } from 'node:fs/promises'
-import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { persistFeedbackRecord } from '../utils/feedback-storage'
 
 type FeedbackPayload = {
   type?: string
@@ -62,15 +60,6 @@ function getRateLimitState(key: string) {
   existing.count += 1
   feedbackRateLimit.set(key, existing)
   return existing
-}
-
-async function persistFeedback(payload: Record<string, unknown>) {
-  const datePrefix = new Date().toISOString().slice(0, 10)
-  const targetDir = join(tmpdir(), 'openclawcn', 'feedback', datePrefix)
-  await mkdir(targetDir, { recursive: true })
-  const filePath = join(targetDir, `${payload.id}.json`)
-  await writeFile(filePath, JSON.stringify(payload, null, 2), 'utf8')
-  return filePath
 }
 
 export default defineEventHandler(async (event) => {
@@ -204,7 +193,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const storedAt = await persistFeedback(payload)
+    const storedAt = await persistFeedbackRecord(payload, event)
 
     console.info('[feedback.accepted]', {
       ...payload,

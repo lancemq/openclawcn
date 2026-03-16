@@ -111,6 +111,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     feedbackWebhookUrl: process.env.FEEDBACK_WEBHOOK_URL || '',
+    feedbackAdminToken: process.env.FEEDBACK_ADMIN_TOKEN || '',
+    feedbackStorageDir: process.env.FEEDBACK_STORAGE_DIR || '',
     subscribeWebhookUrl: process.env.SUBSCRIBE_WEBHOOK_URL || '',
     vercelDeployHookUrl: process.env.VERCEL_DEPLOY_HOOK_URL || '',
     contentRebuildToken: process.env.CONTENT_REBUILD_TOKEN || '',
