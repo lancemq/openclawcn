@@ -3,7 +3,7 @@ title: OpenClaw 核心概念
 description: 用一页建立 OpenClaw 的核心心智图，分清 Gateway、Agent、Channels、Tools、Skills、Memory 和 Control UI 各自负责什么。
 category: 入门
 updatedAt: 2026-03-16
-sourceType: editorial
+sourceType: internal
 tags: [concepts, gateway, agent, channels, tools, memory]
 ---
 
