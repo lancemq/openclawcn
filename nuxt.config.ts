@@ -52,6 +52,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-02-20',
   srcDir: 'app/',
   modules: ['@nuxt/content', '@nuxt/image', '@vercel/analytics/nuxt'],
+  experimental: {
+    appManifest: false,
+  },
   content: {
     experimental: {
       sqliteConnector: 'native',

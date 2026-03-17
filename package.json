@@ -6,12 +6,13 @@
     "node": "22.x"
   },
   "scripts": {
+    "clean": "rm -rf .nuxt .output .vercel/output",
     "content:validate": "node scripts/validate-content.mjs",
     "content:manifest": "node scripts/generate-content-manifest.mjs",
     "content:fetch": "node scripts/fetch-openclaw-content.mjs",
     "content:check": "npm run content:validate && npm run content:manifest",
     "dev": "nuxt dev",
-    "prebuild": "npm run content:check && node scripts/generate-site-verification.mjs",
+    "prebuild": "npm run clean && npm run content:check && node scripts/generate-site-verification.mjs",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

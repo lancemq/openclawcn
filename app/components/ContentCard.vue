@@ -11,15 +11,18 @@ defineProps<{
 <template>
   <NuxtLink :to="to" class="content-card card">
     <div class="card-content">
-      <span v-if="meta" class="tag">{{ meta }}</span>
+      <div class="card-head">
+        <span v-if="meta" class="tag">{{ meta }}</span>
+        <span class="card-direction">专题阅读</span>
+      </div>
       <h3>{{ title }}</h3>
       <p>{{ description }}</p>
-      
+
       <div v-if="tags && tags.length > 0" class="card-tags">
         <span v-for="tag in tags.slice(0, 3)" :key="tag" class="tag-item">#{{ tag }}</span>
       </div>
-      
-      <span class="more">查看详情 →</span>
+
+      <span class="more">继续阅读</span>
     </div>
   </NuxtLink>
 </template>
@@ -34,34 +37,49 @@ defineProps<{
 }
 
 .content-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 32px rgba(48, 39, 25, 0.12);
 }
 
 .card-content {
   display: grid;
-  gap: 8px;
-  padding: 12px;
+  gap: 10px;
+  padding: 10px 8px 6px;
   flex: 1;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-direction {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 h3 {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.08rem;
   letter-spacing: -0.03em;
-  line-height: 1.32;
+  line-height: 1.42;
+  text-wrap: balance;
 }
 
 p {
   margin: 0;
   color: var(--ink-soft);
-  line-height: 1.52;
+  line-height: 1.64;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 0.86rem;
+  font-size: 0.91rem;
 }
 
 .card-tags {
@@ -71,9 +89,9 @@ p {
 }
 
 .tag-item {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--brand);
-  background: rgba(166, 111, 44, 0.1);
+  background: rgba(138, 90, 36, 0.1);
   padding: 3px 8px;
   border-radius: 999px;
 }
@@ -82,8 +100,15 @@ p {
   margin-top: auto;
   color: var(--brand);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
+}
+
+@media (max-width: 640px) {
+  .card-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 </style>

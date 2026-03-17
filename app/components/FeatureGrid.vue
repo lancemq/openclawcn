@@ -42,14 +42,14 @@ const features = [
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .feature-card {
-  min-height: 130px;
+  min-height: 164px;
   align-content: start;
-  padding: 14px;
+  padding: 18px;
 }
 
 .compact-head {
@@ -62,34 +62,36 @@ const features = [
 .head-note {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.84rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 .feature-index {
   display: inline-flex;
   width: fit-content;
-  margin-bottom: 10px;
-  padding: 2px 6px;
+  margin-bottom: 12px;
+  padding: 4px 8px;
   border-radius: 999px;
   color: var(--accent);
-  background: rgba(234, 215, 182, 0.44);
-  font-size: 0.64rem;
+  background: rgba(234, 212, 182, 0.46);
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
 }
 
 h3 {
-  margin: 0 0 5px;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
+  margin: 0 0 8px;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.08rem;
   letter-spacing: -0.03em;
+  line-height: 1.38;
 }
 
 p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: 0.92rem;
+  line-height: 1.68;
 }
 
 @media (max-width: 980px) {

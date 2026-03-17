@@ -275,7 +275,7 @@ const crossLinks = computed(() => {
               <p>{{ bucket.description }}</p>
             </div>
             <div class="topic-grid compact">
-              <NuxtLink v-for="item in bucket.items" :key="item.path" :to="item.path" class="topic-card inner-card">
+              <NuxtLink v-for="item in bucket.items" :key="item.path" :to="item.path" class="card topic-card inner-card">
                 <span class="tag">{{ getDocCategoryLabel(String(item.path)) }}</span>
                 <strong>{{ item.title }}</strong>
                 <p>{{ item.description }}</p>
@@ -351,33 +351,36 @@ const crossLinks = computed(() => {
 .layer-summary-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .layer-summary-card {
   display: grid;
-  gap: 6px;
-  padding: 12px 14px;
-  border-radius: 18px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  background: rgba(255, 255, 255, 0.45);
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(64, 73, 85, 0.1);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .layer-summary-card strong {
-  font-size: 0.92rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 0.98rem;
+  line-height: 1.34;
 }
 
 .layer-summary-card p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.64;
 }
 
 .filter-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 8px;
 }
 
 .filter-label {
@@ -393,8 +396,14 @@ const crossLinks = computed(() => {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.66);
   color: var(--ink);
-  padding: 6px 12px;
-  font-size: 0.82rem;
+  padding: 7px 13px;
+  font-size: 0.84rem;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.filter-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(138, 90, 36, 0.22);
 }
 
 .filter-chip.active {
@@ -412,37 +421,56 @@ const crossLinks = computed(() => {
 }
 
 .topic-doc-bucket {
-  padding: 16px;
+  padding: 20px;
+  border-radius: 28px;
 }
 
 .topic-doc-head p {
-  margin: 4px 0 0;
+  margin: 6px 0 0;
   color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.58;
+  font-size: 0.92rem;
+  line-height: 1.68;
 }
 
 .cross-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.topic-card {
+  align-content: start;
+  gap: 10px;
+  min-height: 100%;
+}
+
 .inner-card {
-  border-radius: 16px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  background: rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  border: 1px solid rgba(64, 73, 85, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 254, 250, 0.98), rgba(247, 242, 234, 0.92)),
+    rgba(255, 255, 255, 0.42);
 }
 
 .topic-card strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1rem;
-  line-height: 1.35;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.04rem;
+  line-height: 1.42;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 .topic-card p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.88rem;
-  line-height: 1.6;
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.topic-summary {
+  gap: 18px;
+}
+
+.topic-block {
+  gap: 14px;
 }
 
 .topic-dual-grid {

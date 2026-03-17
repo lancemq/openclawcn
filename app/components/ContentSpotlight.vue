@@ -115,39 +115,39 @@ const quickLinks = [
 <style scoped>
 .spotlight {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(340px, 1.05fr);
+  gap: 14px;
   align-items: stretch;
 }
 
 .spotlight-copy {
   display: grid;
   align-content: start;
-  gap: 12px;
-  padding: 20px 22px;
+  gap: 14px;
+  padding: 24px;
 }
 
 .spotlight-title {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.25rem;
-  line-height: 1.2;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.46rem;
+  line-height: 1.26;
   letter-spacing: -0.03em;
 }
 
 .spotlight-note {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.96rem;
+  line-height: 1.72;
 }
 
 .quick-links {
   display: grid;
-  gap: 10px;
-  margin-top: 6px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(67, 73, 60, 0.1);
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(64, 73, 85, 0.1);
 }
 
 .quick-links-label {
@@ -162,16 +162,16 @@ const quickLinks = [
 .quick-links-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .quick-link-item {
   display: grid;
-  gap: 4px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  background: rgba(255, 255, 255, 0.5);
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(64, 73, 85, 0.1);
+  background: rgba(255, 255, 255, 0.54);
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
@@ -182,40 +182,40 @@ const quickLinks = [
 }
 
 .quick-link-item strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.95rem;
-  line-height: 1.2;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1rem;
+  line-height: 1.32;
   color: var(--ink);
 }
 
 .quick-link-item span {
-  font-size: 0.8rem;
+  font-size: 0.86rem;
   color: var(--ink-soft);
-  line-height: 1.4;
+  line-height: 1.56;
 }
 
 .spotlight-stacks {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .stack-card {
   display: grid;
-  gap: 6px;
-  padding: 14px 16px;
+  gap: 8px;
+  padding: 18px;
 }
 
 .stack-card strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
-  line-height: 1.3;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.02rem;
+  line-height: 1.4;
 }
 
 .stack-card p {
   margin: 0;
   color: var(--ink-soft);
-  line-height: 1.5;
-  font-size: 0.84rem;
+  line-height: 1.66;
+  font-size: 0.9rem;
 }
 
 .stack-links {

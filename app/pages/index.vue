@@ -95,7 +95,6 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 
           <div class="home-head head-inline">
             <p class="eyebrow">用户分流</p>
-            <p class="section-title compact-title">先判断当前阶段，再进入对应入口。</p>
             <p class="home-head-note">不要第一次进入就把所有入口一起打开。先判断自己是在学习、扩展还是长期运行阶段，再走对应路线。</p>
           </div>
           <div class="grid route-grid">
@@ -195,7 +194,6 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
         <div class="stack-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">文档入口</p>
-            <p class="section-title compact-title">先建立完整地图，再钻进细节。</p>
             <p class="home-head-note">从定位、安装到架构与排错，按顺序建立理解，不要一开始就跳进零散配置。</p>
           </div>
           <div class="grid docs-grid">
@@ -238,7 +236,6 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
         <div class="stack-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">视频教程</p>
-            <p class="section-title compact-title">更适合先看演示，再回头确认细节。</p>
             <p class="home-head-note">把官方 Showcase、YouTube 演示和 Bilibili 中文教程聚合在一个入口里，优先帮助你建立使用直觉。</p>
           </div>
           <div class="grid extension-grid">
@@ -362,8 +359,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 
 <style scoped>
 .content-section {
-  padding-top: 8px;
-  padding-bottom: 4px;
+  padding-top: 16px;
+  padding-bottom: 10px;
 }
 
 .stack-shell,
@@ -376,20 +373,21 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 }
 
 .stack-shell {
-  gap: 6px;
+  gap: 12px;
 }
 
 .layer-ribbon {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 4px;
+  gap: 12px;
+  margin-bottom: 6px;
 }
 
 .layer-card {
   display: grid;
-  gap: 8px;
-  padding: 16px 18px;
+  gap: 10px;
+  min-height: 100%;
+  padding: 20px 20px 18px;
 }
 
 .layer-link-row {
@@ -405,24 +403,24 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 .path-rail {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .path-step {
   display: grid;
   grid-template-columns: 40px minmax(0, 1fr);
-  gap: 10px;
+  gap: 12px;
   align-items: start;
-  padding: 10px 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  background: rgba(255, 255, 255, 0.42);
+  padding: 16px 16px 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(64, 73, 85, 0.12);
+  background: rgba(255, 255, 255, 0.48);
   transition: transform 0.18s ease, border-color 0.18s ease;
 }
 
 .path-step:hover {
   transform: translateY(-2px);
-  border-color: rgba(12, 108, 105, 0.22);
+  border-color: rgba(15, 102, 116, 0.22);
 }
 
 .path-index {
@@ -444,8 +442,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 }
 
 .path-copy strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.02rem;
   line-height: 1.3;
 }
 
@@ -460,16 +458,16 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 }
 
 .feature-band {
-  padding: 10px 12px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.24);
+  padding: 18px 20px;
+  border: 1px solid rgba(64, 73, 85, 0.1);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .editorial-columns {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
-  gap: 10px;
+  gap: 12px;
 }
 
 .editorial-feature,
@@ -480,15 +478,15 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 }
 
 .editorial-feature {
-  padding: 14px;
+  padding: 20px;
   align-content: start;
 }
 
 .editorial-feature h3,
 .timeline-card h3 {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.1rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.18rem;
   line-height: 1.25;
   letter-spacing: -0.03em;
 }
@@ -504,18 +502,37 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 .editorial-side-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .editorial-mini strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1rem;
   line-height: 1.28;
 }
 
 .news-timeline {
   display: grid;
+  gap: 12px;
+}
+
+.home-head {
+  display: grid;
   gap: 8px;
+}
+
+.head-inline {
+  align-items: end;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 18px;
+}
+
+.home-head-note {
+  margin: 0;
+  max-width: 72ch;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  line-height: 1.7;
 }
 
 .timeline-item {
@@ -550,73 +567,48 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 }
 
 .timeline-card {
-  padding: 12px 14px;
+  padding: 16px 18px;
 }
 
 .subtle-band {
   background: linear-gradient(180deg, rgba(255, 250, 241, 0.58), rgba(255, 255, 255, 0.18));
 }
 
-.head-inline {
-  margin-bottom: 2px;
-}
-
-.compact-title {
-  margin: 0;
-  font-size: 1.16rem;
-  line-height: 1.06;
-}
-
-.home-head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.home-head-note {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.42;
-}
-
 .docs-grid {
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .spotlight-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .route-grid,
 .action-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .practice-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .extension-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .ecosystem-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .subscribe-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-  gap: 10px;
+  gap: 14px;
 }
 
 .subscribe-copy {
@@ -643,6 +635,10 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
     grid-template-columns: 1fr;
   }
 
+  .head-inline {
+    grid-template-columns: 1fr;
+  }
+
   .subscribe-grid {
     grid-template-columns: 1fr;
   }
@@ -660,7 +656,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   }
 
   .feature-band {
-    padding: 8px;
+    padding: 16px;
   }
 
   .path-rail {

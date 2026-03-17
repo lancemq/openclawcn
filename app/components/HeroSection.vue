@@ -1,294 +1,355 @@
 <script setup lang="ts">
+const digestItems = [
+  {
+    label: '文档索引',
+    value: '从入门到排障',
+    note: '优先建立整体地图，再深入配置。',
+  },
+  {
+    label: '动态追踪',
+    value: '新闻与版本观察',
+    note: '把短期变化重新接回长期知识结构。',
+  },
+  {
+    label: '实践方法',
+    value: '部署与协作经验',
+    note: '适合已经跑通链路后的持续优化。',
+  },
+]
+
 const primaryRoutes = [
   {
-    title: '第一次认识 OpenClaw',
-    detail: '先看定位、适用人群和阅读顺序，避免直接陷入配置细节。',
+    title: '新用户先看什么',
+    detail: '先理解定位、阅读顺序和安装路线，再进入具体能力。',
     to: '/docs/getting-started/reading-path',
   },
   {
-    title: '准备开始安装与验证',
-    detail: '先跑通最小链路，再进入 Control UI、渠道和长期运维。',
-    to: '/docs/setup/installation',
+    title: '本周重点更新',
+    detail: '快速掌握最近值得关注的版本变化、生态动向和新能力。',
+    to: '/news',
   },
   {
-    title: '持续跟踪变化与协作',
-    detail: '通过新闻、FAQ、反馈和社区页掌握更新与提问路径。',
+    title: '长期运行怎么查',
+    detail: '把文档、最佳实践、FAQ 和社区支持接成稳定的排障路径。',
     to: '/community',
+  },
+]
+
+const editorialPanels = [
+  {
+    kicker: '今日导读',
+    title: '把 OpenClaw 的中文资料整理成可持续查阅的资讯入口',
+    detail: '不是单纯官网，也不是零散文章列表，而是带有阅读顺序、更新判断和长期导航能力的站点首页。',
+  },
+  {
+    kicker: '阅读顺序',
+    title: '先理解，再部署，再扩展',
+    detail: '首页负责分流，栏目页负责承接，详情页负责展开和延伸。',
   },
 ]
 </script>
 
 <template>
   <section class="hero section">
-    <div class="container hero-grid">
-      <div class="hero-copy-column">
-        <div class="hero-heading-row">
-          <p class="eyebrow">OpenClaw 中文官网</p>
-          <span class="hero-kicker">成熟、稳定、可持续查阅的中文入口</span>
-        </div>
-        <h1 class="hero-title">OpenClaw 中文资料与更新导航</h1>
-        <p class="hero-copy">
-          以更紧凑的方式组织产品介绍、安装路径、关键能力、版本变化和社区入口，减少第一次进入时的信息噪音。
-        </p>
-
-        <div class="button-row">
-          <NuxtLink class="button primary" to="/docs">查看文档</NuxtLink>
-          <NuxtLink class="button secondary" to="/news">浏览最新动态</NuxtLink>
-          <NuxtLink class="button ghost" to="/feedback">提交反馈</NuxtLink>
-        </div>
-
-        <div class="hero-tags">
-          <span class="tag">中文教程</span>
-          <span class="tag">安装指引</span>
-          <span class="tag">社区入口</span>
-          <span class="tag">最新动态</span>
-        </div>
-
-        <div class="hero-summary-grid">
-          <article>
-            <strong>先读什么</strong>
-            <p>产品定位、安装、Control UI。</p>
-          </article>
-          <article>
-            <strong>持续关注什么</strong>
-            <p>版本变化、能力更新、排错路径。</p>
-          </article>
-        </div>
-
-        <div class="route-strip">
-          <NuxtLink v-for="route in primaryRoutes" :key="route.to" :to="route.to" class="route-item">
-            <strong>{{ route.title }}</strong>
-            <p>{{ route.detail }}</p>
-          </NuxtLink>
-        </div>
-      </div>
-
-      <div class="hero-panel card">
-        <div class="hero-panel-header">
-          <span>OpenClaw Guide</span>
-          <span class="status">Ready to Explore</span>
-        </div>
-        <div class="hero-stats">
-          <div>
-            <strong>Docs</strong>
-            <span>从入门到排错</span>
+    <div class="container">
+      <div class="hero-frame">
+        <div class="hero-lead">
+          <div class="hero-heading-row">
+            <p class="eyebrow">OpenClaw 中文资讯站</p>
+            <span class="hero-kicker">Editorial index for docs, updates and practice</span>
           </div>
-          <div>
-            <strong>News</strong>
-            <span>版本与变化观察</span>
+
+          <div class="hero-masthead">
+            <div class="hero-title-block">
+              <span class="hero-edition">第 01 版 · 导读首页</span>
+              <h1 class="hero-title">OpenClaw 中文资料、更新与实践导航</h1>
+            </div>
+            <p class="hero-copy">
+              用更接近资讯网站的编排方式，把文档、新闻、最佳实践、视频和社区入口组织成清晰的阅读路径。既保留技术站点的效率，也让首页有一点编辑判断和个性。
+            </p>
           </div>
-          <div>
-            <strong>Community</strong>
-            <span>反馈与讨论入口</span>
+
+          <div class="button-row">
+            <NuxtLink class="button primary" to="/news">先看最新动态</NuxtLink>
+            <NuxtLink class="button secondary" to="/docs">进入文档中心</NuxtLink>
+            <NuxtLink class="button ghost" to="/best-practices">查看最佳实践</NuxtLink>
+          </div>
+
+          <div class="hero-digest">
+            <article v-for="item in digestItems" :key="item.label" class="digest-card">
+              <span>{{ item.label }}</span>
+              <strong>{{ item.value }}</strong>
+              <p>{{ item.note }}</p>
+            </article>
           </div>
         </div>
-        <ol class="timeline">
-          <li>
-            <strong>先理解 OpenClaw 是什么</strong>
-            <p>从定位、能力结构和适用人群开始建立整体认知。</p>
-          </li>
-          <li>
-            <strong>再进入文档与功能专题</strong>
-            <p>优先看安装、Onboarding、Control UI、Channels 和安全边界。</p>
-          </li>
-          <li>
-            <strong>持续跟踪更新与社区讨论</strong>
-            <p>通过新闻、FAQ、反馈和社区页持续跟踪版本变化与使用经验。</p>
-          </li>
-        </ol>
+
+        <aside class="hero-sidebar card">
+          <div class="sidebar-head">
+            <span class="sidebar-title">首页提要</span>
+            <span class="sidebar-live">Live Index</span>
+          </div>
+
+          <div class="editorial-panels">
+            <article v-for="panel in editorialPanels" :key="panel.title" class="editorial-panel">
+              <span class="panel-kicker">{{ panel.kicker }}</span>
+              <strong>{{ panel.title }}</strong>
+              <p>{{ panel.detail }}</p>
+            </article>
+          </div>
+
+          <div class="route-strip">
+            <NuxtLink v-for="route in primaryRoutes" :key="route.to" :to="route.to" class="route-item">
+              <span class="route-index">0{{ primaryRoutes.indexOf(route) + 1 }}</span>
+              <div class="route-copy">
+                <strong>{{ route.title }}</strong>
+                <p>{{ route.detail }}</p>
+              </div>
+            </NuxtLink>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-  gap: 16px;
-  align-items: start;
+.hero {
+  padding-top: 28px;
 }
 
-.hero-copy-column {
-  position: relative;
+.hero-frame {
   display: grid;
-  gap: 10px;
-  padding: 16px 18px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  border-radius: 22px;
-  background: rgba(255, 251, 244, 0.72);
-  box-shadow: 0 14px 32px rgba(74, 56, 28, 0.08);
+  grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.86fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.hero-lead {
+  display: grid;
+  gap: 18px;
+  padding: 28px 30px 30px;
+  border: 1px solid rgba(64, 73, 85, 0.12);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.9), rgba(248, 241, 230, 0.84)),
+    rgba(255, 255, 255, 0.4);
+  box-shadow: 0 20px 44px rgba(48, 39, 25, 0.08);
 }
 
 .hero-heading-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .hero-kicker {
   color: var(--ink-soft);
-  font-size: 0.8rem;
-  letter-spacing: 0.03em;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.72fr);
+  gap: 22px;
+  padding: 18px 0 24px;
+  border-top: 1px solid rgba(64, 73, 85, 0.1);
+  border-bottom: 1px solid rgba(64, 73, 85, 0.1);
+}
+
+.hero-title-block {
+  display: grid;
+  gap: 10px;
+}
+
+.hero-edition {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .hero-title {
-  max-width: 20ch;
+  max-width: 11ch;
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: clamp(1.4rem, 2vw, 2rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: clamp(2.2rem, 4.4vw, 4.3rem);
+  line-height: 1.08;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
 }
 
 .hero-copy {
-  max-width: 60ch;
   margin: 0;
+  align-self: end;
   color: var(--ink-soft);
-  font-size: 0.94rem;
-  line-height: 1.6;
+  font-size: 1.02rem;
+  line-height: 1.78;
 }
 
-.hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.hero-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.hero-summary-grid article {
-  padding: 10px 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  background: rgba(255, 255, 255, 0.46);
-}
-
-.hero-summary-grid strong {
-  display: block;
-  margin-bottom: 3px;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.96rem;
-}
-
-.hero-summary-grid p {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.55;
-}
-
-.route-strip {
+.hero-digest {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.digest-card {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(64, 73, 85, 0.1);
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.digest-card span,
+.panel-kicker {
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.digest-card strong,
+.editorial-panel strong,
+.route-copy strong {
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+}
+
+.digest-card strong {
+  font-size: 1.08rem;
+  line-height: 1.28;
+}
+
+.digest-card p,
+.editorial-panel p,
+.route-copy p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
+.hero-sidebar {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  padding-top: 22px;
+}
+
+.sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(64, 73, 85, 0.08);
+}
+
+.sidebar-title,
+.sidebar-live {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.sidebar-title {
+  color: var(--ink);
+}
+
+.sidebar-live {
+  color: var(--brand);
+}
+
+.editorial-panels,
+.route-strip {
+  display: grid;
+  gap: 12px;
+}
+
+.editorial-panel {
+  display: grid;
+  gap: 8px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(64, 73, 85, 0.08);
 }
 
 .route-item {
   display: grid;
-  gap: 5px;
-  padding: 12px 13px;
-  border-radius: 18px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  background: rgba(255, 255, 255, 0.48);
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(64, 73, 85, 0.08);
+  background: rgba(255, 255, 255, 0.5);
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .route-item:hover {
   transform: translateY(-2px);
-  border-color: rgba(12, 108, 105, 0.2);
-  box-shadow: 0 12px 22px rgba(74, 56, 28, 0.08);
+  border-color: rgba(15, 102, 116, 0.2);
+  box-shadow: 0 14px 24px rgba(48, 39, 25, 0.08);
 }
 
-.route-item strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.96rem;
-  line-height: 1.3;
-}
-
-.route-item p {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.55;
-}
-
-.hero-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  color: var(--ink-soft);
-  font-size: 0.74rem;
+.route-index {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-bright));
+  color: #fffdf8;
+  font-size: 0.84rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
-.status {
-  color: var(--brand);
-}
-
-.hero-stats {
+.route-copy {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: 6px;
 }
 
-.hero-stats div {
-  display: grid;
-  gap: 3px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(67, 73, 60, 0.08);
+.route-copy strong {
+  font-size: 1rem;
+  line-height: 1.35;
 }
 
-.hero-stats strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.92rem;
-}
-
-.hero-stats span {
-  color: var(--ink-soft);
-  font-size: 0.76rem;
-}
-
-.timeline {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding-left: 14px;
-  font-size: 0.88rem;
-}
-
-.timeline p {
-  margin: 3px 0 0;
-  color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.55;
-}
-
-@media (max-width: 900px) {
-  .hero-grid {
+@media (max-width: 1080px) {
+  .hero-frame,
+  .hero-masthead {
     grid-template-columns: 1fr;
   }
 
-  .hero-stats {
-    grid-template-columns: 1fr;
+  .hero-title {
+    max-width: 100%;
   }
 
-  .hero-summary-grid {
+  .hero-digest {
     grid-template-columns: 1fr;
   }
+}
 
-  .route-strip {
-    grid-template-columns: 1fr;
+@media (max-width: 720px) {
+  .hero {
+    padding-top: 18px;
+  }
+
+  .hero-lead,
+  .hero-sidebar {
+    padding-inline: 20px;
+  }
+
+  .hero-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 </style>

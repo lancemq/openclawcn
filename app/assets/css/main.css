@@ -1,19 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --paper: #f4efe4;
-  --paper-deep: #e5dcca;
-  --panel: rgba(255, 251, 244, 0.78);
-  --panel-strong: #fffaf1;
-  --ink: #1d221d;
-  --ink-soft: #526052;
-  --line: rgba(67, 73, 60, 0.16);
-  --line-strong: rgba(25, 111, 105, 0.28);
-  --brand: #0c6c69;
-  --brand-bright: #13817d;
-  --accent: #a66f2c;
-  --accent-soft: #ead7b6;
-  --shadow: 0 28px 60px rgba(74, 56, 28, 0.12);
+  --paper: #f4efe6;
+  --paper-deep: #e6ddcf;
+  --paper-muted: #eee5d7;
+  --panel: rgba(255, 252, 246, 0.84);
+  --panel-strong: #fffdf8;
+  --ink: #171c22;
+  --ink-soft: #586473;
+  --line: rgba(64, 73, 85, 0.14);
+  --line-strong: rgba(20, 101, 112, 0.25);
+  --brand: #0f6674;
+  --brand-bright: #17818c;
+  --accent: #8a5a24;
+  --accent-soft: #ead4b6;
+  --shadow: 0 24px 56px rgba(48, 39, 25, 0.1);
   --max-width: 1380px;
   color-scheme: light;
 }
@@ -28,13 +29,14 @@ html {
 
 body {
   margin: 0;
-  font-family: "Manrope", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  font-size: 15px;
+  font-family: "Source Sans 3", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
   background:
-    radial-gradient(circle at top right, rgba(19, 129, 125, 0.16), transparent 28%),
-    radial-gradient(circle at left center, rgba(166, 111, 44, 0.18), transparent 26%),
-    linear-gradient(180deg, #f8f4ea 0%, #f4efe4 45%, #efe7d8 100%);
+    radial-gradient(circle at top right, rgba(15, 102, 116, 0.12), transparent 28%),
+    radial-gradient(circle at left 20%, rgba(138, 90, 36, 0.12), transparent 24%),
+    linear-gradient(180deg, #f8f4ed 0%, #f4efe6 46%, #efe6d8 100%);
   color: var(--ink);
+  line-height: 1.6;
 }
 
 body::before {
@@ -43,11 +45,11 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(24, 26, 20, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(24, 26, 20, 0.025) 1px, transparent 1px);
-  background-size: 24px 24px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 88%);
-  opacity: 0.45;
+    linear-gradient(rgba(23, 28, 34, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 28, 34, 0.02) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 88%);
+  opacity: 0.4;
 }
 
 a {
@@ -69,30 +71,31 @@ img {
 .site-shell::before {
   content: "";
   position: absolute;
-  top: 88px;
-  right: -120px;
-  width: 240px;
-  height: 240px;
-  border-radius: 24px;
+  top: 106px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.65), rgba(229, 220, 202, 0.4)),
-    radial-gradient(circle at 30% 30%, rgba(19, 129, 125, 0.16), transparent 50%);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  transform: rotate(12deg);
+    radial-gradient(circle at 35% 35%, rgba(23, 129, 140, 0.16), transparent 48%),
+    radial-gradient(circle at 72% 70%, rgba(138, 90, 36, 0.12), transparent 38%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.65), rgba(230, 221, 207, 0.28));
+  border: 1px solid rgba(255, 255, 255, 0.76);
   box-shadow: var(--shadow);
   pointer-events: none;
+  filter: blur(2px);
 }
 
 .site-shell::after {
   content: "OPENCLAW CN";
   position: fixed;
   right: 16px;
-  top: 140px;
+  top: 152px;
   z-index: 0;
   writing-mode: vertical-rl;
-  letter-spacing: 0.28em;
-  font-size: 0.72rem;
-  color: rgba(29, 34, 29, 0.3);
+  letter-spacing: 0.34em;
+  font-size: 0.7rem;
+  color: rgba(23, 28, 34, 0.24);
   pointer-events: none;
 }
 
@@ -104,14 +107,14 @@ img {
 .section {
   position: relative;
   z-index: 1;
-  padding: 46px 0;
+  padding: 52px 0;
 }
 
 .section-title {
   margin: 0 0 10px;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: clamp(1.28rem, 1.78vw, 2rem);
-  line-height: 1;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: clamp(1.45rem, 2vw, 2.24rem);
+  line-height: 1.15;
   letter-spacing: -0.04em;
 }
 
@@ -126,16 +129,22 @@ img {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border: 1px solid rgba(166, 111, 44, 0.24);
-  border-radius: 999px;
+  gap: 10px;
+  padding: 0;
+  border: 0;
   color: var(--accent);
-  background: rgba(234, 215, 182, 0.46);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
 }
 
 .button-row {
@@ -148,13 +157,13 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
-  padding: 0 16px;
+  min-height: 44px;
+  padding: 0 18px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -165,19 +174,19 @@ img {
 
 .button.primary {
   color: #f8f7f2;
-  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
+  background: linear-gradient(135deg, #0b5b67 0%, var(--brand-bright) 100%);
 }
 
 .button.secondary {
   color: var(--ink);
   border-color: var(--line);
-  background: rgba(255, 251, 244, 0.7);
+  background: rgba(255, 252, 246, 0.78);
 }
 
 .button.ghost {
   color: var(--accent);
-  border-color: rgba(166, 111, 44, 0.28);
-  background: rgba(234, 215, 182, 0.4);
+  border-color: rgba(138, 90, 36, 0.22);
+  background: rgba(234, 212, 182, 0.42);
 }
 
 .grid {
@@ -188,11 +197,11 @@ img {
 .card {
   position: relative;
   overflow: hidden;
-  padding: 22px;
+  padding: 24px;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 26px;
   background:
-    linear-gradient(180deg, rgba(255, 251, 244, 0.98), rgba(248, 241, 229, 0.96)),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(247, 241, 231, 0.95)),
     var(--panel);
   box-shadow: var(--shadow);
 }
@@ -200,10 +209,10 @@ img {
 .card::before {
   content: "";
   position: absolute;
-  inset: 0 auto auto 0;
-  width: 88px;
-  height: 88px;
-  background: radial-gradient(circle, rgba(19, 129, 125, 0.1), transparent 68%);
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(15, 102, 116, 0.95), rgba(138, 90, 36, 0.3), transparent 84%);
   pointer-events: none;
 }
 
@@ -212,10 +221,24 @@ img {
   align-items: center;
   border-radius: 999px;
   border: 1px solid var(--line);
-  padding: 4px 8px;
-  font-size: 0.72rem;
+  padding: 5px 9px;
+  font-size: 0.73rem;
   color: var(--ink-soft);
-  background: rgba(255, 255, 255, 0.46);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: min(var(--max-width), calc(100% - 28px));
+  }
+
+  .section {
+    padding: 42px 0;
+  }
+
+  .site-shell::after {
+    display: none;
+  }
 }
 
 .breadcrumbs {

@@ -85,6 +85,11 @@ const activeGroup = computed(() =>
 <template>
   <header class="header">
     <div class="container header-inner">
+      <div class="header-ribbon">
+        <span>OpenClawCN Editorial Desk</span>
+        <span>资讯 · 文档 · 实践 · 社区</span>
+      </div>
+
       <div class="header-top">
         <NuxtLink class="brand" to="/">
           <span class="brand-mark" aria-hidden="true">
@@ -168,15 +173,29 @@ const activeGroup = computed(() =>
   position: sticky;
   top: 0;
   z-index: 30;
-  backdrop-filter: blur(12px);
-  background: rgba(248, 244, 234, 0.88);
-  border-bottom: 1px solid rgba(67, 73, 60, 0.1);
+  backdrop-filter: blur(14px);
+  background: rgba(248, 244, 237, 0.9);
+  border-bottom: 1px solid rgba(64, 73, 85, 0.1);
 }
 
 .header-inner {
   display: grid;
-  gap: 8px;
-  padding: 10px 0 12px;
+  gap: 10px;
+  padding: 10px 0 14px;
+}
+
+.header-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 30px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(64, 73, 85, 0.08);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .header-top {
@@ -184,13 +203,13 @@ const activeGroup = computed(() =>
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  min-height: 48px;
+  min-height: 54px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .brand-mark {
@@ -214,16 +233,16 @@ const activeGroup = computed(() =>
 }
 
 .brand-copy strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1rem;
   letter-spacing: -0.03em;
 }
 
 .brand-copy small {
   margin-top: 1px;
   color: var(--ink-soft);
-  font-size: 0.64rem;
-  letter-spacing: 0.08em;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -239,13 +258,13 @@ const activeGroup = computed(() =>
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
-  padding: 0 10px;
+  min-height: 34px;
+  padding: 0 12px;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: var(--ink-soft);
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -255,18 +274,18 @@ const activeGroup = computed(() =>
 .group-link.active,
 .group-link:hover {
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .header-secondary {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-height: 34px;
-  padding: 8px 12px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  border-radius: 18px;
-  background: rgba(255, 251, 244, 0.7);
+  padding: 10px 14px;
+  border: 1px solid rgba(64, 73, 85, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 252, 247, 0.76);
 }
 
 .secondary-label {
@@ -274,13 +293,13 @@ const activeGroup = computed(() =>
   align-items: center;
   flex: none;
   min-height: 24px;
-  padding: 0 8px;
+  padding: 0 10px;
   border-radius: 999px;
-  background: rgba(234, 215, 182, 0.46);
+  background: rgba(234, 212, 182, 0.5);
   color: var(--accent);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -297,7 +316,7 @@ const activeGroup = computed(() =>
   padding: 0 10px;
   border-radius: 999px;
   color: var(--ink-soft);
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   font-weight: 600;
 }
 
@@ -323,13 +342,13 @@ const activeGroup = computed(() =>
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 32px;
-  padding: 0 10px;
-  border: 1px solid rgba(67, 73, 60, 0.15);
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(64, 73, 85, 0.14);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.62);
   color: var(--ink-soft);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -371,6 +390,10 @@ const activeGroup = computed(() =>
 }
 
 @media (max-width: 980px) {
+  .header-ribbon {
+    display: none;
+  }
+
   .header-top {
     flex-wrap: wrap;
   }
