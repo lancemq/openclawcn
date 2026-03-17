@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { getPrevNext, normalizeTags, sharedTagCount, sortBestPractices, sortNews } from '~/data/content'
-import { detailPageGuides } from '~/data/information-architecture'
+import { getPrevNext, normalizeTags, sortNews } from '~/data/content'
 import { learningPaths, matchesTopic, topicDefinitions } from '~/data/taxonomy'
 
 const route = useRoute()
@@ -44,41 +43,6 @@ const metaItems = computed(() => [
       }
     : null,
 ].filter(Boolean) as Array<{ label: string; value: string; href?: string }>)
-
-const relatedNewsCards = computed(() => {
-  const category = String(page.value?.category || '')
-
-  return orderedNews.value
-    .filter(item => item.path !== pagePath.value)
-    .map((item) => ({
-      ...item,
-      score:
-        (String(item.category || '') === category ? 4 : 0) +
-        sharedTagCount(pageTags.value, item.tags) * 3,
-    }))
-    .filter(item => item.score > 0)
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 3)
-    .map(item => ({
-      title: item.title,
-      path: item.path,
-      description: item.description,
-      meta: `${item.category || '新闻'} / ${item.date || ''}`,
-    }))
-})
-
-const curatedPractices = computed(() =>
-  sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[])
-    .slice(0, 3)
-    .map(item => ({
-      title: item.title,
-      path: item.path,
-      description: item.description,
-      meta: `最佳实践 / ${item.category || '专题'}`,
-    })),
-)
-
-const pageGuide = detailPageGuides.news
 
 const pageTopic = computed(() =>
   topicDefinitions.find(topic =>
@@ -166,20 +130,7 @@ useSeo({
         section-description="新闻适合快速掌握变化，实践和文档更适合沉淀长期方法。看完动态后，建议继续进入相关实践或更早一篇更新。"
         :previous="newsNav.previous"
         :next="newsNav.next"
-        :related="[...relatedNewsCards, ...curatedPractices].slice(0, 3)"
       />
-
-      <aside class="card guide-card">
-        <p class="eyebrow">站点层级</p>
-        <h2>{{ pageGuide.title }}</h2>
-        <p class="guide-copy">{{ pageGuide.summary }}</p>
-        <div class="guide-links">
-          <NuxtLink v-for="item in pageGuide.links" :key="item.to" :to="item.to" class="guide-link">
-            <strong>{{ item.title }}</strong>
-            <span>{{ item.description }}</span>
-          </NuxtLink>
-        </div>
-      </aside>
 
       <section class="card stage-card">
         <p class="eyebrow">关联入口</p>
@@ -221,44 +172,6 @@ useSeo({
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 18px;
-}
-
-.guide-card,
-.guide-links {
-  display: grid;
-  gap: 10px;
-}
-
-.guide-card {
-  margin-top: 16px;
-}
-
-.guide-card h2 {
-  margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1rem;
-  letter-spacing: -0.03em;
-}
-
-.guide-copy,
-.guide-link span {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.6;
-}
-
-.guide-link {
-  display: grid;
-  gap: 4px;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  background: rgba(255, 255, 255, 0.44);
-}
-
-.guide-link strong {
-  font-size: 0.92rem;
 }
 
 .stage-card,

@@ -39,21 +39,6 @@ const architectureGroups = [
   },
 ]
 
-const menuDecisions = [
-  {
-    title: '保留 6 个核心专题',
-    description: '插件、执行边界、触发、自动化、排障和组合方案仍然各自独立，因为它们解决的是不同问题。',
-  },
-  {
-    title: '合并重复入口',
-    description: '`Hooks / Webhooks` 归并到“触发机制”，`工具排障` 归并到“诊断与排障”，旧路由保留兼容跳转。',
-  },
-  {
-    title: '菜单改成主能力入口',
-    description: '顶部“扩展”菜单不再塞进过多旁支内容，而是优先展示最常被直接进入的能力入口。',
-  },
-]
-
 const companionLinks = [
   {
     to: '/skills',
@@ -152,22 +137,6 @@ function getPathLabel(path: string) {
           <p>{{ item.note }}</p>
         </article>
       </div>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">IA Decisions</p>
-            <h2>这轮目录为什么这样重排</h2>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <article v-for="item in menuDecisions" :key="item.title" class="series-card">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-          </article>
-        </div>
-      </section>
 
       <section class="card series-panel">
         <div class="series-head">

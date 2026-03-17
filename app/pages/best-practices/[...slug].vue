@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { getPrevNext, normalizeTags, sharedTagCount, sortBestPractices } from '~/data/content'
-import { detailPageGuides } from '~/data/information-architecture'
+import { getPrevNext, normalizeTags, sortBestPractices } from '~/data/content'
 import { learningPaths, matchesTopic, topicDefinitions } from '~/data/taxonomy'
 
 const route = useRoute()
@@ -46,27 +45,6 @@ const metaItems = computed(() => [
       }
     : null,
 ].filter(Boolean) as Array<{ label: string; value: string; href?: string }>)
-
-const relatedCards = computed(() =>
-  sortBestPractices((manifest.value?.collections.bestPractices.items || []) as any[])
-    .filter(item => String(item.path) !== pagePath.value)
-    .map((item) => ({
-      ...item,
-      score:
-        (String(item.category || '') === String(page.value?.category || '') ? 4 : 0) +
-        sharedTagCount(pageTags.value, item.tags) * 3,
-    }))
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 3)
-    .map(item => ({
-      title: item.title,
-      path: item.path,
-      description: item.description,
-      meta: `${item.category || '实践'} / ${item.difficulty || '未分级'}`,
-    })),
-)
-
-const pageGuide = detailPageGuides.bestPractices
 
 const pageTopic = computed(() =>
   topicDefinitions.find(topic =>
@@ -153,20 +131,7 @@ useSeo({
         section-description="最佳实践更适合在你已经跑通基础链路后阅读。可以顺着前后文继续看，也可以回到实践列表按难度和场景筛选。"
         :previous="practiceNav.previous"
         :next="practiceNav.next"
-        :related="relatedCards"
       />
-
-      <aside class="card guide-card">
-        <p class="eyebrow">站点层级</p>
-        <h2>{{ pageGuide.title }}</h2>
-        <p class="guide-copy">{{ pageGuide.summary }}</p>
-        <div class="guide-links">
-          <NuxtLink v-for="item in pageGuide.links" :key="item.to" :to="item.to" class="guide-link">
-            <strong>{{ item.title }}</strong>
-            <span>{{ item.description }}</span>
-          </NuxtLink>
-        </div>
-      </aside>
 
       <section class="card stage-card">
         <p class="eyebrow">关联入口</p>
@@ -208,40 +173,6 @@ useSeo({
   gap: 12px;
   flex-wrap: wrap;
   margin: 18px 0;
-}
-
-.guide-card,
-.guide-links {
-  display: grid;
-  gap: 10px;
-}
-
-.guide-card h2 {
-  margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1rem;
-  letter-spacing: -0.03em;
-}
-
-.guide-copy,
-.guide-link span {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.6;
-}
-
-.guide-link {
-  display: grid;
-  gap: 4px;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  background: rgba(255, 255, 255, 0.44);
-}
-
-.guide-link strong {
-  font-size: 0.92rem;
 }
 
 .stage-card,

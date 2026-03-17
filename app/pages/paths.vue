@@ -97,33 +97,6 @@ const pathEditorialMeta: Record<string, {
   },
 }
 
-const learnSwitchboard = [
-  {
-    title: '主题中心',
-    description: '当你已经知道自己要解决安装、渠道、模型或安全问题时，从主题聚合页切入更快。',
-    to: '/topics',
-    meta: '按问题进入',
-  },
-  {
-    title: '文档中心',
-    description: '如果你想回到完整结构查找上下游知识点，直接回文档中心继续读。',
-    to: '/docs',
-    meta: '完整目录',
-  },
-  {
-    title: '视频教程',
-    description: '适合先看演示建立直觉，再回到路径里的具体步骤。',
-    to: '/videos',
-    meta: '演示',
-  },
-  {
-    title: '最佳实践',
-    description: '路径走通后，把做法沉淀成长期可复用的方法。',
-    to: '/best-practices',
-    meta: '深化',
-  },
-]
-
 const pathSignals = [
   {
     label: '页面作用',
@@ -288,23 +261,6 @@ const chooserCards = [
         </div>
       </section>
 
-      <section class="card learn-switch-card">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">和其他学习页交叉访问</p>
-            <p class="section-copy">学习路径负责决定顺序，但你不需要被锁在这一页。每走完一段，都可以切回主题、文档、视频或实践页继续推进。</p>
-          </div>
-        </div>
-
-        <div class="grid learn-switch-grid">
-          <NuxtLink v-for="item in learnSwitchboard" :key="item.to" :to="item.to" class="card resource-card">
-            <span class="tag">{{ item.meta }}</span>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
-        </div>
-      </section>
-
       <section class="path-stack">
         <article
           v-for="path in pathCards"
@@ -412,16 +368,6 @@ const chooserCards = [
 .paths-page {
   display: grid;
   gap: 22px;
-}
-
-.learn-switch-card,
-.learn-switch-grid {
-  display: grid;
-  gap: 12px;
-}
-
-.learn-switch-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .paths-hero {

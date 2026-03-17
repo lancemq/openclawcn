@@ -71,6 +71,14 @@ function isActive(to: string) {
   return route.path === to || route.path.startsWith(`${to}/`)
 }
 
+function isSecondaryActive(to: string, index: number) {
+  if (route.path === '/' && activeGroupSlug.value === 'start') {
+    return index === 0
+  }
+
+  return isActive(to)
+}
+
 const activeGroupSlug = computed(() => {
   const matchedGroup = navGroups.find(group => group.items.some(item => isActive(item.to)))
   return matchedGroup?.slug || 'start'
@@ -153,11 +161,11 @@ const activeGroup = computed(() =>
         <span class="secondary-label">{{ activeGroup.label }}</span>
         <nav class="secondary-nav">
           <NuxtLink
-            v-for="item in activeGroup.items"
+            v-for="(item, index) in activeGroup.items"
             :key="item.to"
             :to="item.to"
             class="nav-link"
-            :class="{ active: isActive(item.to) }"
+            :class="{ active: isSecondaryActive(item.to, index) }"
           >
             {{ item.label }}
           </NuxtLink>

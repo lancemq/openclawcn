@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { getPrevNext, normalizeTags, sharedTagCount, sortDocs } from '~/data/content'
-import { detailPageGuides } from '~/data/information-architecture'
+import { getPrevNext, normalizeTags, sortDocs } from '~/data/content'
 import { learningPaths, matchesTopic, topicDefinitions } from '~/data/taxonomy'
 
 const route = useRoute()
@@ -49,36 +48,6 @@ const pageToc = computed(() => {
   const links = (page.value?.body as any)?.toc?.links
   return Array.isArray(links) ? links : []
 })
-
-const relatedDocs = computed(() => {
-  const category = String(page.value?.category || '')
-  const tags = pageTags.value
-
-  return orderedDocs.value
-    .filter(item => item.path !== pagePath.value)
-    .map((item) => {
-      const score =
-        (String(item.category || '') === category ? 5 : 0) +
-        sharedTagCount(tags, item.tags) * 3 +
-        (String(item.path).startsWith('/docs/getting-started/') ? 1 : 0)
-
-      return {
-        ...item,
-        score,
-      }
-    })
-    .filter(item => item.score > 0)
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 3)
-    .map(item => ({
-      title: item.title,
-      path: item.path,
-      description: item.description,
-      meta: String(item.category || '文档'),
-    }))
-})
-
-const pageGuide = detailPageGuides.docs
 
 const pageTopic = computed(() =>
   topicDefinitions.find(topic =>
@@ -162,23 +131,6 @@ useSeo({
 
         <div class="content-side">
           <ContentOutline title="本页目录" :links="pageToc" />
-
-          <aside class="card content-side-card">
-            <p class="eyebrow">站点层级</p>
-            <h2>{{ pageGuide.title }}</h2>
-            <p class="content-side-summary">{{ pageGuide.summary }}</p>
-            <div class="content-side-links">
-              <NuxtLink
-                v-for="item in pageGuide.links"
-                :key="item.to"
-                :to="item.to"
-                class="content-side-link"
-              >
-                <strong>{{ item.title }}</strong>
-                <span>{{ item.description }}</span>
-              </NuxtLink>
-            </div>
-          </aside>
         </div>
       </div>
 
@@ -188,7 +140,6 @@ useSeo({
         section-description="如果你正在系统理解 OpenClaw，优先沿着文档顺序继续看；如果只是查某个点，也可以跳回文档中心按分类选择。"
         :previous="docNav.previous"
         :next="docNav.next"
-        :related="relatedDocs"
       />
 
       <section class="card stage-card">
@@ -216,8 +167,7 @@ useSeo({
 
 .content-header,
 .content-tag-list,
-.content-side,
-.content-side-links {
+.content-side {
   display: grid;
   gap: 10px;
 }
@@ -228,51 +178,6 @@ useSeo({
 
 .content-side {
   gap: 14px;
-}
-
-.content-side-card {
-  display: grid;
-  gap: 10px;
-}
-
-.content-side-card h2 {
-  margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1rem;
-  line-height: 1.35;
-  letter-spacing: -0.03em;
-}
-
-.content-side-summary {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.58;
-}
-
-.content-side-link {
-  display: grid;
-  gap: 4px;
-  padding: 12px 14px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.44);
-  transition: transform 0.18s ease, border-color 0.18s ease;
-}
-
-.content-side-link:hover {
-  transform: translateY(-2px);
-  border-color: rgba(12, 108, 105, 0.22);
-}
-
-.content-side-link strong {
-  font-size: 0.92rem;
-}
-
-.content-side-link span {
-  color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.55;
 }
 
 .stage-card,
