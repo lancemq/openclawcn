@@ -2,6 +2,7 @@
   <div class="site-shell">
     <AppHeader />
     <main>
+      <AutoBreadcrumbs />
       <slot />
     </main>
     <AppFooter />
