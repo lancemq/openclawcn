@@ -6,7 +6,6 @@ import {
   docsOverview,
   ecosystemOverview,
   extensionOverview,
-  newsOverview,
   userRouteOverview,
 } from '~/data/site'
 import { informationLayers } from '~/data/information-architecture'
@@ -64,12 +63,12 @@ const topicOverview = computed(() =>
 
 const featuredTopic = computed(() => topicOverview.value[0])
 const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
+const featuredPaths = computed(() => learningPaths.slice(0, 4))
 </script>
 
 <template>
   <div>
     <HeroSection />
-    <QuickStartSection />
     <FeatureGrid />
     <ContentSpotlight />
 
@@ -94,64 +93,44 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
           </div>
 
           <div class="home-head head-inline">
-            <p class="eyebrow">用户分流</p>
-            <p class="home-head-note">不要第一次进入就把所有入口一起打开。先判断自己是在学习、扩展还是长期运行阶段，再走对应路线。</p>
+            <p class="eyebrow">开始</p>
+            <p class="home-head-note">首页先只回答两件事：你该从哪个入口进，以及最常见的几条学习路径怎么走。</p>
           </div>
-          <div class="grid route-grid">
-            <ContentCard
-              v-for="item in userRouteOverview"
-              :key="item.to"
-              :title="item.title"
-              :description="item.description"
-              :to="item.to"
-              :meta="item.meta"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section content-section paths-section">
-      <div class="container">
-        <div class="feature-band card">
-          <div class="home-head">
-            <p class="eyebrow">学习路径</p>
-            <p class="home-head-note">从部署、Windows、Skills 扩展到团队运维，把零散内容接成连续路线。</p>
-          </div>
-          <div class="path-rail">
-            <NuxtLink
-              v-for="(path, index) in learningPaths"
-              :key="path.slug"
-              :to="path.next"
-              class="path-step"
-            >
-              <span class="path-index">{{ String(index + 1).padStart(2, '0') }}</span>
-              <div class="path-copy">
-                <strong>{{ path.title }}</strong>
-                <p>{{ path.summary }}</p>
+          <div class="feature-band start-band">
+            <div class="start-intro">
+              <div class="grid route-grid">
+                <ContentCard
+                  v-for="item in userRouteOverview"
+                  :key="item.to"
+                  :title="item.title"
+                  :description="item.description"
+                  :to="item.to"
+                  :meta="item.meta"
+                />
               </div>
-            </NuxtLink>
-          </div>
-        </div>
-      </div>
-    </section>
+            </div>
 
-    <section class="section content-section week-section">
-      <div class="container">
-        <div class="stagger-shell">
-          <div class="home-head">
-            <p class="eyebrow">本周推荐</p>
-            <p class="home-head-note">如果你只想快速知道最近最值得看的内容，从这里开始。</p>
-          </div>
-          <div class="grid spotlight-grid">
-            <ContentCard
-              v-for="item in weeklyFocus"
-              :key="item.to"
-              :title="item.title"
-              :description="item.description"
-              :to="item.to"
-              :meta="item.meta"
-            />
+            <div class="start-paths">
+              <div class="home-head">
+                <p class="eyebrow">学习路径</p>
+                <p class="home-head-note">只保留最常见的 4 条路径，其他更细的场景继续放在完整路径页里。</p>
+              </div>
+              <div class="compact-path-grid">
+                <NuxtLink
+                  v-for="(path, index) in featuredPaths"
+                  :key="path.slug"
+                  :to="path.next"
+                  class="path-step compact-path-step"
+                >
+                  <span class="path-index">{{ String(index + 1).padStart(2, '0') }}</span>
+                  <div class="path-copy">
+                    <strong>{{ path.title }}</strong>
+                    <p>{{ path.summary }}</p>
+                  </div>
+                </NuxtLink>
+              </div>
+              <NuxtLink to="/paths" class="start-more">查看完整路径</NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -161,8 +140,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
         <div class="editorial-shell">
           <div class="home-head head-inline">
-            <p class="eyebrow">主题中心</p>
-            <p class="home-head-note">按安装、Gateway、渠道、扩展、模型和安全跨模块聚合内容。</p>
+            <p class="eyebrow">开始 / 主题中心</p>
+            <p class="home-head-note">按安装、Gateway、渠道、扩展、模型和安全跨模块聚合内容，适合你已经知道自己要解决什么问题时进入。</p>
           </div>
           <div class="editorial-columns">
             <NuxtLink v-if="featuredTopic" :to="featuredTopic.to" class="card editorial-feature">
@@ -193,8 +172,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
         <div class="stack-shell">
           <div class="home-head head-inline">
-            <p class="eyebrow">文档入口</p>
-            <p class="home-head-note">从定位、安装到架构与排错，按顺序建立理解，不要一开始就跳进零散配置。</p>
+            <p class="eyebrow">文档</p>
+            <p class="home-head-note">从定位、安装到架构与排错，先建立稳定的知识主线，再进入更细的配置和机制。</p>
           </div>
           <div class="grid docs-grid">
             <ContentCard
@@ -214,8 +193,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
         <div class="feature-band subtle-band">
           <div class="home-head">
-            <p class="eyebrow">最佳实践</p>
-            <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法。</p>
+            <p class="eyebrow">进阶 / 最佳实践</p>
+            <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法，适合已经跑通基础链路后继续深化。</p>
           </div>
           <div class="grid practice-grid">
             <ContentCard
@@ -235,8 +214,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
         <div class="stack-shell">
           <div class="home-head head-inline">
-            <p class="eyebrow">视频教程</p>
-            <p class="home-head-note">把官方 Showcase、YouTube 演示和 Bilibili 中文教程聚合在一个入口里，优先帮助你建立使用直觉。</p>
+            <p class="eyebrow">开始 / 视频教程</p>
+            <p class="home-head-note">把官方 Showcase、YouTube 演示和 Bilibili 中文教程聚合在一个入口里，适合先建立使用直觉再回到文档确认细节。</p>
           </div>
           <div class="grid extension-grid">
             <ContentCard
@@ -252,11 +231,53 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       </div>
     </section>
 
+    <section class="section content-section extension-section">
+      <div class="container">
+        <div class="stack-shell">
+          <div class="home-head head-inline">
+            <p class="eyebrow">进阶 / 能力扩展</p>
+            <p class="home-head-note">把工具系列、Skills、关键配置、模型和安全专题集中整理，减少在零散文档和社区讨论里来回翻找。</p>
+          </div>
+          <div class="grid extension-grid">
+            <ContentCard
+              v-for="item in extensionOverview"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section week-section">
+      <div class="container">
+        <div class="stagger-shell">
+          <div class="home-head">
+            <p class="eyebrow">动态 / 本周推荐</p>
+            <p class="home-head-note">如果你只想快速知道最近最值得看的内容，从这里开始。</p>
+          </div>
+          <div class="grid spotlight-grid">
+            <ContentCard
+              v-for="item in weeklyFocus"
+              :key="item.to"
+              :title="item.title"
+              :description="item.description"
+              :to="item.to"
+              :meta="item.meta"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section content-section news-section">
       <div class="container">
         <div class="ticker-shell">
           <div class="home-head head-inline">
-            <p class="eyebrow">最近更新</p>
+            <p class="eyebrow">动态 / 最近更新</p>
             <p class="home-head-note">聚焦版本变化、能力更新和需要及时关注的使用提醒。</p>
           </div>
           <div class="news-timeline">
@@ -281,33 +302,12 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       </div>
     </section>
 
-    <section class="section content-section extension-section">
-      <div class="container">
-        <div class="stack-shell">
-          <div class="home-head head-inline">
-            <p class="eyebrow">扩展入口</p>
-            <p class="home-head-note">把工具系列、Skills 和关键配置单独整理，减少在零散文档和社区讨论里来回翻找。</p>
-          </div>
-          <div class="grid extension-grid">
-            <ContentCard
-              v-for="item in extensionOverview"
-              :key="item.to"
-              :title="item.title"
-              :description="item.description"
-              :to="item.to"
-              :meta="item.meta"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section content-section ecosystem-section">
       <div class="container">
         <div class="feature-band">
           <div class="home-head head-inline">
-            <p class="eyebrow">生态入口</p>
-            <p class="home-head-note">探索 OpenClaw 的生态系统，包括技能市场、案例展示、下载中心和产品路线图。</p>
+            <p class="eyebrow">动态 / 生态与路线</p>
+            <p class="home-head-note">探索 OpenClaw 的生态系统，包括生态项目、案例展示、背景故事、下载中心和产品路线图。</p>
           </div>
           <div class="grid ecosystem-grid">
             <ContentCard
@@ -327,7 +327,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
       <div class="container">
           <div class="feature-band">
             <div class="home-head head-inline">
-            <p class="eyebrow">辅助入口</p>
+            <p class="eyebrow">支持</p>
             <p class="home-head-note">通过搜索、FAQ、反馈和社区支持更快找到下一步动作。</p>
             </div>
             <div class="grid action-grid">
@@ -347,7 +347,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
     <section class="section">
       <div class="container subscribe-grid card">
         <div class="subscribe-copy">
-          <p class="eyebrow">订阅更新</p>
+          <p class="eyebrow">支持 / 订阅更新</p>
           <p class="home-head-note">这里分成两种方式：RSS 适合直接加到阅读器，邮箱订阅适合接收后续站点更新提醒。</p>
         </div>
 
@@ -376,9 +376,15 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   gap: 12px;
 }
 
+.start-band {
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 16px;
+  align-items: start;
+}
+
 .layer-ribbon {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 6px;
 }
@@ -400,9 +406,8 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   background: rgba(19, 129, 125, 0.08);
 }
 
-.path-rail {
+.compact-path-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -455,6 +460,38 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   color: var(--ink-soft);
   font-size: 0.84rem;
   line-height: 1.48;
+}
+
+.start-paths {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.compact-path-step {
+  padding: 14px 14px 16px;
+}
+
+.start-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  width: fit-content;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(19, 129, 125, 0.18);
+  color: var(--brand);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(19, 129, 125, 0.06);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.start-more:hover {
+  transform: translateY(-1px);
+  border-color: rgba(19, 129, 125, 0.28);
+  background: rgba(19, 129, 125, 0.1);
 }
 
 .feature-band {
@@ -584,7 +621,11 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
   gap: 12px;
 }
 
-.route-grid,
+.route-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
 .action-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
@@ -629,7 +670,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .path-rail,
+  .start-band,
   .editorial-columns,
   .editorial-side-grid {
     grid-template-columns: 1fr;
@@ -659,7 +700,7 @@ const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
     padding: 16px;
   }
 
-  .path-rail {
+  .compact-path-grid {
     grid-template-columns: 1fr;
   }
 }

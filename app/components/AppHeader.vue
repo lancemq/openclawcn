@@ -4,60 +4,59 @@ const { openSearch } = useGlobalSearch()
 
 const navGroups = [
   {
-    label: '学习',
-    slug: 'learn',
+    label: '开始',
+    slug: 'start',
     to: '/paths',
     items: [
       { label: '学习路径', to: '/paths' },
       { label: '主题中心', to: '/topics' },
-      { label: '文档中心', to: '/docs' },
       { label: '视频教程', to: '/videos' },
-      { label: '最佳实践', to: '/best-practices' },
     ],
   },
   {
-    label: '扩展',
-    slug: 'tools',
-    to: '/tools',
+    label: '文档',
+    slug: 'docs',
+    to: '/docs',
     items: [
-      { label: '能力地图', to: '/tools' },
-      { label: 'Skills', to: '/skills' },
-      { label: '插件系统', to: '/tools/plugins' },
-      { label: '触发与自动化', to: '/tools/triggers' },
-      { label: '执行边界', to: '/tools/exec-and-approvals' },
+      { label: '文档中心', to: '/docs' },
       { label: '关键配置', to: '/configurations' },
+      { label: '模型选择', to: '/models' },
+      { label: '安全实践', to: '/security' },
     ],
   },
   {
-    label: '生态',
-    slug: 'ecosystem',
-    to: '/ecosystem',
+    label: '进阶',
+    slug: 'advanced',
+    to: '/best-practices',
     items: [
-      { label: '生态中心', to: '/ecosystem' },
-      { label: '二次开发专题', to: '/ecosystem/secondary-development' },
+      { label: '最佳实践', to: '/best-practices' },
+      { label: '工具系列', to: '/tools' },
+      { label: 'Skills', to: '/skills' },
       { label: '案例展示', to: '/showcase' },
-      { label: '下载中心', to: '/download' },
-      { label: '产品路线图', to: '/roadmap' },
+      { label: '二次开发专题', to: '/ecosystem/secondary-development' },
     ],
   },
   {
-    label: '资讯',
-    slug: 'news',
+    label: '动态',
+    slug: 'updates',
     to: '/news',
     items: [
       { label: '新闻动态', to: '/news' },
+      { label: '产品路线图', to: '/roadmap' },
+      { label: '生态项目', to: '/ecosystem' },
       { label: '背景故事', to: '/story' },
-      { label: '社区支持', to: '/community' },
     ],
   },
   {
-    label: '辅助',
-    slug: 'service',
+    label: '支持',
+    slug: 'support',
     to: '/search',
     items: [
       { label: '站内搜索', to: '/search' },
       { label: '常见问题', to: '/faq' },
+      { label: '社区支持', to: '/community' },
       { label: '提交反馈', to: '/feedback' },
+      { label: '下载中心', to: '/download' },
     ],
   },
 ] as const
@@ -74,7 +73,7 @@ function isActive(to: string) {
 
 const activeGroupSlug = computed(() => {
   const matchedGroup = navGroups.find(group => group.items.some(item => isActive(item.to)))
-  return matchedGroup?.slug || 'learn'
+  return matchedGroup?.slug || 'start'
 })
 
 const activeGroup = computed(() =>
@@ -87,7 +86,7 @@ const activeGroup = computed(() =>
     <div class="container header-inner">
       <div class="header-ribbon">
         <span>OpenClawCN Editorial Desk</span>
-        <span>资讯 · 文档 · 实践 · 社区</span>
+        <span>开始 · 文档 · 进阶 · 动态 · 支持</span>
       </div>
 
       <div class="header-top">
