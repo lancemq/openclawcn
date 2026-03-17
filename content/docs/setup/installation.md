@@ -2,7 +2,9 @@
 title: OpenClaw 安装与环境
 description: 按官方推荐方式安装 OpenClaw，并根据本地开发、WSL2 和生产部署场景选择合适的安装路径。
 category: 安装
-updatedAt: 2026-03-11
+updatedAt: 2026-03-17
+source: https://docs.openclaw.ai/zh-CN/install
+sourceName: OpenClaw Docs
 sourceType: official
 tags: [installation, npm, install-script, wsl2]
 ---
@@ -19,8 +21,8 @@ tags: [installation, npm, install-script, wsl2]
 |------|-------|---------|-------|
 | **操作系统** | macOS 12 (Monterey) | Windows 10 1809+ | Ubuntu 20.04 / Debian 11 |
 | **推荐系统** | macOS 14 (Sonoma) | Windows 11 + WSL2 | Ubuntu 22.04 / Debian 12 |
-| **Node.js** | 20 LTS | 20 LTS | 20 LTS |
-| **推荐 Node.js** | 22 LTS | 22 LTS | 22 LTS |
+| **Node.js** | 22.16+ | 22.16+ | 22.16+ |
+| **推荐 Node.js** | 24 LTS | 24 LTS | 24 LTS |
 | **内存** | 4 GB | 4 GB | 2 GB |
 | **推荐内存** | 8 GB+ | 8 GB+ | 4 GB+ |
 | **存储空间** | 5 GB | 5 GB | 5 GB |
@@ -39,37 +41,52 @@ tags: [installation, npm, install-script, wsl2]
 
 OpenClaw 当前的安装前提主要是：
 
-- Node.js 22+
+- Node.js 22.16+
 - macOS、Linux 或 Windows
 - 如果你从源码构建，需要 `pnpm`
 
-官方还特别强调了一点：如果你在 Windows 上运行 OpenClaw，强烈建议通过 **WSL2** 使用，而不是直接把 Windows 当作首选运行环境。
+官方在 2026 年 3 月的安装页里还特别强调了一点：如果你在 Windows 上运行 OpenClaw，强烈建议通过 **WSL2** 使用，而不是直接把 Windows 当作首选运行环境。
+
+同时，官方安装页当前把 Node 版本要求写得更细了：
+
+- **Node 24 推荐**
+- **Node 22 LTS 仍兼容，但要求至少 `22.16+`**
 
 ## 最推荐的安装方式：官网安装脚本
 
-官方推荐使用安装脚本完成交互式安装。它会做这些事情：
+官方当前把安装脚本明确列为推荐路径。它会做这些事情：
 
-- 检测并安装 Node.js 22+
+- 检测并安装 Node.js
 - 安装 OpenClaw CLI
 - 在合适的情况下直接进入 onboarding
 
 macOS / Linux / WSL2 的推荐命令是：
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash
+curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
-如果你想先看脚本参数：
+Windows PowerShell 的对应命令是：
+
+```powershell
+iwr -useb https://openclaw.ai/install.ps1 | iex
+```
+
+如果你只是想先装 CLI，不立刻跑 onboarding，官方现在也给了明确的跳过方式：
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --help
+curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard
 ```
 
-对绝大多数中文用户来说，这条路径比手工装 Node、再手工全局安装 CLI 更稳，因为它把依赖检查和 onboarding 串在了一起。
+```powershell
+& ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -NoOnboard
+```
+
+对绝大多数中文用户来说，这条路径比手工装 Node、再手工全局安装 CLI 更稳，因为它把依赖检查、安装和 onboarding 串在了一起。
 
 ## 另一条常见路径：直接安装 CLI
 
-如果你已经有稳定的 Node.js 22+ 环境，也可以直接安装：
+如果你已经有稳定的 Node 环境，也可以直接安装：
 
 ```bash
 npm install -g openclaw@latest
@@ -84,6 +101,24 @@ openclaw onboard --install-daemon
 ```
 
 这是当前官方 quick start 里最常见的命令组合。
+
+如果你用 `pnpm`，安装页现在还特别强调了一个很容易被忽略的步骤：
+
+```bash
+pnpm approve-builds -g
+```
+
+因为首次全局安装时，`openclaw`、`node-llama-cpp`、`sharp` 这类带构建脚本的包可能会被 `pnpm` 拦住。
+
+## `sharp` / `libvips` 的最新安装坑
+
+官方安装页 2026 年 3 月版专门把这条列了出来。如果你在 macOS 上装过全局 `libvips`，`sharp` 安装失败时，优先尝试：
+
+```bash
+SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install -g openclaw@latest
+```
+
+如果提示 `sharp: Please add node-gyp to your dependencies`，再补本机编译工具链，例如 Xcode CLT 和全局 `node-gyp`。
 
 ## Docker 安装方式
 
@@ -115,10 +150,20 @@ pnpm install
 pnpm ui:build
 pnpm build
 
-pnpm openclaw onboard --install-daemon
+openclaw onboard --install-daemon
 ```
 
 注意：从源码构建需要 `pnpm` 作为包管理器。
+
+如果你只是想提前尝试 GitHub `main` 分支的最新版本，官方现在还列出了包管理器直装方式：
+
+```bash
+npm install -g github:openclaw/openclaw#main
+```
+
+```bash
+pnpm add -g github:openclaw/openclaw#main
+```
 
 ## 安装完成后怎么验证
 
@@ -177,10 +222,13 @@ openclaw dashboard
 
 ## 生产环境怎么装
 
-如果你要把 OpenClaw 放到长期运行的服务器上，官方推荐的生产部署方向不是手工拼命令，而是：
+如果你要把 OpenClaw 放到长期运行的服务器上，安装页当前把生产部署方向分成了几类：
 
-- 使用 `openclaw-ansible`
-- 通过 Tailscale、UFW、防火墙和 systemd 做更完整的安全部署
+- Docker
+- Podman
+- Nix
+- Ansible
+- Bun（更偏 CLI-only）
 
 官方给出的 Ansible 快速安装入口是：
 
@@ -193,6 +241,12 @@ curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw-ansible/main/inst
 - Debian / Ubuntu 服务器
 - 需要持续运行的 Gateway
 - 希望默认就有 SSH + Tailscale 安全边界的场景
+
+如果你是 VPS / 云主机场景，官方安装页还新增了一条很值得保留的判断：
+
+- 尽量避免第三方“一键式”市场镜像
+- 优先使用干净基础 OS 镜像，例如 Ubuntu LTS
+- 再用官方安装脚本或你自己确认过的自动化方案安装
 
 ### Tailscale 远程访问
 

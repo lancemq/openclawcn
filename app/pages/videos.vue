@@ -105,7 +105,7 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
           <h1 class="section-title">视频教程</h1>
           <p class="section-copy">
             这一页把 OpenClaw 相关的视频资料按“官方入口、YouTube 英文主线、中文部署教程、Skills 扩展、渠道接入”拆成几组，
-            避免你在官网、YouTube 和 Bilibili 之间来回搜索。第一次接触 OpenClaw，建议先看官网 Showcase 和官方引用视频，再选一条与你设备环境最接近的部署教程。
+            避免你在官网、YouTube 和 Bilibili 之间来回搜索。第一次接触 OpenClaw，先看官网 Showcase 和官方引用视频，再选一条最接近你环境的部署教程就够了。
           </p>
 
           <div class="collection-utility">
@@ -121,7 +121,7 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
           <div class="collection-summary">
             <span class="mini-label">推荐观看顺序</span>
             <strong>先官网入口，再看 YouTube 主线，最后补中文实操</strong>
-            <p>如果你是第一次上手，优先看 Showcase 和完整 setup 视频；如果已经部署完成，再进入 Skills、渠道与模型接入。</p>
+            <p>第一次上手先看 Showcase 和完整 setup；基础链路稳定后，再进入 Skills、渠道和模型类视频。</p>
           </div>
 
           <div class="collection-summary">

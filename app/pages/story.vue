@@ -550,8 +550,9 @@ const relatedLinks = [
       <section class="card series-panel">
         <div class="series-head">
           <div>
-            <p class="eyebrow">Continue</p>
-            <h2>继续深入这段故事的其他侧面</h2>
+            <p class="eyebrow">交叉访问</p>
+            <h2>继续把这段故事放回产品、生态和案例结构里</h2>
+            <p class="section-copy">故事页负责解释“为什么会发生”，如果你准备继续看产品、生态或实际落地，就从这些入口切出去。</p>
           </div>
         </div>
 

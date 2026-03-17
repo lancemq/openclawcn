@@ -2,7 +2,7 @@
 title: 远程访问与 Tailscale / SSH
 description: 把 OpenClaw 放到远程主机长期运行时，如何在 SSH、tailnet、Tailscale Serve 和直接 ws/wss 之间做选择。
 category: 运维
-updatedAt: 2026-03-11
+updatedAt: 2026-03-17
 source: https://docs.openclaw.ai/gateway/remote
 sourceName: OpenClaw Docs
 sourceType: official
@@ -11,7 +11,7 @@ tags: [remote, ssh, tailscale, gateway, operations]
 
 # 远程访问与 Tailscale / SSH
 
-现有文档已经解释了 Gateway、Control UI 和安全边界，但如果你准备把 OpenClaw 长期放到另一台机器上运行，真正最容易踩坑的部分其实是远程访问。官方文档把这一块拆成了 `gateway/remote`、`gateway/tailscale` 和 macOS app 的 remote over SSH 说明，说明这不是附属功能，而是正式使用中的核心路径。
+现有文档已经解释了 Gateway、Control UI 和安全边界，但如果你准备把 OpenClaw 长期放到另一台机器上运行，真正最容易踩坑的部分其实是远程访问。官方文档把这一块拆成了 `gateway/remote`、`gateway/tailscale` 和 macOS app 的 remote over SSH 说明，说明这不是附属功能，而是正式使用中的核心路径。到 2026 年 3 月，官方还把“智能体所在位置”和“操作员所在位置”分得更清楚了。
 
 ## 远程访问的核心原则
 
@@ -80,6 +80,8 @@ OpenClaw 的默认思路不是“把服务直接暴露到公网”，而是：
 
 所以远程访问不是简单的“看一个面板”，而是连接到真正持有系统状态的那台机器。
 
+官方当前对这件事的表达非常直接：**Gateway 主机就是“智能体所在的位置”**。你的笔记本、桌面和节点只是连接过去。
+
 ## 官方推荐的典型组合
 
 ### 家庭服务器或 VPS 长期开机
@@ -96,6 +98,8 @@ OpenClaw 的默认思路不是“把服务直接暴露到公网”，而是：
 - 想随时从别的设备继续控制
 - 不希望主机跟着笔记本一起离线
 
+官方 `gateway/remote` 页面现在还明确举了这类例子：VPS 或家庭服务器在 tailnet 中长期在线，是最适合承接长期会话、渠道和状态的一类主机。
+
 ### 笔记本只是控制台，不是运行主机
 
 这时更合理的做法是：
@@ -106,7 +110,27 @@ OpenClaw 的默认思路不是“把服务直接暴露到公网”，而是：
 
 这比在笔记本本地维护完整运行环境更稳。
 
-## CLI 远程默认值怎么理解
+## CLI 远程默认值现在更值得单独讲清楚
+
+官方远程页最近把 `gateway.remote` 这组配置单独拿出来强调了：
+
+```json
+{
+  "gateway": {
+    "mode": "remote",
+    "remote": {
+      "url": "ws://127.0.0.1:18789",
+      "token": "your-token"
+    }
+  }
+}
+```
+
+这里最重要的边界是：
+
+- `gateway.remote.token` 只是**远程 CLI 调用的客户端凭证来源**
+- 它**不会**自动替代本地 Gateway 的认证配置
+- 如果你是通过 SSH 隧道访问 loopback，URL 仍然应该写 `ws://127.0.0.1:18789`
 
 官方文档强调过一件事：如果你显式指定远程 `url`，就不要再指望 CLI 去帮你隐式回退到本地配置或环境变量。远程调用应该把 URL 和认证方式写清楚。
 
@@ -127,6 +151,8 @@ WebChat 不再是单独一套 HTTP 页面，它本质上也是连接 Gateway Web
 - 远程访问不是只影响 CLI
 - 它会影响聊天、控制、节点和健康检查的整体体验
 
+官方远程页现在还单独点出了一条很实用的结论：通过 SSH 使用聊天 UI 时，转发的仍然是 `18789` 这个 Gateway WebSocket 端口，因为 WebChat 已经不再依赖单独 HTTP 端口。
+
 ## Tailscale / Funnel 什么时候用
 
 官方对 Tailscale 的建议非常明确：
@@ -137,6 +163,16 @@ WebChat 不再是单独一套 HTTP 页面，它本质上也是连接 Gateway Web
 如果你只是想自己和少量设备访问，优先考虑 `serve`。  
 如果你准备把访问开放到公网，就不该再用“本地默认配置够了”的思路。
 
+## `wss://` 场景下还要考虑 TLS 指纹
+
+远程页最新补充了一条很多人会忽略的配置：如果你最终走的是 `wss://`，可以用 `gateway.remote.tlsFingerprint` 固定远程 TLS 证书。
+
+它适合：
+
+- 公网 `wss://`
+- 明确要防止证书被替换或中间层变更
+- 想把远程连接边界写得更死一点
+
 ## 安全上最重要的几条
 
 - 默认保持 `gateway.bind: "loopback"`
@@ -144,6 +180,10 @@ WebChat 不再是单独一套 HTTP 页面，它本质上也是连接 Gateway Web
 - token / password 是远程边界，不要混同于本地信任
 - 通过反向代理或 Tailscale 时，要清楚 trusted proxies / identity headers 是否生效
 - 不要为了省事把高权限控制入口直接裸露到公网
+
+再补一条官方 2026 年 3 月最新强调的边界：
+
+- 如果 `gateway.auth.allowTailscale: true`，Serve 可以靠 Tailscale 身份头为 Control UI / WebSocket 做认证；但这并不等于所有 HTTP API 都自动免密
 
 ## 常见误区
 
@@ -165,6 +205,11 @@ WebChat 不再是单独一套 HTTP 页面，它本质上也是连接 Gateway Web
 2. 再用 SSH 隧道验证远程可访问
 3. 如果需要长期多设备访问，再考虑 tailnet / Tailscale Serve
 4. 只有在明确知道自己为什么要公开暴露时，才考虑 direct `wss://`
+
+如果你是浏览器控制场景，官方当前的建议也更明确了：
+
+- 浏览器在另一台机器上时，更适合在那里跑一个节点主机
+- 不要把 Funnel 当成浏览器远控的默认主路径
 
 ## 下一步推荐
 

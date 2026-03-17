@@ -172,6 +172,46 @@ const bestPractices = [
   { title: '及时更新', desc: '关注安全公告，及时安装补丁', icon: '🔄' },
   { title: '应急准备', desc: '提前准备应急响应方案', icon: '🚨' },
 ]
+
+const learnEntries = [
+  {
+    title: '安全最佳实践文档',
+    description: '继续回到稳定文档，确认安全配置、暴露面和长期运维基线。',
+    to: '/docs/operations/openclaw-security-best-practices',
+    meta: 'Docs',
+  },
+  {
+    title: '关键配置',
+    description: '把 SOUL、审批、沙箱、Hooks 和其他高风险配置项放到同一处核对。',
+    to: '/configurations',
+    meta: 'Config',
+  },
+  {
+    title: '团队运维路径',
+    description: '安全问题更适合放进长期运行、升级、监控和协作场景里一起理解。',
+    to: '/paths#team-ops',
+    meta: 'Path',
+  },
+  {
+    title: '反馈与社区支持',
+    description: '如果你遇到安全疑问、文档缺口或需要补充案例，可以继续反馈和提问。',
+    to: '/community',
+    meta: 'Support',
+  },
+]
+
+const heroFacts = [
+  {
+    label: '先看什么',
+    value: '暴露面 + 权限边界',
+    note: '先判断哪些入口能被调用、哪些操作需要审批，再去补更细的规则。',
+  },
+  {
+    label: '长期重点',
+    value: '更新、审计、告警',
+    note: '安全不是一次性配置，真正有效的是持续补丁、监控和回溯能力。',
+  },
+]
 </script>
 
 <template>
@@ -183,20 +223,28 @@ const bestPractices = [
           <p class="eyebrow">安全实践</p>
           <h1 class="section-title">OpenClaw 安全指南</h1>
           <p class="section-copy">
-            AI Agent 的能力越强，安全风险越大。了解真实的安全事故，建立有效的防御体系。
+            这一页不是单纯列风险点，而是帮你把事故、配置、检查和长期运维放进同一套安全视角里理解。
           </p>
+
+          <div class="collection-utility">
+            <article v-for="fact in heroFacts" :key="fact.label" class="collection-utility-item">
+              <span class="mini-label">{{ fact.label }}</span>
+              <strong>{{ fact.value }}</strong>
+              <p>{{ fact.note }}</p>
+            </article>
+          </div>
         </div>
 
         <aside class="card hero-side">
           <div class="signal-panel">
             <span class="mini-label">核心原则</span>
             <strong>最小权限 + 人机协同</strong>
-            <p>只授予必要权限，高风险操作必须人工确认。</p>
+            <p>高风险能力默认不要直接放开，先用审批、沙箱和隔离边界把风险收窄。</p>
           </div>
           <div class="signal-panel">
             <span class="mini-label">关键配置</span>
             <strong>security.*</strong>
-            <p>输入验证、输出过滤、审计日志、人工审批。</p>
+            <p>输入验证、输出过滤、审计日志和人工审批需要一起看，缺一项都容易留下空档。</p>
           </div>
         </aside>
       </section>
@@ -320,25 +368,16 @@ const bestPractices = [
       <!-- 相关链接 -->
       <section class="card section-panel">
         <div class="section-head">
-          <p class="eyebrow">Related</p>
-          <h2>继续深入</h2>
+          <p class="eyebrow">交叉访问</p>
+          <h2>继续把安全问题放回运维和配置结构里</h2>
+          <p class="section-copy">安全页不是孤立专题，真正落地时还要继续回到文档、配置、路径和支持入口一起看。</p>
         </div>
 
         <div class="related-grid">
-          <NuxtLink to="/docs/operations/openclaw-security-best-practices" class="related-link">
-            <span class="tag">Docs</span>
-            <strong>安全最佳实践</strong>
-            <p>详细的安全配置指南。</p>
-          </NuxtLink>
-          <NuxtLink to="/configurations" class="related-link">
-            <span class="tag">Config</span>
-            <strong>SOUL.md 指南</strong>
-            <p>系统提示配置详解。</p>
-          </NuxtLink>
-          <NuxtLink to="/configurations" class="related-link">
-            <span class="tag">Config</span>
-            <strong>关键配置</strong>
-            <p>完整配置参考。</p>
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="related-link">
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
           </NuxtLink>
         </div>
       </section>
@@ -370,6 +409,19 @@ const bestPractices = [
   gap: 8px;
 }
 
+.signal-panel strong {
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.02rem;
+  line-height: 1.36;
+}
+
+.signal-panel p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.64;
+}
+
 .signal-panel + .signal-panel {
   margin-top: 16px;
   padding-top: 16px;
@@ -396,9 +448,11 @@ const bestPractices = [
 
 .section-head h2 {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.4rem;
-  line-height: 1.3;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: clamp(1.22rem, 1.6vw, 1.54rem);
+  line-height: 1.28;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 /* Incidents */
@@ -621,7 +675,7 @@ const bestPractices = [
 /* Related */
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
@@ -642,14 +696,16 @@ const bestPractices = [
 }
 
 .related-link strong {
-  font-family: "Fraunces", serif;
-  font-size: 0.95rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 0.98rem;
+  line-height: 1.38;
 }
 
 .related-link p {
   margin: 0;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--ink-soft);
+  line-height: 1.62;
 }
 
 @media (max-width: 1100px) {

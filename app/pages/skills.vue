@@ -342,6 +342,33 @@ const reviewChecklist = [
   '新技能先放到独立 workspace 验证，不要直接带进长期生产环境。',
   '技能数量一多，就回到配置层做逐项开关，不要继续无边界累加。',
 ]
+
+const learnEntries = [
+  {
+    title: '二次开发专题',
+    description: '如果你已经不只是安装技能，而是准备自己做技能、插件或 ClawHub 扩展，继续进开发专题。',
+    to: '/secondary-development',
+    meta: '开发',
+  },
+  {
+    title: '工具系列',
+    description: '把 Skills 和插件、自动化、Exec、Hooks 放回统一能力图里理解，边界会更清楚。',
+    to: '/tools',
+    meta: '能力图',
+  },
+  {
+    title: 'Skills 系统文档',
+    description: '回到正式文档确认加载机制、目录结构和运行时边界，而不是只记安装命令。',
+    to: '/docs/manual/skills-system',
+    meta: 'Docs',
+  },
+  {
+    title: 'Skills 最佳实践',
+    description: '如果你准备把技能接进长期环境，继续看更稳定的实践方法和治理方式。',
+    to: '/best-practices/skills-development',
+    meta: '方法深化',
+  },
+]
 </script>
 
 <template>
@@ -379,6 +406,21 @@ const reviewChecklist = [
             <p>自动部署、生产巡检、改配置、外部 webhook、钱包或高权限终端相关技能。它们价值很高，但也更容易把风险直接带进环境。</p>
           </div>
         </aside>
+      </section>
+
+      <section class="card desk-panel">
+        <div class="panel-head">
+          <p class="eyebrow">交叉访问</p>
+          <p class="section-copy">Skills 页适合先判断方向。真正开始安装、开发和长期治理时，通常还要继续回到开发专题、工具页和正式文档。</p>
+        </div>
+
+        <div class="config-grid entry-grid">
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="config-card entry-card">
+            <span class="mini-label">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
       </section>
 
       <section class="card desk-panel">
@@ -793,6 +835,16 @@ const reviewChecklist = [
   border-radius: 18px;
   border: 1px solid rgba(67, 73, 60, 0.12);
   background: rgba(255, 255, 255, 0.38);
+}
+
+.entry-card {
+  text-decoration: none;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.entry-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.18);
 }
 
 .review-item {

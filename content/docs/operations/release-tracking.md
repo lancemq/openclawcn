@@ -2,7 +2,9 @@
 title: 如何持续跟踪 OpenClaw 更新
 description: 建立一套低成本的更新跟踪方法，并把官方 release 和文档变化转化成真正可执行的中文维护动作。
 category: 更新
-updatedAt: 2026-03-11
+updatedAt: 2026-03-17
+source: https://github.com/openclaw/openclaw/releases
+sourceName: GitHub Releases
 sourceType: official
 tags: [release, changelog, updates, maintenance]
 ---
@@ -21,7 +23,18 @@ tags: [release, changelog, updates, maintenance]
 
 其中，Releases 最适合看版本变化，官方文档最适合看能力结构和使用方式，仓库则最适合补充真实讨论和实现方向。
 
-截至 2026 年 3 月 9 日，公开可见的最近一个 release 是 `openclaw 2026.3.7`。对中文站来说，这类版本节点值得至少产出一篇速览或升级提醒。
+截至 **2026 年 3 月 17 日**，GitHub Releases 页面公开可见的最新稳定 release 是 **`openclaw 2026.3.13`**。不过它在 GitHub 上对应的是一个恢复型 release：
+
+- GitHub Release / tag：`v2026.3.13-1`
+- npm 对应版本：仍然是 `2026.3.13`
+
+官方说明这次 `-1` 后缀是因为 GitHub immutable releases 不允许复用已经发布过的 `v2026.3.13` tag，所以新建了一个恢复 release 来修复 broken tag / release path。
+
+这类版本节点对中文站特别值得跟，因为它不只是“有新版本”，还涉及：
+
+- Git tag 和 npm 版本号不完全一致
+- 文档里引用 tag、asset 或 compare 链接时需要更谨慎
+- 版本说明里有时会出现“修复发布过程本身”的情况
 
 ## 为什么不能只看一个入口
 
@@ -36,6 +49,15 @@ tags: [release, changelog, updates, maintenance]
 1. 先看 release 发生了什么
 2. 再看官方 docs 如何组织能力
 3. 最后看社区里哪些问题最常见
+
+截至 2026 年 3 月 17 日，GitHub Releases 页还能直接看出另一个信号：**3 月份发布节奏非常密**。当前页面上至少能看到：
+
+- `openclaw 2026.3.13`
+- `openclaw 2026.3.12`
+- `openclaw 2026.3.11`
+- `openclaw 2026.3.8`
+
+这意味着对中文站来说，“每周看一次 releases”已经不是宽松建议，而是比较贴近实际节奏的最低频率。
 
 ## 版本更新里最值得关注的内容
 
@@ -71,6 +93,7 @@ tags: [release, changelog, updates, maintenance]
 
 - 看 Releases 是否有新版本
 - 看官方文档目录有没有新栏目或重要结构变化
+- 记录最新稳定版、beta/pre-release 和是否存在恢复型 release
 
 ### 每次重要版本后
 
@@ -97,6 +120,10 @@ tags: [release, changelog, updates, maintenance]
 2. 每周看一次官方 docs 目录变化
 3. 把重要更新同步进中文新闻页
 
+如果你已经在维护中文文档，建议再补一条：
+
+4. 把“最新稳定版日期”和“当前最新 tag 细节”写进维护记录
+
 这样就能让站点内容保持基本的新鲜度。
 
 ## 更新跟踪不等于立即升级
@@ -107,6 +134,11 @@ tags: [release, changelog, updates, maintenance]
 2. 判断是否涉及配置、认证、渠道或包名变化
 3. 在测试环境验证
 4. 再决定是否正式升级
+
+像 `2026.3.13` 这种带恢复型 tag 的版本，更应该多做一步核对：
+
+- 你引用的是 npm 版本、Git tag，还是 GitHub release 页面名
+- 你的自动化脚本依赖的是哪一种
 
 ## 下一步推荐
 

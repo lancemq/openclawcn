@@ -16,6 +16,33 @@ const featuredItems = computed(() =>
     })),
   ),
 )
+
+const learnEntries = [
+  {
+    title: '二次开发专题',
+    description: '如果你不只是浏览生态，而是准备真正开始扩展，先进入技能、插件、Hooks 和 ClawHub 的开发专题。',
+    to: '/secondary-development',
+    meta: '开发',
+  },
+  {
+    title: '工具系列',
+    description: '把插件、自动化、Exec、Hooks 和扩展边界放在统一能力图里理解。',
+    to: '/tools',
+    meta: '工具',
+  },
+  {
+    title: 'Skills',
+    description: '如果你更关心现成能力和安装方式，继续到 Skills 页按类型和场景筛选。',
+    to: '/skills',
+    meta: '能力包',
+  },
+  {
+    title: '案例展示',
+    description: '想判断生态能力在真实场景里怎么落地，可以回到案例页继续看应用面。',
+    to: '/showcase',
+    meta: '案例',
+  },
+]
 </script>
 
 <template>
@@ -26,7 +53,7 @@ const featuredItems = computed(() =>
           <p class="eyebrow">Ecosystem</p>
           <h1 class="section-title">生态中心</h1>
           <p class="section-copy">
-            OpenClaw 拥有丰富的生态系统，包括技能市场、插件系统、第三方集成和社区项目。这一页帮助你快速了解生态全貌，找到适合你的扩展方向。
+            这里主要帮你看清 OpenClaw 的生态全貌，再决定下一步是去装现成能力、研究工具边界，还是进入真正的二次开发。
           </p>
 
           <div class="series-grid-2">
@@ -45,7 +72,7 @@ const featuredItems = computed(() =>
           <div class="series-signal">
             <span class="series-kicker">生态概览</span>
             <strong>技能、插件、集成、社区四位一体</strong>
-            <p>从 ClawHub 技能开始，再扩展到渠道接入和第三方系统集成，逐步构建你的专属助手。</p>
+            <p>先从现成能力建立直觉，再逐步进入渠道接入、第三方系统和更深入的扩展能力。</p>
           </div>
 
           <div v-for="signal in ecosystemSignals.slice(0, 2)" :key="signal.label" class="series-signal">
@@ -66,8 +93,27 @@ const featuredItems = computed(() =>
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">交叉访问</p>
+            <p class="section-copy">生态中心负责看全貌，但真正行动时通常还要继续进入开发、工具、Skills 和案例页承接。</p>
+          </div>
+        </div>
+        <div class="series-grid-4">
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="series-link-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="muted" small />
+              <span class="series-tag">{{ item.meta }}</span>
+            </div>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">Featured</p>
-            <p class="section-copy">热门生态项目，帮助你快速上手。</p>
+            <p class="section-copy">先看代表性项目，快速判断生态能力已经覆盖到什么程度。</p>
           </div>
         </div>
         <div class="series-grid-3">
@@ -127,8 +173,8 @@ const featuredItems = computed(() =>
       <section class="card series-panel">
         <div class="series-head">
           <div>
-            <p class="eyebrow">Quick Links</p>
-            <p class="section-copy">快速进入生态相关入口。</p>
+            <p class="eyebrow">更多入口</p>
+            <p class="section-copy">如果你已经知道要往哪条线继续，就从这里切回更具体的承接页。</p>
           </div>
         </div>
         <div class="series-grid-3">

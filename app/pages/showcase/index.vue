@@ -602,8 +602,9 @@ function toggleIndustry(id: string) {
       <section class="card series-panel">
         <div class="series-head">
           <div>
-            <p class="eyebrow">Next Steps</p>
-            <h2>继续把案例变成你的实施路径</h2>
+            <p class="eyebrow">交叉访问</p>
+            <h2>继续把案例页里的结果转成你的实施路径</h2>
+            <p class="section-copy">案例页负责帮你建立“值不值得做”的判断，真正继续落地时再切回实践、演示、社区和反馈入口。</p>
           </div>
         </div>
 

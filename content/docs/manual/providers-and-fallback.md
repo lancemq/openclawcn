@@ -2,7 +2,7 @@
 title: 模型提供商与故障转移
 description: 基于官方 providers 文档，整理 OpenClaw 常见 provider、默认模型写法、fallback 思路和长期运行时的配置重点。
 category: 功能
-updatedAt: 2026-03-12
+updatedAt: 2026-03-17
 source: https://docs.openclaw.ai/zh-CN/providers
 sourceName: OpenClaw Docs
 sourceType: official
@@ -39,28 +39,63 @@ tags: [providers, models, fallback, openrouter, ollama]
 
 ## 官方 provider 范围比很多人想象的大
 
-根据当前官方中文 provider 目录，OpenClaw 不只是支持少数几家常见云模型。文档里明确列出的包括：
+根据官方中文 providers 页面截至 2026 年 3 月 17 日的目录，OpenClaw 不只是支持少数几家常见云模型。页面里明确列出的包括：
 
-- OpenAI
 - Anthropic
-- Qwen
-- OpenRouter
-- Vercel AI Gateway
-- Moonshot AI
-- OpenCode Zen
 - Amazon Bedrock
-- Z.AI
-- Xiaomi
-- GLM
+- Claude Max API 代理（社区工具）
+- Deepgram（转录）
+- GitHub Copilot
+- GLM Models
 - MiniMax
-- Venice
+- Moonshot AI
+- OpenCode
 - Ollama
+- OpenAI
+- OpenRouter
+- Qianfan
+- Qwen
+- Synthetic
+- Venice AI
+- Vercel AI Gateway
+- Xiaomi MiMo
+- Z.AI
+
+而当前 providers 列表里还额外出现了：
+
+- Cloudflare AI Gateway
+- Hugging Face
+- Kilocode
+- LiteLLM
+- Mistral
+- NVIDIA
+- Together AI
+- vLLM
 
 还有专门的转录提供商，例如 Deepgram。
 
 这意味着“接 provider”本身已经是一个正式能力面，而不是第三方折腾。
 
-## 官方对 Venice 的定位很明确
+## 官方现在把“统一网关型 provider”单独做出来了
+
+最新 providers 页里已经不只是列 API 厂商，而是把下面这些也单独列入正式路径：
+
+- LiteLLM
+- Cloudflare AI Gateway
+- Vercel AI Gateway
+
+这说明 OpenClaw 已经把“上游模型厂商”和“统一网关/路由层”都当成正式 provider 入口来处理。
+
+对长期运行来说，这特别有意义，因为它让你可以把：
+
+- 成本统计
+- 路由
+- 缓存
+- 多上游切换
+
+放到更清晰的一层里理解。
+
+## 官方对 Venice 的定位仍然很明确
 
 中文 provider 文档里把 Venice 单独做了亮点推荐，用于隐私优先推理，并给出了默认模型和更强组合。
 
@@ -70,6 +105,18 @@ tags: [providers, models, fallback, openrouter, ollama]
 - 成本
 - 稳定性
 - 本地化或区域可达性
+
+## Transcription provider 现在也不该和聊天 provider 混着理解
+
+截至 2026 年 3 月 17 日，官方 providers 总页已经把 **Deepgram** 单独列到“转录提供商”部分。
+
+这意味着：
+
+- 聊天主模型 provider 是一层
+- embeddings / memory 可能是另一层
+- 音频转录 provider 又是另一层
+
+所以“我已经配好了模型”并不等于“语音 / 转录 / 记忆相关 provider 都已经完整配置”。
 
 ## 为什么 fallback 应该被当成正式配置
 
@@ -106,7 +153,7 @@ tags: [providers, models, fallback, openrouter, ollama]
 - 转录 provider
 - 远程或代理 provider
 
-都可能是分开的。
+都可能是分开的，而且最新官方目录已经用页面结构把这件事表现得更清楚了。
 
 所以“已经能聊天了”不等于“记忆搜索、本地转录和 fallback 都配置好了”。
 
@@ -128,6 +175,16 @@ tags: [providers, models, fallback, openrouter, ollama]
 1. 先从总页确认支持哪些 provider
 2. 再按你所在地区、预算和任务类型选几家
 3. 最后再回到本站的模型策略文档做主力/fallback 设计
+
+## 一个更贴近 2026 年 3 月官方目录的理解方式
+
+如果你要快速给当前 provider 体系分层，可以这样看：
+
+- **直接上游**：Anthropic、OpenAI、Moonshot、MiniMax、Qwen、GLM、Z.AI、Xiaomi 等
+- **统一网关**：LiteLLM、Cloudflare AI Gateway、Vercel AI Gateway、OpenRouter
+- **本地 / 自托管**：Ollama、vLLM
+- **补充能力**：Deepgram 这类转录 provider
+- **社区或兼容层**：Claude Max API Proxy、Synthetic 等
 
 ## 下一步推荐
 

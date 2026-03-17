@@ -26,6 +26,33 @@ useHead({
 })
 
 const totalProjects = computed(() => derivativeSections.reduce((count, section) => count + section.items.length, 0))
+
+const learnEntries = [
+  {
+    title: '二次开发专题',
+    description: '如果你准备真正开始扩展，不只是观察项目列表，就继续进入二次开发专题。',
+    to: '/secondary-development',
+    meta: '开发主线',
+  },
+  {
+    title: '生态中心',
+    description: '想先回到更完整的生态全貌，而不是只盯着中文衍生项目时，先看生态中心。',
+    to: '/ecosystem',
+    meta: '全貌视角',
+  },
+  {
+    title: '工具系列',
+    description: '如果你更关心插件、自动化、Hooks 和执行边界，继续切回工具系列。',
+    to: '/tools',
+    meta: '能力结构',
+  },
+  {
+    title: '案例展示',
+    description: '想判断这些衍生方向最后会怎样落到实际使用场景，可以继续看案例页。',
+    to: '/showcase',
+    meta: '结果导向',
+  },
+]
 </script>
 
 <template>
@@ -36,7 +63,7 @@ const totalProjects = computed(() => derivativeSections.reduce((count, section) 
           <p class="eyebrow">Derivatives</p>
           <h1 class="section-title">衍生品与二次开发</h1>
           <p class="section-copy">
-            OpenClaw 在中文社区里已经不只是一条官方主线，还逐渐出现了桌面包装、轻量发行、本地化入口、自动化平台化方案和硬件实验方向。这一页的作用不是替代官方文档，而是帮你快速判断这些项目分别解决什么问题、适合谁，以及它们和 OpenClaw 主项目是什么关系。
+            OpenClaw 在中文社区里已经不只是一条官方主线，还逐渐出现了桌面包装、轻量发行、本地化入口、自动化平台化方案和硬件实验方向。这一页主要帮你判断这些项目分别解决什么问题、适合谁，以及它们和 OpenClaw 主项目是什么关系。
           </p>
 
           <div class="collection-utility">
@@ -69,6 +96,23 @@ const totalProjects = computed(() => derivativeSections.reduce((count, section) 
           <p>{{ item.description }}</p>
         </article>
       </div>
+
+      <section class="card compare-panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">交叉访问</p>
+            <p class="section-copy">衍生页更适合做判断，不一定适合直接落地。真正继续行动时，通常还要回到开发、生态、工具和案例页。</p>
+          </div>
+        </div>
+
+        <div class="compare-grid">
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="compare-card compare-link">
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+            <span class="mini-label">{{ item.meta }}</span>
+          </NuxtLink>
+        </div>
+      </section>
 
       <section v-for="section in derivativeSections" :id="section.id" :key="section.id" class="derivative-section">
         <div class="section-head">
@@ -300,6 +344,16 @@ const totalProjects = computed(() => derivativeSections.reduce((count, section) 
 
 .compare-card strong {
   font-size: 0.96rem;
+}
+
+.compare-link {
+  text-decoration: none;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.compare-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.18);
 }
 
 @media (max-width: 1040px) {

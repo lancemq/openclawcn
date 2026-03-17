@@ -132,6 +132,33 @@ const faqs = [
     answer: '当前仍以 GitHub 和站内反馈为主。中文社区入口会随着内容与协作机制成熟逐步补充。',
   },
 ]
+
+const learnEntries = [
+  {
+    title: '文档中心',
+    description: '遇到概念和用法问题时，先回到完整文档结构里确认，再决定是否提问。',
+    to: '/docs',
+    meta: '稳定资料',
+  },
+  {
+    title: '反馈中心',
+    description: '如果问题只和中文站内容、链接或展示相关，直接走站内反馈会更高效。',
+    to: '/feedback',
+    meta: '站内问题',
+  },
+  {
+    title: '新闻动态',
+    description: '如果你主要想持续跟踪更新、版本变化和生态动向，继续去动态页更合适。',
+    to: '/news',
+    meta: '持续跟踪',
+  },
+  {
+    title: '协作说明',
+    description: '如果你准备参与整理、修订和长期协作，先看社区协作说明再行动。',
+    to: '/docs/reference/community',
+    meta: '贡献入口',
+  },
+]
 </script>
 
 <template>
@@ -305,6 +332,21 @@ const faqs = [
             <NuxtLink class="button secondary" to="/docs/reference/community">查看协作说明</NuxtLink>
             <NuxtLink class="button ghost" to="/news">查看新闻动态</NuxtLink>
           </div>
+        </div>
+      </section>
+
+      <section class="faq-panel">
+        <div class="section-heading">
+          <p class="eyebrow">交叉访问</p>
+          <h2 class="section-title">社区页负责分流，真正处理问题还要回到对应承接页。</h2>
+        </div>
+
+        <div class="priority-grid related-grid">
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="card route-card related-card">
+            <span class="route-tag">{{ item.meta }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
         </div>
       </section>
 
@@ -548,6 +590,14 @@ const faqs = [
 .priority-panel,
 .faq-panel {
   margin-top: 20px;
+}
+
+.related-grid {
+  margin-bottom: 20px;
+}
+
+.related-card {
+  min-height: 0;
 }
 
 .section-heading {

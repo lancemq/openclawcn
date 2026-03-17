@@ -109,6 +109,46 @@ const codingPlans = [
   { platform: '字节火山引擎', model: 'Doubao-pro', free: '50万tokens/月', price: '¥0.8/M' },
   { platform: '智谱AI', model: 'GLM-4-Flash', free: '永久免费', price: '¥0.1/M' },
 ]
+
+const learnEntries = [
+  {
+    title: '模型层理解',
+    description: '先看 OpenClaw 里模型层到底扮演什么角色，避免把 provider、路由和工具层混为一谈。',
+    to: '/docs/manual/models-overview',
+    meta: 'Docs',
+  },
+  {
+    title: '模型策略与成本',
+    description: '把默认模型、备用链和成本控制放进运维视角里统一理解。',
+    to: '/docs/operations/model-strategy-and-cost',
+    meta: 'Ops',
+  },
+  {
+    title: '提供商与 Fallback',
+    description: '如果你准备做多模型冗余，继续看 provider 认证、fallback 和回退链写法。',
+    to: '/docs/manual/providers-and-fallback',
+    meta: 'Config',
+  },
+  {
+    title: '关键配置',
+    description: '回到配置页统一确认 openclaw.json、SOUL 和路由相关配置项。',
+    to: '/configurations',
+    meta: 'Config',
+  },
+]
+
+const heroFacts = [
+  {
+    label: '推荐起点',
+    value: '先定默认模型',
+    note: '优先跑通一条最小链路，再决定是否做多模型、回退链和成本治理。',
+  },
+  {
+    label: '真正成本点',
+    value: '历史上下文累积',
+    note: '持续对话和冗长系统提示往往比单次调用单价更快把预算吃掉。',
+  },
+]
 </script>
 
 <template>
@@ -120,20 +160,28 @@ const codingPlans = [
           <p class="eyebrow">模型选择</p>
           <h1 class="section-title">如何选择最适合的模型</h1>
           <p class="section-copy">
-            模型费用才是大头。选平台时重点看模型套餐价格，而不是只看服务器价格。
+            这一页更适合做模型判断，而不是直接照抄配置。先确定默认模型，再决定是否引入备用链、路由和成本上限。
           </p>
+
+          <div class="collection-utility">
+            <article v-for="fact in heroFacts" :key="fact.label" class="collection-utility-item">
+              <span class="mini-label">{{ fact.label }}</span>
+              <strong>{{ fact.value }}</strong>
+              <p>{{ fact.note }}</p>
+            </article>
+          </div>
         </div>
 
         <aside class="card hero-side">
           <div class="signal-panel">
-            <span class="mini-label">核心原则</span>
-            <strong>先确定默认模型</strong>
-            <p>先跑通完整最小链路，再考虑多模型策略。</p>
+            <span class="mini-label">推荐顺序</span>
+            <strong>默认模型，备用模型，最后才是自动路由</strong>
+            <p>如果第一条链路还没稳定，不要一开始就把 provider、fallback 和复杂策略同时叠上去。</p>
           </div>
           <div class="signal-panel">
             <span class="mini-label">成本陷阱</span>
-            <strong>对话历史无限增长</strong>
-            <p>100轮对话后，历史可能消耗 20,000+ tokens。</p>
+            <strong>长会话和大上下文最容易失控</strong>
+            <p>真正要盯的是系统提示长度、上下文累计和重试策略，而不是只看单次模型价格。</p>
           </div>
         </aside>
       </section>
@@ -286,25 +334,16 @@ const codingPlans = [
       <!-- 相关链接 -->
       <section class="card section-panel">
         <div class="section-head">
-          <p class="eyebrow">Related</p>
-          <h2>继续深入</h2>
+          <p class="eyebrow">交叉访问</p>
+          <h2>继续把模型问题放回完整结构里</h2>
+          <p class="section-copy">模型页更像专题判断页。真正落地时，通常还要继续切回文档、运维和配置入口。</p>
         </div>
 
         <div class="related-grid">
-          <NuxtLink to="/docs/manual/models-overview" class="related-link">
-            <span class="tag">Docs</span>
-            <strong>模型层理解</strong>
-            <p>理解 OpenClaw 里模型层的角色。</p>
-          </NuxtLink>
-          <NuxtLink to="/docs/operations/model-strategy-and-cost" class="related-link">
-            <span class="tag">Ops</span>
-            <strong>模型策略与成本</strong>
-            <p>运维层面的模型配置指南。</p>
-          </NuxtLink>
-          <NuxtLink to="/docs/manual/providers-and-fallback" class="related-link">
-            <span class="tag">Config</span>
-            <strong>提供商与 Fallback</strong>
-            <p>多模型冗余配置。</p>
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="related-link">
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
           </NuxtLink>
         </div>
       </section>
@@ -334,6 +373,19 @@ const codingPlans = [
 .signal-panel {
   display: grid;
   gap: 8px;
+}
+
+.signal-panel strong {
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.02rem;
+  line-height: 1.36;
+}
+
+.signal-panel p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.64;
 }
 
 .signal-panel + .signal-panel {
@@ -692,7 +744,7 @@ const codingPlans = [
 /* Related */
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
@@ -713,14 +765,16 @@ const codingPlans = [
 }
 
 .related-link strong {
-  font-family: "Fraunces", serif;
-  font-size: 0.95rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 0.98rem;
+  line-height: 1.38;
 }
 
 .related-link p {
   margin: 0;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--ink-soft);
+  line-height: 1.62;
 }
 
 @media (max-width: 1100px) {

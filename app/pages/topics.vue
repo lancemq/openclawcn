@@ -40,6 +40,18 @@ const filteredVideos = computed(() => {
 
 const topicNews = computed(() => pickTopicItems(sortedNews.value as any[], activeTopic.value.slug, 4))
 const topicPractices = computed(() => pickTopicItems(sortedPractices.value as any[], activeTopic.value.slug, 4))
+const topicStats = computed(() => [
+  {
+    label: '相关文档',
+    value: String(topicDocBuckets.value.reduce((count, bucket) => count + bucket.items.length, 0)),
+    note: '按先后顺序重排，不再把同主题内容平铺在一起。',
+  },
+  {
+    label: '配套内容',
+    value: `${topicPractices.value.length} 实践 / ${topicNews.value.length} 动态`,
+    note: '从文档继续延伸到视频、实践和最近更新。',
+  },
+])
 
 const topicPathMap: Record<string, { title: string; to: string; description: string }> = {
   installation: {
@@ -208,15 +220,23 @@ const crossLinks = computed(() => {
           <p class="eyebrow">Topics</p>
           <h1 class="section-title">主题中心</h1>
           <p class="section-copy">
-            把文档、视频、新闻和最佳实践按同一主题聚合，适合已经知道自己要解决什么问题，但不想在多个模块里来回切换的用户。
+            把文档、视频、新闻和最佳实践按同一主题聚合。适合已经知道自己要解决什么问题，但不想在多个栏目之间来回找入口的时候使用。
           </p>
+
+          <div class="collection-utility">
+            <article v-for="stat in topicStats" :key="stat.label" class="collection-utility-item">
+              <span class="mini-label">{{ stat.label }}</span>
+              <strong>{{ stat.value }}</strong>
+              <p>{{ stat.note }}</p>
+            </article>
+          </div>
         </div>
 
         <aside class="card collection-side">
           <div class="collection-summary">
             <span class="mini-label">适合什么时候用</span>
             <strong>知道自己要看“安装、渠道、Skills、安全”这类主题时</strong>
-            <p>如果你还不知道从哪开始，先看学习路径；如果你已经知道主题，但不知道该先看文档、视频还是实践，再来这里。</p>
+            <p>如果你还不知道从哪开始，先看学习路径；如果你已经知道主题，但还没决定先看文档、视频还是实践，再来这里。</p>
           </div>
         </aside>
       </section>
@@ -240,7 +260,7 @@ const crossLinks = computed(() => {
         <p class="eyebrow">{{ activeTopic.title }}</p>
         <p class="section-copy">{{ activeTopic.description }}</p>
         <div class="layer-summary-grid">
-          <article v-for="layer in informationLayers" :key="layer.id" class="layer-summary-card">
+          <article v-for="layer in informationLayers.slice(0, 3)" :key="layer.id" class="layer-summary-card">
             <strong>{{ layer.title }}</strong>
             <p>{{ layer.summary }}</p>
           </article>
@@ -372,8 +392,8 @@ const crossLinks = computed(() => {
 .layer-summary-card p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.9rem;
-  line-height: 1.64;
+  font-size: 0.88rem;
+  line-height: 1.58;
 }
 
 .filter-group {
@@ -467,6 +487,7 @@ const crossLinks = computed(() => {
 
 .topic-summary {
   gap: 18px;
+  padding: 22px 24px;
 }
 
 .topic-block {
