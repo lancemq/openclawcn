@@ -315,13 +315,13 @@ const codingPlans = [
 <style scoped>
 .models-page {
   display: grid;
-  gap: 24px;
+  gap: 28px;
 }
 
 .detail-hero {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 20px;
+  gap: 22px;
   align-items: start;
 }
 
@@ -352,7 +352,7 @@ const codingPlans = [
 
 .section-panel {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .section-head {
@@ -362,9 +362,11 @@ const codingPlans = [
 
 .section-head h2 {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.4rem;
-  line-height: 1.3;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: clamp(1.22rem, 1.6vw, 1.54rem);
+  line-height: 1.28;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 /* Categories */
@@ -374,10 +376,10 @@ const codingPlans = [
 }
 
 .category-block {
-  padding: 16px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.4);
+  padding: 20px;
+  border: 1px solid rgba(64, 73, 85, 0.1);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .category-header {
@@ -389,7 +391,9 @@ const codingPlans = [
 
 .category-header h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.16rem;
+  line-height: 1.34;
 }
 
 .provider-tag {
@@ -403,8 +407,9 @@ const codingPlans = [
 
 .category-desc {
   margin: 0 0 12px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--ink-soft);
+  line-height: 1.66;
 }
 
 .models-list {
@@ -414,10 +419,10 @@ const codingPlans = [
 }
 
 .model-item {
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(67, 73, 60, 0.08);
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(64, 73, 85, 0.08);
 }
 
 .model-item.best {
@@ -433,8 +438,9 @@ const codingPlans = [
 }
 
 .model-name {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.94rem;
+  line-height: 1.4;
 }
 
 .best-tag {
@@ -456,8 +462,8 @@ const codingPlans = [
 .feature-tag {
   padding: 2px 6px;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.05);
-  font-size: 0.7rem;
+  background: rgba(64, 73, 85, 0.06);
+  font-size: 0.72rem;
 }
 
 .model-meta {
@@ -475,21 +481,24 @@ const codingPlans = [
 }
 
 .routing-card {
-  padding: 16px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(67, 73, 60, 0.1);
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(64, 73, 85, 0.1);
 }
 
 .routing-card h4 {
   margin: 0 0 4px;
-  font-size: 0.95rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1rem;
+  line-height: 1.38;
 }
 
 .routing-card p {
   margin: 0 0 12px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--ink-soft);
+  line-height: 1.64;
 }
 
 .code-block {
@@ -513,10 +522,10 @@ const codingPlans = [
 }
 
 .tip-item {
-  padding: 16px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(67, 73, 60, 0.1);
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(64, 73, 85, 0.1);
   text-align: center;
 }
 

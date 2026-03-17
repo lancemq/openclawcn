@@ -285,13 +285,13 @@ img {
 
 .series-page {
   display: grid;
-  gap: 24px;
+  gap: 28px;
 }
 
 .series-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.85fr);
-  gap: 16px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -306,7 +306,7 @@ img {
 
 .series-main {
   display: grid;
-  gap: 18px;
+  gap: 22px;
 }
 
 .series-side,
@@ -321,7 +321,7 @@ img {
 }
 
 .series-side {
-  gap: 14px;
+  gap: 16px;
 }
 
 .series-signal + .series-signal {
@@ -339,17 +339,18 @@ img {
 
 .series-head h2 {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.42rem;
-  line-height: 1.18;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: clamp(1.28rem, 1.65vw, 1.72rem);
+  line-height: 1.22;
   letter-spacing: -0.04em;
+  text-wrap: balance;
 }
 
 .series-grid-2,
 .series-grid-3,
 .series-grid-4 {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .series-grid-2 {
@@ -368,10 +369,10 @@ img {
 .series-link-card,
 .series-stat-card,
 .series-chip {
-  padding: 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(67, 73, 60, 0.1);
-  background: rgba(255, 255, 255, 0.52);
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(64, 73, 85, 0.1);
+  background: rgba(255, 255, 255, 0.58);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -405,10 +406,11 @@ img {
 .series-signal strong,
 .series-chip strong {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.04rem;
-  line-height: 1.28;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.08rem;
+  line-height: 1.36;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .series-kicker {
@@ -530,7 +532,7 @@ img {
 
 .tools-detail-page .section-head h2 {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
   font-size: clamp(1.34rem, 1.55vw, 1.58rem);
   line-height: 1.16;
   letter-spacing: -0.04em;
@@ -764,7 +766,7 @@ img {
 
 .tools-detail-page .faq-item h3 {
   margin: 0 0 8px;
-  font-family: "Fraunces", "Times New Roman", serif;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
   font-size: 1rem;
   line-height: 1.3;
 }
@@ -778,20 +780,20 @@ img {
 
 .tools-detail-page .faq-item strong,
 .tools-detail-page .related-link strong {
-  font-family: "Fraunces", "Times New Roman", serif;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
   line-height: 1.28;
 }
 
 /* Collection page styles */
 .collection-page {
   display: grid;
-  gap: 18px;
+  gap: 22px;
 }
 
 .collection-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
-  gap: 14px;
+  gap: 18px;
   align-items: start;
 }
 
@@ -800,34 +802,38 @@ img {
 .collection-summary,
 .collection-utility {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .collection-utility {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .collection-summary,
 .collection-utility-item {
-  padding: 14px 16px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.44);
+  padding: 18px 20px;
+  border: 1px solid rgba(64, 73, 85, 0.11);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.56);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .collection-summary strong,
 .collection-utility-item strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1rem;
-  line-height: 1.35;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.08rem;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 .collection-summary p,
 .collection-utility-item p {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   color: var(--ink-soft);
-  font-size: 0.88rem;
-  line-height: 1.62;
+  font-size: 0.94rem;
+  line-height: 1.7;
 }
 
 .collection-filters {
@@ -837,7 +843,7 @@ img {
 
 .collection-grid {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .collection-card {
@@ -854,23 +860,24 @@ img {
 
 .collection-card-body {
   display: grid;
-  gap: 8px;
-  padding: 14px;
+  gap: 10px;
+  padding: 18px 18px 16px;
 }
 
 .collection-card h2 {
   margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.04rem;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.1rem;
   letter-spacing: -0.02em;
-  line-height: 1.35;
+  line-height: 1.42;
+  text-wrap: balance;
 }
 
 .collection-card p {
   margin: 0;
   color: var(--ink-soft);
-  line-height: 1.55;
-  font-size: 0.88rem;
+  line-height: 1.66;
+  font-size: 0.93rem;
 }
 
 .collection-meta {

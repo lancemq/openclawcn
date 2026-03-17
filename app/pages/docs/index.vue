@@ -4,8 +4,9 @@ import { getDocCategoryLabel, sortDocs } from '~/data/content'
 const route = useRoute()
 const router = useRouter()
 
-const { data: manifest } = await useContentManifest()
+const { data: manifest, status } = await useContentManifest()
 const items = computed(() => manifest.value?.collections.docs.items || [])
+const isManifestReady = computed(() => status.value === 'success')
 
 // 分类筛选
 const selectedCategory = computed(() =>
@@ -243,7 +244,7 @@ useSeo({
         </div>
       </div>
 
-      <div class="masonry-grid collection-grid">
+      <div v-if="isManifestReady" class="masonry-grid collection-grid">
         <NuxtLink
           v-for="item in filteredItems"
           :key="item.path"
@@ -266,7 +267,11 @@ useSeo({
         </NuxtLink>
       </div>
 
-      <div v-if="filteredItems.length === 0" class="empty-state collection-empty">
+      <div v-else class="empty-state collection-empty">
+        <p>正在加载文档索引...</p>
+      </div>
+
+      <div v-if="isManifestReady && filteredItems.length === 0" class="empty-state collection-empty">
         <p>没有找到匹配的文档，请尝试其他筛选条件。</p>
       </div>
     </div>
@@ -308,11 +313,11 @@ useSeo({
 
 .entry-card {
   display: grid;
-  gap: 8px;
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(67, 73, 60, 0.12);
-  background: rgba(255, 255, 255, 0.5);
+  gap: 10px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(64, 73, 85, 0.12);
+  background: rgba(255, 255, 255, 0.58);
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
@@ -323,16 +328,17 @@ useSeo({
 }
 
 .entry-card strong {
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 0.98rem;
-  line-height: 1.28;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.04rem;
+  line-height: 1.38;
+  text-wrap: balance;
 }
 
 .entry-card p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.58;
+  font-size: 0.9rem;
+  line-height: 1.66;
 }
 
 .filter-group {

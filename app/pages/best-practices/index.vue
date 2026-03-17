@@ -4,8 +4,9 @@ import { sortBestPractices } from '~/data/content'
 const route = useRoute()
 const router = useRouter()
 
-const { data: manifest } = await useContentManifest()
+const { data: manifest, status } = await useContentManifest()
 const items = computed(() => manifest.value?.collections.bestPractices.items || [])
+const isManifestReady = computed(() => status.value === 'success')
 
 const selectedCategory = computed(() =>
   typeof route.query.category === 'string' ? route.query.category : '全部',
@@ -140,7 +141,7 @@ useSeo({
         </div>
       </div>
 
-      <div class="masonry-grid collection-grid">
+      <div v-if="isManifestReady" class="masonry-grid collection-grid">
         <NuxtLink
           v-for="item in filteredItems"
           :key="item.path"
@@ -164,7 +165,11 @@ useSeo({
         </NuxtLink>
       </div>
 
-      <div v-if="filteredItems.length === 0" class="empty-state collection-empty">
+      <div v-else class="empty-state collection-empty">
+        <p>正在加载实践索引...</p>
+      </div>
+
+      <div v-if="isManifestReady && filteredItems.length === 0" class="empty-state collection-empty">
         <p>没有找到匹配的实践内容，请尝试其他筛选条件。</p>
       </div>
     </div>

@@ -59,19 +59,7 @@ type ContentManifest = {
 export function useContentManifest() {
   return useAsyncData<ContentManifest>(
     'content-manifest',
-    async () => {
-      if (import.meta.server) {
-        const [{ readFile }, { join }] = await Promise.all([
-          import('node:fs/promises'),
-          import('node:path'),
-        ])
-        const manifestPath = join(process.cwd(), 'public', 'generated', 'content-manifest.json')
-        const raw = await readFile(manifestPath, 'utf8')
-        return JSON.parse(raw) as ContentManifest
-      }
-
-      return await $fetch('/generated/content-manifest.json')
-    },
+    async () => await $fetch('/api/content-manifest'),
     {
       default: () => ({
         generatedAt: '',
