@@ -2,32 +2,40 @@
 const year = new Date().getFullYear()
 
 const footerLinks = {
-  learn: {
-    title: '学习',
+  start: {
+    title: '开始',
     items: [
       { label: '学习路径', to: '/paths' },
       { label: '主题中心', to: '/topics' },
-      { label: '文档中心', to: '/docs' },
       { label: '视频教程', to: '/videos' },
-      { label: '最佳实践', to: '/best-practices' },
     ],
   },
-  ecosystem: {
-    title: '生态',
+  docs: {
+    title: '文档',
     items: [
-      { label: '二次开发专题', to: '/ecosystem/secondary-development' },
+      { label: '文档中心', to: '/docs' },
+      { label: '关键配置', to: '/configurations' },
+      { label: '模型选择', to: '/models' },
+      { label: '安全实践', to: '/security' },
+    ],
+  },
+  advanced: {
+    title: '进阶',
+    items: [
+      { label: '最佳实践', to: '/best-practices' },
       { label: '工具系列', to: '/tools' },
       { label: 'Skills', to: '/skills' },
-      { label: '关键配置', to: '/configurations' },
-      { label: '衍生生态', to: '/derivatives' },
+      { label: '案例展示', to: '/showcase' },
+      { label: '二次开发专题', to: '/secondary-development' },
     ],
   },
-  community: {
-    title: '社区',
+  updates: {
+    title: '动态',
     items: [
       { label: '新闻动态', to: '/news' },
-      { label: '社区支持', to: '/community' },
-      { label: '案例展示', to: '/showcase' },
+      { label: '产品路线图', to: '/roadmap' },
+      { label: '生态项目', to: '/ecosystem' },
+      { label: '背景故事', to: '/story' },
     ],
   },
   support: {
@@ -228,7 +236,7 @@ const footerLinks = {
 
 .footer-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 24px;
 }
 

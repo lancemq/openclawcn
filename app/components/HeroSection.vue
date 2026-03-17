@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { trackAction } = useSiteTracking()
+
 const digestItems = [
   {
     label: '文档索引',
@@ -47,6 +49,14 @@ const editorialPanels = [
     detail: '首页负责分流，栏目页负责承接，详情页负责展开和延伸。',
   },
 ]
+
+function trackHeroClick(target: string, label: string) {
+  trackAction('hero_cta_click', {
+    section: 'hero',
+    target,
+    label,
+  })
+}
 </script>
 
 <template>
@@ -70,9 +80,9 @@ const editorialPanels = [
           </div>
 
           <div class="button-row">
-            <NuxtLink class="button primary" to="/news">先看最新动态</NuxtLink>
-            <NuxtLink class="button secondary" to="/docs">进入文档中心</NuxtLink>
-            <NuxtLink class="button ghost" to="/best-practices">查看最佳实践</NuxtLink>
+            <NuxtLink class="button primary" to="/paths" @click="trackHeroClick('/paths', '开始学习路径')">开始学习路径</NuxtLink>
+            <NuxtLink class="button secondary" to="/docs" @click="trackHeroClick('/docs', '进入文档中心')">进入文档中心</NuxtLink>
+            <NuxtLink class="button ghost" to="/news" @click="trackHeroClick('/news', '查看最近更新')">查看最近更新</NuxtLink>
           </div>
 
           <div class="hero-digest">

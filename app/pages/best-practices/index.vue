@@ -41,6 +41,33 @@ const filteredItems = computed(() =>
 
 const featuredPractices = computed(() => orderedItems.value.slice(0, 3))
 
+const learnEntries = [
+  {
+    title: '文档中心',
+    description: '遇到配置、机制和命令问题时，先回到稳定文档确认基础事实。',
+    to: '/docs',
+    meta: '基础知识',
+  },
+  {
+    title: '学习路径',
+    description: '如果你还在第一次部署阶段，优先回到路径页判断当前所处阶段。',
+    to: '/paths',
+    meta: '主线',
+  },
+  {
+    title: '主题中心',
+    description: '按安装、运维、渠道和安全等问题域重新组织实践内容。',
+    to: '/topics',
+    meta: '问题聚合',
+  },
+  {
+    title: '工具系列',
+    description: '如果实践涉及工具、自动化、Hooks 或扩展边界，继续去工具页承接。',
+    to: '/tools',
+    meta: '能力边界',
+  },
+]
+
 const practiceStats = computed(() => [
   {
     label: '更适合谁',
@@ -109,6 +136,23 @@ useSeo({
             <p>{{ item.description }}</p>
           </NuxtLink>
         </aside>
+      </section>
+
+      <section class="card entry-panel">
+        <div class="section-head compact-head">
+          <div>
+            <p class="eyebrow">交叉访问</p>
+            <p class="section-copy">最佳实践更像“长期方法层”。如果你还需要补基础或确认边界，继续切回文档、路径、主题和工具页会更稳。</p>
+          </div>
+        </div>
+
+        <div class="entry-grid">
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="entry-card">
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
       </section>
 
       <div class="filters card collection-filters">

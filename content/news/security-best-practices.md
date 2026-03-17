@@ -3,6 +3,7 @@ title: "OpenClaw 安全最佳实践：保护你的 AI 助手免受风险"
 description: "随着 OpenClaw 的普及，安全问题日益受到关注。本文整理了保护本地 AI 助手的关键安全措施和最佳实践。"
 category: 安全公告
 date: "2026-03-11"
+updatedAt: "2026-03-11"
 author: "OpenClawCN"
 source: "安全社区"
 sourceType: community

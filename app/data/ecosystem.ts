@@ -259,7 +259,7 @@ export const ecosystemQuickLinks = [
   {
     title: '二次开发专题',
     description: '从 skills、plugins、hooks 到 ClawHub，梳理 OpenClaw 二次开发的官方资料和实现路径。',
-    to: '/ecosystem/secondary-development',
+    to: '/secondary-development',
     meta: '专题',
   },
   {

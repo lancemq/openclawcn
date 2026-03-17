@@ -11,6 +11,7 @@ import {
 import { informationLayers } from '~/data/information-architecture'
 import { featuredVideos } from '~/data/videos'
 import { learningPaths, topicDefinitions } from '~/data/taxonomy'
+const { trackAction } = useSiteTracking()
 
 useSeo({
   title: 'OpenClaw 中文官网',
@@ -64,13 +65,19 @@ const topicOverview = computed(() =>
 const featuredTopic = computed(() => topicOverview.value[0])
 const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 const featuredPaths = computed(() => learningPaths.slice(0, 4))
+
+function trackPathClick(target: string, label: string) {
+  trackAction('homepage_path_click', {
+    section: 'start',
+    target,
+    label,
+  })
+}
 </script>
 
 <template>
   <div>
     <HeroSection />
-    <FeatureGrid />
-    <ContentSpotlight />
 
     <section class="section content-section routes-section">
       <div class="container">
@@ -121,6 +128,7 @@ const featuredPaths = computed(() => learningPaths.slice(0, 4))
                   :key="path.slug"
                   :to="path.next"
                   class="path-step compact-path-step"
+                  @click="trackPathClick(path.next, path.title)"
                 >
                   <span class="path-index">{{ String(index + 1).padStart(2, '0') }}</span>
                   <div class="path-copy">
@@ -129,7 +137,7 @@ const featuredPaths = computed(() => learningPaths.slice(0, 4))
                   </div>
                 </NuxtLink>
               </div>
-              <NuxtLink to="/paths" class="start-more">查看完整路径</NuxtLink>
+              <NuxtLink to="/paths" class="start-more" @click="trackPathClick('/paths', '查看完整路径')">查看完整路径</NuxtLink>
             </div>
           </div>
         </div>
@@ -252,51 +260,50 @@ const featuredPaths = computed(() => learningPaths.slice(0, 4))
       </div>
     </section>
 
-    <section class="section content-section week-section">
-      <div class="container">
-        <div class="stagger-shell">
-          <div class="home-head">
-            <p class="eyebrow">动态 / 本周推荐</p>
-            <p class="home-head-note">如果你只想快速知道最近最值得看的内容，从这里开始。</p>
-          </div>
-          <div class="grid spotlight-grid">
-            <ContentCard
-              v-for="item in weeklyFocus"
-              :key="item.to"
-              :title="item.title"
-              :description="item.description"
-              :to="item.to"
-              :meta="item.meta"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section content-section news-section">
       <div class="container">
-        <div class="ticker-shell">
-          <div class="home-head head-inline">
-            <p class="eyebrow">动态 / 最近更新</p>
-            <p class="home-head-note">聚焦版本变化、能力更新和需要及时关注的使用提醒。</p>
+        <div class="updates-shell">
+          <div class="home-head">
+            <p class="eyebrow">动态</p>
+            <p class="home-head-note">先看本周最值得注意的内容，再决定是否继续进入完整新闻流或相关专题。</p>
           </div>
-          <div class="news-timeline">
-            <NuxtLink
-              v-for="item in latestNews"
-              :key="item.path"
-              :to="item.path"
-              class="timeline-item"
-            >
-              <div class="timeline-stem">
-                <span class="timeline-dot" />
-                <span class="timeline-line" />
+          <div class="updates-grid">
+            <div class="grid spotlight-grid">
+              <ContentCard
+                v-for="item in weeklyFocus"
+                :key="item.to"
+                :title="item.title"
+                :description="item.description"
+                :to="item.to"
+                :meta="item.meta"
+              />
+            </div>
+
+            <div class="updates-side">
+              <div class="side-head">
+                <p class="eyebrow">最近更新</p>
+                <NuxtLink to="/news" class="more-link">查看全部新闻</NuxtLink>
               </div>
-              <div class="card timeline-card">
-                <span class="tag">{{ item.date }}</span>
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.description }}</p>
+
+              <div class="news-timeline">
+                <NuxtLink
+                  v-for="item in latestNews"
+                  :key="item.path"
+                  :to="item.path"
+                  class="timeline-item"
+                >
+                  <div class="timeline-stem">
+                    <span class="timeline-dot" />
+                    <span class="timeline-line" />
+                  </div>
+                  <div class="card timeline-card">
+                    <span class="tag">{{ item.date }}</span>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.description }}</p>
+                  </div>
+                </NuxtLink>
               </div>
-            </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -365,8 +372,7 @@ const featuredPaths = computed(() => learningPaths.slice(0, 4))
 
 .stack-shell,
 .feature-band,
-.ticker-shell,
-.stagger-shell,
+.updates-shell,
 .editorial-shell {
   display: grid;
   gap: 10px;
@@ -514,6 +520,25 @@ const featuredPaths = computed(() => learningPaths.slice(0, 4))
   gap: 8px;
 }
 
+.updates-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.updates-side {
+  display: grid;
+  gap: 10px;
+}
+
+.side-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .editorial-feature {
   padding: 20px;
   align-content: start;
@@ -617,7 +642,7 @@ const featuredPaths = computed(() => learningPaths.slice(0, 4))
 }
 
 .spotlight-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -671,6 +696,7 @@ const featuredPaths = computed(() => learningPaths.slice(0, 4))
   }
 
   .start-band,
+  .updates-grid,
   .editorial-columns,
   .editorial-side-grid {
     grid-template-columns: 1fr;

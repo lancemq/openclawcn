@@ -3,6 +3,7 @@ title: "OpenClaw on AWS：云上一键部署指南发布"
 description: "AWS 官方发布 OpenClaw on Lightsail 部署指南，用户可在 AWS 云平台快速部署自己的 AI 助手实例。"
 category: 云服务集成
 date: "2026-03-10"
+updatedAt: "2026-03-10"
 author: "OpenClawCN"
 source: "AWS Blog"
 sourceType: official

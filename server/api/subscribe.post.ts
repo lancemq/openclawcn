@@ -1,5 +1,9 @@
 type SubscribePayload = {
   email?: string
+  page?: string
+  section?: string
+  cta?: string
+  entryType?: string
 }
 
 function isValidEmail(email: string) {
@@ -10,6 +14,10 @@ export default defineEventHandler(async (event) => {
   const body = await readBody<SubscribePayload>(event)
   const config = useRuntimeConfig(event)
   const email = String(body.email || '').trim()
+  const page = String(body.page || '').trim().slice(0, 120)
+  const section = String(body.section || '').trim().slice(0, 80)
+  const cta = String(body.cta || '').trim().slice(0, 80)
+  const entryType = String(body.entryType || '').trim().slice(0, 40)
 
   if (!email) {
     throw createError({
@@ -30,6 +38,10 @@ export default defineEventHandler(async (event) => {
     email,
     source: 'openclawcn',
     receivedAt: new Date().toISOString(),
+    page,
+    section,
+    cta,
+    entryType,
   }
 
   if (config.subscribeWebhookUrl) {

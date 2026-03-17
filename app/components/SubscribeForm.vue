@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { public: publicConfig } = useRuntimeConfig()
+const { trackAction } = useSiteTracking()
+const route = useRoute()
 const rssUrl = computed(() => new URL('/rss.xml', publicConfig.siteUrl).toString())
 const email = ref('')
 const pending = ref(false)
@@ -22,7 +24,17 @@ async function submitSubscription() {
       method: 'POST',
       body: {
         email: email.value,
+        page: route.path,
+        section: 'subscribe',
+        cta: 'email-subscribe',
+        entryType: 'email',
       },
+    })
+
+    trackAction('subscription_submit', {
+      section: 'subscribe',
+      entryType: 'email',
+      delivery: response.delivery,
     })
 
     successMessage.value =
@@ -42,10 +54,21 @@ async function copyRssUrl() {
 
   try {
     await navigator.clipboard.writeText(rssUrl.value)
+    trackAction('subscription_rss_copy', {
+      section: 'subscribe',
+      entryType: 'rss',
+    })
     rssMessage.value = 'RSS 链接已复制，可以直接粘贴到阅读器里。'
   } catch {
     rssMessage.value = '复制失败，请手动复制下方 RSS 链接。'
   }
+}
+
+function openRss() {
+  trackAction('subscription_rss_open', {
+    section: 'subscribe',
+    entryType: 'rss',
+  })
 }
 </script>
 
@@ -58,7 +81,7 @@ async function copyRssUrl() {
       </div>
 
       <div class="rss-actions">
-        <a class="button secondary" :href="rssUrl" target="_blank" rel="noreferrer">打开 RSS</a>
+        <a class="button secondary" :href="rssUrl" target="_blank" rel="noreferrer" @click="openRss">打开 RSS</a>
         <button class="button ghost" type="button" @click="copyRssUrl">复制链接</button>
       </div>
 

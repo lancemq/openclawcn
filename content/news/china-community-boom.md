@@ -3,6 +3,7 @@ title: "OpenClaw 中国社区热潮：本地化部署与中文教程需求激增
 description: "OpenClaw 在中国市场迎来爆发式增长，小红书、知乎等平台讨论热度持续攀升，中文教程和本地化部署成为用户最关注的话题。"
 category: 社区动态
 date: "2026-03-12"
+updatedAt: "2026-03-12"
 author: "OpenClawCN"
 source: "社区观察"
 sourceType: community

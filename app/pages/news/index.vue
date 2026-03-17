@@ -42,6 +42,33 @@ const filteredItems = computed(() =>
 
 const featuredNews = computed(() => orderedItems.value.slice(0, 3))
 
+const learnEntries = [
+  {
+    title: '文档中心',
+    description: '如果更新涉及安装、配置或机制变化，回到文档里确认稳定说法。',
+    to: '/docs',
+    meta: '稳定知识',
+  },
+  {
+    title: '主题中心',
+    description: '按安装、渠道、模型、安全等问题域重新理解新闻里的变化。',
+    to: '/topics',
+    meta: '按问题聚合',
+  },
+  {
+    title: '最佳实践',
+    description: '把版本变化转成长期可复用的方法，而不是只停留在资讯层。',
+    to: '/best-practices',
+    meta: '长期方法',
+  },
+  {
+    title: '社区支持',
+    description: '如果更新已经影响到你的环境或使用节奏，可以继续提问、反馈和确认影响范围。',
+    to: '/community',
+    meta: '支持入口',
+  },
+]
+
 const newsStats = computed(() => [
   {
     label: '最新视角',
@@ -110,6 +137,23 @@ useSeo({
             <p>{{ item.description }}</p>
           </NuxtLink>
         </aside>
+      </section>
+
+      <section class="card entry-panel">
+        <div class="section-head compact-head">
+          <div>
+            <p class="eyebrow">交叉访问</p>
+            <p class="section-copy">新闻页负责快速感知变化，但真正的理解通常还要回到文档、主题、实践和社区入口继续承接。</p>
+          </div>
+        </div>
+
+        <div class="entry-grid">
+          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="entry-card">
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
       </section>
 
       <div class="filters card collection-filters">

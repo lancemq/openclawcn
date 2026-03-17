@@ -3,6 +3,7 @@ title: "OpenClaw 创始人 Peter Steinberger：从独立开发者到开源明星
 description: "OpenClaw 创始人 Peter Steinberger 的创业故事，从 Clawdbot/Moltbot 到爆火开源项目的历程。"
 category: 人物故事
 date: "2026-03-13"
+updatedAt: "2026-03-13"
 author: "OpenClawCN"
 source: "社区整理"
 sourceType: community
