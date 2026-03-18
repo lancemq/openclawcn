@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { informationLayers } from '~/data/information-architecture'
 import { pickTopicItems, topicDefinitions } from '~/data/taxonomy'
 import { getDocCategoryLabel, sortBestPractices, sortDocs, sortNews } from '~/data/content'
 import { videoSections } from '~/data/videos'
@@ -44,112 +43,49 @@ const topicStats = computed(() => [
   {
     label: '相关文档',
     value: String(topicDocBuckets.value.reduce((count, bucket) => count + bucket.items.length, 0)),
-    note: '按先后顺序重排，不再把同主题内容平铺在一起。',
+    note: '集中覆盖这个主题下最常被查阅的说明、配置与参考资料。',
   },
   {
     label: '配套内容',
     value: `${topicPractices.value.length} 实践 / ${topicNews.value.length} 动态`,
-    note: '从文档继续延伸到视频、实践和最近更新。',
+    note: '同步整理相关视频、实践经验与近期动态。',
   },
 ])
 
-const topicPathMap: Record<string, { title: string; to: string; description: string }> = {
-  installation: {
-    title: '新手首次部署路径',
-    to: '/paths#new-user',
-    description: '先从定位、安装、Onboarding 和 Control UI 跑通一条最小链路。',
+const topicPublicHighlights = computed(() => [
+  {
+    title: '主题范围',
+    summary: activeTopic.value.description,
   },
-  'gateway-ops': {
-    title: '团队运维路径',
-    to: '/paths#team-ops',
-    description: '把 Gateway、升级、安全和监控放进长期运行视角里理解。',
+  {
+    title: '常见关注点',
+    summary: activeTopic.value.keywords.slice(0, 4).join(' / '),
   },
-  channels: {
-    title: '渠道接入路径',
-    to: '/paths#channels-integration',
-    description: '先理解入口边界，再接入 Telegram、WhatsApp、团队频道等真实渠道。',
+  {
+    title: '资料覆盖',
+    summary: `文档 ${topicDocBuckets.value.reduce((count, bucket) => count + bucket.items.length, 0)} 篇、视频 ${filteredVideos.value.length} 条、实践 ${topicPractices.value.length} 篇`,
   },
-  'skills-tools': {
-    title: 'Skills 与扩展路径',
-    to: '/paths#expansion',
-    description: '先看边界和扩展层，再决定安装技能、插件还是自动化触发。',
-  },
-  'context-sessions': {
-    title: '团队运维路径',
-    to: '/paths#team-ops',
-    description: '优先建立上下文、会话隔离和长期协作的稳态方法。',
-  },
-  plugins: {
-    title: 'Skills 与扩展路径',
-    to: '/paths#expansion',
-    description: '插件属于能力层扩展，适合在基础链路稳定后继续阅读。',
-  },
-  'memory-search': {
-    title: 'Skills 与扩展路径',
-    to: '/paths#expansion',
-    description: '先理解记忆、索引和长期上下文边界，再做更深入的工作流设计。',
-  },
-  providers: {
-    title: '新手首次部署路径',
-    to: '/paths#new-user',
-    description: '先把默认模型和 provider 路径理顺，再进入更复杂的回退和路由配置。',
-  },
-  models: {
-    title: 'Skills 与扩展路径',
-    to: '/paths#expansion',
-    description: '适合在基础部署后，继续进入本地模型、Ollama 和成本优化。',
-  },
-  security: {
-    title: '团队运维路径',
-    to: '/paths#team-ops',
-    description: '安全主题更适合放进长期运行和权限边界里一起理解。',
-  },
-  debugging: {
-    title: '团队运维路径',
-    to: '/paths#team-ops',
-    description: '排障要和版本、状态检查、日志和长期维护方法放在一起看。',
-  },
-  network: {
-    title: '远程网络与节点路径',
-    to: '/paths#remote-network',
-    description: '先理清配对、远程访问和 Tailnet 方案，再考虑多设备协同。',
-  },
-}
-
-const topicVideoAnchorMap: Record<string, string> = {
-  installation: '/videos#setup',
-  'gateway-ops': '/videos#practice',
-  channels: '/videos#integration',
-  'skills-tools': '/videos#skills',
-  'context-sessions': '/videos#practice',
-  plugins: '/videos#skills',
-  'memory-search': '/videos#skills',
-  providers: '/videos#models',
-  models: '/videos#models',
-  security: '/videos#practice',
-  debugging: '/videos#practice',
-  network: '/videos#integration',
-}
+])
 
 const topicDocBuckets = computed(() => {
   const matched = pickTopicItems(sortedDocs.value as any[], activeTopic.value.slug, 12)
   const bucketRules = [
     {
       id: 'start',
-      title: '先看这些文档',
-      description: '先建立结构和最小操作顺序，再进入更细节的专题。',
+      title: '基础说明与启动',
+      description: '涵盖入门认识、安装准备、首次启动和基础操作。',
       matcher: (item: any) => String(item.path).startsWith('/docs/getting-started/') || String(item.path).startsWith('/docs/setup/'),
     },
     {
       id: 'build',
-      title: '再看专题与机制',
-      description: '把这个主题放回系统结构里理解，知道真正涉及哪些模块和边界。',
+      title: '功能机制与关键能力',
+      description: '聚焦该主题相关的功能说明、配置方法和使用机制。',
       matcher: (item: any) => String(item.path).startsWith('/docs/manual/'),
     },
     {
       id: 'run',
-      title: '最后补运维与参考',
-      description: '适合在开始使用后查看长期运行、风险控制和排障细节。',
+      title: '运维、排障与参考',
+      description: '补充长期运行、风险控制、排障方法和参考资料。',
       matcher: (item: any) => String(item.path).startsWith('/docs/operations/') || String(item.path).startsWith('/docs/reference/'),
     },
   ]
@@ -170,8 +106,8 @@ const topicDocBuckets = computed(() => {
   if (remaining.length) {
     buckets.push({
       id: 'more',
-      title: '同主题补充阅读',
-      description: '如果上面几组已经看完，再继续从这些补充页延伸。',
+      title: '补充资料',
+      description: '延伸阅读与同主题补充说明。',
       items: remaining,
     })
   }
@@ -189,7 +125,7 @@ const topicDocBuckets = computed(() => {
           <p class="eyebrow">Topics</p>
           <h1 class="section-title">主题中心</h1>
           <p class="section-copy">
-            把文档、视频、新闻和最佳实践按同一主题聚合。适合已经知道自己要解决什么问题，但不想在多个栏目之间来回找入口的时候使用。
+            围绕安装、运维、渠道、模型、安全等主题，集中整理相关文档、视频、实践经验与近期动态，方便按问题快速查找资料。
           </p>
 
           <div class="collection-utility">
@@ -203,9 +139,9 @@ const topicDocBuckets = computed(() => {
 
         <aside class="card collection-side">
           <div class="collection-summary">
-            <span class="mini-label">适合什么时候用</span>
-            <strong>知道自己要看“安装、渠道、Skills、安全”这类主题时</strong>
-            <p>如果你还不知道从哪开始，先看学习路径；如果你已经知道主题，但还没决定先看文档、视频还是实践，再来这里。</p>
+            <span class="mini-label">内容说明</span>
+            <strong>每个主题都会同步汇总文档、视频、实践和动态资料。</strong>
+            <p>你可以直接选择当前最关心的主题，查看相关的基础说明、进阶内容和补充阅读。</p>
           </div>
         </aside>
       </section>
@@ -229,9 +165,9 @@ const topicDocBuckets = computed(() => {
         <p class="eyebrow">{{ activeTopic.title }}</p>
         <p class="section-copy">{{ activeTopic.description }}</p>
         <div class="layer-summary-grid">
-          <article v-for="layer in informationLayers.slice(0, 3)" :key="layer.id" class="layer-summary-card">
-            <strong>{{ layer.title }}</strong>
-            <p>{{ layer.summary }}</p>
+          <article v-for="item in topicPublicHighlights" :key="item.title" class="layer-summary-card">
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.summary }}</p>
           </article>
         </div>
       </section>
@@ -239,7 +175,7 @@ const topicDocBuckets = computed(() => {
       <section class="topic-block">
         <div class="home-head">
           <p class="eyebrow">文档安排</p>
-          <p class="home-head-note">不再平铺一组文档，而是按“先看什么、再深化什么、最后补什么”来读。</p>
+          <p class="home-head-note">从基础说明到功能机制，再到运维与参考，集中查看该主题相关文档。</p>
         </div>
         <div class="topic-doc-stack">
           <article v-for="bucket in topicDocBuckets" :key="bucket.id" class="card topic-doc-bucket">
@@ -261,7 +197,7 @@ const topicDocBuckets = computed(() => {
       <section class="topic-block">
         <div class="home-head">
           <p class="eyebrow">视频</p>
-          <p class="home-head-note">适合先建立直觉再回到文档确认。</p>
+          <p class="home-head-note">精选与该主题直接相关的视频资料，帮助快速建立直观理解。</p>
         </div>
         <div class="topic-grid">
           <a v-for="item in filteredVideos" :key="item.href" :href="item.href" target="_blank" rel="noreferrer" class="card topic-card">
@@ -276,7 +212,7 @@ const topicDocBuckets = computed(() => {
         <div class="topic-block">
           <div class="home-head">
             <p class="eyebrow">最佳实践</p>
-            <p class="home-head-note">适合跑通基础链路后继续深化。</p>
+            <p class="home-head-note">结合真实使用场景，补充该主题的落地方法与经验。</p>
           </div>
           <div class="topic-grid compact">
             <NuxtLink v-for="item in topicPractices" :key="item.path" :to="item.path" class="card topic-card">
@@ -290,7 +226,7 @@ const topicDocBuckets = computed(() => {
         <div class="topic-block">
           <div class="home-head">
             <p class="eyebrow">新闻与更新</p>
-            <p class="home-head-note">适合快速判断最近有什么变化。</p>
+            <p class="home-head-note">跟踪该主题相关的版本变化、案例进展和社区动态。</p>
           </div>
           <div class="topic-grid compact">
             <NuxtLink v-for="item in topicNews" :key="item.path" :to="item.path" class="card topic-card">

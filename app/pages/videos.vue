@@ -4,15 +4,15 @@ import { topicDefinitions } from '~/data/taxonomy'
 
 useSeo({
   title: '视频教程',
-  description: '整理 OpenClaw 官网 Showcase、官方引用 YouTube 视频和中文高质量教程，覆盖总览、安装部署、Ollama 本地模型、Skills 扩展、渠道接入和进阶实战案例。',
+  description: '查看 OpenClaw 的视频教程与演示内容，覆盖安装部署、本地模型、Skills 扩展、渠道接入和进阶案例。',
   path: '/videos',
   type: 'website',
 })
 
 const quickFacts = [
-  { label: '优先来源', value: '官网 + YouTube + Bilibili', note: '先官网与官方引用视频，再补中文部署教程' },
-  { label: '覆盖方向', value: '总览 / 安装 / 模型 / Skills / 渠道', note: '从总览判断到部署、扩展和接入全链路覆盖' },
-  { label: '更适合谁', value: '先看视频再上手的用户', note: '尤其适合第一次接触 OpenClaw 的中文用户' },
+  { label: '视频来源', value: 'Official / YouTube / Bilibili', note: '包含官方演示、英文主线视频和中文实操内容' },
+  { label: '覆盖方向', value: '总览 / 安装 / 模型 / Skills / 渠道', note: '适合从基础了解一路看到部署、扩展和接入' },
+  { label: '适合人群', value: '想先看演示再动手的用户', note: '尤其适合第一次接触 OpenClaw 或在找具体操作示例时观看' },
 ]
 
 const config = useRuntimeConfig()
@@ -25,7 +25,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: 'OpenClaw 视频教程',
-        description: '整理 OpenClaw 官方 Showcase、YouTube 演示和 Bilibili 中文教程。',
+        description: 'OpenClaw 视频教程与演示内容，包含官方视频、YouTube 视频和中文实操教程。',
         url: `${config.public.siteUrl}/videos`,
       }),
     },
@@ -104,8 +104,8 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
           <p class="eyebrow">Video Tutorials</p>
           <h1 class="section-title">视频教程</h1>
           <p class="section-copy">
-            这一页把 OpenClaw 相关的视频资料按“官方入口、YouTube 英文主线、中文部署教程、Skills 扩展、渠道接入”拆成几组，
-            避免你在官网、YouTube 和 Bilibili 之间来回搜索。第一次接触 OpenClaw，先看官网 Showcase 和官方引用视频，再选一条最接近你环境的部署教程就够了。
+            这里汇总了 OpenClaw 相关的视频教程与演示内容，覆盖产品总览、安装部署、本地模型、Skills 扩展、渠道接入和进阶案例。
+            如果你是第一次接触 OpenClaw，建议先看总览和安装视频，再进入更具体的模型、Skills 和渠道主题。
           </p>
 
           <div class="collection-utility">
@@ -120,13 +120,13 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
         <aside class="card collection-side">
           <div class="collection-summary">
             <span class="mini-label">推荐观看顺序</span>
-            <strong>先官网入口，再看 YouTube 主线，最后补中文实操</strong>
-            <p>第一次上手先看 Showcase 和完整 setup；基础链路稳定后，再进入 Skills、渠道和模型类视频。</p>
+            <strong>先看总览与安装，再进入模型、Skills 和渠道</strong>
+            <p>先建立基础认识，再根据你当前要解决的问题选择更具体的视频内容。</p>
           </div>
 
           <div class="collection-summary">
             <span class="mini-label">建议做法</span>
-            <p>跟视频操作时，只照着完成一条最小链路，不要在第一次尝试时同时接多种模型、渠道和 Skills。</p>
+            <p>第一次跟视频操作时，优先完成一条最小可用链路，再逐步增加模型、渠道和 Skills 配置。</p>
           </div>
         </aside>
       </section>
@@ -220,22 +220,22 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
       <section class="card watch-tips">
         <div>
           <p class="eyebrow">观看建议</p>
-          <h2 class="section-title">先用视频建立直觉，再回到文档做确认</h2>
+          <h2 class="section-title">按当前问题选择更合适的视频内容</h2>
         </div>
 
         <div class="tips-grid">
           <article class="tip-card">
             <strong>第一次部署时</strong>
-            <p>边看视频边保留官方文档，遇到版本差异时以官方文档和 release 说明为准。</p>
+            <p>优先看安装和基础设置视频，边操作边核对当前版本要求与环境差异。</p>
           </article>
           <article class="tip-card">
             <strong>看完安装视频后</strong>
-            <p>回到站内文档中心继续看安装、Onboarding 和 Gateway 运维，不要只停留在视频步骤。</p>
+            <p>如果你还需要更完整的步骤说明、参数解释或排错路径，可以继续查看文档中心。</p>
             <NuxtLink class="video-inline-link" to="/docs">进入文档中心</NuxtLink>
           </article>
           <article class="tip-card">
             <strong>做渠道和 Skills 扩展前</strong>
-            <p>先确认本地最小链路已跑通，再进入飞书、钉钉、QQ、Ollama 或 Skills 类视频。</p>
+            <p>先确认基础链路已稳定，再进入飞书、钉钉、QQ、Ollama 或 Skills 相关视频，会更容易跟上。</p>
           </article>
         </div>
 
