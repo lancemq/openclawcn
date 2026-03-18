@@ -26,7 +26,7 @@ const footerLinks = {
       { label: '工具系列', to: '/tools' },
       { label: 'Skills', to: '/skills' },
       { label: '案例展示', to: '/showcase' },
-      { label: '二次开发专题', to: '/secondary-development' },
+      { label: '二次开发', to: '/secondary-development' },
     ],
   },
   updates: {

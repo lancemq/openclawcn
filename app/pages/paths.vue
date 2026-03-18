@@ -367,16 +367,24 @@ const chooserCards = [
 <style scoped>
 .paths-page {
   display: grid;
-  gap: 22px;
+  gap: 30px;
 }
 
 .paths-hero {
+  position: relative;
   align-items: stretch;
+  gap: 18px;
 }
 
 .hero-main {
   display: grid;
-  gap: 18px;
+  gap: 24px;
+  padding: clamp(26px, 2.8vw, 36px);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top right, rgba(19, 129, 125, 0.14), transparent 30%),
+    radial-gradient(circle at left bottom, rgba(166, 111, 44, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(246, 239, 228, 0.88));
 }
 
 .hero-side {
@@ -392,6 +400,9 @@ const chooserCards = [
 
 .stat-panel {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(248, 244, 236, 0.92));
 }
 
 .stat-item,
@@ -400,9 +411,15 @@ const chooserCards = [
   gap: 6px;
 }
 
+.stat-item {
+  padding: 10px 8px 8px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
 .stat-item strong {
   font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.6rem;
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
   line-height: 1;
   letter-spacing: -0.04em;
 }
@@ -427,28 +444,72 @@ const chooserCards = [
   line-height: 1.68;
 }
 
+.signal-panel {
+  padding: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(248, 244, 236, 0.9));
+}
+
+.signal-item + .signal-item {
+  padding-top: 12px;
+  border-top: 1px solid rgba(67, 73, 60, 0.08);
+}
+
 .hero-map {
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-  padding-top: 8px;
+  gap: 14px;
+  padding: 14px 0 0;
 }
 
 .hero-line {
   position: absolute;
-  left: 18px;
-  right: 18px;
-  top: 20px;
+  left: 32px;
+  right: 32px;
+  top: 33px;
   height: 1px;
-  background: linear-gradient(90deg, rgba(19, 129, 125, 0.16), rgba(166, 111, 44, 0.3), rgba(19, 129, 125, 0.16));
+  background: linear-gradient(90deg, rgba(19, 129, 125, 0.18), rgba(166, 111, 44, 0.34), rgba(19, 129, 125, 0.18));
 }
 
 .hero-node {
   position: relative;
   display: grid;
-  gap: 10px;
-  padding: 10px 12px 0 0;
+  gap: 12px;
+  min-height: 100%;
+  padding: 10px 14px 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(67, 73, 60, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(249, 243, 233, 0.54));
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.hero-node::after,
+.chooser-card::after,
+.related-card::after,
+.resource-card::after {
+  content: "→";
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  color: rgba(15, 102, 116, 0.42);
+  font-size: 0.95rem;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.hero-node:hover {
+  transform: translateY(-3px);
+  border-color: rgba(12, 108, 105, 0.16);
+  box-shadow: 0 18px 32px rgba(63, 72, 46, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(249, 243, 233, 0.74));
+}
+
+.hero-node:hover::after,
+.chooser-card:hover::after,
+.related-card:hover::after,
+.resource-card:hover::after {
+  transform: translateX(2px);
+  color: rgba(15, 102, 116, 0.72);
 }
 
 .hero-index,
@@ -475,6 +536,8 @@ const chooserCards = [
 
 .hero-node strong {
   font-size: 0.96rem;
+  display: block;
+  padding-right: 18px;
 }
 
 .hero-node p {
@@ -482,12 +545,13 @@ const chooserCards = [
   color: var(--ink-soft);
   font-size: 0.88rem;
   line-height: 1.58;
+  padding-right: 14px;
 }
 
 .chooser-shell,
 .signal-shell {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .chooser-grid {
@@ -495,34 +559,54 @@ const chooserCards = [
 }
 
 .chooser-card {
+  position: relative;
   display: grid;
-  gap: 8px;
+  gap: 10px;
   min-height: 100%;
+  padding: 22px 20px 26px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(19, 129, 125, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.94), rgba(246, 239, 228, 0.84));
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.chooser-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(12, 108, 105, 0.18);
+  box-shadow: 0 18px 34px rgba(63, 72, 46, 0.1);
 }
 
 .path-stack {
   display: grid;
-  gap: 16px;
+  gap: 20px;
 }
 
 .path-card {
-  padding: 18px;
+  padding: 22px;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top right, rgba(19, 129, 125, 0.08), transparent 22%),
+    radial-gradient(circle at left bottom, rgba(166, 111, 44, 0.06), transparent 24%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(246, 240, 230, 0.88));
 }
 
 .path-shell {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr) minmax(260px, 0.8fr);
-  gap: 18px;
+  gap: 24px;
 }
 
 .path-column {
   display: grid;
   align-content: start;
-  gap: 14px;
+  gap: 16px;
 }
 
 .intro-column {
-  padding-right: 4px;
+  position: relative;
+  padding-right: 16px;
 }
 
 .path-number {
@@ -530,23 +614,34 @@ const chooserCards = [
   height: 42px;
 }
 
+.intro-column::after,
+.steps-column::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  right: -12px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(15, 102, 116, 0.14), rgba(67, 73, 60, 0.04));
+}
+
 .path-card h2 {
-  font-size: 1.44rem;
-  line-height: 1.02;
+  font-size: clamp(1.38rem, 2vw, 1.64rem);
+  line-height: 1.06;
 }
 
 .path-meta-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .meta-box {
   display: grid;
   gap: 6px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.46);
+  background: rgba(255, 255, 255, 0.62);
   border: 1px solid rgba(67, 73, 60, 0.08);
 }
 
@@ -556,10 +651,20 @@ const chooserCards = [
 
 .route-entry {
   width: fit-content;
+  margin-top: 8px;
 }
 
 .compact-head {
   margin-bottom: 0;
+}
+
+.steps-column {
+  position: relative;
+  padding: 18px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(249, 244, 236, 0.68));
+  border: 1px solid rgba(67, 73, 60, 0.08);
 }
 
 .step-list {
@@ -572,19 +677,38 @@ const chooserCards = [
 }
 
 .step-item {
+  position: relative;
   display: grid;
   grid-template-columns: 38px minmax(0, 1fr);
   gap: 12px;
   align-items: start;
 }
 
+.step-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 42px;
+  bottom: -12px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(15, 102, 116, 0.18), rgba(166, 111, 44, 0.08));
+}
+
 .step-link {
   display: grid;
   gap: 4px;
-  padding: 12px 14px;
+  min-height: 100%;
+  padding: 13px 16px;
   border-radius: 18px;
   border: 1px solid rgba(67, 73, 60, 0.1);
-  background: rgba(255, 255, 255, 0.52);
+  background: rgba(255, 255, 255, 0.82);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.step-link:hover {
+  transform: translateX(3px);
+  border-color: rgba(12, 108, 105, 0.16);
+  background: rgba(255, 255, 255, 0.94);
 }
 
 .step-link strong {
@@ -619,18 +743,34 @@ const chooserCards = [
   font-weight: 700;
 }
 
+.related-column {
+  padding: 18px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 243, 0.9), rgba(249, 243, 233, 0.78));
+  border: 1px solid rgba(67, 73, 60, 0.08);
+}
+
 .related-grid {
   display: grid;
   gap: 10px;
 }
 
 .related-card {
+  position: relative;
   display: grid;
   gap: 8px;
-  padding: 14px 16px;
+  padding: 14px 16px 22px;
   border-radius: 18px;
   border: 1px solid rgba(67, 73, 60, 0.1);
   background: rgba(255, 250, 243, 0.72);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.related-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(166, 111, 44, 0.2);
+  box-shadow: 0 16px 28px rgba(63, 72, 46, 0.08);
 }
 
 .signal-grid {
@@ -638,8 +778,18 @@ const chooserCards = [
 }
 
 .resource-card {
+  position: relative;
   display: grid;
   gap: 8px;
+  min-height: 100%;
+  padding-bottom: 28px;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.18);
+  box-shadow: 0 18px 30px rgba(63, 72, 46, 0.08);
 }
 
 .mini-label {
@@ -655,6 +805,11 @@ const chooserCards = [
   .hero-map,
   .chooser-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .intro-column::after,
+  .steps-column::after {
+    display: none;
   }
 
   .path-shell {
@@ -674,6 +829,27 @@ const chooserCards = [
   .signal-grid,
   .path-meta-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-main,
+  .path-card {
+    padding: 18px;
+  }
+
+  .hero-node,
+  .chooser-card,
+  .resource-card,
+  .related-card {
+    padding-right: 20px;
+  }
+
+  .steps-column,
+  .related-column {
+    padding: 16px;
+  }
+
+  .step-item:not(:last-child)::after {
+    left: 18px;
   }
 }
 </style>

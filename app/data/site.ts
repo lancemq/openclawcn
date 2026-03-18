@@ -99,8 +99,8 @@ export const ecosystemOverview = [
     meta: '生态',
   },
   {
-    title: '二次开发专题',
-    description: '从 Skills、插件、Hooks 到 ClawHub，系统整理适合开发者的二次开发资料入口。',
+    title: '二次开发',
+    description: '围绕 Skills、插件、Hooks 与 ClawHub，集中查看 OpenClaw 二次开发相关资料。',
     to: '/secondary-development',
     meta: '开发',
   },

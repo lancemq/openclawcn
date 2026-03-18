@@ -119,9 +119,9 @@ const topicDocBuckets = computed(() => {
 
 <template>
   <section class="section">
-    <div class="container collection-page">
-      <section class="collection-hero">
-        <div class="card collection-main">
+    <div class="container collection-page topics-page">
+      <section class="collection-hero topics-hero">
+        <div class="card collection-main topics-main">
           <p class="eyebrow">Topics</p>
           <h1 class="section-title">主题中心</h1>
           <p class="section-copy">
@@ -137,7 +137,7 @@ const topicDocBuckets = computed(() => {
           </div>
         </div>
 
-        <aside class="card collection-side">
+        <aside class="card collection-side topics-side">
           <div class="collection-summary">
             <span class="mini-label">内容说明</span>
             <strong>每个主题都会同步汇总文档、视频、实践和动态资料。</strong>
@@ -146,7 +146,7 @@ const topicDocBuckets = computed(() => {
         </aside>
       </section>
 
-      <div class="filters card">
+      <div class="filters card topic-filters">
         <div class="filter-group">
           <span class="filter-label">主题</span>
           <NuxtLink
@@ -242,6 +242,7 @@ const topicDocBuckets = computed(() => {
 </template>
 
 <style scoped>
+.topics-page,
 .filters,
 .topic-summary,
 .topic-block,
@@ -257,19 +258,61 @@ const topicDocBuckets = computed(() => {
   gap: 12px;
 }
 
+.topics-page {
+  gap: 28px;
+}
+
+.topics-hero {
+  align-items: stretch;
+  gap: 18px;
+}
+
+.topics-main {
+  gap: 22px;
+  padding: clamp(26px, 2.8vw, 36px);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top right, rgba(19, 129, 125, 0.14), transparent 32%),
+    radial-gradient(circle at left bottom, rgba(166, 111, 44, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(246, 239, 228, 0.9));
+}
+
+.topics-side {
+  justify-content: center;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(248, 244, 236, 0.9));
+}
+
+.collection-summary {
+  display: grid;
+  gap: 10px;
+}
+
+.collection-summary strong {
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.06rem;
+  line-height: 1.45;
+}
+
+.collection-summary p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
 .layer-summary-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
 .layer-summary-card {
   display: grid;
-  gap: 8px;
-  padding: 16px 18px;
-  border-radius: 20px;
+  gap: 10px;
+  padding: 18px 20px;
+  border-radius: 22px;
   border: 1px solid rgba(64, 73, 85, 0.1);
-  background: rgba(255, 255, 255, 0.5);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(249, 243, 233, 0.62));
 }
 
 .layer-summary-card strong {
@@ -285,11 +328,19 @@ const topicDocBuckets = computed(() => {
   line-height: 1.58;
 }
 
+.topic-filters {
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(246, 239, 228, 0.9));
+}
+
 .filter-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .filter-label {
@@ -305,14 +356,16 @@ const topicDocBuckets = computed(() => {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.66);
   color: var(--ink);
-  padding: 7px 13px;
+  padding: 8px 14px;
   font-size: 0.84rem;
-  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  font-weight: 700;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
 .filter-chip:hover {
   transform: translateY(-1px);
   border-color: rgba(138, 90, 36, 0.22);
+  box-shadow: 0 12px 24px rgba(63, 72, 46, 0.08);
 }
 
 .filter-chip.active {
@@ -332,6 +385,9 @@ const topicDocBuckets = computed(() => {
 .topic-doc-bucket {
   padding: 20px;
   border-radius: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(19, 129, 125, 0.08), transparent 24%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(246, 240, 230, 0.9));
 }
 
 .topic-doc-head p {
@@ -346,9 +402,22 @@ const topicDocBuckets = computed(() => {
 }
 
 .topic-card {
+  position: relative;
   align-content: start;
   gap: 10px;
   min-height: 100%;
+  padding-bottom: 30px;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.topic-card::after {
+  content: "→";
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  color: rgba(15, 102, 116, 0.42);
+  font-size: 0.95rem;
+  transition: transform 0.18s ease, color 0.18s ease;
 }
 
 .inner-card {
@@ -365,6 +434,7 @@ const topicDocBuckets = computed(() => {
   line-height: 1.42;
   letter-spacing: -0.02em;
   text-wrap: balance;
+  padding-right: 18px;
 }
 
 .topic-card p {
@@ -372,20 +442,37 @@ const topicDocBuckets = computed(() => {
   color: var(--ink-soft);
   font-size: 0.92rem;
   line-height: 1.68;
+  padding-right: 10px;
 }
 
 .topic-summary {
-  gap: 18px;
-  padding: 22px 24px;
+  gap: 20px;
+  padding: 24px 26px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top right, rgba(19, 129, 125, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(247, 241, 231, 0.92));
 }
 
 .topic-block {
-  gap: 14px;
+  gap: 16px;
 }
 
 .topic-dual-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
+  gap: 18px;
+}
+
+.topic-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(12, 108, 105, 0.16);
+  box-shadow: 0 18px 30px rgba(63, 72, 46, 0.08);
+}
+
+.topic-card:hover::after {
+  transform: translateX(2px);
+  color: rgba(15, 102, 116, 0.72);
 }
 
 @media (max-width: 980px) {
@@ -395,6 +482,17 @@ const topicDocBuckets = computed(() => {
   .layer-summary-grid,
   .topic-dual-grid {
     grid-template-columns: 1fr;
+  }
+
+  .topics-page {
+    gap: 24px;
+  }
+
+  .topics-main,
+  .topic-summary,
+  .topic-doc-bucket,
+  .topic-filters {
+    padding: 20px;
   }
 }
 </style>

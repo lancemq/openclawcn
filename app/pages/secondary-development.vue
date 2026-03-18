@@ -9,11 +9,26 @@ import {
 } from '~/data/ecosystem-development'
 
 useSeo({
-  title: '二次开发专题',
-  description: '围绕 Skills、Plugins、Hooks、HTTP Routes 和 ClawHub，整理 OpenClaw 二次开发的官方资料、实现路径和阅读顺序。',
+  title: '二次开发',
+  description: '围绕 Skills、Plugins、Hooks、HTTP Routes 和 ClawHub，整理 OpenClaw 二次开发的主要方向、应用场景与官方资料。',
   path: '/secondary-development',
   type: 'website',
 })
+
+const developmentBriefs = [
+  {
+    title: '适用对象',
+    body: '面向希望扩展 OpenClaw 能力的开发者、技术团队、内部平台团队与自动化工作流维护者。',
+  },
+  {
+    title: '典型产出',
+    body: '技能包、插件包、Hook / Webhook 入口、HTTP 路由、公开分发的能力包与团队内部复用组件。',
+  },
+  {
+    title: '开发入口',
+    body: '优先查看 Skills、Plugins、ClawHub 与 Plugin API 文档，再根据接入目标选择本地调试或公开发布路径。',
+  },
+]
 </script>
 
 <template>
@@ -22,16 +37,15 @@ useSeo({
       <AppBreadcrumbs :items="[
         { label: '首页', to: '/' },
         { label: '生态中心', to: '/ecosystem' },
-        { label: '二次开发专题' },
+        { label: '二次开发' },
       ]" />
 
       <section class="collection-hero development-hero">
         <div class="card collection-main development-main">
           <p class="eyebrow">Secondary Development</p>
-          <h1 class="section-title">OpenClaw 二次开发专题</h1>
+          <h1 class="section-title">OpenClaw 二次开发</h1>
           <p class="section-copy">
-            这一页不是泛泛而谈“能不能扩展”，而是帮你判断: 你的需求更适合写
-            skill、写 plugin、接 hook，还是只做一个可控的 HTTP / webhook 入口。
+            围绕 Skills、Plugins、Hooks、HTTP Routes 和 ClawHub，集中整理 OpenClaw 常见的二次开发方向、应用场景和官方资料入口。
           </p>
 
           <div class="collection-utility">
@@ -49,9 +63,9 @@ useSeo({
 
         <aside class="card collection-side development-side">
           <div class="collection-summary">
-            <span class="mini-label">资料边界</span>
-            <strong>本专题以 2026 年 3 月 16 日可访问的官方资料为主。</strong>
-            <p>优先采用 OpenClaw 官方文档中的 Skills、Plugins、ClawHub 和 Plugin API 页面，不混用二手教程。</p>
+            <span class="mini-label">内容来源</span>
+            <strong>本页基于 2026 年 3 月 16 日可访问的公开官方资料整理。</strong>
+            <p>相关说明主要来自 OpenClaw 官方文档中的 Skills、Plugins、ClawHub 与 Plugin API 页面。</p>
           </div>
 
           <div v-for="signal in secondaryDevelopmentSignals" :key="signal.label" class="collection-summary">
@@ -69,12 +83,19 @@ useSeo({
         </article>
       </div>
 
+      <section class="brief-grid">
+        <article v-for="item in developmentBriefs" :key="item.title" class="card brief-card">
+          <span class="mini-label">{{ item.title }}</span>
+          <p>{{ item.body }}</p>
+        </article>
+      </section>
+
       <section class="card series-panel">
         <div class="series-head">
           <div>
-            <p class="eyebrow">Choose Path</p>
-            <h2>先选扩展形态，再开始动手</h2>
-            <p class="section-copy">很多“二开”其实不需要上来就写完整插件。先选对形态，后面的维护成本会差很多。</p>
+            <p class="eyebrow">Development Types</p>
+            <h2>主要开发形态</h2>
+            <p class="section-copy">根据任务封装、能力接入、事件联动和公开分发等不同目标，OpenClaw 的二次开发通常会落到下面几类形态。</p>
           </div>
         </div>
 
@@ -87,11 +108,11 @@ useSeo({
             <p class="series-card-copy">{{ track.description }}</p>
             <div class="track-meta">
               <div>
-                <span class="mini-label">适合场景</span>
+                <span class="mini-label">常见场景</span>
                 <p>{{ track.fit }}</p>
               </div>
               <div>
-                <span class="mini-label">典型产物</span>
+                <span class="mini-label">交付形式</span>
                 <p>{{ track.output }}</p>
               </div>
             </div>
@@ -122,9 +143,9 @@ useSeo({
       <section class="card series-panel">
         <div class="series-head">
           <div>
-            <p class="eyebrow">Reading Path</p>
-            <h2>更稳的阅读顺序</h2>
-            <p class="section-copy">如果你要把这个专题发给团队同事，建议按下面的顺序看，不容易一开始就把工程复杂度拉满。</p>
+            <p class="eyebrow">Development Process</p>
+            <h2>常见开发流程</h2>
+            <p class="section-copy">从明确目标到确定运行边界，再到分发与复用，是 OpenClaw 二次开发中更常见的推进方式。</p>
           </div>
         </div>
 
@@ -143,7 +164,7 @@ useSeo({
         <div class="series-head">
           <div>
             <p class="eyebrow">Scenarios</p>
-            <h2>常见二开需求，应该从哪条路切入</h2>
+            <h2>常见应用场景</h2>
           </div>
         </div>
 
@@ -164,7 +185,7 @@ useSeo({
           <div>
             <p class="eyebrow">Official Sources</p>
             <h2>官方资料索引</h2>
-            <p class="section-copy">下面这些是这次专题整理时最值得直接打开的原始资料。</p>
+            <p class="section-copy">下面这些公开资料可直接用于了解 OpenClaw 二次开发中的技能、插件、Hook 与 HTTP 接口能力。</p>
           </div>
         </div>
 
@@ -192,7 +213,8 @@ useSeo({
 .development-side,
 .track-meta,
 .track-links,
-.reading-path {
+.reading-path,
+.brief-grid {
   display: grid;
   gap: 16px;
 }
@@ -221,11 +243,22 @@ useSeo({
 }
 
 .stat-note,
+.brief-card p,
 .track-meta p,
 .path-card p {
   margin: 0;
   color: var(--ink-soft);
   line-height: 1.65;
+}
+
+.brief-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.brief-card {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
 }
 
 .development-track,
@@ -274,7 +307,8 @@ useSeo({
 
 @media (max-width: 960px) {
   .stats-grid,
-  .track-links {
+  .track-links,
+  .brief-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -282,6 +316,7 @@ useSeo({
 @media (max-width: 720px) {
   .stats-grid,
   .track-links,
+  .brief-grid,
   .path-card {
     grid-template-columns: 1fr;
   }

@@ -257,10 +257,10 @@ export const ecosystemSections: EcosystemSection[] = [
 
 export const ecosystemQuickLinks = [
   {
-    title: '二次开发专题',
-    description: '从 skills、plugins、hooks 到 ClawHub，梳理 OpenClaw 二次开发的官方资料和实现路径。',
+    title: '二次开发',
+    description: '围绕 Skills、Plugins、Hooks 与 ClawHub，查看 OpenClaw 二次开发的主要方向和官方资料。',
     to: '/secondary-development',
-    meta: '专题',
+    meta: '开发',
   },
   {
     title: 'ClawHub 技能市场',

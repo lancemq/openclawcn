@@ -1,49 +1,49 @@
 export const secondaryDevelopmentStats = [
   {
-    label: '第一条主线',
+    label: '核心方向',
     value: 'Skills',
-    note: '适合把特定任务流程、提示词约束和可复用脚本打包成能力包。',
+    note: '围绕任务流程、提示词规则和可复用脚本构建专用能力包。',
   },
   {
-    label: '第二条主线',
+    label: '核心方向',
     value: 'Plugins',
-    note: '适合接入新渠道、注册新工具、扩展 Gateway 运行时能力。',
+    note: '面向渠道接入、工具注册、命令能力和 Gateway 运行时扩展。',
   },
   {
-    label: '第三条主线',
+    label: '核心方向',
     value: 'Hooks',
-    note: '适合做事件触发、命令触发和和外部系统的轻量联动。',
+    note: '用于事件触发、命令触发以及和外部系统的轻量联动。',
   },
   {
-    label: '第四条主线',
+    label: '生态入口',
     value: 'ClawHub',
-    note: '适合分发、版本化和复用公开技能包。',
+    note: '适合公开分发、版本管理和复用技能能力。',
   },
 ]
 
 export const secondaryDevelopmentSignals = [
   {
-    label: '专题定位',
-    value: '给准备做二次开发的人一张结构图',
-    note: '先分清该写 skill、写 plugin，还是只接 webhook，再决定工程投入。',
+    label: '页面定位',
+    value: 'OpenClaw 二次开发资料索引',
+    note: '围绕 Skills、Plugins、Hooks、HTTP Routes 和 ClawHub 汇总常见开发方向。',
   },
   {
     label: '资料来源',
-    value: '以官方文档和官方仓库为主',
-    note: '优先引用 OpenClaw 官方文档、主仓库和官方技能分发入口，而不是二手教程。',
+    value: '以官方文档与官方入口为主',
+    note: '优先整理 OpenClaw 官方文档与官方分发入口中的公开资料。',
   },
   {
-    label: '推荐顺序',
-    value: '先 skills，再 plugins，再事件和 HTTP',
-    note: '多数团队一开始并不需要写完整插件，先把需求压缩到更轻的扩展方式通常更稳。',
+    label: '内容覆盖',
+    value: '开发形态、场景示例、资料索引',
+    note: '从扩展类型、常见应用场景到官方资料入口，帮助快速定位相关内容。',
   },
 ]
 
 export const secondaryDevelopmentTracks = [
   {
     title: 'Skills 扩展',
-    description: '当你要教模型完成某类固定任务、复用提示词规则，或把脚本和资源与任务绑定时，优先考虑 skills。',
-    fit: '内容生产、资料整理、内部规范执行、轻量工作流',
+    description: '适合为特定任务封装提示词规则、脚本、资源文件和操作说明，形成可复用的能力包。',
+    fit: '内容生产、资料整理、规范执行、轻量工作流',
     output: '一个目录 + `SKILL.md` + 可选脚本与资源',
     links: [
       {
@@ -62,7 +62,7 @@ export const secondaryDevelopmentTracks = [
   },
   {
     title: 'Plugins 扩展',
-    description: '当你要给 Gateway 增加真实运行能力，比如新渠道、模型适配、命令、工具或运行时配置时，应该走 plugin。',
+    description: '适合为 Gateway 增加渠道接入、工具能力、命令能力或其他运行时扩展。',
     fit: '渠道接入、企业系统桥接、自定义命令、运行时扩展',
     output: '一个插件包，可从 npm 安装，也可从本地扩展目录安装调试',
     links: [
@@ -82,7 +82,7 @@ export const secondaryDevelopmentTracks = [
   },
   {
     title: 'Hooks / Webhooks 联动',
-    description: '当你不需要重写完整插件，只想把外部事件接进来，或者在某个命令、动作发生时触发自动流程，可以优先走 hook 和 HTTP route。',
+    description: '适合连接外部事件、回调通知和轻量自动流程，让系统与表单、审批、工单或其他服务联动。',
     fit: '审批回调、表单通知、GitHub 事件、内部系统回调',
     output: '插件中的 Hook 注册，或带鉴权的 HTTP 入口',
     links: [
@@ -104,39 +104,39 @@ export const secondaryDevelopmentTracks = [
 
 export const secondaryDevelopmentReadingPath = [
   {
-    title: '先判断需求重量',
-    description: '如果只是把任务打包给模型，先不要急着写 plugin；能用 skill 解决的，维护成本通常更低。',
+    title: '明确扩展目标',
+    description: '先确定你要解决的是任务封装、能力接入、事件联动还是公开分发，再选择对应开发形态。',
   },
   {
-    title: '再决定运行边界',
-    description: '只有当你需要新工具、HTTP 路由、Hook 或 Gateway 级配置时，才进入 plugin 形态。',
+    title: '确认运行边界',
+    description: '涉及新工具、HTTP 路由、Hook 或 Gateway 级配置时，再进入插件层开发。',
   },
   {
-    title: '最后考虑分发与团队复用',
-    description: '公开技能优先考虑 ClawHub，团队内部共享则考虑工作区或本地 managed skills。',
+    title: '考虑分发与复用',
+    description: '对外公开的技能可以进入 ClawHub，团队内部共享则更适合工作区或本地托管方式。',
   },
 ]
 
 export const secondaryDevelopmentScenarios = [
   {
     title: '给企业内部知识助手做专用技能包',
-    description: '把术语约束、输出模板、常用脚本和文档资源一起封装进 skill，适合客服、法务、售前、运营等团队。',
-    path: '优先走 Skills',
+    description: '将术语规则、输出模板、常用脚本和文档资源封装进技能包，方便客服、法务、售前、运营等团队复用。',
+    path: 'Skills',
   },
   {
     title: '把 OpenClaw 接进内部审批或工单系统',
-    description: '通过 plugin 注册 HTTP 路由或 hook，让外部系统事件直接进入 Gateway，再由 agent 决定后续动作。',
-    path: '优先走 Plugins / HTTP Routes',
+    description: '通过插件注册 HTTP 路由或 Hook，让审批、工单、表单等外部事件进入 Gateway。',
+    path: 'Plugins / HTTP Routes',
   },
   {
     title: '增加新的渠道或第三方消息入口',
-    description: '如果需要新的 IM、CRM、协作平台接入，这类通常已经超出 skill 范畴，应走插件层开发。',
-    path: '优先走 Plugins',
+    description: '新增 IM、CRM 或协作平台入口时，通常需要通过插件扩展渠道层能力。',
+    path: 'Plugins',
   },
   {
     title: '给团队分发可复用的公开能力包',
     description: '当技能具备通用价值时，可以版本化并发布到 ClawHub，降低团队和社区复用门槛。',
-    path: '优先走 ClawHub',
+    path: 'ClawHub',
   },
 ]
 
@@ -182,25 +182,25 @@ export const secondaryDevelopmentSources = [
 export const secondaryDevelopmentCrossLinks = [
   {
     title: '插件系统',
-    description: '如果你已经确定要写插件，先回到站内插件页看边界和分类。',
+    description: '查看插件分类、运行边界和扩展方式。',
     to: '/tools/plugins',
     meta: 'Tools',
   },
   {
     title: '触发与自动化',
-    description: '如果你更像是在接事件和回调，这一页更适合决定是 hook 还是自动化。',
+    description: '查看事件触发、回调处理与自动化编排相关内容。',
     to: '/tools/triggers',
     meta: 'Flow',
   },
   {
     title: 'Skills',
-    description: '如果你还在判断 skill 到底适不适合当前需求，先看这一页更稳。',
+    description: '查看 Skills 的安装、使用和典型能力场景。',
     to: '/skills',
     meta: 'Skills',
   },
   {
     title: '关键配置',
-    description: '二次开发最终还是会落到运行时配置、权限、模型和环境变量上。',
+    description: '查看运行时配置、权限、模型和环境变量相关说明。',
     to: '/configurations',
     meta: 'Config',
   },
