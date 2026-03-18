@@ -92,33 +92,6 @@ const orderedItems = computed(() => sortDocs((items.value || []) as any[]))
 
 const featuredDocs = computed(() => orderedItems.value.slice(0, 3))
 
-const learnEntries = [
-  {
-    title: '学习路径',
-    description: '先按阶段选路线，避免第一次进入就自己拼学习顺序。',
-    to: '/paths',
-    meta: '主线',
-  },
-  {
-    title: '主题中心',
-    description: '如果你已经知道自己要看安装、渠道、模型或安全，优先从主题聚合页进入。',
-    to: '/topics',
-    meta: '按问题聚合',
-  },
-  {
-    title: '视频教程',
-    description: '适合先建立直觉，再回到文档确认命令和配置差异。',
-    to: '/videos',
-    meta: '演示',
-  },
-  {
-    title: '最佳实践',
-    description: '适合跑通基础链路后，再把方法沉淀成稳定做法。',
-    to: '/best-practices',
-    meta: '深化',
-  },
-]
-
 const docStats = computed(() => [
   {
     label: '当前文档数',
@@ -195,23 +168,6 @@ useSeo({
             <p>{{ item.description }}</p>
           </NuxtLink>
         </aside>
-      </section>
-
-      <section class="card entry-panel">
-        <div class="section-head compact-head">
-          <div>
-            <p class="eyebrow">交叉访问</p>
-            <p class="section-copy">文档中心负责完整结构，但你也可以随时切回路径、主题、视频和实践页，减少在站内来回找入口的成本。</p>
-          </div>
-        </div>
-
-        <div class="entry-grid">
-          <NuxtLink v-for="item in learnEntries" :key="item.to" :to="item.to" class="entry-card">
-            <span class="tag">{{ item.meta }}</span>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
-        </div>
       </section>
 
       <div class="filters card collection-filters">

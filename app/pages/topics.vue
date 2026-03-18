@@ -179,37 +179,6 @@ const topicDocBuckets = computed(() => {
   return buckets.filter(bucket => bucket.items.length)
 })
 
-const crossLinks = computed(() => {
-  const topicPath = topicPathMap[activeTopic.value.slug]
-  const topicVideo = topicVideoAnchorMap[activeTopic.value.slug] || '/videos'
-
-  return [
-    topicPath && {
-      title: topicPath.title,
-      description: topicPath.description,
-      to: topicPath.to,
-      meta: '学习路径',
-    },
-    {
-      title: '文档中心',
-      description: '如果你想回到完整结构，按分类继续查阅相邻文档。',
-      to: '/docs',
-      meta: '完整目录',
-    },
-    {
-      title: '视频教程',
-      description: '先看这一主题的演示，再回到文档确认配置差异。',
-      to: topicVideo,
-      meta: '演示入口',
-    },
-    {
-      title: '最佳实践',
-      description: '把当前主题里的做法沉淀成更稳定的方法，不只停留在“知道怎么配”。',
-      to: '/best-practices',
-      meta: '方法深化',
-    },
-  ].filter(Boolean) as Array<{ title: string; description: string; to: string; meta: string }>
-})
 </script>
 
 <template>
@@ -264,22 +233,6 @@ const crossLinks = computed(() => {
             <strong>{{ layer.title }}</strong>
             <p>{{ layer.summary }}</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card topic-summary cross-panel">
-        <div class="section-head compact-head">
-          <div>
-            <p class="eyebrow">交叉访问</p>
-            <p class="section-copy">主题中心不是终点。看完当前主题后，可以顺手切回路径、完整文档、视频或最佳实践。</p>
-          </div>
-        </div>
-        <div class="cross-grid">
-          <NuxtLink v-for="item in crossLinks" :key="item.to" :to="item.to" class="card topic-card">
-            <span class="tag">{{ item.meta }}</span>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
 

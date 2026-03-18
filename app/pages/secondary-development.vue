@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  secondaryDevelopmentCrossLinks,
   secondaryDevelopmentReadingPath,
   secondaryDevelopmentScenarios,
   secondaryDevelopmentSignals,
@@ -184,31 +183,6 @@ useSeo({
         </div>
       </section>
 
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">Cross Access</p>
-            <h2>继续回到站内相关专题</h2>
-            <p class="section-copy">二次开发最终还是要和站内已有的插件、触发、技能和配置内容交叉阅读。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-2">
-          <NuxtLink
-            v-for="link in secondaryDevelopmentCrossLinks"
-            :key="link.to"
-            :to="link.to"
-            class="series-link-card"
-          >
-            <div class="series-card-top">
-              <SeriesGlyph kind="orbit" tone="muted" small />
-              <span class="series-tag">{{ link.meta }}</span>
-            </div>
-            <strong>{{ link.title }}</strong>
-            <p>{{ link.description }}</p>
-          </NuxtLink>
-        </div>
-      </section>
     </div>
   </section>
 </template>

@@ -17,40 +17,25 @@ const entryCount = computed(() => toolSeriesOverview.length)
 
 const architectureGroups = [
   {
-    title: '能力层',
+    title: '先装能力',
     description: '先确认系统如何装进新能力，再去讨论怎样触发和长期运行。',
     items: ['/tools/plugins'],
     tone: 'brand' as const,
     kind: 'grid' as const,
   },
   {
-    title: '运行层',
+    title: '再接流程',
     description: '把事件触发、时间触发和执行边界拆开理解，自动化链路才会稳定。',
     items: ['/tools/exec-and-approvals', '/tools/triggers', '/tools/automation'],
     tone: 'accent' as const,
     kind: 'flow' as const,
   },
   {
-    title: '治理层',
+    title: '最后看稳定性',
     description: '排障与组合方案不是附录，而是决定这套能力能否长期用下去的关键层。',
     items: ['/tools/diagnostics', '/tools/stacks'],
     tone: 'muted' as const,
     kind: 'shield' as const,
-  },
-]
-
-const menuDecisions = [
-  {
-    title: '保留 6 个核心专题',
-    description: '插件、执行边界、触发、自动化、排障和组合方案仍然各自独立，因为它们解决的是不同问题。',
-  },
-  {
-    title: '合并重复入口',
-    description: '`Hooks / Webhooks` 归并到“触发机制”，`工具排障` 归并到“诊断与排障”，旧路由保留兼容跳转。',
-  },
-  {
-    title: '菜单改成主能力入口',
-    description: '顶部“扩展”菜单不再塞进过多旁支内容，而是优先展示最常被直接进入的能力入口。',
   },
 ]
 
@@ -94,7 +79,7 @@ function getPathLabel(path: string) {
       <section class="series-hero tools-hero">
         <div class="card series-main tools-main">
           <div class="tools-kicker-row">
-            <span class="series-kicker">Extension Map</span>
+            <span class="series-kicker">工具总览</span>
             <span class="tools-hero-note">先边界，后扩展，再长期运行</span>
           </div>
 
@@ -124,19 +109,19 @@ function getPathLabel(path: string) {
 
         <aside class="card series-side tools-side">
           <div class="series-signal">
-            <span class="series-kicker">当前目录</span>
+            <span class="series-kicker">这一页能看到什么</span>
             <strong>{{ entryCount }} 个核心专题</strong>
             <p>扩展目录保留核心主线，不再让重复页面分散判断。旧入口会兼容跳转到新的主专题。</p>
           </div>
 
           <div class="series-signal">
-            <span class="series-kicker">最重要调整</span>
-            <strong>触发机制和排障入口完成收口</strong>
+            <span class="series-kicker">从哪里开始更稳</span>
+            <strong>先看边界，再进触发和自动化</strong>
             <p>现在用户不再需要判断 “Hooks 页面”和“触发机制页面”到底该先看哪一个。</p>
           </div>
 
           <div class="series-signal">
-            <span class="series-kicker">阅读原则</span>
+            <span class="series-kicker">推荐顺序</span>
             <p>从执行边界开始建立安全感，再去装能力、接事件、做自动化，最后再看组合方案，通常是最稳的顺序。</p>
           </div>
         </aside>
@@ -156,24 +141,8 @@ function getPathLabel(path: string) {
       <section class="card series-panel">
         <div class="series-head">
           <div>
-            <p class="eyebrow">IA Decisions</p>
-            <h2>这轮目录为什么这样重排</h2>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <article v-for="item in menuDecisions" :key="item.title" class="series-card">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">Architecture</p>
-            <h2>扩展能力应该按三层理解</h2>
+            <p class="eyebrow">怎么读这一组内容</p>
+            <h2>按使用顺序看，会更容易上手</h2>
           </div>
           <span class="tools-section-note">先分层，再进具体页面，信息噪音会低很多。</span>
         </div>
@@ -213,8 +182,8 @@ function getPathLabel(path: string) {
       <section class="card series-panel">
         <div class="series-head">
           <div>
-            <p class="eyebrow">Audience Paths</p>
-            <h2>按你现在的阶段选入口</h2>
+            <p class="eyebrow">推荐入口</p>
+            <h2>按你现在要解决的问题开始</h2>
           </div>
         </div>
 
@@ -243,8 +212,8 @@ function getPathLabel(path: string) {
         <section class="card series-panel">
           <div class="series-head">
             <div>
-              <p class="eyebrow">Risk Bands</p>
-              <h2>不是每一层都适合立即自动化</h2>
+              <p class="eyebrow">注意事项</p>
+              <h2>不是每一类能力都适合立刻自动化</h2>
             </div>
           </div>
 
@@ -263,8 +232,8 @@ function getPathLabel(path: string) {
         <section class="card series-panel">
           <div class="series-head">
             <div>
-              <p class="eyebrow">Companions</p>
-              <h2>和工具系列最常一起看的页面</h2>
+              <p class="eyebrow">相关内容</p>
+              <h2>这些页面通常会一起用到</h2>
             </div>
           </div>
 
