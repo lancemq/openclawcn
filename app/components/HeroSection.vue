@@ -40,13 +40,13 @@ const primaryRoutes = [
 const editorialPanels = [
   {
     kicker: '今日导读',
-    title: '把 OpenClaw 的中文资料整理成可持续查阅的资讯入口',
-    detail: '不是单纯官网，也不是零散文章列表，而是带有阅读顺序、更新判断和长期导航能力的站点首页。',
+    title: '从文档、更新到实践，先找到最适合你的入口',
+    detail: '无论你是第一次接触 OpenClaw，还是在排查具体问题，都可以先从这里找到合适的下一步。',
   },
   {
-    kicker: '阅读顺序',
-    title: '先理解，再部署，再扩展',
-    detail: '首页负责分流，栏目页负责承接，详情页负责展开和延伸。',
+    kicker: '推荐顺序',
+    title: '先了解，再安装，再扩展',
+    detail: '建议先建立整体认识，再进入安装、配置、运维和进阶专题。',
   },
 ]
 
@@ -66,16 +66,16 @@ function trackHeroClick(target: string, label: string) {
         <div class="hero-lead">
           <div class="hero-heading-row">
             <p class="eyebrow">OpenClaw 中文资讯站</p>
-            <span class="hero-kicker">Editorial index for docs, updates and practice</span>
+            <span class="hero-kicker">Docs, updates and practice</span>
           </div>
 
           <div class="hero-masthead">
             <div class="hero-title-block">
-              <span class="hero-edition">第 01 版 · 导读首页</span>
+              <span class="hero-edition">OpenClawCN 首页</span>
               <h1 class="hero-title">OpenClaw 中文资料、更新与实践导航</h1>
             </div>
             <p class="hero-copy">
-              用更接近资讯网站的编排方式，把文档、新闻、最佳实践、视频和社区入口组织成清晰的阅读路径。既保留技术站点的效率，也让首页有一点编辑判断和个性。
+              在这里可以快速找到文档、新闻、最佳实践、视频和社区支持入口，先判断自己当前阶段，再进入对应内容。
             </p>
           </div>
 
@@ -97,7 +97,7 @@ function trackHeroClick(target: string, label: string) {
         <aside class="hero-sidebar card">
           <div class="sidebar-head">
             <span class="sidebar-title">首页提要</span>
-            <span class="sidebar-live">Live Index</span>
+            <span class="sidebar-live">站点索引</span>
           </div>
 
           <div class="editorial-panels">

@@ -93,7 +93,7 @@ const activeGroup = computed(() =>
   <header class="header">
     <div class="container header-inner">
       <div class="header-ribbon">
-        <span>OpenClawCN Editorial Desk</span>
+        <span>OpenClawCN 中文资料站</span>
         <span>开始 · 文档 · 进阶 · 动态 · 支持</span>
       </div>
 

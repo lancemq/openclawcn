@@ -2,7 +2,7 @@
 title: 配对审批与设备授权管理
 description: 从管理员视角理解 OpenClaw 的 DM pairing、设备 pairing、allowFrom 文件和审批命令，避免把授权边界搞乱。
 category: 参考
-updatedAt: 2026-03-11
+updatedAt: 2026-03-18
 source: https://docs.openclaw.ai/channels/pairing
 sourceName: OpenClaw Docs
 sourceType: official
@@ -53,6 +53,7 @@ Pairing 的核心不是“麻烦一点更安全”，而是把授权从“隐式
 
 - 未知发送者先收到一个短 code
 - 该 code 通常 1 小时失效
+- 单个渠道默认最多保留 3 个 pending pairing 请求
 - 只有批准后，对方消息才会真正进入处理流程
 
 典型命令是：
@@ -63,6 +64,16 @@ openclaw pairing approve telegram <CODE>
 ```
 
 这类命令的意义，是在“聊天入口”层做显式授权。
+
+截至 2026 年 3 月，官方 pairing 页还明确列出了支持这条流程的主要渠道：
+
+- `telegram`
+- `whatsapp`
+- `signal`
+- `imessage`
+- `discord`
+- `slack`
+- `feishu`
 
 ## Device pairing 怎么工作
 
@@ -83,12 +94,19 @@ openclaw devices reject <requestId>
 - 位置
 - 其他 node actions
 
+官方近期还补了一条很实用的 iOS 首次配对路径：如果装了 `device-pair` 插件，可以直接在 Telegram 里发送 `/pair`，然后在手机 App 里粘贴 setup code，最后再回到 Telegram 执行批准。
+
 ## State 存在哪里
 
 官方文档给得很明确：
 
 - 渠道 pairing 和 allowFrom 状态：`~/.openclaw/credentials/`
 - 设备 pairing 状态：`~/.openclaw/devices/`
+
+对于非默认账号，官方现在还明确写了 allowFrom 的 scoped 文件名规则：
+
+- 默认账号：`<channel>-allowFrom.json`
+- 非默认账号：`<channel>-<accountId>-allowFrom.json`
 
 这两组文件都应该被当作敏感状态数据，而不是普通缓存。
 
