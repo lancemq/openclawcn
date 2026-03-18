@@ -458,7 +458,7 @@ const chooserCards = [
 .hero-map {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   padding: 14px 0 0;
 }
@@ -802,7 +802,6 @@ const chooserCards = [
 
 @media (max-width: 1180px) {
   .learn-switch-grid,
-  .hero-map,
   .chooser-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
