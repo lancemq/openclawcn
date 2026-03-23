@@ -28,6 +28,6 @@ onUnmounted(() => {
     <NuxtPage />
   </NuxtLayout>
   <ClientOnly>
-    <GlobalSearch v-if="isOpen" />
+    <GlobalSearch />
   </ClientOnly>
 </template>

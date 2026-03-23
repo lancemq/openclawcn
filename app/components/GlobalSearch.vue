@@ -5,7 +5,7 @@ const selectedIndex = ref(0)
 const inputRef = ref<HTMLInputElement>()
 const resultsContainerRef = ref<HTMLDivElement>()
 
-const { data: manifest } = await useContentManifest()
+const { data: manifest, pending, error, refresh } = await useContentManifest()
 
 const allItems = computed(() => {
   const docItems = (manifest.value?.collections.docs.items || []).map((item) => ({
@@ -88,15 +88,6 @@ const groupedResults = computed(() => {
   return Object.entries(groups).map(([kind, items]) => ({ kind, items }))
 })
 
-function open() {
-  isOpen.value = true
-  query.value = ''
-  selectedIndex.value = 0
-  nextTick(() => {
-    inputRef.value?.focus()
-  })
-}
-
 function close() {
   closeSearch()
   query.value = ''
@@ -167,6 +158,18 @@ function getKindIcon(kind: string) {
   }
   return icons[kind] || '📄'
 }
+
+watch(isOpen, (open) => {
+  if (!open) {
+    return
+  }
+
+  selectedIndex.value = 0
+  nextTick(() => {
+    inputRef.value?.focus()
+    inputRef.value?.select()
+  })
+})
 </script>
 
 <template>
@@ -191,7 +194,17 @@ function getKindIcon(kind: string) {
               <kbd class="search-shortcut">ESC</kbd>
             </div>
 
-            <div v-if="results.length" ref="resultsContainerRef" class="search-results">
+            <div v-if="pending" class="search-loading">
+              <p>正在加载搜索索引...</p>
+              <p class="search-loading-hint">首次打开或开发模式下可能需要一点时间。</p>
+            </div>
+
+            <div v-else-if="error" class="search-empty">
+              <p>搜索索引加载失败</p>
+              <button type="button" class="search-retry" @click="refresh()">重新加载</button>
+            </div>
+
+            <div v-else-if="results.length" ref="resultsContainerRef" class="search-results">
               <div v-for="group in groupedResults" :key="group.kind" class="result-group">
                 <div class="result-group-header">
                   <span class="result-group-icon">{{ getKindIcon(group.kind) }}</span>
@@ -418,7 +431,17 @@ function getKindIcon(kind: string) {
   text-align: center;
 }
 
+.search-loading {
+  padding: 32px 20px;
+  text-align: center;
+}
+
 .search-empty p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.search-loading p {
   margin: 0;
   color: #6b7280;
 }
@@ -427,6 +450,24 @@ function getKindIcon(kind: string) {
   margin-top: 4px !important;
   font-size: 0.85rem;
   color: #9ca3af !important;
+}
+
+.search-loading-hint {
+  margin-top: 4px !important;
+  font-size: 0.85rem;
+  color: #9ca3af !important;
+}
+
+.search-retry {
+  margin-top: 12px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(15, 23, 48, 0.14);
+  background: rgba(255, 255, 255, 0.84);
+  color: #1f52db;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .search-hints {
