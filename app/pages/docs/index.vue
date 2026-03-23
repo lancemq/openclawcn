@@ -92,6 +92,39 @@ const orderedItems = computed(() => sortDocs((items.value || []) as any[]))
 
 const featuredDocs = computed(() => orderedItems.value.slice(0, 3))
 
+const decisionDocs = [
+  {
+    title: '我应该先从哪个页面开始',
+    description: '如果你还不确定该先看文档、路径、主题、视频还是案例，先用这页完成入口判断。',
+    to: '/docs/getting-started/which-page-should-i-start-with',
+    meta: '入口判断',
+  },
+  {
+    title: '我什么时候该开始接入渠道',
+    description: '判断自己是否已经适合进入 Telegram、飞书、WhatsApp 等渠道接入。',
+    to: '/docs/getting-started/when-to-connect-channels',
+    meta: '接入时机',
+  },
+  {
+    title: '我什么时候再上 Skills、Plugins 和多 Agent',
+    description: '帮助区分该先补能力还是先稳住系统，避免基础链路未稳就堆复杂度。',
+    to: '/docs/getting-started/when-to-add-skills-plugins-and-multi-agent',
+    meta: '扩展时机',
+  },
+  {
+    title: '模型、配置和安全这三页分别什么时候看',
+    description: '最短区分模型页、配置页和安全页各自解决什么问题，减少走错入口。',
+    to: '/docs/getting-started/when-to-read-models-config-security',
+    meta: '专题分流',
+  },
+  {
+    title: 'Dashboard、WebChat 和聊天渠道分别什么时候用',
+    description: '先分清是在查状态、测试聊天，还是准备进入真实沟通软件。',
+    to: '/docs/getting-started/when-to-use-dashboard-webchat-or-channels',
+    meta: '入口选择',
+  },
+]
+
 const docStats = computed(() => [
   {
     label: '当前文档数',
@@ -156,6 +189,25 @@ useSeo({
         ]"
         @update="(key, value) => updateFilters(key as 'category' | 'tag', value)"
       />
+
+      <section class="entry-panel">
+        <div class="result-group-head">
+          <p class="eyebrow">先判断再进入</p>
+          <p class="muted">第一次访问更适合先看这组决策文档</p>
+        </div>
+        <div class="entry-grid">
+          <NuxtLink
+            v-for="item in decisionDocs"
+            :key="item.to"
+            :to="item.to"
+            class="entry-card"
+          >
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
+      </section>
 
       <div v-if="isManifestReady" class="masonry-grid collection-grid">
         <NuxtLink

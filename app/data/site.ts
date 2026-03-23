@@ -1,15 +1,15 @@
 export const docsOverview = [
   {
-    title: 'OpenClaw 是什么',
-    description: '用中文快速理解 OpenClaw 的定位、使用方式和它与普通聊天产品的差别。',
-    to: '/docs/getting-started/what-is-openclaw',
-    meta: '产品',
-  },
-  {
     title: '我应该先从哪个页面开始',
     description: '按“先跑通 / 按路径学 / 按主题查 / 先看演示 / 先看案例”判断自己当前最该进入的入口。',
     to: '/docs/getting-started/which-page-should-i-start-with',
     meta: '入口判断',
+  },
+  {
+    title: 'OpenClaw 是什么',
+    description: '用中文快速理解 OpenClaw 的定位、使用方式和它与普通聊天产品的差别。',
+    to: '/docs/getting-started/what-is-openclaw',
+    meta: '产品',
   },
   {
     title: '安装与环境',
@@ -35,6 +35,24 @@ export const docsOverview = [
     to: '/docs/getting-started/when-to-connect-channels',
     meta: '渠道',
   },
+  {
+    title: '我什么时候再上 Skills、Plugins 和多 Agent',
+    description: '帮助区分该先补能力还是先稳住系统，避免基础链路刚跑通就堆复杂度。',
+    to: '/docs/getting-started/when-to-add-skills-plugins-and-multi-agent',
+    meta: '扩展时机',
+  },
+  {
+    title: '按角色选择入口',
+    description: '如果你已经知道自己是个人用户、开发团队还是企业运维，可以直接进入对应阅读顺序。',
+    to: '/docs/getting-started/who-is-openclaw-for',
+    meta: '角色入口',
+  },
+  {
+    title: 'Dashboard、WebChat 和聊天渠道分别什么时候用',
+    description: '把三种最常见入口拆开，先分清自己是在查状态、测试聊天，还是进入真实消息工作流。',
+    to: '/docs/getting-started/when-to-use-dashboard-webchat-or-channels',
+    meta: '入口选择',
+  },
 ]
 
 export const bestPracticeOverview = [
@@ -51,9 +69,9 @@ export const bestPracticeOverview = [
     meta: '社区协作',
   },
   {
-    title: '版本升级跟踪节奏',
-    description: '建立看 release、判断影响和验证升级的固定节奏，而不是看见新版本就直接替换环境。',
-    to: '/best-practices/upgrade-migration',
+    title: '把版本观察变成升级决策',
+    description: '先看影响层、再看当前环境是否会碰到，最后再决定是否应该立刻升级。',
+    to: '/best-practices/release-watch-to-upgrade-decision',
     meta: '更新跟踪',
   },
   {
@@ -72,16 +90,16 @@ export const actionOverview = [
     meta: '搜索',
   },
   {
+    title: '先看 FAQ 再判断入口',
+    description: '如果问题还很模糊，先用 FAQ 区分自己该去路径、主题、搜索还是反馈。',
+    to: '/faq',
+    meta: '分流',
+  },
+  {
     title: '安全实践',
     description: '社区踩坑经验、三大灾难事故复盘和防御配置。',
     to: '/security',
     meta: '安全',
-  },
-  {
-    title: '常见问题',
-    description: '快速查看"先看哪里、怎么反馈、去哪里提问"等高频问题。',
-    to: '/faq',
-    meta: 'FAQ',
   },
   {
     title: '提交反馈',
@@ -144,16 +162,40 @@ export const userRouteOverview = [
     meta: '新手路径',
   },
   {
+    title: '我是个人用户，想先搭自己的长期助手',
+    description: '先分清该从 Dashboard、WebChat、渠道还是 Skills 开始，避免入口太多导致节奏混乱。',
+    to: '/docs/getting-started/personal-user-entry',
+    meta: '个人用户',
+  },
+  {
     title: '我已经部署，想继续扩展',
     description: '从工具系列、Skills、视频教程和最佳实践进入更实战的能力扩展。',
     to: '/tools',
     meta: '扩展路径',
   },
   {
+    title: '我是开发团队，想先把结构和扩展顺序理清',
+    description: '优先理解架构、配置、入口和扩展层的顺序，而不是一上来就把整套能力堆上去。',
+    to: '/docs/getting-started/developer-team-entry',
+    meta: '开发团队',
+  },
+  {
+    title: '我还不确定该先进哪个入口',
+    description: '如果你现在连先看文档、路径、主题还是视频都没想清楚，先走入口判断页。',
+    to: '/docs/getting-started/which-page-should-i-start-with',
+    meta: '入口判断',
+  },
+  {
     title: '我在长期运行，需要稳态方法',
     description: '聚合 Gateway 运维、安全、升级和监控相关内容。',
     to: '/topics?topic=gateway-ops',
     meta: '运维路径',
+  },
+  {
+    title: '我是企业运维，想先看长期运行边界',
+    description: '优先看 Gateway、远程访问、安全与升级治理，不把 OpenClaw 只当成一次性安装项目。',
+    to: '/docs/getting-started/enterprise-ops-entry',
+    meta: '企业运维',
   },
 ]
 

@@ -1,10 +1,12 @@
 ---
 title: 模型选型与成本控制
-description: 从主力模型、fallback、本地模型和低价值任务分流四个角度理解 OpenClaw 的模型配置策略与成本控制方法。
+description: 从主力模型、fallback、国内 provider 和低价值任务分流四个角度理解 OpenClaw 的模型配置策略与成本控制方法。
 category: 运维
-updatedAt: 2026-03-11
-sourceType: third-party
-tags: [models, cost, providers, fallback]
+updatedAt: 2026-03-23
+source: https://docs.openclaw.ai/providers
+sourceName: OpenClaw Docs
+sourceType: official
+tags: [models, cost, providers, fallback, qwen, qianfan, kimi]
 ---
 
 # 模型选型与成本控制
@@ -14,7 +16,7 @@ tags: [models, cost, providers, fallback]
 - 主力模型够不够稳
 - fallback 链有没有准备
 - 低价值任务是不是在浪费预算
-- 本地模型值不值得接入
+- 你的 provider 是否适合当前网络环境
 
 ## 1. 一开始不要追求模型越多越好
 
@@ -37,9 +39,9 @@ tags: [models, cost, providers, fallback]
 选择主力模型时，优先看：
 
 - 你是否已经有稳定凭据
-- 成本能否长期承受
-- 工具调用是否稳定
-- 是否足够适合你的主要任务类型
+- 当前网络环境访问是否稳定
+- 工具调用和长上下文是否符合你的主要任务
+- 长期成本能否承受
 
 ## 3. 为什么 fallback 很重要
 
@@ -54,7 +56,57 @@ tags: [models, cost, providers, fallback]
 
 如果你的 OpenClaw 已经接了真实渠道，最好不要让主模型成为单点故障。
 
-## 4. 哪些任务适合用低成本模型
+## 4. 中文用户更值得单独看的 3 类 provider
+
+### Qwen OAuth
+
+官方 Qwen provider 现在更像“快速验证和低门槛试用入口”：
+
+- 通过设备码 OAuth 登录
+- 默认 provider 是 `qwen-portal`
+- 文档注明有每日请求额度上限
+
+它很适合：
+
+- 本地测试
+- 快速体验 Qwen Coder / Vision
+- 轻量备用入口
+
+但如果你要长期跑真实团队工作流，更适合把它看成补充路线，而不是唯一主力。
+
+### Qianfan
+
+Qianfan 更适合已经在百度云体系里、或者想统一走 MaaS 平台的团队。
+
+官方接入已经支持：
+
+```bash
+openclaw onboard --auth-choice qianfan-api-key
+```
+
+它更适合：
+
+- 团队已有百度云账号与结算体系
+- 想把模型入口放进统一平台
+- 希望接入和审计方式更企业化
+
+### Moonshot / Kimi
+
+官方现在已经把 Moonshot API 和 Kimi Coding 明确分开：
+
+- `moonshot/...`
+- `kimi-coding/...`
+
+它们不是同一个 provider，密钥也不能互换。
+
+对中文用户尤其重要的一点是，官方文档已经给出：
+
+- 国际端点：`https://api.moonshot.ai/v1`
+- 中国端点：`https://api.moonshot.cn/v1`
+
+如果你准备在国内网络环境长期运行，这类 provider 会比“只看模型榜单”更值得先核对端点和计费方式。
+
+## 5. 哪些任务适合用低成本模型
 
 不是所有任务都值得上高价模型。
 
@@ -71,7 +123,7 @@ tags: [models, cost, providers, fallback]
 - 把预算留给真正需要强模型的任务
 - 降低长期运行的焦虑感
 
-## 5. 本地模型值不值得上
+## 6. 本地模型值不值得上
 
 本地模型的核心优点是：
 
@@ -94,21 +146,18 @@ tags: [models, cost, providers, fallback]
 
 而不是默认替代所有云端模型。
 
-## 6. 模型配置时最容易忽略的点
+## 7. 中文团队最容易忽略的成本，不只是单价
 
-### 没有保留内置 provider
+真正容易失控的，通常不是某个模型的标价，而是下面这些组合问题：
 
-如果你在自定义 provider 时没有正确处理合并策略，就容易把已有 provider 覆盖掉。
+- 所有任务都走同一个高价主力模型
+- 没有 fallback，导致故障时只能强行切更贵模型
+- 长期在线群聊把低价值消息也送进高价模型
+- 在国内网络环境下频繁因端点不稳重试
 
-### 只有主模型，没有 fallback
+所以长期成本控制，本质上也是入口治理和任务分层。
 
-短期没问题，长期一旦限速或失效，就会直接影响实际使用。
-
-### 用高价模型跑低价值任务
-
-这通常是账单膨胀最快的原因。
-
-## 7. 一条更稳的成本控制路径
+## 8. 一条更稳的成本控制路径
 
 建议按这个顺序配置：
 
@@ -117,26 +166,35 @@ tags: [models, cost, providers, fallback]
 3. 把轻量任务切到低成本模型
 4. 如果确实需要，再补本地模型
 
-## 8. 哪些任务更适合本地模型
+## 9. 给中文用户的一套实用预算思路
 
-更适合本地模型的通常包括：
+如果你现在还没有精细计费体系，可以先按三层看：
 
-- 本地测试
-- 非高频实验
-- 对隐私要求高的处理
-- 不强依赖最强推理效果的任务
+### 主力预算
 
-而需要稳定工具调用和复杂任务推进时，通常仍更适合保留云端主力模型。
+留给：
 
-## 9. 中文用户常见的两种误区
+- 长任务
+- 工具调用
+- 需要稳定结果的主会话
 
-### 误区一：只看模型单价，不看实际任务类型
+### 维护预算
 
-最便宜的模型不一定适合你的主要任务。
+留给：
 
-### 误区二：只接一家，完全不设 fallback
+- 定时任务
+- 状态汇总
+- 轻量问答
 
-这样一旦 provider 波动，OpenClaw 的使用体验会很脆弱。
+### 试验预算
+
+留给：
+
+- 新 provider 测试
+- 本地模型实验
+- 新渠道灰度接入
+
+这样比“所有流量统一走同一个模型”更容易长期维护。
 
 ## 10. 一条推荐的实践思路
 
@@ -144,13 +202,13 @@ tags: [models, cost, providers, fallback]
 
 - 强模型负责主任务
 - 低成本模型负责常规维护
-- 本地模型负责隐私或实验场景
+- 国内 provider 或本地模型负责网络环境、预算或隐私约束下的补位
 
 这样比“全部任务都上同一个模型”更接近长期可用状态。
 
 ## 下一步推荐
 
-- [OpenClaw 的 Models 应该怎么理解](/docs/manual/models-overview)
-- [部署方式怎么选](/docs/setup/deployment-options)
-- [Gateway 运维与日常检查](/docs/operations/gateway-operations)
-- [OpenClaw 安全配置基础](/docs/operations/safety-basics)
+- [模型、配置和安全这三页分别什么时候看](/docs/getting-started/when-to-read-models-config-security)
+- [国内云部署思路](/docs/setup/china-cloud-deployment)
+- [Providers 与 Fallback](/docs/manual/providers-and-fallback)
+- [本地模型与 Ollama](/docs/manual/local-models-ollama)

@@ -8,8 +8,43 @@ useSeo({
 const faqs = [
   {
     question: '第一次访问应该从哪里开始？',
-    answer: '建议先看快速入门，再看安装与环境，最后按需求进入新闻或社区支持。',
+    answer: '如果你还不确定入口，先看“我应该先从哪个页面开始”；如果目标是先跑通，就继续看快速入门和安装与环境。',
     category: '入门',
+  },
+  {
+    question: '如果我已经知道自己是个人用户、开发团队或企业运维，该怎么进？',
+    answer: '个人用户更适合先看个人入口页；开发团队先看结构和扩展顺序；企业运维先看 Gateway、远程边界、安全和升级治理。',
+    category: '入门',
+  },
+  {
+    question: '我现在应该先看文档、学习路径、主题中心还是视频？',
+    answer: '想按顺序学就去学习路径；已经知道自己关心安装、模型或安全就去主题中心；更习惯先看演示就去视频教程；只想先跑通就直接从快速入门开始。',
+    category: '入门',
+  },
+  {
+    question: '什么时候才适合开始接渠道？',
+    answer: '至少在本地最小链路已经跑通、能正常打开 Control UI、知道 Gateway 状态正常后，再进入渠道接入会更稳。',
+    category: '入门',
+  },
+  {
+    question: '什么时候再上 Skills、Plugins 或多 Agent？',
+    answer: '当你已经稳定完成基础链路，且能明确说出当前缺的是哪类能力时，再少量增加 Skills 或扩展更合适；多 Agent 更适合放到长期稳定运行之后。',
+    category: '进阶判断',
+  },
+  {
+    question: '模型、配置和安全这三页我该先看哪个？',
+    answer: '选模型去模型页，配系统去配置页，看入口和风险边界去安全页。如果三个问题混在一起，建议顺序是先配置，再模型，最后安全。',
+    category: '进阶判断',
+  },
+  {
+    question: 'Dashboard、WebChat 和聊天渠道我该先用哪个？',
+    answer: '看系统状态和管理面先用 Dashboard；先测试聊天和上下文更适合 WebChat；只有确定要进入真实沟通软件时，再去接 Telegram、飞书或 WhatsApp。',
+    category: '进阶判断',
+  },
+  {
+    question: '为什么长期运行一段时间后，输出会越来越乱？',
+    answer: '这通常不只是模型问题，也和 session、memory、compaction 和重置策略有关。长期运行时，需要把会话边界和记忆治理一起看。',
+    category: '进阶判断',
   },
   {
     question: '如果中文资料不完整怎么办？',
@@ -39,10 +74,14 @@ const faqs = [
 ]
 
 const quickLinks = [
+  { title: '入口判断', to: '/docs/getting-started/which-page-should-i-start-with', desc: '先判断该从哪个入口进' },
+  { title: '角色入口', to: '/docs/getting-started/who-is-openclaw-for', desc: '按个人 / 团队 / 运维进入' },
   { title: '快速入门', to: '/docs/getting-started/getting-started', desc: '5分钟建立整体认识' },
-  { title: '安装配置', to: '/docs/setup/installation', desc: '环境准备与首次安装' },
+  { title: '渠道时机', to: '/docs/getting-started/when-to-connect-channels', desc: '判断什么时候接渠道更稳' },
+  { title: '扩展时机', to: '/docs/getting-started/when-to-add-skills-plugins-and-multi-agent', desc: '判断什么时候再补能力' },
+  { title: '模型 / 配置 / 安全', to: '/docs/getting-started/when-to-read-models-config-security', desc: '先分清该去哪个专题页' },
+  { title: '入口选择', to: '/docs/getting-started/when-to-use-dashboard-webchat-or-channels', desc: '区分 Dashboard、WebChat 和渠道' },
   { title: '提交反馈', to: '/feedback', desc: '报告问题或建议' },
-  { title: '社区支持', to: '/community', desc: '获取更多帮助' },
 ]
 
 const faqRoutes = [
@@ -161,7 +200,7 @@ const groupedFaqs = Object.entries(
 
 .quick-links {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-top: 0;
 }
