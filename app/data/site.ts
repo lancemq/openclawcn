@@ -6,10 +6,10 @@ export const docsOverview = [
     meta: '产品',
   },
   {
-    title: '快速入门',
-    description: '用 5 到 10 分钟建立整体认识，并明确第一次上手时更稳妥的阅读和配置顺序。',
-    to: '/docs/getting-started/getting-started',
-    meta: '入门',
+    title: '我应该先从哪个页面开始',
+    description: '按“先跑通 / 按路径学 / 按主题查 / 先看演示 / 先看案例”判断自己当前最该进入的入口。',
+    to: '/docs/getting-started/which-page-should-i-start-with',
+    meta: '入口判断',
   },
   {
     title: '安装与环境',
@@ -24,16 +24,16 @@ export const docsOverview = [
     meta: '架构',
   },
   {
-    title: 'Models 应该怎么理解',
-    description: '先区分模型层、工具层和 Gateway 层，再决定如何选择提供方与默认配置。',
-    to: '/docs/manual/models-overview',
-    meta: '模型',
+    title: '模型、配置和安全分别什么时候看',
+    description: '用最短方式区分模型页、配置页和安全页各自解决什么问题，避免进错入口。',
+    to: '/docs/getting-started/when-to-read-models-config-security',
+    meta: '判断',
   },
   {
-    title: 'Gateway 运维与日常检查',
-    description: '围绕状态检查、访问方式、日志与升级窗口，建立长期运行的最小运维习惯。',
-    to: '/docs/operations/gateway-operations',
-    meta: '运维',
+    title: '我什么时候该开始接入渠道',
+    description: '判断现在是否已经适合进入 Telegram、飞书、WhatsApp 等渠道接入，而不是过早增加复杂度。',
+    to: '/docs/getting-started/when-to-connect-channels',
+    meta: '渠道',
   },
 ]
 

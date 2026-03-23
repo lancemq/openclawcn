@@ -433,4 +433,74 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .collection-main,
+  .collection-side,
+  .overview-card,
+  .video-card,
+  .watch-tips,
+  .tip-card,
+  .filters {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .video-overview-grid,
+  .video-grid,
+  .tips-grid,
+  .filters {
+    gap: 10px;
+  }
+
+  .home-head {
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .home-head-note,
+  .overview-card p,
+  .tip-card p,
+  .video-copy,
+  .video-meta,
+  .collection-summary p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .overview-card strong,
+  .tip-card strong,
+  .video-card h2,
+  .collection-summary strong {
+    font-size: 0.94rem;
+    line-height: 1.34;
+  }
+
+  .filter-group {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .filter-label {
+    width: 100%;
+    font-size: 0.78rem;
+  }
+
+  .filter-chip {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  .video-card-head,
+  .video-meta,
+  .video-tags,
+  .related-topic-row {
+    gap: 6px;
+  }
+
+  .video-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
 </style>

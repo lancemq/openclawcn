@@ -707,4 +707,76 @@ const faqs = [
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .configurations-page {
+    gap: 18px;
+  }
+
+  .hero-main,
+  .summary-card,
+  .edit-card,
+  .layer-card,
+  .risk-card,
+  .faq-card,
+  .related-link,
+  .preset-card,
+  .command-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .hero-facts,
+  .edit-grid,
+  .layer-grid,
+  .preset-grid,
+  .risk-grid,
+  .faq-grid,
+  .related-grid,
+  .command-stack,
+  .config-columns {
+    gap: 10px;
+  }
+
+  .edit-card h3,
+  .layer-card h3,
+  .preset-card h3,
+  .command-card h3,
+  .faq-card h3,
+  .related-link strong,
+  .risk-card strong {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .hero-fact p,
+  .summary-card p,
+  .edit-card p,
+  .layer-card p,
+  .preset-card p,
+  .command-card p,
+  .risk-card p,
+  .faq-card p,
+  .related-link p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .edit-card code,
+  .layer-tag {
+    font-size: 0.76rem;
+  }
+
+  .preset-card pre,
+  .command-card pre {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .preset-card code,
+  .command-card code {
+    font-size: 0.74rem;
+    line-height: 1.6;
+  }
+}
 </style>

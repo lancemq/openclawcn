@@ -399,5 +399,54 @@ function updateKindFilter(kind: string) {
   .search-shell-head {
     display: grid;
   }
+
+  .search-main-panel {
+    padding: 16px;
+  }
+
+  .search-count-box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .search-field input {
+    padding: 13px 14px;
+    font-size: 0.96rem;
+  }
+
+  .route-panel-link,
+  .side-panel,
+  .route-panel {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .filter-group {
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .filter-label {
+    width: 100%;
+  }
+
+  .filter-chip {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  .result-card {
+    gap: 10px;
+  }
+
+  .result-card h2 {
+    font-size: 1rem;
+  }
+
+  .result-card p {
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
 }
 </style>

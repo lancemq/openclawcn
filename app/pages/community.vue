@@ -854,4 +854,79 @@ const learnEntries = [
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .hero-copy,
+  .signal-board,
+  .route-card,
+  .triage-card,
+  .scenario-card,
+  .contribution-card,
+  .status-card,
+  .faq-item summary,
+  .faq-item p {
+    border-radius: 18px;
+  }
+
+  .hero-copy,
+  .signal-board,
+  .route-card,
+  .triage-card,
+  .scenario-card,
+  .contribution-card,
+  .status-card {
+    padding: 14px;
+  }
+
+  .hero-summary,
+  .board-grid,
+  .hero-signals,
+  .priority-grid,
+  .scenario-grid,
+  .lane-grid,
+  .faq-list {
+    gap: 10px;
+  }
+
+  .hero-title,
+  .section-title {
+    line-height: 1.14;
+  }
+
+  .route-card h3,
+  .triage-step h3,
+  .lane-item h3,
+  .status-item strong,
+  .faq-item summary {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .hero-description,
+  .route-card p,
+  .route-detail,
+  .triage-step p,
+  .scenario-item p,
+  .lane-item p,
+  .board-summary,
+  .board-stat p,
+  .status-item span,
+  .faq-item p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .triage-step-no {
+    width: 38px;
+    height: 38px;
+  }
+
+  .faq-item summary {
+    padding: 14px 16px;
+  }
+
+  .faq-item p {
+    padding: 14px 16px 16px;
+  }
+}
 </style>

@@ -495,4 +495,87 @@ const topicDocBuckets = computed(() => {
     padding: 20px;
   }
 }
+
+@media (max-width: 720px) {
+  .topics-page {
+    gap: 20px;
+  }
+
+  .topics-main,
+  .topics-side,
+  .topic-summary,
+  .topic-doc-bucket,
+  .topic-filters {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .topic-summary {
+    gap: 16px;
+  }
+
+  .collection-summary strong,
+  .layer-summary-card strong,
+  .topic-card strong {
+    font-size: 0.98rem;
+  }
+
+  .collection-summary p,
+  .layer-summary-card p,
+  .topic-card p,
+  .topic-doc-head p,
+  .filter-label {
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+
+  .filter-group {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .filter-label {
+    width: 100%;
+  }
+
+  .filter-chip {
+    padding: 7px 11px;
+    font-size: 0.78rem;
+  }
+
+  .topic-card {
+    padding-bottom: 26px;
+  }
+
+  .topic-card::after {
+    right: 14px;
+    bottom: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .layer-summary-grid,
+  .topic-grid,
+  .topic-grid.compact,
+  .topic-dual-grid {
+    gap: 10px;
+  }
+
+  .layer-summary-card,
+  .topic-card,
+  .inner-card {
+    border-radius: 18px;
+  }
+
+  .topic-card strong {
+    line-height: 1.34;
+    padding-right: 12px;
+  }
+
+  .topic-card p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+    padding-right: 0;
+  }
+}
 </style>

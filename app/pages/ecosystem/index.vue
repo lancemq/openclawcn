@@ -200,4 +200,47 @@ const learnEntries = [
 .section-meta {
   align-items: flex-start;
 }
+
+@media (max-width: 560px) {
+  .series-page {
+    gap: 18px;
+  }
+
+  .series-main,
+  .series-side,
+  .series-panel,
+  .series-card,
+  .series-link-card,
+  .series-stat-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .series-grid-2,
+  .series-grid-3,
+  .series-grid-4 {
+    gap: 10px;
+  }
+
+  .series-main .section-title,
+  .series-head h2 {
+    line-height: 1.14;
+  }
+
+  .series-card strong,
+  .series-link-card strong,
+  .series-signal strong {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .section-copy,
+  .series-card-copy,
+  .series-link-card p,
+  .series-signal p,
+  .series-stat-card p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+}
 </style>

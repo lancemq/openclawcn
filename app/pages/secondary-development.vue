@@ -321,4 +321,55 @@ const developmentBriefs = [
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .development-page {
+    gap: 18px;
+  }
+
+  .development-main,
+  .development-side,
+  .stat-card,
+  .brief-card,
+  .development-track,
+  .path-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .stats-grid,
+  .brief-grid,
+  .reading-path,
+  .track-links,
+  .scenario-grid {
+    gap: 10px;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-label,
+  .path-card strong,
+  .series-card h3 {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .stat-note,
+  .brief-card p,
+  .track-meta p,
+  .path-card p,
+  .series-card-copy,
+  .collection-summary p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .path-index {
+    width: 36px;
+    height: 36px;
+    font-size: 0.78rem;
+  }
+}
 </style>

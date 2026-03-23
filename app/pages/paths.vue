@@ -851,4 +851,90 @@ const chooserCards = [
     left: 18px;
   }
 }
+
+@media (max-width: 560px) {
+  .paths-page {
+    gap: 22px;
+  }
+
+  .hero-main,
+  .path-card {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .stat-panel,
+  .signal-panel,
+  .steps-column,
+  .related-column {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .hero-node,
+  .chooser-card,
+  .resource-card,
+  .related-card {
+    gap: 8px;
+    padding: 12px 14px 18px;
+    border-radius: 18px;
+  }
+
+  .hero-node strong,
+  .chooser-card strong,
+  .related-card strong,
+  .resource-card strong,
+  .step-link strong {
+    font-size: 0.94rem;
+    line-height: 1.38;
+  }
+
+  .hero-node p,
+  .chooser-card p,
+  .resource-card p,
+  .path-audience,
+  .path-summary,
+  .meta-box p,
+  .step-link span {
+    font-size: 0.83rem;
+    line-height: 1.58;
+  }
+
+  .hero-index,
+  .path-number,
+  .step-index {
+    width: 34px;
+    height: 34px;
+    font-size: 0.82rem;
+  }
+
+  .path-card h2 {
+    font-size: 1.24rem;
+    line-height: 1.12;
+  }
+
+  .meta-box {
+    padding: 12px 13px;
+    border-radius: 16px;
+  }
+
+  .step-item {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .step-item:not(:last-child)::after {
+    left: 16px;
+    top: 36px;
+  }
+
+  .step-link {
+    padding: 12px 13px;
+    border-radius: 16px;
+  }
+
+  .checkpoint-item {
+    font-size: 0.76rem;
+  }
+}
 </style>

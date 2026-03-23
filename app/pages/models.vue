@@ -1318,4 +1318,103 @@ const relatedLinks = [
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .models-shell {
+    gap: 18px;
+  }
+
+  .hero-copy,
+  .margin-card,
+  .audience-card,
+  .sidebar-panel,
+  .routing-card,
+  .governance-card,
+  .comparison-card,
+  .cost-card,
+  .source-card,
+  .related-card,
+  .tip-item,
+  .plan-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .hero-copy,
+  .section-panel {
+    gap: 14px;
+  }
+
+  .hero-copy .section-title,
+  .section-head h2,
+  .sidebar-panel h2 {
+    line-height: 1.16;
+  }
+
+  .hero-note p,
+  .family-model-card p,
+  .family-caution p,
+  .routing-card p,
+  .governance-card p,
+  .cost-card p,
+  .source-card p,
+  .related-card p,
+  .matrix-item p,
+  .audience-card p,
+  .step-card p,
+  .comparison-head p,
+  .plan-capacity,
+  .model-row {
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+
+  .audience-card h2,
+  .family-model-top h3,
+  .comparison-head h3,
+  .tip-item h3,
+  .plan-header h3,
+  .routing-card h3,
+  .cost-card h3,
+  .source-card h3,
+  .step-card h3 {
+    font-size: 0.96rem;
+    line-height: 1.36;
+  }
+
+  .step-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .step-index {
+    width: 38px;
+    height: 38px;
+  }
+
+  .family-model-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .comparison-model,
+  .tip-item,
+  .plan-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .comparison-model-top,
+  .plan-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .coding-plan-item {
+    padding: 12px 14px;
+    gap: 6px;
+    border-radius: 14px;
+    font-size: 0.82rem;
+  }
+}
 </style>

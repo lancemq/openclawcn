@@ -1,0 +1,63 @@
+---
+title: 我什么时候该开始接入渠道
+description: 帮你判断现在是否已经适合进入 Telegram、WhatsApp、飞书等渠道接入，而不是在最小链路未稳定时过早增加复杂度。
+category: 入门
+updatedAt: 2026-03-23
+sourceType: internal
+tags: [channels, onboarding, decision, gateway, safety]
+---
+
+# 我什么时候该开始接入渠道
+
+很多人第一次接触 OpenClaw 时，最先想做的就是把它接进 Telegram、飞书或其他聊天入口。  
+但大多数时候，过早接渠道会让问题更难判断。
+
+## 先回答这 4 个问题
+
+如果下面 4 条里还有 2 条以上没做到，通常都不建议立刻接渠道：
+
+1. 你已经完成 [快速入门](/docs/getting-started/getting-started)
+2. 你能正常打开 Control UI / Dashboard
+3. 你知道当前 Gateway 是否运行正常
+4. 你已经理解基本安全边界，不会直接把入口暴露到公网
+
+## 适合开始接渠道的信号
+
+- 本地最小链路已经跑通
+- 你知道问题出在本地、模型、配置还是入口
+- 你已经决定先接哪个渠道，而不是一次接多个
+- 你愿意先做白名单、mention 规则和最小权限收口
+
+## 暂时不要接渠道的信号
+
+- 还没跑通本地启动
+- 还不理解 Gateway、Control UI 和入口之间的关系
+- 想一开始就接多个渠道
+- 只是因为“看起来更酷”而不是当前真有使用场景
+
+## 更稳的顺序
+
+1. 先完成本地最小链路
+2. 看 [Channels 概览](/docs/manual/channels-overview)
+3. 先接一个渠道
+4. 配好 `allowFrom`、群组 mention 或配对规则
+5. 跑通一次真实消息验证
+6. 再考虑第二个渠道
+
+## 哪些人可以更早接
+
+- 明确就是为了群聊或消息入口来的用户
+- 已经有稳定运维经验、知道怎么做入口收口的团队
+- 正在验证某个具体渠道的产品可行性，而不是泛泛试用
+
+## 接渠道前最该补的内容
+
+- [Channels 概览](/docs/manual/channels-overview)
+- [安全配置基础](/docs/operations/safety-basics)
+- [网络模型、发现与配对](/docs/operations/network-and-pairing)
+- [渠道接入路径](/paths#channels-integration)
+
+## 一句话判断
+
+如果你还不能稳定解释“系统现在是否正常运行”，那就还不该先接渠道。  
+先把本地链路跑稳，再接入口，后面会省很多排查时间。

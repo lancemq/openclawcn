@@ -690,6 +690,29 @@ function trackPathClick(target: string, label: string) {
     padding: 16px;
   }
 
+  .home-head {
+    gap: 6px;
+  }
+
+  .home-head-note {
+    font-size: 0.92rem;
+    line-height: 1.62;
+  }
+
+  .editorial-feature,
+  .timeline-card {
+    padding: 16px;
+  }
+
+  .timeline-item {
+    gap: 8px;
+  }
+
+  .timeline-card h3,
+  .editorial-feature h3 {
+    font-size: 1.06rem;
+  }
+
   .compact-path-grid {
     grid-template-columns: 1fr;
   }
@@ -704,6 +727,35 @@ function trackPathClick(target: string, label: string) {
   .ecosystem-grid,
   .action-grid {
     grid-template-columns: 1fr;
+  }
+
+  .path-step {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .path-index {
+    width: 36px;
+    height: 36px;
+    font-size: 0.82rem;
+  }
+
+  .path-copy strong {
+    font-size: 0.96rem;
+  }
+
+  .path-copy p,
+  .editorial-feature p,
+  .editorial-mini p,
+  .timeline-card p {
+    font-size: 0.82rem;
+    line-height: 1.46;
+  }
+
+  .start-more {
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>

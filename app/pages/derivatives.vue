@@ -375,4 +375,51 @@ const learnEntries = [
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .derivatives-page {
+    gap: 18px;
+  }
+
+  .collection-main,
+  .collection-side,
+  .overview-card,
+  .derivative-card,
+  .compare-panel,
+  .compare-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .collection-utility,
+  .overview-grid,
+  .derivative-grid,
+  .compare-grid {
+    gap: 10px;
+  }
+
+  .collection-summary strong,
+  .overview-card strong,
+  .derivative-card h2,
+  .compare-card strong {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .section-copy,
+  .collection-summary p,
+  .card-copy,
+  .note,
+  .pending-text,
+  .meta-list dd,
+  .compare-card p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .compact-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
 </style>

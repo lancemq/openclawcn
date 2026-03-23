@@ -1044,4 +1044,72 @@ const relatedLinks = [
     display: grid;
   }
 }
+
+@media (max-width: 560px) {
+  .story-page {
+    gap: 18px;
+  }
+
+  .story-hero-main,
+  .story-hero-side,
+  .story-opening,
+  .story-highlight-card,
+  .story-quote-card,
+  .story-timeline-card,
+  .naming-step,
+  .naming-incident,
+  .incident-card,
+  .decision-card,
+  .conversation-card,
+  .growth-comparison-board,
+  .comparison-row,
+  .culture-card,
+  .story-related-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .story-highlight-band,
+  .story-opening-grid,
+  .incident-list,
+  .conversation-strip,
+  .culture-layout,
+  .comparison-stack {
+    gap: 10px;
+  }
+
+  .story-headline .section-title,
+  .story-opening h2,
+  .series-head h2 {
+    line-height: 1.14;
+  }
+
+  .story-highlight-card strong,
+  .decision-card strong,
+  .comparison-row strong,
+  .story-related-card strong {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .story-highlight-card p,
+  .story-editorial p,
+  .incident-card p,
+  .decision-card p,
+  .conversation-card p,
+  .culture-card p,
+  .story-related-card p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .story-quote-card blockquote {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .naming-step code {
+    font-size: 0.92rem;
+  }
+}
 </style>

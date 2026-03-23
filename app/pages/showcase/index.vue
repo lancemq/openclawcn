@@ -957,4 +957,70 @@ function toggleIndustry(id: string) {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .showcase-page {
+    gap: 18px;
+  }
+
+  .showcase-hero-card,
+  .implementation-card,
+  .industry-entry,
+  .industry-position,
+  .industry-case-card,
+  .industry-soul,
+  .showcase-record,
+  .personal-record,
+  .showcase-next-card {
+    border-radius: 18px;
+  }
+
+  .showcase-hero-card,
+  .implementation-card,
+  .industry-toggle,
+  .industry-body,
+  .industry-position,
+  .industry-case-card,
+  .industry-soul,
+  .showcase-record,
+  .personal-record,
+  .showcase-next-card {
+    padding: 14px;
+  }
+
+  .showcase-quick-grid,
+  .showcase-card-grid,
+  .personal-grid,
+  .showcase-next-grid,
+  .industry-cases {
+    gap: 10px;
+  }
+
+  .industry-toggle {
+    gap: 10px;
+  }
+
+  .industry-toggle h3,
+  .industry-case-card strong,
+  .showcase-record h3,
+  .showcase-next-card strong {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .section-copy,
+  .industry-position p,
+  .industry-detail-grid p,
+  .record-outcomes,
+  .showcase-record p,
+  .showcase-next-card p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .industry-code {
+    font-size: 0.74rem;
+    line-height: 1.6;
+  }
+}
 </style>

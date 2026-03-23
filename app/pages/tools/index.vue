@@ -403,4 +403,52 @@ function getPathLabel(path: string) {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .tools-index-page {
+    gap: 18px;
+  }
+
+  .tools-main,
+  .tools-side,
+  .tools-reading-card,
+  .tools-signal-card,
+  .architecture-band,
+  .risk-card,
+  .series-link-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .tools-reading-band,
+  .architecture-stack,
+  .companion-stack,
+  .tools-dual-grid {
+    gap: 10px;
+  }
+
+  .tools-main .section-title,
+  .series-head h2 {
+    line-height: 1.14;
+  }
+
+  .tools-reading-card strong,
+  .architecture-band-title strong,
+  .series-link-card strong,
+  .risk-card strong {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .section-copy,
+  .tools-reading-card p,
+  .architecture-band-title p,
+  .series-link-card p,
+  .risk-card p,
+  .risk-card small,
+  .series-signal p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+}
 </style>

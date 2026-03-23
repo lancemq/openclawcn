@@ -912,4 +912,63 @@ const learnEntries = [
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .skills-page {
+    gap: 18px;
+  }
+
+  .hero-main,
+  .hero-side,
+  .desk-panel,
+  .scenario-panel,
+  .review-panel,
+  .config-panel,
+  .skill-card,
+  .scenario-card,
+  .config-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .signal-grid,
+  .quick-grid,
+  .track-grid,
+  .skill-grid,
+  .loading-grid,
+  .config-grid,
+  .scenario-list {
+    gap: 10px;
+  }
+
+  .skill-card {
+    min-height: 0;
+  }
+
+  .hero-main .section-title,
+  .section-head h2 {
+    line-height: 1.14;
+  }
+
+  .skill-card strong,
+  .scenario-card strong,
+  .config-card strong {
+    font-size: 0.9rem;
+    line-height: 1.42;
+  }
+
+  .section-copy,
+  .skill-card p,
+  .scenario-card p,
+  .config-card p,
+  .review-item p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .loading-card pre {
+    padding: 12px;
+    border-radius: 16px;
+  }
+}
 </style>

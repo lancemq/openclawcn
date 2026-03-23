@@ -1234,4 +1234,86 @@ const learnEntries = [
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 560px) {
+  .security-page {
+    gap: 18px;
+  }
+
+  .hero-main,
+  .hero-side,
+  .priority-panel,
+  .priority-card,
+  .boundary-card,
+  .baseline-card,
+  .cadence-card,
+  .checklist-card,
+  .practice-card,
+  .related-link {
+    border-radius: 18px;
+  }
+
+  .hero-main,
+  .summary-card,
+  .surface-card,
+  .priority-panel,
+  .priority-card,
+  .boundary-card,
+  .baseline-card,
+  .cadence-card,
+  .checklist-card,
+  .practice-card,
+  .related-link,
+  .incident-card,
+  .defense-card {
+    padding: 14px;
+  }
+
+  .hero-facts,
+  .exposure-grid,
+  .incidents-grid,
+  .defense-grid,
+  .boundary-grid,
+  .cadence-grid,
+  .checklist-grid,
+  .practice-grid,
+  .related-grid {
+    gap: 10px;
+  }
+
+  .hero-fact strong,
+  .priority-copy strong,
+  .boundary-card strong,
+  .related-link strong {
+    font-size: 0.94rem;
+    line-height: 1.36;
+  }
+
+  .hero-fact p,
+  .priority-copy p,
+  .boundary-card p,
+  .baseline-card li,
+  .cadence-card p,
+  .checklist-card li,
+  .practice-card p,
+  .related-link p {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .priority-level {
+    min-height: 36px;
+    font-size: 0.82rem;
+  }
+
+  .config-block {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .config-block code {
+    font-size: 0.74rem;
+    line-height: 1.62;
+  }
+}
 </style>

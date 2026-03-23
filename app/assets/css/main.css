@@ -1092,6 +1092,32 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .collection-page {
+    gap: 18px;
+  }
+
+  .collection-main,
+  .collection-side,
+  .collection-summary,
+  .collection-utility-item,
+  .collection-filters,
+  .collection-card-body {
+    padding: 16px;
+  }
+
+  .collection-summary strong,
+  .collection-utility-item strong,
+  .collection-card h2 {
+    font-size: 1rem;
+  }
+
+  .collection-summary p,
+  .collection-utility-item p,
+  .collection-card p {
+    font-size: 0.9rem;
+    line-height: 1.62;
+  }
+
   .site-shell::after {
     display: none;
   }
