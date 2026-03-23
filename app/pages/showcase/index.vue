@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { sortShowcase } from '~/data/content'
 
+const route = useRoute()
+
 useSeo({
   title: '案例展示',
   description: '探索 OpenClaw 在企业和个人场景中的真实应用案例，涵盖法律、电商、教育、金融等行业。',
@@ -20,6 +22,64 @@ const enterpriseCases = computed(() =>
 
 const personalCases = computed(() =>
   sortedItems.value.filter((item: any) => item.scale === '个人'),
+)
+
+const roleDefinitions = [
+  {
+    id: 'personal',
+    title: '个人用户',
+    description: '先看个人工作流、研究和日常效率类案例，判断 OpenClaw 能不能成为你的长期助手。',
+    note: '个人效率 / 内容创作 / 研究整理',
+  },
+  {
+    id: 'developers',
+    title: '开发团队',
+    description: '更适合看内容生产、发布前检查、研发协作和内部工作台类案例，判断工程与流程层的价值。',
+    note: '开发辅助 / QA / 内容工作流',
+  },
+  {
+    id: 'ops',
+    title: '企业运维',
+    description: '优先看飞书协作、知识中台、值班巡检和内部问答类案例，判断长期运行和组织协作边界。',
+    note: '知识管理 / 运维协作 / 团队入口',
+  },
+] as const
+
+const selectedRole = computed(() =>
+  typeof route.query.role === 'string' ? route.query.role : 'all',
+)
+
+function matchesRole(item: any, role: string) {
+  const text = `${item.title} ${item.description} ${item.industry} ${item.scenario} ${(item.tags || []).join(' ')}`.toLowerCase()
+
+  if (role === 'personal') {
+    return item.scale === '个人'
+  }
+
+  if (role === 'developers') {
+    return ['开发', 'qa', '前端', '产品', '发布', '内容运营', '工作流', '研究'].some(keyword =>
+      text.includes(keyword.toLowerCase()),
+    )
+  }
+
+  if (role === 'ops') {
+    return ['运维', '值班', '监控', '知识', '飞书', '企业', '内部问答', '协作'].some(keyword =>
+      text.includes(keyword.toLowerCase()),
+    )
+  }
+
+  return true
+}
+
+const roleCaseGroups = computed(() =>
+  roleDefinitions.map(role => ({
+    ...role,
+    items: sortedItems.value.filter(item => matchesRole(item, role.id)).slice(0, 3),
+  })),
+)
+
+const selectedRoleGroup = computed(() =>
+  roleCaseGroups.value.find(item => item.id === selectedRole.value) || null,
 )
 
 const industryCount = computed(() =>
@@ -375,6 +435,58 @@ function toggleIndustry(id: string) {
             </article>
           </div>
         </aside>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">By Role</p>
+            <h2>先按你的角色看案例</h2>
+          </div>
+          <span class="showcase-subnote">角色入口更适合第一次评估时快速建立代入感。</span>
+        </div>
+
+        <div class="series-grid-3 role-grid">
+          <NuxtLink
+            v-for="role in roleCaseGroups"
+            :key="role.id"
+            :to="{ path: '/showcase', query: { role: role.id } }"
+            class="series-link-card role-card"
+            :class="{ active: selectedRole === role.id }"
+          >
+            <span class="series-tag highlight">{{ role.title }}</span>
+            <strong>{{ role.description }}</strong>
+            <p>{{ role.note }}</p>
+          </NuxtLink>
+        </div>
+
+        <div v-if="selectedRoleGroup" class="role-focus-panel">
+          <div class="series-head compact">
+            <div>
+              <p class="eyebrow">{{ selectedRoleGroup.title }}</p>
+              <h3>这组案例更适合作为起点</h3>
+            </div>
+          </div>
+
+          <div class="showcase-card-grid role-case-grid">
+            <NuxtLink
+              v-for="item in selectedRoleGroup.items"
+              :key="item.path"
+              :to="item.path"
+              class="series-link-card showcase-record"
+            >
+              <div class="series-tag-row">
+                <span class="series-tag highlight">{{ item.industry }}</span>
+                <span class="series-tag">{{ item.scale }}</span>
+              </div>
+              <strong>{{ item.title }}</strong>
+              <p>{{ item.description }}</p>
+              <ul v-if="item.outcomes && item.outcomes.length" class="record-outcomes">
+                <li v-for="outcome in item.outcomes.slice(0, 2)" :key="outcome">{{ outcome }}</li>
+              </ul>
+            </NuxtLink>
+          </div>
+        </div>
       </section>
 
       <section class="card series-panel">
@@ -920,6 +1032,24 @@ function toggleIndustry(id: string) {
 
 .showcase-next-grid {
   align-items: stretch;
+}
+
+.role-grid,
+.role-case-grid {
+  margin-top: 16px;
+}
+
+.role-card.active {
+  border-color: rgba(32, 84, 201, 0.28);
+  box-shadow: 0 14px 36px rgba(32, 84, 201, 0.12);
+}
+
+.role-focus-panel {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(15, 24, 46, 0.08);
 }
 
 @media (max-width: 1180px) {

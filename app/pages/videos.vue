@@ -50,6 +50,63 @@ const allVideos = computed(() =>
   ),
 )
 
+const totalVideoCount = computed(() => allVideos.value.length)
+
+const stageGuides = [
+  {
+    title: '第一次接触 OpenClaw',
+    description: '先看官方入口和安装视频，建立最小认知，不要一上来就钻进复杂玩法。',
+    section: 'official',
+    link: '/docs/getting-started/getting-started',
+    linkLabel: '看快速入门',
+  },
+  {
+    title: '已经跑通，准备继续扩展',
+    description: '把重点切到 Skills、自动化和本地模型，先补能力边界，再继续堆复杂度。',
+    section: 'skills',
+    link: '/docs/getting-started/when-to-add-skills-plugins-and-multi-agent',
+    linkLabel: '看扩展时机',
+  },
+  {
+    title: '准备接入真实办公流',
+    description: '优先看飞书、钉钉、微信等入口视频，并同步核对对应的文档边界和权限说明。',
+    section: 'integration',
+    link: '/docs/getting-started/when-to-connect-channels',
+    linkLabel: '看渠道时机',
+  },
+]
+
+const roleGuides = computed(() => [
+  {
+    title: '个人用户',
+    description: '先看总览、安装和一个最常用入口，再决定是否继续看本地模型或 Skills。',
+    items: allVideos.value
+      .filter(item => ['Official', 'Bilibili'].includes(item.platform) && ['入门', '基础'].includes(item.level))
+      .filter(item => item.tags.some(tag => ['热点', '部署', '国内办公', '实用', '中文'].includes(tag)))
+      .slice(0, 3),
+    to: '/docs/getting-started/personal-user-entry',
+    meta: '个人入口',
+  },
+  {
+    title: '开发团队',
+    description: '更适合先看安装、Skills、自动化和工作流类视频，建立结构感再扩能力。',
+    items: allVideos.value
+      .filter(item => item.tags.some(tag => ['Skills', '自动化', '多Agent', '案例', 'Discord'].includes(tag)))
+      .slice(0, 3),
+    to: '/docs/getting-started/developer-team-entry',
+    meta: '开发团队',
+  },
+  {
+    title: '企业运维',
+    description: '优先看飞书、远程部署、长期在线和团队协作入口，先建立稳定运行边界。',
+    items: allVideos.value
+      .filter(item => item.tags.some(tag => ['飞书', 'VPS', '远程部署', '自动化', '国内办公'].includes(tag)))
+      .slice(0, 3),
+    to: '/docs/getting-started/enterprise-ops-entry',
+    meta: '企业运维',
+  },
+])
+
 const filteredSections = computed(() =>
   videoSections
     .map(section => {
@@ -85,6 +142,12 @@ const relatedTopics = computed(() =>
     ).length,
   })),
 )
+
+const sectionStats = computed(() => [
+  { label: '视频总数', value: String(totalVideoCount.value), note: '覆盖官方入口、中文教程和英文主线视频' },
+  { label: '平台来源', value: '3 类', note: 'Official / Bilibili / YouTube' },
+  { label: '内容分组', value: String(videoSections.length), note: '从总览、安装到 Skills、渠道和进阶案例' },
+])
 
 function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
   router.replace({
@@ -132,12 +195,64 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
       </section>
 
       <div class="grid video-overview-grid">
-        <article v-for="fact in quickFacts" :key="fact.label" class="card overview-card">
+        <article v-for="fact in [...quickFacts, ...sectionStats]" :key="fact.label" class="card overview-card">
           <span class="mini-label">{{ fact.label }}</span>
           <strong>{{ fact.value }}</strong>
           <p>{{ fact.note }}</p>
         </article>
       </div>
+
+      <section class="card watch-guide-panel">
+        <div class="home-head">
+          <p class="eyebrow">按阶段观看</p>
+          <p class="home-head-note">如果你不想自己在各类视频里来回挑，先按当前阶段走一条最像你的观看线。</p>
+        </div>
+
+        <div class="tips-grid">
+          <article v-for="item in stageGuides" :key="item.title" class="tip-card">
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+            <div class="video-card-head">
+              <span class="tag">推荐分区</span>
+              <span class="tag">{{ videoSections.find(section => section.id === item.section)?.title }}</span>
+            </div>
+            <NuxtLink class="video-inline-link" :to="item.link">{{ item.linkLabel }}</NuxtLink>
+          </article>
+        </div>
+      </section>
+
+      <section class="card watch-guide-panel">
+        <div class="home-head">
+          <p class="eyebrow">按角色看</p>
+          <p class="home-head-note">如果你已经知道自己更像个人用户、开发团队还是企业运维，可以直接从这组视频开始。</p>
+        </div>
+
+        <div class="role-guide-grid">
+          <article v-for="guide in roleGuides" :key="guide.title" class="card role-guide-card">
+            <div class="video-card-head">
+              <span class="tag">{{ guide.meta }}</span>
+            </div>
+            <strong>{{ guide.title }}</strong>
+            <p>{{ guide.description }}</p>
+
+            <div class="role-video-list">
+              <a
+                v-for="item in guide.items"
+                :key="guide.title + item.href"
+                :href="item.href"
+                target="_blank"
+                rel="noreferrer"
+                class="role-video-link"
+              >
+                <span>{{ item.title }}</span>
+                <b>{{ item.platform }} / {{ item.level }}</b>
+              </a>
+            </div>
+
+            <NuxtLink class="video-inline-link" :to="guide.to">继续看对应入口</NuxtLink>
+          </article>
+        </div>
+      </section>
 
       <div class="filters card">
         <div class="filter-group">
@@ -319,6 +434,43 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
   gap: 10px;
 }
 
+.watch-guide-panel,
+.role-guide-grid,
+.role-video-list,
+.role-guide-card {
+  display: grid;
+  gap: 14px;
+}
+
+.role-guide-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.role-guide-card {
+  align-content: start;
+}
+
+.role-video-link {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 24, 46, 0.08);
+  background: rgba(255, 255, 255, 0.56);
+  color: inherit;
+  text-decoration: none;
+}
+
+.role-video-link span {
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.role-video-link b {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
 .overview-card strong,
 .tip-card strong {
   font-family: "Fraunces", "Times New Roman", serif;
@@ -420,6 +572,7 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
 
 @media (max-width: 980px) {
   .video-overview-grid,
+  .role-guide-grid,
   .video-grid,
   .tips-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -428,6 +581,7 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
 
 @media (max-width: 760px) {
   .video-overview-grid,
+  .role-guide-grid,
   .video-grid,
   .tips-grid {
     grid-template-columns: 1fr;
@@ -447,6 +601,7 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
   }
 
   .video-overview-grid,
+  .role-guide-grid,
   .video-grid,
   .tips-grid,
   .filters {

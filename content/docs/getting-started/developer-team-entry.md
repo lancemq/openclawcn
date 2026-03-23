@@ -102,3 +102,4 @@ tags: [developers, teams, architecture, configuration, skills]
 - [学习路径](/paths)
 - [主题中心](/topics)
 - [如果你是企业运维，应该先走哪条入口](/docs/getting-started/enterprise-ops-entry)
+- [开发团队案例](/showcase?role=developers)

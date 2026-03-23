@@ -105,3 +105,4 @@ tags: [personal, getting-started, dashboard, channels, skills]
 - [学习路径](/paths)
 - [我应该先从哪个页面开始](/docs/getting-started/which-page-should-i-start-with)
 - [Dashboard、WebChat 和聊天渠道分别什么时候用](/docs/getting-started/when-to-use-dashboard-webchat-or-channels)
+- [个人用户案例](/showcase?role=personal)
