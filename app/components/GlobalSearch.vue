@@ -4,89 +4,18 @@ const query = ref('')
 const selectedIndex = ref(0)
 const inputRef = ref<HTMLInputElement>()
 const resultsContainerRef = ref<HTMLDivElement>()
+const quickKeywords = ['安装', '渠道', '模型', '安全', 'gateway', 'skills']
 
-const { data: manifest, pending, error, refresh } = await useContentManifest()
-
-const allItems = computed(() => {
-  const docItems = (manifest.value?.collections.docs.items || []).map((item) => ({
-    title: String(item.title || ''),
-    description: String(item.description || ''),
-    category: String(item.category || '文档'),
-    path: String(item.path || ''),
-    kind: '文档',
-  }))
-
-  const newsItems = (manifest.value?.collections.news.items || []).map((item) => ({
-    title: String(item.title || ''),
-    description: String(item.description || ''),
-    category: String(item.category || '新闻'),
-    path: String(item.path || ''),
-    kind: '新闻',
-  }))
-
-  const practiceItems = (manifest.value?.collections.bestPractices.items || []).map((item) => ({
-    title: String(item.title || ''),
-    description: String(item.description || ''),
-    category: String(item.category || '最佳实践'),
-    path: String(item.path || ''),
-    kind: '最佳实践',
-  }))
-
-  return [...docItems, ...newsItems, ...practiceItems]
-})
+const { allItems, pending, error, refresh } = useSiteSearchIndex()
 
 const results = computed(() => {
-  const keyword = query.value.trim().toLowerCase()
-
-  if (!keyword) {
-    return allItems.value.slice(0, 8)
-  }
-
-  return allItems.value
-    .map((item) => {
-      const title = item.title.toLowerCase()
-      const description = item.description.toLowerCase()
-      const category = item.category.toLowerCase()
-      const kind = item.kind.toLowerCase()
-      const target = `${title} ${description} ${category} ${kind}`
-
-      let score = 0
-
-      if (title.includes(keyword)) {
-        score += title.startsWith(keyword) ? 14 : 10
-      }
-
-      if (description.includes(keyword)) {
-        score += 4
-      }
-
-      if (category.includes(keyword) || kind.includes(keyword)) {
-        score += 3
-      }
-
-      if (!target.includes(keyword)) {
-        score = 0
-      }
-
-      return { ...item, score }
-    })
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 12)
+  const keyword = query.value.trim()
+  return keyword
+    ? searchSiteItems(allItems.value, { query: keyword, limit: 12 })
+    : buildSearchSuggestions(allItems.value, 8)
 })
 
-const groupedResults = computed(() => {
-  const groups: Record<string, typeof results.value> = {}
-
-  for (const item of results.value) {
-    if (!groups[item.kind]) {
-      groups[item.kind] = []
-    }
-    groups[item.kind].push(item)
-  }
-
-  return Object.entries(groups).map(([kind, items]) => ({ kind, items }))
-})
+const groupedResults = computed(() => groupSiteSearchResults(results.value))
 
 function close() {
   closeSearch()
@@ -157,6 +86,14 @@ function getKindIcon(kind: string) {
     '最佳实践': '💡',
   }
   return icons[kind] || '📄'
+}
+
+function applyKeyword(keyword: string) {
+  query.value = keyword
+  selectedIndex.value = 0
+  nextTick(() => {
+    inputRef.value?.focus()
+  })
 }
 
 watch(isOpen, (open) => {
@@ -236,6 +173,21 @@ watch(isOpen, (open) => {
             </div>
 
             <div v-else class="search-hints">
+              <div class="hint-group quick-keywords">
+                <span class="hint-label">推荐关键词</span>
+                <div class="hint-chips">
+                  <button
+                    v-for="keyword in quickKeywords"
+                    :key="keyword"
+                    type="button"
+                    class="hint-chip"
+                    @click="applyKeyword(keyword)"
+                  >
+                    {{ keyword }}
+                  </button>
+                </div>
+              </div>
+
               <div class="hint-group">
                 <span class="hint-label">快捷键</span>
                 <div class="hint-items">
@@ -492,6 +444,29 @@ watch(isOpen, (open) => {
 .hint-items {
   display: flex;
   gap: 16px;
+}
+
+.quick-keywords {
+  display: grid;
+  gap: 10px;
+  align-items: start;
+}
+
+.hint-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hint-chip {
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(15, 23, 48, 0.12);
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .hint-item {

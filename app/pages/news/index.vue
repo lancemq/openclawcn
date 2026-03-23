@@ -75,72 +75,29 @@ useSeo({
 <template>
   <section class="section">
     <div class="container collection-page">
-      <section class="collection-hero">
-        <div class="card collection-main">
-          <p class="eyebrow">News</p>
-          <h1 class="section-title">新闻动态</h1>
-          <p class="section-copy">
-            这里主要发布 OpenClaw 的版本更新、功能变化、使用提醒和中文解读。更适合已经开始关注产品变化、希望持续跟踪版本节奏的读者。
-          </p>
+      <CollectionHero
+        eyebrow="News"
+        title="新闻动态"
+        description="这里主要发布 OpenClaw 的版本更新、功能变化、使用提醒和中文解读。更适合已经开始关注产品变化、希望持续跟踪版本节奏的读者。"
+        :stats="newsStats"
+        summary-label="重点更新"
+        summary-title="先看最近发布，再决定是否深入专题"
+        summary-text="如果你只想快速判断哪些变化和自己有关，优先看最近几条动态，再通过最佳实践和文档补长期方案。"
+        :featured="featuredNews.map(item => ({
+          label: item.date || '',
+          title: item.title,
+          description: item.description,
+          to: item.path,
+        }))"
+      />
 
-          <div class="collection-utility">
-            <article v-for="stat in newsStats" :key="stat.label" class="collection-utility-item">
-              <span class="mini-label">{{ stat.label }}</span>
-              <strong>{{ stat.value }}</strong>
-              <p>{{ stat.note }}</p>
-            </article>
-          </div>
-        </div>
-
-        <aside class="card collection-side">
-          <div class="collection-summary">
-            <span class="mini-label">重点更新</span>
-            <strong>先看最近发布，再决定是否深入专题</strong>
-            <p>如果你只想快速判断哪些变化和自己有关，优先看最近几条动态，再通过最佳实践和文档补长期方案。</p>
-          </div>
-
-          <NuxtLink
-            v-for="item in featuredNews"
-            :key="item.path"
-            :to="item.path"
-            class="collection-utility-item utility-link"
-          >
-            <span class="mini-label">{{ item.date }}</span>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
-        </aside>
-      </section>
-
-      <div class="filters card collection-filters">
-        <div class="filter-group">
-          <span class="filter-label">分类</span>
-          <button
-            v-for="category in categories"
-            :key="category"
-            type="button"
-            class="filter-chip"
-            :class="{ active: selectedCategory === category }"
-            @click="updateFilters('category', category)"
-          >
-            {{ category }}
-          </button>
-        </div>
-
-        <div class="filter-group">
-          <span class="filter-label">归档</span>
-          <button
-            v-for="archive in archives"
-            :key="archive"
-            type="button"
-            class="filter-chip"
-            :class="{ active: selectedArchive === archive }"
-            @click="updateFilters('archive', archive)"
-          >
-            {{ archive }}
-          </button>
-        </div>
-      </div>
+      <CollectionFilters
+        :groups="[
+          { key: 'category', label: '分类', options: categories, selected: selectedCategory },
+          { key: 'archive', label: '归档', options: archives, selected: selectedArchive },
+        ]"
+        @update="(key, value) => updateFilters(key as 'category' | 'archive', value)"
+      />
 
       <div v-if="isManifestReady" class="masonry-grid collection-grid">
         <NuxtLink
@@ -166,78 +123,17 @@ useSeo({
         </NuxtLink>
       </div>
 
-      <div v-else class="empty-state collection-empty">
-        <p>正在加载新闻索引...</p>
-      </div>
+      <CollectionEmptyState v-else message="正在加载新闻索引..." />
 
-      <div v-if="isManifestReady && filteredItems.length === 0" class="empty-state collection-empty">
-        <p>没有找到匹配的新闻，请尝试其他筛选条件。</p>
-      </div>
+      <CollectionEmptyState
+        v-if="isManifestReady && filteredItems.length === 0"
+        message="没有找到匹配的新闻，请尝试其他筛选条件。"
+      />
     </div>
   </section>
 </template>
 
 <style scoped>
-.mini-label {
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.utility-link {
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-}
-
-.utility-link:hover {
-  transform: translateY(-2px);
-  border-color: rgba(12, 108, 105, 0.22);
-  box-shadow: 0 12px 26px rgba(74, 56, 28, 0.08);
-}
-
-.filters {
-  margin-top: 0;
-}
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.filter-label {
-  color: var(--ink-soft);
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.filter-chip {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.66);
-  color: var(--ink);
-  padding: 6px 12px;
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.82rem;
-  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
-}
-
-.filter-chip:hover {
-  transform: translateY(-1px);
-  border-color: rgba(166, 111, 44, 0.22);
-}
-
-.filter-chip.active {
-  color: #fff8ef;
-  border-color: transparent;
-  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-bright) 100%);
-}
-
 .masonry-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

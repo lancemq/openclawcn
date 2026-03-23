@@ -4,11 +4,9 @@ import {
   actionOverview,
   bestPracticeOverview,
   docsOverview,
-  ecosystemOverview,
   extensionOverview,
   userRouteOverview,
 } from '~/data/site'
-import { informationLayers } from '~/data/information-architecture'
 import { featuredVideos } from '~/data/videos'
 import { learningPaths, topicDefinitions } from '~/data/taxonomy'
 const { trackAction } = useSiteTracking()
@@ -65,6 +63,8 @@ const topicOverview = computed(() =>
 const featuredTopic = computed(() => topicOverview.value[0])
 const supportingTopics = computed(() => topicOverview.value.slice(1, 5))
 const featuredPaths = computed(() => learningPaths.slice(0, 4))
+const supportOverview = computed(() => actionOverview.slice(0, 3))
+const compactExtensions = computed(() => extensionOverview.slice(0, 4))
 
 function trackPathClick(target: string, label: string) {
   trackAction('homepage_path_click', {
@@ -82,23 +82,6 @@ function trackPathClick(target: string, label: string) {
     <section class="section content-section routes-section">
       <div class="container">
         <div class="stack-shell">
-          <div class="layer-ribbon">
-            <div v-for="layer in informationLayers" :key="layer.id" class="card layer-card">
-              <span class="eyebrow">{{ layer.title }}</span>
-              <p class="home-head-note">{{ layer.summary }}</p>
-              <div class="layer-link-row">
-                <NuxtLink
-                  v-for="item in layer.items"
-                  :key="item.to"
-                  :to="item.to"
-                  class="tag-item layer-link"
-                >
-                  {{ item.title }}
-                </NuxtLink>
-              </div>
-            </div>
-          </div>
-
           <div class="home-head head-inline">
             <p class="eyebrow">开始</p>
             <p class="home-head-note">首页先只回答两件事：你该从哪个入口进，以及最常见的几条学习路径怎么走。</p>
@@ -149,7 +132,7 @@ function trackPathClick(target: string, label: string) {
         <div class="editorial-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">开始 / 主题中心</p>
-            <p class="home-head-note">按安装、Gateway、渠道、扩展、模型和安全跨模块聚合内容，适合你已经知道自己要解决什么问题时进入。</p>
+            <p class="home-head-note">当你已经知道自己在找安装、渠道、模型或安全时，直接从主题进入会比顺着首页继续往下翻更快。</p>
           </div>
           <div class="editorial-columns">
             <NuxtLink v-if="featuredTopic" :to="featuredTopic.to" class="card editorial-feature">
@@ -181,7 +164,7 @@ function trackPathClick(target: string, label: string) {
         <div class="stack-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">文档</p>
-            <p class="home-head-note">从定位、安装到架构与排错，先建立稳定的知识主线，再进入更细的配置和机制。</p>
+            <p class="home-head-note">首页只保留最常用的文档入口，剩下更细的分类、标签和全文索引继续放在文档中心里完成。</p>
           </div>
           <div class="grid docs-grid">
             <ContentCard
@@ -202,7 +185,7 @@ function trackPathClick(target: string, label: string) {
         <div class="feature-band subtle-band">
           <div class="home-head">
             <p class="eyebrow">进阶 / 最佳实践</p>
-            <p class="home-head-note">把接入、运维、协作和升级经验整理成更稳定的中文方法，适合已经跑通基础链路后继续深化。</p>
+            <p class="home-head-note">如果你已经跑通基础链路，这里给出更稳定的方法入口；但首页不再展开过多进阶分支。</p>
           </div>
           <div class="grid practice-grid">
             <ContentCard
@@ -220,14 +203,14 @@ function trackPathClick(target: string, label: string) {
 
     <section class="section content-section videos-section">
       <div class="container">
-        <div class="stack-shell">
+        <div class="feature-band subtle-band">
           <div class="home-head head-inline">
             <p class="eyebrow">开始 / 视频教程</p>
-            <p class="home-head-note">把官方 Showcase、YouTube 演示和 Bilibili 中文教程聚合在一个入口里，适合先建立使用直觉再回到文档确认细节。</p>
+            <p class="home-head-note">视频入口保留在首页，但只作为补充入口，不再和开始、文档、动态一起争抢注意力。</p>
           </div>
-          <div class="grid extension-grid">
+          <div class="grid practice-grid">
             <ContentCard
-              v-for="item in featuredVideos"
+              v-for="item in featuredVideos.slice(0, 3)"
               :key="item.to"
               :title="item.title"
               :description="item.description"
@@ -235,6 +218,7 @@ function trackPathClick(target: string, label: string) {
               :meta="item.meta"
             />
           </div>
+          <NuxtLink to="/videos" class="start-more">查看全部视频</NuxtLink>
         </div>
       </div>
     </section>
@@ -244,11 +228,11 @@ function trackPathClick(target: string, label: string) {
         <div class="stack-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">进阶 / 能力扩展</p>
-            <p class="home-head-note">把工具系列、Skills、关键配置、模型和安全专题集中整理，减少在零散文档和社区讨论里来回翻找。</p>
+            <p class="home-head-note">这里只保留最常用的 4 个扩展入口，更完整的能力树继续放到进阶频道页里。</p>
           </div>
           <div class="grid extension-grid">
             <ContentCard
-              v-for="item in extensionOverview"
+              v-for="item in compactExtensions"
               :key="item.to"
               :title="item.title"
               :description="item.description"
@@ -309,37 +293,16 @@ function trackPathClick(target: string, label: string) {
       </div>
     </section>
 
-    <section class="section content-section ecosystem-section">
-      <div class="container">
-        <div class="feature-band">
-          <div class="home-head head-inline">
-            <p class="eyebrow">动态 / 生态与路线</p>
-            <p class="home-head-note">探索 OpenClaw 的生态系统，包括生态项目、案例展示、背景故事、下载中心和产品路线图。</p>
-          </div>
-          <div class="grid ecosystem-grid">
-            <ContentCard
-              v-for="item in ecosystemOverview"
-              :key="item.to"
-              :title="item.title"
-              :description="item.description"
-              :to="item.to"
-              :meta="item.meta"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section content-section action-section">
       <div class="container">
           <div class="feature-band">
             <div class="home-head head-inline">
             <p class="eyebrow">支持</p>
-            <p class="home-head-note">通过搜索、FAQ、反馈和社区支持更快找到下一步动作。</p>
+            <p class="home-head-note">把最直接的动作入口留在首页底部，避免在前半段不断打断主线阅读。</p>
             </div>
             <div class="grid action-grid">
             <ContentCard
-              v-for="item in actionOverview"
+              v-for="item in supportOverview"
               :key="item.to"
               :title="item.title"
               :description="item.description"
@@ -347,6 +310,7 @@ function trackPathClick(target: string, label: string) {
               :meta="item.meta"
             />
           </div>
+          <NuxtLink to="/community" class="start-more">查看完整支持入口</NuxtLink>
         </div>
       </div>
     </section>

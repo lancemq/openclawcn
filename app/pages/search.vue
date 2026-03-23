@@ -11,110 +11,23 @@ const router = useRouter()
 
 const searchInput = ref(typeof route.query.q === 'string' ? route.query.q : '')
 
-const { data: manifest } = await useContentManifest()
+const { allItems } = useSiteSearchIndex()
 
 const normalizedQuery = computed(() => searchInput.value.trim().toLowerCase())
 const selectedKind = computed(() =>
   typeof route.query.kind === 'string' ? route.query.kind : '全部',
 )
 
-const allItems = computed(() => {
-  const docItems = (manifest.value?.collections.docs.items || []).map((item) => ({
-    title: String(item.title || ''),
-    description: String(item.description || ''),
-    category: String(item.category || '文档'),
-    tags: Array.isArray(item.tags) ? (item.tags as string[]) : [],
-    path: String(item.path || ''),
-    kind: '文档',
-  }))
-
-  const newsItems = (manifest.value?.collections.news.items || []).map((item) => ({
-    title: String(item.title || ''),
-    description: String(item.description || ''),
-    category: String(item.category || '新闻'),
-    tags: Array.isArray(item.tags) ? (item.tags as string[]) : [],
-    path: String(item.path || ''),
-    kind: '新闻',
-  }))
-
-  const practiceItems = (manifest.value?.collections.bestPractices.items || []).map((item) => ({
-    title: String(item.title || ''),
-    description: String(item.description || ''),
-    category: String(item.category || '最佳实践'),
-    tags: Array.isArray(item.tags) ? (item.tags as string[]) : [],
-    path: String(item.path || ''),
-    kind: '最佳实践',
-  }))
-
-  return [...docItems, ...newsItems, ...practiceItems]
-})
-
-const filteredItems = computed(() => {
-  const keyword = normalizedQuery.value
-  const kind = selectedKind.value
-
-  if (!keyword && kind === '全部') {
-    return allItems.value
-  }
-
-  return allItems.value
-    .map((item) => {
-      const title = item.title.toLowerCase()
-      const description = item.description.toLowerCase()
-      const category = item.category.toLowerCase()
-      const kindText = item.kind.toLowerCase()
-      const tags = item.tags.join(' ').toLowerCase()
-      const target = `${title} ${description} ${category} ${kindText} ${tags}`
-
-      let score = 0
-
-      if (!keyword) {
-        score = 1
-      } else if (title.includes(keyword)) {
-        score += title.startsWith(keyword) ? 14 : 10
-      }
-
-      if (description.includes(keyword)) {
-        score += 4
-      }
-
-      if (category.includes(keyword) || kindText.includes(keyword)) {
-        score += 3
-      }
-
-      if (tags.includes(keyword)) {
-        score += 5
-      }
-
-      if (!target.includes(keyword) && keyword) {
-        score = 0
-      }
-
-      if (kind !== '全部' && item.kind !== kind) {
-        score = 0
-      }
-
-      return {
-        ...item,
-        score,
-      }
-    })
-    .filter(item => item.score > 0)
-    .sort((left, right) => right.score - left.score || left.title.localeCompare(right.title, 'zh-CN'))
-})
+const filteredItems = computed(() =>
+  searchSiteItems(allItems.value, {
+    query: normalizedQuery.value,
+    kind: selectedKind.value,
+  }),
+)
 
 const hasQuery = computed(() => normalizedQuery.value.length > 0)
 
-const groupedResults = computed(() => {
-  const groups = ['文档', '最佳实践', '新闻'] as const
-
-  return groups
-    .map((kind) => ({
-      kind,
-      items: filteredItems.value.filter(item => item.kind === kind),
-    }))
-    .filter(group => group.items.length > 0)
-})
+const groupedResults = computed(() => groupSiteSearchResults(filteredItems.value))
 
 const kindFilters = ['全部', '文档', '最佳实践', '新闻']
 
