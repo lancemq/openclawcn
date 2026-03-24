@@ -42,16 +42,16 @@ const updateTypes = computed(() => Array.from(new Set(siteUpdates.map(item => it
       <section class="updates-hero">
         <div class="hero-main">
           <p class="eyebrow">Website Changelog</p>
-          <h1 class="hero-title">把中文站近期的重要变化，整理成一份可追踪的更新日志。</h1>
+          <h1 class="hero-title">查看中文站近期的内容补充、页面调整与体验更新。</h1>
           <p class="hero-copy">
-            这里不只记录“新加了什么”，也记录结构调整、文案修订、性能优化、导航修复和内容补充，方便长期关注站点的人快速了解最近发生了什么。
+            这里汇总近期新增内容、页面优化、导航调整和体验修正，方便快速了解最近有哪些值得关注的变化。
           </p>
 
           <div class="hero-metrics">
             <article class="metric-card">
               <span class="metric-value">{{ totalChanges }}</span>
               <strong>更新记录</strong>
-              <p>按日期持续追加，避免重要修订散落在多个页面里。</p>
+              <p>按时间整理近期更新，方便集中查看和回顾。</p>
             </article>
             <article class="metric-card">
               <span class="metric-value">{{ totalActions }}</span>
