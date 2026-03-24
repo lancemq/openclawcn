@@ -2,7 +2,7 @@
 title: 社区支持
 description: 汇总 OpenClaw 的官方社区入口、反馈方式、提问建议和中文用户更适合的参与路径。
 category: 社区
-updatedAt: 2026-03-11
+updatedAt: 2026-03-24
 sourceType: community
 tags: [community, github, issues, feedback]
 ---
@@ -17,6 +17,31 @@ tags: [community, github, issues, feedback]
 - Releases：适合跟踪版本变化和迁移提醒
 - 官方文档：适合理解当前推荐用法和结构调整
 - 站内反馈页：适合把中文用户的阅读和使用问题整理成可处理的问题单
+
+## 除了官方文档，还能从哪里补信息
+
+截至 **2026 年 3 月 24 日**，中文用户如果想更快补齐上下文，除了官方 docs 和 GitHub，还可以把下面几类来源一起看：
+
+- 中文教程站：更适合补中文解释、国内部署和渠道接入场景
+- 中文社区文章：更适合观察最近哪些主题被频繁讨论
+- 媒体报道：更适合判断某个能力是否已经成为生态热点
+
+但这三类来源更适合补“背景、场景、误区和热度”，不适合直接替代官方文档里的配置真值。
+
+## 中文渠道最适合怎么用
+
+如果你关心的是：
+
+- 企业微信、微信、飞书等中文环境下的渠道接入
+- 国内模型、云主机和部署方式的中文经验
+- 中文用户最常见的误区和提问方式
+
+那可以把公开可访问的中文教程站和社区文章作为补充阅读。  
+更稳的顺序通常是：
+
+1. 先看官方 docs 确认能力边界
+2. 再看 GitHub Releases / Issues 判断当前变化和已知问题
+3. 最后看中文教程和社区文章，补足中文语境下的用法说明
 
 ## 遇到问题时应该去哪里
 
@@ -78,5 +103,6 @@ tags: [community, github, issues, feedback]
 ## 下一步推荐
 
 - [如何持续跟踪 OpenClaw 更新](/docs/operations/release-tracking)
+- [如何结合官方文档、GitHub 和中文渠道跟踪 OpenClaw](/docs/reference/external-sources-and-trust-levels)
 - [故障排除与诊断思路](/docs/reference/troubleshooting)
 - [版本迁移与升级检查单](/docs/setup/migration-guide)

@@ -2,7 +2,7 @@
 title: 如何持续跟踪 OpenClaw 更新
 description: 建立一套低成本的更新跟踪方法，并把官方 release 和文档变化转化成真正可执行的中文维护动作。
 category: 更新
-updatedAt: 2026-03-17
+updatedAt: 2026-03-24
 source: https://github.com/openclaw/openclaw/releases
 sourceName: GitHub Releases
 sourceType: official
@@ -49,6 +49,16 @@ tags: [release, changelog, updates, maintenance]
 1. 先看 release 发生了什么
 2. 再看官方 docs 如何组织能力
 3. 最后看社区里哪些问题最常见
+
+如果你在维护中文站，还应该再加第四步：
+
+4. 看中文教程站、社区文章或媒体报道里，哪些主题已经开始被反复提到
+
+这样更容易发现：
+
+- 哪些变化官方已经发布，但中文用户还没形成稳定理解
+- 哪些主题虽然不是新功能，却已经成为高频使用问题
+- 哪些内容适合写成中文“背景说明”而不是配置文档
 
 截至 2026 年 3 月 17 日，GitHub Releases 页还能直接看出另一个信号：**3 月份发布节奏非常密**。当前页面上至少能看到：
 
@@ -112,6 +122,23 @@ tags: [release, changelog, updates, maintenance]
 - 每次重要版本后补一篇中文摘要
 - 每次能力结构变化时补对应文档页
 
+## 中文渠道最适合补什么
+
+对中文站来说，中文教程站、知乎、媒体报道这类外部来源最适合补下面几类信息：
+
+- 国内部署环境和网络条件
+- 企业微信、微信、飞书等中文工作流入口
+- 中文用户最常见的理解偏差
+- 版本更新在中文社区里的实际关注点
+
+但这些内容更适合写成：
+
+- 使用提醒
+- 背景说明
+- 新闻观察
+
+而不是直接替代官方 release 和 docs 里的技术描述。
+
 ## 当前最实用的做法
 
 如果你还不想搭复杂自动化，先做下面三件事就够：
@@ -145,3 +172,4 @@ tags: [release, changelog, updates, maintenance]
 - [版本迁移与升级检查单](/docs/setup/migration-guide)
 - [故障排除与诊断思路](/docs/reference/troubleshooting)
 - [社区支持](/docs/reference/community)
+- [如何结合官方文档、GitHub 和中文渠道跟踪 OpenClaw](/docs/reference/external-sources-and-trust-levels)

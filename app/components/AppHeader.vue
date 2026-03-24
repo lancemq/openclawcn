@@ -42,6 +42,7 @@ const navGroups = [
     to: '/news',
     items: [
       { label: '新闻动态', to: '/news' },
+      { label: '网站更新', to: '/updates' },
       { label: '产品路线图', to: '/roadmap' },
       { label: '生态项目', to: '/ecosystem' },
       { label: '背景故事', to: '/story' },

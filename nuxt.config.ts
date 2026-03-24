@@ -142,6 +142,7 @@ export default defineNuxtConfig({
     '/videos': { prerender: true },
     '/derivatives': { prerender: true },
     '/news': { prerender: true },
+    '/updates': { prerender: true },
     '/secondary-development': { prerender: true },
     '/ecosystem/secondary-development': { redirect: '/secondary-development' },
     '/community': { prerender: true },
