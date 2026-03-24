@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { siteUpdates } from '~/data/site-updates'
-
 useSeo({
   title: '社区支持',
   description: '查看 OpenClawCN 的社区入口、问题分流方式、贡献路径和中文社区协作现状。',
@@ -153,6 +151,12 @@ const learnEntries = [
     description: '如果你主要想持续跟踪更新、版本变化和生态动向，继续去动态页更合适。',
     to: '/news',
     meta: '持续跟踪',
+  },
+  {
+    title: '网站更新',
+    description: '如果你想查看中文站本身最近做了哪些调整、修复和内容补充，直接进入更新记录页。',
+    to: '/updates',
+    meta: '站点更新',
   },
   {
     title: '协作说明',
@@ -334,31 +338,6 @@ const learnEntries = [
             <NuxtLink class="button secondary" to="/docs/reference/community">查看协作说明</NuxtLink>
             <NuxtLink class="button ghost" to="/news">查看新闻动态</NuxtLink>
           </div>
-        </div>
-      </section>
-
-      <section class="faq-panel updates-panel">
-        <div class="section-heading">
-          <p class="eyebrow">Updates</p>
-          <h2 class="section-title">网站更新说明</h2>
-          <p class="updates-intro">这里记录中文站近期的结构调整、内容补充和体验优化，方便快速了解最近有哪些变化。</p>
-        </div>
-
-        <div class="updates-list">
-          <article v-for="item in siteUpdates.slice(0, 3)" :key="`${item.date}-${item.title}`" class="card update-card">
-            <div class="update-head">
-              <span class="update-date">{{ item.date }}</span>
-              <h3>{{ item.title }}</h3>
-            </div>
-            <p class="update-summary">{{ item.summary }}</p>
-            <ul class="update-items">
-              <li v-for="point in item.items" :key="point">{{ point }}</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="button-row">
-          <NuxtLink class="button secondary" to="/updates">查看完整更新记录</NuxtLink>
         </div>
       </section>
 
@@ -617,60 +596,6 @@ const learnEntries = [
 .priority-panel,
 .faq-panel {
   margin-top: 20px;
-}
-
-.updates-intro,
-.update-summary {
-  margin: 0;
-  color: var(--ink-soft);
-  line-height: 1.65;
-}
-
-.updates-list {
-  display: grid;
-  gap: 12px;
-}
-
-.update-card {
-  display: grid;
-  gap: 12px;
-  padding: 18px 20px;
-}
-
-.update-head {
-  display: grid;
-  gap: 6px;
-}
-
-.update-date {
-  display: inline-flex;
-  width: fit-content;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(234, 215, 182, 0.42);
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
-.update-head h3 {
-  margin: 0;
-  font-family: "Fraunces", "Times New Roman", serif;
-  font-size: 1.08rem;
-  line-height: 1.34;
-  letter-spacing: -0.03em;
-}
-
-.update-items {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--ink-soft);
-  line-height: 1.7;
-}
-
-.update-items li + li {
-  margin-top: 6px;
 }
 
 .related-grid {
