@@ -2,17 +2,17 @@ export const secondaryDevelopmentStats = [
   {
     label: '核心方向',
     value: 'Skills',
-    note: '围绕任务流程、提示词规则和可复用脚本构建专用能力包。',
+    note: '围绕任务流程、提示词规则和可复用脚本构建能力包。',
   },
   {
     label: '核心方向',
     value: 'Plugins',
-    note: '面向渠道接入、工具注册、命令能力和 Gateway 运行时扩展。',
+    note: '面向渠道接入、工具注册和 Gateway 运行时扩展。',
   },
   {
     label: '核心方向',
     value: 'Hooks',
-    note: '用于事件触发、命令触发以及和外部系统的轻量联动。',
+    note: '用于事件触发以及和外部系统的轻量联动。',
   },
   {
     label: '生态入口',
@@ -35,14 +35,14 @@ export const secondaryDevelopmentSignals = [
   {
     label: '内容覆盖',
     value: '开发形态、场景示例、资料索引',
-    note: '从扩展类型、常见应用场景到官方资料入口，帮助快速定位相关内容。',
+    note: '覆盖扩展类型、常见场景和官方资料入口。',
   },
 ]
 
 export const secondaryDevelopmentTracks = [
   {
     title: 'Skills 扩展',
-    description: '适合为特定任务封装提示词规则、脚本、资源文件和操作说明，形成可复用的能力包。',
+    description: '适合封装提示词规则、脚本、资源文件和操作说明，形成可复用能力包。',
     fit: '内容生产、资料整理、规范执行、轻量工作流',
     output: '一个目录 + `SKILL.md` + 可选脚本与资源',
     links: [
@@ -62,9 +62,9 @@ export const secondaryDevelopmentTracks = [
   },
   {
     title: 'Plugins 扩展',
-    description: '适合为 Gateway 增加渠道接入、工具能力、命令能力或其他运行时扩展。',
+    description: '适合为 Gateway 增加渠道接入、工具能力和运行时扩展。',
     fit: '渠道接入、企业系统桥接、自定义命令、运行时扩展',
-    output: '一个插件包，可从 npm 安装，也可从本地扩展目录安装调试',
+    output: '一个插件包，可从 npm 安装，也可从本地扩展目录调试',
     links: [
       {
         label: 'Plugins 文档',
@@ -82,7 +82,7 @@ export const secondaryDevelopmentTracks = [
   },
   {
     title: 'Hooks / Webhooks 联动',
-    description: '适合连接外部事件、回调通知和轻量自动流程，让系统与表单、审批、工单或其他服务联动。',
+    description: '适合连接外部事件、回调通知和轻量自动流程，让系统与表单、审批、工单等服务联动。',
     fit: '审批回调、表单通知、GitHub 事件、内部系统回调',
     output: '插件中的 Hook 注册，或带鉴权的 HTTP 入口',
     links: [
@@ -105,7 +105,7 @@ export const secondaryDevelopmentTracks = [
 export const secondaryDevelopmentReadingPath = [
   {
     title: '明确扩展目标',
-    description: '先确定你要解决的是任务封装、能力接入、事件联动还是公开分发，再选择对应开发形态。',
+    description: '先确定是任务封装、能力接入、事件联动还是公开分发，再选择对应开发形态。',
   },
   {
     title: '确认运行边界',
@@ -113,7 +113,7 @@ export const secondaryDevelopmentReadingPath = [
   },
   {
     title: '考虑分发与复用',
-    description: '对外公开的技能可以进入 ClawHub，团队内部共享则更适合工作区或本地托管方式。',
+    description: '对外公开的技能可进入 ClawHub，团队内部共享更适合工作区或本地托管。',
   },
 ]
 
@@ -125,7 +125,7 @@ export const secondaryDevelopmentScenarios = [
   },
   {
     title: '把 OpenClaw 接进内部审批或工单系统',
-    description: '通过插件注册 HTTP 路由或 Hook，让审批、工单、表单等外部事件进入 Gateway。',
+    description: '通过插件注册 HTTP 路由或 Hook，让审批、工单、表单等事件进入 Gateway。',
     path: 'Plugins / HTTP Routes',
   },
   {
@@ -145,31 +145,31 @@ export const secondaryDevelopmentSources = [
     title: 'Skills',
     href: 'https://docs.openclaw.ai/skills',
     source: 'OpenClaw Docs',
-    summary: '官方说明了 skills 的目录结构、加载位置、优先级，以及 workspace / 本地 / 内置 skills 的覆盖关系。',
+    summary: '官方说明 skills 的目录结构、加载位置、优先级，以及 workspace / 本地 / 内置 skills 的覆盖关系。',
   },
   {
     title: 'Creating Skills',
     href: 'https://docs.openclaw.ai/tools/creating-skills',
     source: 'OpenClaw Docs',
-    summary: '官方给出了创建第一个 skill 的最小步骤，包括目录、`SKILL.md`、刷新与测试方式。',
+    summary: '官方给出创建第一个 skill 的最小步骤，包括目录、`SKILL.md`、刷新与测试方式。',
   },
   {
     title: 'ClawHub',
     href: 'https://docs.openclaw.ai/tools/clawhub',
     source: 'OpenClaw Docs',
-    summary: '官方把 ClawHub 定义为公开技能注册表，支持搜索、安装、更新和发布技能。',
+    summary: '官方将 ClawHub 定义为公开技能注册表，支持搜索、安装、更新和发布技能。',
   },
   {
     title: 'Plugins',
     href: 'https://docs.openclaw.ai/tools/plugin',
     source: 'OpenClaw Docs',
-    summary: '插件文档说明了插件的安装方式、导出形式，以及如何在运行时注册 hook。',
+    summary: '插件文档说明插件的安装方式、导出形式，以及如何在运行时注册 hook。',
   },
   {
     title: 'Plugin Agent Tools',
     href: 'https://docs.openclaw.ai/plugins/agent-tools',
     source: 'OpenClaw Docs',
-    summary: '官方明确插件可以向 LLM 暴露 JSON Schema 形式的 agent tools，并通过 allowlist / denylist 管理可调用范围。',
+    summary: '官方说明插件可向 LLM 暴露 JSON Schema 形式的 agent tools，并通过 allowlist / denylist 管理可调用范围。',
   },
   {
     title: 'Plugin HTTP Routes',

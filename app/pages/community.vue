@@ -114,6 +114,39 @@ const communityStatus = [
   },
 ]
 
+const siteUpdates = [
+  {
+    date: '2026-03-24',
+    title: '支持与生态入口持续整理',
+    summary: '补充管理员反馈查看、二次开发入口和支持页分流说明，让问题提交、内容反馈和专题访问更清晰。',
+    items: ['新增管理员反馈列表页与 token 访问方式', '生态菜单补充二次开发入口并修正可访问性', '支持页继续强化问题分流与入口说明'],
+  },
+  {
+    date: '2026-03-24',
+    title: '专题页与内容结构优化',
+    summary: '调整模型选择、安全实践、主题中心和二次开发等重点页面的结构与文案，减少空白和内部策展口吻。',
+    items: ['模型选择页改成更完整的深度专题结构', '安全实践页恢复事故案例与配置模板内容', '主题中心和二次开发页改为面向外部访客的展示语言'],
+  },
+  {
+    date: '2026-03-24',
+    title: '学习与内容导航补强',
+    summary: '重新梳理学习菜单、交叉访问链路和文档排序，提升从学习路径到主题中心、文档中心之间的跳转效率。',
+    items: ['补充核心概念文档与学习主题导流', '优化学习路径、主题中心与文档中心的交叉链接', '修复部分错误锚点、断链和一级菜单跳转问题'],
+  },
+  {
+    date: '2026-03-24',
+    title: '加载性能与基础体验优化',
+    summary: '减少全站不必要的内容加载，降低搜索与列表页的首屏压力，并修复部分构建兼容问题。',
+    items: ['全局搜索改为按需加载', '列表页改用轻量内容清单减少整库读取', '修复 content manifest 在服务端与构建阶段的读取问题'],
+  },
+  {
+    date: '2026-03-16',
+    title: '新闻内容补充',
+    summary: '根据临时素材整理并生成站内新闻，补充中文信息跟踪内容。',
+    items: ['新增 5 篇中文观察型新闻稿', '统一新闻 frontmatter 与站内表达口径', '补充 OpenClaw 中国生态、开发者生态和企业/教育采用观察内容'],
+  },
+]
+
 const faqs = [
   {
     question: '我第一次接触 OpenClaw，应该从哪里开始？',
@@ -332,6 +365,27 @@ const learnEntries = [
             <NuxtLink class="button secondary" to="/docs/reference/community">查看协作说明</NuxtLink>
             <NuxtLink class="button ghost" to="/news">查看新闻动态</NuxtLink>
           </div>
+        </div>
+      </section>
+
+      <section class="faq-panel updates-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Updates</p>
+          <h2 class="section-title">网站更新说明</h2>
+          <p class="updates-intro">这里记录中文站近期的结构调整、内容补充和体验优化，方便快速了解最近有哪些变化。</p>
+        </div>
+
+        <div class="updates-list">
+          <article v-for="item in siteUpdates" :key="`${item.date}-${item.title}`" class="card update-card">
+            <div class="update-head">
+              <span class="update-date">{{ item.date }}</span>
+              <h3>{{ item.title }}</h3>
+            </div>
+            <p class="update-summary">{{ item.summary }}</p>
+            <ul class="update-items">
+              <li v-for="point in item.items" :key="point">{{ point }}</li>
+            </ul>
+          </article>
         </div>
       </section>
 
@@ -590,6 +644,60 @@ const learnEntries = [
 .priority-panel,
 .faq-panel {
   margin-top: 20px;
+}
+
+.updates-intro,
+.update-summary {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.updates-list {
+  display: grid;
+  gap: 12px;
+}
+
+.update-card {
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px;
+}
+
+.update-head {
+  display: grid;
+  gap: 6px;
+}
+
+.update-date {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(234, 215, 182, 0.42);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.update-head h3 {
+  margin: 0;
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-size: 1.08rem;
+  line-height: 1.34;
+  letter-spacing: -0.03em;
+}
+
+.update-items {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.update-items li + li {
+  margin-top: 6px;
 }
 
 .related-grid {
@@ -884,7 +992,8 @@ const learnEntries = [
   .priority-grid,
   .scenario-grid,
   .lane-grid,
-  .faq-list {
+  .faq-list,
+  .updates-list {
     gap: 10px;
   }
 
@@ -897,7 +1006,8 @@ const learnEntries = [
   .triage-step h3,
   .lane-item h3,
   .status-item strong,
-  .faq-item summary {
+  .faq-item summary,
+  .update-head h3 {
     font-size: 0.94rem;
     line-height: 1.36;
   }
@@ -911,7 +1021,10 @@ const learnEntries = [
   .board-summary,
   .board-stat p,
   .status-item span,
-  .faq-item p {
+  .faq-item p,
+  .updates-intro,
+  .update-summary,
+  .update-items {
     font-size: 0.84rem;
     line-height: 1.56;
   }
