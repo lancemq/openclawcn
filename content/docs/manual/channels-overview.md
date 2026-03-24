@@ -2,7 +2,7 @@
 title: OpenClaw 渠道能力概览
 description: 了解 OpenClaw 当前支持的主要聊天渠道、接入方式，以及第一次应该如何选择和配置渠道。
 category: 功能
-updatedAt: 2026-03-11
+updatedAt: 2026-03-24
 sourceType: official
 tags: [channels, telegram, whatsapp, discord]
 ---
@@ -139,6 +139,51 @@ openclaw gateway --port 18789
 
 这些文件本质上是敏感状态数据，应该和配置、token 一样对待。
 
+## 2026 年 3 月 24 日的中文环境观察
+
+除了官方 Channels 文档，近期公开可访问的中文教程站有一个很明显的变化：渠道话题不再只围绕 Telegram 和 WhatsApp，而是越来越多地把飞书、微信、企业微信和 WebChat 放到同一张入口图里讨论。
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程：Channels](https://openclawgithub.cc/guide/channels/)
+- [OpenClaw 中文教程：飞书（Feishu）](https://openclawgithub.cc/guide/channels/feishu/)
+- [OpenClaw 中文教程：微信（WeChat）](https://openclawgithub.cc/guide/channels/wechat/)
+
+从这些中文资料里，当前最值得补进文档的不是“又多了几个平台”，而是下面三个判断：
+
+### 1. 中文用户更常把渠道当成工作流入口，而不只是聊天窗口
+
+在中文办公环境里，飞书、企业微信和微信更容易被当成：
+
+- 通知入口
+- 值班与审批入口
+- 团队协作入口
+
+这意味着第一次接渠道时，更应该先判断“谁需要进入这条消息流”，而不是只判断“哪个平台最常用”。
+
+### 2. WebChat 在中文环境里经常被当成过渡入口
+
+很多中文教程会把 WebChat 作为：
+
+- 本地验证入口
+- 交付给内部少量成员试用的过渡入口
+- 在正式接 IM 平台前的临时入口
+
+这和把 WebChat 当成长期主入口是两回事。  
+如果你只是想验证模型、工具和回复链路，WebChat 很适合；但如果你最终是团队协作，还是要尽快回到真实渠道的权限和身份边界上。
+
+### 3. 飞书 / 微信这类中文入口更需要额外重视身份边界
+
+在中文环境里，群组、机器人、通知流和个人消息往往混得更近。  
+因此接这类渠道时，比“能发消息”更重要的通常是：
+
+- allowFrom 是否收敛
+- 群组里是否要求 mention
+- 谁可以触发高风险能力
+- 渠道身份和 Agent 身份有没有被混淆
+
+这也是为什么中文站里会反复把渠道文档和安全文档、远程访问文档连起来看。
+
 ## 多渠道的正确节奏
 
 更稳的扩展路径通常是：
@@ -165,3 +210,4 @@ openclaw gateway --port 18789
 - [Control UI 是什么](/docs/manual/control-ui)
 - [安全配置基础](/docs/operations/safety-basics)
 - [故障排除与诊断思路](/docs/reference/troubleshooting)
+- [国内云部署思路](/docs/setup/china-cloud-deployment)

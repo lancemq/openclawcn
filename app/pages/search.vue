@@ -90,7 +90,7 @@ function updateKindFilter(kind: string) {
           <p class="eyebrow">Search</p>
           <h1 class="section-title">站内搜索</h1>
           <p class="section-copy">
-            你可以按标题、描述和分类搜索文档、新闻与最佳实践。搜索更适合“已经知道自己在找什么”，如果你还不确定问题属于哪一层，社区页和 FAQ 往往更快。
+            你可以按标题、描述和分类搜索文档、新闻与最佳实践。搜索更适合“已经知道自己在找什么”；如果你还不确定问题属于哪一层，FAQ、学习路径和社区页往往更快。
           </p>
 
           <div class="collection-utility">
@@ -111,7 +111,7 @@ function updateKindFilter(kind: string) {
           <div class="collection-summary">
             <span class="mini-label">搜索建议</span>
             <strong>先搜主题词，再缩小到具体模块</strong>
-            <p>例如先搜“安装”或“渠道”，再根据结果进入更细的专题；这比直接搜一句完整问题更稳定。</p>
+            <p>例如先搜“安装”或“渠道”，再根据结果进入更细的专题；这比直接搜一句完整自然语言问题更稳定。</p>
           </div>
 
           <div class="collection-summary">
@@ -126,7 +126,7 @@ function updateKindFilter(kind: string) {
           <div class="search-shell-head">
             <div>
               <p class="eyebrow">Search Desk</p>
-              <p class="section-copy">先输入主题词，再按类型收窄。当前搜索只覆盖文档、新闻和最佳实践。</p>
+              <p class="section-copy">先输入主题词，再按类型收窄。当前搜索只覆盖文档、新闻和最佳实践，适合已经能说清自己在找哪个概念或主题的人。</p>
             </div>
             <div class="search-count-box">
               <span class="mini-label">当前结果</span>
@@ -157,7 +157,7 @@ function updateKindFilter(kind: string) {
           <div class="card side-panel">
             <span class="mini-label">不会搜时</span>
             <strong>优先用短词，再根据结果跳转</strong>
-            <p>先搜“安装、渠道、模型、安全”这类短词，再逐步缩小，不要一开始就输入完整自然语言问题。</p>
+            <p>先搜“安装、渠道、模型、安全”这类短词，再逐步缩小；如果连短词都不确定，先回 FAQ、路径或主题页更稳。</p>
           </div>
 
           <div class="card route-panel">
@@ -192,8 +192,9 @@ function updateKindFilter(kind: string) {
 
       <div v-else-if="hasQuery" class="card empty-state">
         <h2>没有找到匹配结果</h2>
-        <p class="muted">可以尝试更短的关键词，或者直接进入社区页和反馈页告诉我们你想找什么内容。</p>
+        <p class="muted">可以尝试更短的关键词；如果你现在连该搜什么都不确定，先回 FAQ、学习路径或社区页判断入口会更高效。</p>
         <div class="button-row">
+          <NuxtLink class="button ghost" to="/faq">先看 FAQ</NuxtLink>
           <NuxtLink class="button secondary" to="/community">查看社区支持</NuxtLink>
           <NuxtLink class="button ghost" to="/feedback">提交内容建议</NuxtLink>
         </div>

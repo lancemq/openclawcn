@@ -2,7 +2,7 @@
 title: Dashboard、WebChat 和聊天渠道分别什么时候用
 description: 把 OpenClaw 最常见的三个使用入口拆开，帮助你判断什么时候该进 Dashboard，什么时候该用 WebChat，什么时候才值得接入 Telegram、飞书或 WhatsApp。
 category: 入门
-updatedAt: 2026-03-23
+updatedAt: 2026-03-24
 sourceType: internal
 tags: [dashboard, webchat, channels, decision, getting-started]
 ---
@@ -86,6 +86,24 @@ WebChat 很适合测试、受限访问和轻量协作，但它不等于完整渠
 - 看状态、查管理面：去 Dashboard
 - 先测试聊天和上下文：去 WebChat
 - 进入真实沟通软件：再接渠道
+
+## 2026 年 3 月 24 日的中文入口观察
+
+近期公开可访问的中文教程站，越来越常把 WebChat 放进“快速开始”路径里，把飞书、微信、Telegram、WhatsApp 放进“真正进入工作流”路径里。  
+这个倾向基本是对的，但也容易让新用户误解成“WebChat 不重要”。
+
+更实用的理解方式是：
+
+- Dashboard：看系统状态和管理边界
+- WebChat：做最小聊天验证和过渡试用
+- 渠道：进入真实消息工作流
+
+所以如果你现在是第一次跟着外部教程走，不要因为教程很快就开始讲飞书、微信或 Telegram，就跳过 Dashboard 和 WebChat。  
+更稳的顺序仍然是：
+
+1. 先确认 Dashboard 正常  
+2. 再用 WebChat 做最小聊天验证  
+3. 最后再把实例接进真实渠道
 
 ## 如果你现在还拿不准
 

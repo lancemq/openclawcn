@@ -2,7 +2,7 @@
 title: 国内云部署思路
 description: 面向中文团队整理 OpenClaw 在国内或面向国内网络环境部署时最该先判断的三件事：入口生态、模型端点和长期在线后的运维边界。
 category: 安装
-updatedAt: 2026-03-23
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/zh-CN/install
 sourceName: OpenClaw Docs
 sourceType: official
@@ -140,6 +140,31 @@ openclaw onboard --auth-choice qianfan-api-key
 
 不要把“云上能打开”当成“已经适合长期运行”。
 
+## 2026 年 3 月 24 日的外部中文资料信号
+
+除了官方文档，近期公开可访问的中文教程站也在集中讨论国内云部署、企业微信 / 微信入口和国内模型端点。这些资料对判断“中文团队到底会怎么落地”很有帮助，但更适合补场景，不适合替代官方配置真值。
+
+我这轮整理时重点参考了：
+
+- [OpenClaw 中文教程：部署与 Docker](https://openclawgithub.cc/guide/deploy/)
+- [OpenClaw 中文教程：快速开始](https://openclawgithub.cc/guide/start/)
+- [OpenClaw 中文教程：微信（WeChat）](https://openclawgithub.cc/guide/channels/wechat/)
+
+从这些公开中文资料里，当前最明显的三个信号是：
+
+1. 中文团队更常把“飞书 / 企业微信 / 微信入口”放在和“买哪台云主机”同等重要的位置  
+2. 国内模型经常被和部署一起讨论，而不是等系统跑通后再选  
+3. 很多中文教程仍会把“先开放端口再说”当成默认步骤
+
+第三点尤其值得提醒：一些中文部署示例会直接开放 `18789` 端口甚至给出 `0.0.0.0/0` 的安全组示例。  
+这类做法确实能更快验证联通性，但**按官方 2026 年 3 月的安全文档，更稳的默认方案仍然是 loopback + SSH tunnel / Tailscale Serve / 受控反向代理**，而不是直接把 Gateway 暴露成公网入口。
+
+所以如果你在中文环境里参考外部教程，建议按这个顺序过滤：
+
+1. 先用官方 docs 确认能力是否真实存在  
+2. 再把中文教程当成“国内场景补充”  
+3. 看到开放公网端口、宽松安全组、默认暴露控制面这类做法时，优先回到官方安全页重新核对
+
 ## 第五步：一条更稳的中文团队迁移路径
 
 对多数中文团队来说，更实际的顺序通常是：
@@ -173,3 +198,4 @@ openclaw onboard --auth-choice qianfan-api-key
 - [Dashboard、WebChat 和聊天渠道分别什么时候用](/docs/getting-started/when-to-use-dashboard-webchat-or-channels)
 - [模型选型与成本控制](/docs/operations/model-strategy-and-cost)
 - [远程访问](/docs/operations/remote-access)
+- [如何结合官方文档、GitHub 和中文渠道跟踪 OpenClaw](/docs/reference/external-sources-and-trust-levels)

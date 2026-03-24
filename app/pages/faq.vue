@@ -87,19 +87,19 @@ const quickLinks = [
 const faqRoutes = [
   {
     title: '问题还很模糊',
-    description: '先看 FAQ，确认你该去路径、主题、搜索还是反馈。',
+    description: '先看 FAQ，确认你该去路径、主题、搜索还是反馈；适合问题还很模糊的时候。',
     to: '/faq',
     meta: '当前页',
   },
   {
     title: '已经知道关键词',
-    description: '直接进入搜索页，用更短的主题词快速定位内容。',
+    description: '直接进入搜索页，用更短的主题词快速定位内容；适合已经知道关键词的时候。',
     to: '/search',
     meta: '搜索',
   },
   {
     title: '已经知道阶段',
-    description: '从学习路径选一条主线，避免自己拼阅读顺序。',
+    description: '从学习路径选一条主线，避免自己拼阅读顺序；适合还没确定当前阶段的时候。',
     to: '/paths',
     meta: '路径',
   },
@@ -122,14 +122,14 @@ const groupedFaqs = Object.entries(
           <p class="eyebrow">FAQ</p>
           <h1 class="section-title">常见问题</h1>
           <p class="section-copy">
-            这里整理的是最常见的入门疑问、反馈路径和信息查找方式。它更适合在你问题还比较模糊时，先快速判断下一步该看哪里或去哪提问。
+            这里整理的是最常见的入门疑问、反馈路径和信息查找方式。它更适合在你问题还比较模糊时，先快速判断下一步该看哪里或去哪提问；如果问题已经很具体，搜索和专题页通常更快。
           </p>
 
           <div class="collection-utility">
             <article class="collection-utility-item">
               <span class="mini-label">适合什么时候看</span>
               <strong>第一次访问或入口不清时</strong>
-              <p>FAQ 负责快速分流，而不是替代完整文档。</p>
+              <p>FAQ 负责快速分流，而不是替代完整文档；它解决的是“我先去哪”，不是“所有细节都在这里”。</p>
             </article>
             <article class="collection-utility-item">
               <span class="mini-label">如果问题更具体</span>
@@ -143,7 +143,7 @@ const groupedFaqs = Object.entries(
           <div class="collection-summary">
             <span class="mini-label">FAQ 结构</span>
             <strong>先按问题类型分组，再给出下一步入口</strong>
-            <p>这里把入门、内容、社区、导航和订阅问题拆开，避免所有问题混在同一块里。</p>
+            <p>这里把入门、内容、社区、导航和订阅问题拆开，帮助你先分清问题属于哪一层，再进入对应页面。</p>
           </div>
         </aside>
       </section>

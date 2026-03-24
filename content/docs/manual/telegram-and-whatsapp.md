@@ -2,7 +2,7 @@
 title: Telegram 与 WhatsApp 接入重点
 description: 两个最常见的入门渠道该怎么选、各自依赖什么认证方式，以及群聊和私聊里最容易踩的坑。
 category: 功能
-updatedAt: 2026-03-11
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/channels
 sourceName: OpenClaw Docs
 sourceType: official
@@ -133,8 +133,43 @@ WhatsApp 更需要关心的是：
 
 那 WhatsApp 才会开始体现价值。否则太早切进去，问题很容易混在一起。
 
+## 2026 年 3 月 24 日的中文入口观察
+
+近期公开可访问的中文教程站和社区整理，对这两个渠道的使用倾向已经比较明显：
+
+- Telegram 更常被当成“先验证远程入口能不能跑通”的技术入口
+- WhatsApp 更常被当成“真正放进日常消息流”的长期入口
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程：Channels](https://openclawgithub.cc/guide/channels/)
+- [OpenClaw 中文教程首页](https://openclawgithub.cc/en/)
+
+从这些中文资料里，当前最值得补进文档的不是平台特性，而是两条更实际的判断：
+
+### 1. Telegram 更适合先分离“系统问题”和“渠道问题”
+
+因为 Telegram 更接近标准 bot 路径，所以当你遇到问题时，更容易先判断：
+
+- 是 Gateway 没起来
+- 是 token / chat 配置不对
+- 还是群聊触发规则没收住
+
+对中文用户来说，这使它仍然是更适合第一轮验证的远程消息入口。
+
+### 2. WhatsApp 更需要提前考虑长期稳定性
+
+中文用户在公开教程里经常只关注“扫码成功”，但真正影响长期使用的通常是：
+
+- 配对会不会掉
+- 配对状态是不是持久化
+- allowFrom 和群聊 mention 规则有没有收敛
+
+所以如果你准备把 OpenClaw 放进真实消息流，WhatsApp 更应该被当成“长期运行入口”去治理，而不是一次性演示入口。
+
 ## 下一步推荐
 
 - 想看整体渠道地图：看 [OpenClaw 渠道能力概览](/docs/manual/channels-overview)
 - 想理解会话边界：看 [Session 与配对机制](/docs/manual/session-and-pairing)
 - 想排查渠道异常：看 [故障排除与诊断思路](/docs/reference/troubleshooting)
+- 想看中文办公环境里的入口判断：看 [国内云部署思路](/docs/setup/china-cloud-deployment)

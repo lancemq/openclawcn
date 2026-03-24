@@ -2,7 +2,7 @@
 title: 模型提供商与故障转移
 description: 基于官方 providers 文档，整理 OpenClaw 常见 provider、默认模型写法、fallback 思路和长期运行时的配置重点。
 category: 功能
-updatedAt: 2026-03-17
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/zh-CN/providers
 sourceName: OpenClaw Docs
 sourceType: official
@@ -185,6 +185,58 @@ tags: [providers, models, fallback, openrouter, ollama]
 - **本地 / 自托管**：Ollama、vLLM
 - **补充能力**：Deepgram 这类转录 provider
 - **社区或兼容层**：Claude Max API Proxy、Synthetic 等
+
+## 2026 年 3 月 24 日的中文 provider 观察
+
+近期公开可访问的中文教程站和社区文章，在介绍 provider 时有一个很明显的倾向：会优先强调国内可用、中文能力和本地模型，而不是完整覆盖官方 provider 目录。
+
+这对第一次入门很友好，但也容易让人忽略两件事：
+
+- OpenClaw 的 provider 体系其实比中文文章里常出现的几家更大
+- provider 页面本质上是“能力目录”，不是最终选型答案
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程首页](https://openclawgithub.cc/en/)
+- [Qianfan Provider Guide](https://docs.openclaw.ai/qianfan)
+
+结合官方资料和中文外部资料，当前更值得长期保留的判断有三条：
+
+### 1. 中文资料更常提到的 provider，不一定就是唯一值得看的 provider
+
+Moonshot、Qwen、Qianfan、Ollama 在中文环境里确实更常被讨论，但这不代表：
+
+- OpenRouter
+- LiteLLM
+- Cloudflare AI Gateway
+- Vercel AI Gateway
+
+这类更偏路由层和统一网关层的 provider 就不重要。
+
+### 2. 中文团队更适合先分“直连上游”和“统一网关”
+
+如果你要的是：
+
+- 简单接入
+- 尽快跑通
+
+那直连上游 provider 更直观。
+
+如果你要的是：
+
+- 成本治理
+- 多上游切换
+- 更统一的入口
+
+那统一网关型 provider 反而更值得早点考虑。
+
+### 3. provider 页更适合先用来缩小范围，再回到策略文档决策
+
+更稳的顺序通常是：
+
+1. 先从 provider 总览确认可选范围  
+2. 再按区域、预算和组织条件缩小到几类  
+3. 最后回到模型策略文档决定主力、fallback 和本地补位
 
 ## 下一步推荐
 

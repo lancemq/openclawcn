@@ -2,7 +2,7 @@
 title: OpenClaw 的 Models 应该怎么理解
 description: 理解 OpenClaw 里模型层的角色、选择思路和常见配置边界，避免把所有问题都误判成模型问题。
 category: 功能
-updatedAt: 2026-03-11
+updatedAt: 2026-03-24
 sourceType: official
 tags: [models, llm, providers, routing]
 ---
@@ -107,8 +107,66 @@ tags: [models, llm, providers, routing]
 - 先跑通完整最小链路
 - 在系统稳定后，再按任务类型拆分模型策略
 
+## 2026 年 3 月 24 日的外部模型信号
+
+近期公开可访问的中文教程站和社区文章，在模型话题上出现了一个很稳定的趋势：中文用户不再只问“哪个最强”，而是更常一起问下面三件事：
+
+- 当前网络环境下哪个 provider 更稳
+- 中文工作流里哪个模型更适合做主力
+- 本地模型要不要一起接进来做兜底
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程首页](https://openclawgithub.cc/en/)
+- [OpenClaw 中文教程：安装与环境](https://openclawgithub.cc/en/guide/install/)
+- [Qianfan Provider Guide](https://docs.openclaw.ai/qianfan)
+
+从这些公开资料里，当前最值得补进长期文档的判断有三条：
+
+### 1. 中文用户更常把“provider 稳定性”放在第一位
+
+在很多中文使用场景里，模型选择不是单纯比效果，而是同时看：
+
+- 密钥和控制台是否容易管理
+- 当前网络环境下端点是否稳定
+- 是否方便做团队长期复用
+
+所以对中文团队来说，provider 的可接入性经常比单次效果更重要。
+
+### 2. 国内 provider 更适合被当成正式选项，而不是临时替代
+
+官方现在已经明确给出了 Moonshot / Kimi、Qwen、Qianfan 这类 provider 的独立文档和接入方式。  
+这意味着在中文环境里，把它们作为主力或备用模型来设计，并不是“偏门玩法”，而是官方已经承认的正式路径。
+
+### 3. 本地模型更常被当成“兜底能力”而不是唯一主力
+
+在中文教程和讨论里，本地模型经常和云端 provider 一起出现。  
+更常见的实际思路是：
+
+- 主力任务走稳定云端 provider
+- 本地模型负责隐私场景、离线场景或低成本兜底
+
+这比“一开始就把所有任务全压到本地模型”更接近多数团队的真实做法。
+
+## 中文站更推荐的模型判断顺序
+
+如果你主要面向中文团队，当前更稳的顺序通常是：
+
+1. 先确定一个最稳定的默认 provider  
+2. 再决定要不要接第二个 provider 做 fallback  
+3. 最后再判断本地模型是主力、补充，还是只做实验
+
+这样更容易把：
+
+- 网络环境问题
+- provider 认证问题
+- 真正的模型效果问题
+
+分开看清。
+
 ## 下一步建议
 
 - 想理解工具层：看 [Hooks 能做什么](/docs/manual/hooks-overview)
 - 想理解系统结构：看 [Gateway 架构概览](/docs/manual/architecture)
 - 想先把环境跑通：看 [OpenClaw 安装与环境](/docs/setup/installation)
+- 想看中文环境下的端点与部署关系：看 [国内云部署思路](/docs/setup/china-cloud-deployment)

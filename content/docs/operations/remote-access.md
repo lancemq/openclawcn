@@ -2,7 +2,7 @@
 title: 远程访问与 Tailscale / SSH
 description: 把 OpenClaw 放到远程主机长期运行时，如何在 SSH、tailnet、Tailscale Serve 和直接 ws/wss 之间做选择。
 category: 运维
-updatedAt: 2026-03-17
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/gateway/remote
 sourceName: OpenClaw Docs
 sourceType: official
@@ -210,6 +210,54 @@ WebChat 不再是单独一套 HTTP 页面，它本质上也是连接 Gateway Web
 
 - 浏览器在另一台机器上时，更适合在那里跑一个节点主机
 - 不要把 Funnel 当成浏览器远控的默认主路径
+
+## 2026 年 3 月 24 日的中文远程运维观察
+
+近期公开可访问的中文教程站和部署文章，在远程访问这件事上有一个反复出现的倾向：会先教你“怎样连上”，再补“怎样收口”。  
+这对第一次验证很友好，但如果你把临时验证方式直接带到长期环境，问题通常会出得很快。
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程：部署与 Docker](https://openclawgithub.cc/guide/deploy/)
+- [OpenClaw 中文教程：安装与环境](https://openclawgithub.cc/en/guide/install/)
+
+结合官方资料和中文外部资料，当前更值得长期保留的提醒有三条：
+
+### 1. “能打开”不等于“远程边界已经设计好”
+
+很多中文教程会优先强调：
+
+- 端口是否联通
+- 控制面能否打开
+- Web 页面是否可见
+
+但长期运行更关键的往往是：
+
+- Gateway 还是否保持 loopback
+- 认证边界是不是清楚
+- 是不是所有入口都走了同一条受控路径
+
+### 2. SSH / Tailscale Serve 仍然比公网入口更适合多数中文团队
+
+如果你只是自己用，或者少量成员需要管理入口，当前更稳的默认组合仍然是：
+
+- SSH tunnel
+- Tailnet
+- Tailscale Serve
+
+而不是一开始就做公网 `wss://` 或直接暴露控制面。
+
+### 3. 浏览器控制面和消息入口不要混成同一条暴露路径
+
+中文环境里最常见的问题之一，是把：
+
+- Control UI
+- WebChat
+- Webhooks
+- 公网反向代理
+
+一起挂到同一个公开入口上。  
+这种做法虽然看上去方便，但也会让排障、认证和暴露面同时变复杂。
 
 ## 下一步推荐
 

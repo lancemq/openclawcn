@@ -1,7 +1,7 @@
 export const docsOverview = [
   {
     title: '我应该先从哪个页面开始',
-    description: '按“先跑通 / 按路径学 / 按主题查 / 先看演示 / 先看案例”判断自己当前最该进入的入口。',
+    description: '按“先跑通 / 按路径学 / 按主题查 / 先看演示 / 先看案例”判断当前最该进入的入口，避免被热门话题页带偏。',
     to: '/docs/getting-started/which-page-should-i-start-with',
     meta: '入口判断',
   },
@@ -31,7 +31,7 @@ export const docsOverview = [
   },
   {
     title: '我什么时候该开始接入渠道',
-    description: '判断现在是否已经适合进入 Telegram、飞书、WhatsApp 等渠道接入，而不是过早增加复杂度。',
+    description: '判断现在是否已经适合进入 Telegram、飞书、WhatsApp 等渠道接入，而不是被热门渠道教程带着过早增加复杂度。',
     to: '/docs/getting-started/when-to-connect-channels',
     meta: '渠道',
   },
@@ -157,7 +157,7 @@ export const ecosystemOverview = [
 export const userRouteOverview = [
   {
     title: '我是新手，想先跑通',
-    description: '从产品定位、安装、Onboarding 到第一条最小链路，一条路径走完。',
+    description: '从产品定位、安装、Onboarding 到 Dashboard / WebChat 的最小验证，一条路径走完。',
     to: '/paths',
     meta: '新手路径',
   },
@@ -169,7 +169,7 @@ export const userRouteOverview = [
   },
   {
     title: '我已经部署，想继续扩展',
-    description: '从工具系列、Skills、视频教程和最佳实践进入更实战的能力扩展。',
+    description: '从工具系列、Skills、视频教程和最佳实践进入更实战的能力扩展，而不是一开始就把所有扩展层一起堆上去。',
     to: '/tools',
     meta: '扩展路径',
   },
@@ -181,7 +181,7 @@ export const userRouteOverview = [
   },
   {
     title: '我还不确定该先进哪个入口',
-    description: '如果你现在连先看文档、路径、主题还是视频都没想清楚，先走入口判断页。',
+    description: '如果你现在连先看文档、路径、主题还是视频都没想清楚，先走入口判断页，不要直接追最热的专题。',
     to: '/docs/getting-started/which-page-should-i-start-with',
     meta: '入口判断',
   },

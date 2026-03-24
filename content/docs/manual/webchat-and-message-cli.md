@@ -2,7 +2,7 @@
 title: WebChat 与 message CLI
 description: 理解 OpenClaw 除聊天渠道外的两类直接交互入口：Gateway WebSocket 上的 WebChat 和统一的 openclaw message 命令。
 category: 功能
-updatedAt: 2026-03-11
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/web/webchat
 sourceName: OpenClaw Docs
 sourceType: official
@@ -123,8 +123,44 @@ tags: [webchat, message, cli, gateway, channels]
 2. 渠道配置完成后用 `openclaw message` 做一次明确的 outbound 测试
 3. 真正进入生产使用时，再把不同渠道交给真实用户或真实自动化场景
 
+## 2026 年 3 月 24 日的中文入口观察
+
+近期公开可访问的中文教程站在介绍 OpenClaw 时，越来越常把 WebChat 放进“快速开始”和“最小验证路径”里，而不是把它当成长期主入口来强调。
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程首页](https://openclawgithub.cc/en/)
+- [OpenClaw 中文教程：快速开始](https://openclawgithub.cc/guide/start/)
+
+结合官方资料和中文外部资料，当前更值得长期保留的判断有三条：
+
+### 1. WebChat 在中文环境里更像“系统验证入口”
+
+很多中文用户第一次接触 OpenClaw 时，还没准备好 Telegram、WhatsApp、飞书或企业内部渠道。  
+这时 WebChat 最有价值的地方不是长期承接消息，而是帮你先确认：
+
+- Gateway 是否真的起来了
+- 默认模型是否可用
+- 最小聊天链路是否成立
+
+### 2. `message` 命令更适合做“外发验证”和脚本集成
+
+中文用户经常把出站通知、自动化提醒和渠道测试混在一起做。  
+`openclaw message` 的价值就在于，它能把“我要验证某个渠道能不能发出去”从完整 agent 流程里单独剥出来。
+
+### 3. WebChat 适合过渡，不一定适合长期替代真实渠道
+
+如果你最终是要接团队消息入口、审批流或长期协作环境，那么 WebChat 更适合：
+
+- 过渡验证
+- 运维调试
+- 内部少量试用
+
+而不是长期替代真实消息入口的主路径。
+
 ## 下一步推荐
 
 - 想看渠道全貌：看 [渠道能力概览](/docs/manual/channels-overview)
 - 想理解远程访问：看 [远程访问与 Tailscale / SSH](/docs/operations/remote-access)
 - 想排查异常：看 [故障排除与诊断思路](/docs/reference/troubleshooting)
+- 想判断什么时候该从 WebChat 过渡到真实渠道：看 [Dashboard、WebChat 和聊天渠道分别什么时候用](/docs/getting-started/when-to-use-dashboard-webchat-or-channels)

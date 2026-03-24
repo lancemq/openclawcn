@@ -2,7 +2,7 @@
 title: OpenClaw 插件系统怎么用
 description: 基于官方插件与 CLI 文档，解释插件和 Skills、Tools 的边界，说明安装、启用、更新与风险控制的基本方法。
 category: 功能
-updatedAt: 2026-03-12
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/zh-CN/tools/plugin
 sourceName: OpenClaw Docs
 sourceType: official
@@ -185,9 +185,63 @@ openclaw plugins doctor
 3. 然后看这篇插件文档，明确哪层该用哪种机制
 4. 最后再结合 [关键配置](/configurations) 和具体插件说明落地
 
+## 2026 年 3 月 24 日的二次开发观察
+
+除了官方插件文档，近期公开可访问的中文教程站和社区整理里，二次开发内容有一个很明显的倾向：很多文章会把 Skills、插件、Hook 和工作流能力放在同一篇里介绍。
+
+这对新用户有帮助，因为更容易快速建立整体印象；但副作用也很明显，就是更容易把“任务组织”和“系统扩展”混成一层。
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程首页](https://openclawgithub.cc/en/)
+- [OpenClaw 中文教程：插件与扩展相关入口](https://openclawgithub.cc/guide/cheatsheet/)
+- [官方 Plugins 文档](https://docs.openclaw.ai/tools/plugin)
+
+结合官方资料和中文外部资料，当前更值得长期保留的判断是：
+
+### 1. 中文资料里最常见的误区，仍然是把 Skills 和 Plugins 混写
+
+如果你只是：
+
+- 整理提示词
+- 封装任务步骤
+- 补一套项目级工作法
+
+那通常还是 Skills 更合适。
+
+如果你要：
+
+- 接入新渠道
+- 增加 Gateway 运行时能力
+- 注册新的 CLI、tools、hooks 或 HTTP 入口
+
+那才更像插件层问题。
+
+### 2. 插件在中文环境里更常和“系统集成”绑定出现
+
+中文开发者在讨论插件时，更常见的真实诉求不是“做一个抽象扩展”，而是：
+
+- 接办公系统
+- 接通知流
+- 接审批和工单
+- 接渠道桥接
+
+这意味着二次开发文档如果只讲插件结构，不讲运行位置、权限边界和远程 Gateway，通常还是不够。
+
+### 3. 二次开发文档更适合把“边界判断”写在前面
+
+从近期中文教程和站内反馈看，很多人真正卡住的不是不会写代码，而是不知道：
+
+- 这个需求该落 Skill 还是 Plugin
+- 这个扩展应该装在本地还是远程 Gateway
+- 这个能力到底属于工具层还是消息入口层
+
+所以中文文档里把“先判断边界，再进入实现”放在前面，会比直接展示插件命令更有效。
+
 ## 下一步推荐
 
 - [Tools 概览](/docs/manual/tools-overview)
 - [Skills 系统怎么工作](/docs/manual/skills-system)
 - [记忆搜索与索引机制](/docs/manual/memory-search-and-indexing)
 - [远程访问与 Tailscale / SSH](/docs/operations/remote-access)
+- [OpenClaw 二次开发](/secondary-development)

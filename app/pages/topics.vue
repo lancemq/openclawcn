@@ -125,7 +125,7 @@ const topicDocBuckets = computed(() => {
           <p class="eyebrow">Topics</p>
           <h1 class="section-title">主题中心</h1>
           <p class="section-copy">
-            围绕安装、运维、渠道、模型、安全等主题，集中整理相关文档、视频、实践经验与近期动态，方便按问题快速查找资料。
+            围绕安装、运维、渠道、模型、安全等主题，集中整理相关文档、视频、实践经验与近期动态，适合已经知道问题属于哪一层的人直接进入。
           </p>
 
           <div class="collection-utility">
@@ -141,7 +141,7 @@ const topicDocBuckets = computed(() => {
           <div class="collection-summary">
             <span class="mini-label">内容说明</span>
             <strong>每个主题都会同步汇总文档、视频、实践和动态资料。</strong>
-            <p>你可以直接选择当前最关心的主题，查看相关的基础说明、进阶内容和补充阅读。</p>
+            <p>如果你已经知道自己在查安装、渠道、模型、安全或扩展问题，直接从主题进入通常会比在首页继续翻更快。</p>
           </div>
         </aside>
       </section>
@@ -175,7 +175,7 @@ const topicDocBuckets = computed(() => {
       <section class="topic-block">
         <div class="home-head">
           <p class="eyebrow">文档安排</p>
-          <p class="home-head-note">从基础说明到功能机制，再到运维与参考，集中查看该主题相关文档。</p>
+          <p class="home-head-note">先看基础说明，再进入功能机制，最后补运维与参考，避免把同一主题的资料读散。</p>
         </div>
         <div class="topic-doc-stack">
           <article v-for="bucket in topicDocBuckets" :key="bucket.id" class="card topic-doc-bucket">
@@ -197,7 +197,7 @@ const topicDocBuckets = computed(() => {
       <section class="topic-block">
         <div class="home-head">
           <p class="eyebrow">视频</p>
-          <p class="home-head-note">精选与该主题直接相关的视频资料，帮助快速建立直观理解。</p>
+          <p class="home-head-note">精选与该主题直接相关的视频资料，适合先建立直观理解，再回到文档核对细节。</p>
         </div>
         <div class="topic-grid">
           <a v-for="item in filteredVideos" :key="item.href" :href="item.href" target="_blank" rel="noreferrer" class="card topic-card">
@@ -212,7 +212,7 @@ const topicDocBuckets = computed(() => {
         <div class="topic-block">
           <div class="home-head">
             <p class="eyebrow">最佳实践</p>
-            <p class="home-head-note">结合真实使用场景，补充该主题的落地方法与经验。</p>
+            <p class="home-head-note">结合真实使用场景，补充该主题在中文环境里的落地方法与经验。</p>
           </div>
           <div class="topic-grid compact">
             <NuxtLink v-for="item in topicPractices" :key="item.path" :to="item.path" class="card topic-card">
@@ -226,7 +226,7 @@ const topicDocBuckets = computed(() => {
         <div class="topic-block">
           <div class="home-head">
             <p class="eyebrow">新闻与更新</p>
-            <p class="home-head-note">跟踪该主题相关的版本变化、案例进展和社区动态。</p>
+            <p class="home-head-note">跟踪该主题相关的版本变化、案例进展和社区动态，帮助判断最近有没有值得插队看的变化。</p>
           </div>
           <div class="topic-grid compact">
             <NuxtLink v-for="item in topicNews" :key="item.path" :to="item.path" class="card topic-card">

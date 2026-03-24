@@ -84,7 +84,7 @@ function trackPathClick(target: string, label: string) {
         <div class="stack-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">开始</p>
-            <p class="home-head-note">首页先只回答两件事：你该从哪个入口进，以及最常见的几条学习路径怎么走。</p>
+            <p class="home-head-note">首页先只回答两件事：你该从哪个入口进，以及最常见的几条学习路径怎么走，不先把你带去最热的话题页。</p>
           </div>
           <div class="feature-band start-band">
             <div class="start-intro">
@@ -103,7 +103,7 @@ function trackPathClick(target: string, label: string) {
             <div class="start-paths">
               <div class="home-head">
                 <p class="eyebrow">学习路径</p>
-                <p class="home-head-note">只保留最常见的 4 条路径，其他更细的场景继续放在完整路径页里。</p>
+                <p class="home-head-note">只保留最常见的 4 条路径，先帮你判断当前阶段；其他更细的场景继续放在完整路径页里。</p>
               </div>
               <div class="compact-path-grid">
                 <NuxtLink
@@ -132,7 +132,7 @@ function trackPathClick(target: string, label: string) {
         <div class="editorial-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">开始 / 主题中心</p>
-            <p class="home-head-note">当你已经知道自己在找安装、渠道、模型或安全时，直接从主题进入会比顺着首页继续往下翻更快。</p>
+            <p class="home-head-note">当你已经知道自己在找安装、渠道、模型或安全时，直接从主题进入会比顺着首页继续往下翻更快；如果还没判断清楚，就先回到路径页。</p>
           </div>
           <div class="editorial-columns">
             <NuxtLink v-if="featuredTopic" :to="featuredTopic.to" class="card editorial-feature">
@@ -164,7 +164,7 @@ function trackPathClick(target: string, label: string) {
         <div class="stack-shell">
           <div class="home-head head-inline">
             <p class="eyebrow">文档</p>
-            <p class="home-head-note">首页只保留最常用的文档入口，剩下更细的分类、标签和全文索引继续放在文档中心里完成。</p>
+            <p class="home-head-note">首页只保留最常用的文档入口，优先解决“先看哪类文档”这个问题；剩下更细的分类和全文索引继续放在文档中心里完成。</p>
           </div>
           <div class="grid docs-grid">
             <ContentCard
@@ -249,7 +249,7 @@ function trackPathClick(target: string, label: string) {
         <div class="updates-shell">
           <div class="home-head">
             <p class="eyebrow">动态</p>
-            <p class="home-head-note">先看本周最值得注意的内容，再决定是否继续进入完整新闻流或相关专题。</p>
+            <p class="home-head-note">先看本周最值得注意的内容，再决定是否继续进入完整新闻流或相关专题；动态适合补信号，不适合作为第一入口。</p>
           </div>
           <div class="updates-grid">
             <div class="grid spotlight-grid">

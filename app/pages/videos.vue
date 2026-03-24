@@ -168,7 +168,7 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
           <h1 class="section-title">视频教程</h1>
           <p class="section-copy">
             这里汇总了 OpenClaw 相关的视频教程与演示内容，覆盖产品总览、安装部署、本地模型、Skills 扩展、渠道接入和进阶案例。
-            如果你是第一次接触 OpenClaw，建议先看总览和安装视频，再进入更具体的模型、Skills 和渠道主题。
+            如果你是第一次接触 OpenClaw，建议先看总览和安装视频，再进入更具体的模型、Skills 和渠道主题。视频更适合先建立直觉，不适合替代后续的文档核对。
           </p>
 
           <div class="collection-utility">
@@ -184,12 +184,12 @@ function updateFilter(key: 'platform' | 'level' | 'topic', value: string) {
           <div class="collection-summary">
             <span class="mini-label">推荐观看顺序</span>
             <strong>先看总览与安装，再进入模型、Skills 和渠道</strong>
-            <p>先建立基础认识，再根据你当前要解决的问题选择更具体的视频内容。</p>
+            <p>先建立基础认识，再根据你当前要解决的问题选择更具体的视频内容；如果已经知道自己在找哪个主题，主题中心和文档通常更快。</p>
           </div>
 
           <div class="collection-summary">
             <span class="mini-label">建议做法</span>
-            <p>第一次跟视频操作时，优先完成一条最小可用链路，再逐步增加模型、渠道和 Skills 配置。</p>
+            <p>第一次跟视频操作时，优先完成一条最小可用链路，再逐步增加模型、渠道和 Skills 配置，不要被热门视频直接带进复杂扩展。</p>
           </div>
         </aside>
       </section>

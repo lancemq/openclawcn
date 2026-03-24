@@ -2,7 +2,7 @@
 title: 模型选型与成本控制
 description: 从主力模型、fallback、国内 provider 和低价值任务分流四个角度理解 OpenClaw 的模型配置策略与成本控制方法。
 category: 运维
-updatedAt: 2026-03-23
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/providers
 sourceName: OpenClaw Docs
 sourceType: official
@@ -205,6 +205,56 @@ openclaw onboard --auth-choice qianfan-api-key
 - 国内 provider 或本地模型负责网络环境、预算或隐私约束下的补位
 
 这样比“全部任务都上同一个模型”更接近长期可用状态。
+
+## 2026 年 3 月 24 日的中文预算与 provider 观察
+
+近期公开可访问的中文教程站和社区文章，在模型话题上有一个很明显的变化：  
+中文用户越来越少只问“哪个最好”，而更常一起问：
+
+- 哪个 provider 当前更稳
+- 哪个适合当长期主力
+- 本地模型该不该一起接进来
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程首页](https://openclawgithub.cc/en/)
+- [Qianfan Provider Guide](https://docs.openclaw.ai/qianfan)
+
+结合官方资料和中文外部资料，当前更值得长期保留的提醒有三条：
+
+### 1. 中文团队更适合先定“默认 provider”，再谈模型组合
+
+很多成本失控并不是因为模型单价太高，而是：
+
+- 默认 provider 不稳
+- 故障时没有明确 fallback
+- 所有任务都被送进高价模型
+
+所以比“先列一堆候选模型”更重要的，是先确定：
+
+- 默认 provider 是谁
+- fallback 走谁
+- 低价值任务降到哪一层
+
+### 2. 国内 provider 更应该按“组织条件”而不是“榜单热度”选
+
+对中文团队来说，Moonshot、Qwen、Qianfan 这类 provider 是否适合长期使用，往往更取决于：
+
+- 当前网络环境
+- 团队已有账号与结算体系
+- 是否需要统一平台审计
+
+而不只是模型排行里的效果强弱。
+
+### 3. 本地模型最适合承担预算和隐私约束下的补位角色
+
+从近期中文教程和用户反馈看，更实际的配置通常是：
+
+- 强模型做主力
+- 国内 provider 做稳定或网络补位
+- 本地模型做隐私任务、实验任务或低价值任务承接
+
+这比“所有任务都混着走”更容易长期维护成本和排障边界。
 
 ## 下一步推荐
 

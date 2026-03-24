@@ -207,7 +207,7 @@ const chooserCards = [
           <p class="eyebrow">Learning Paths</p>
           <h1 class="section-title">学习路径</h1>
           <p class="section-copy">
-            学习 OpenClaw 最容易浪费时间的地方，不是内容太少，而是入口太多。这个页面把现有文档、视频、最佳实践和更新信号重新组织成几条连续路径，让你先选问题，再顺着路线往下走。
+            学习 OpenClaw 最容易浪费时间的地方，不是内容太少，而是入口太多、外部教程又很容易把人直接带到热门专题。这个页面把现有文档、视频、最佳实践和更新信号重新组织成几条连续路径，让你先选阶段，再顺着路线往下走。
           </p>
 
           <div class="hero-map">
@@ -249,7 +249,7 @@ const chooserCards = [
         <div class="section-head">
           <div>
             <p class="eyebrow">先判断自己在哪个阶段</p>
-            <p class="section-copy">如果你不确定该先看哪条路线，从这里直接选最像你当前问题的一项。</p>
+            <p class="section-copy">如果你不确定该先看哪条路线，从这里直接选最像你当前问题的一项，不要先被最热的话题页带着走。</p>
           </div>
         </div>
 
@@ -298,7 +298,7 @@ const chooserCards = [
               <div class="section-head compact-head">
                 <div>
                   <p class="eyebrow">路径步骤</p>
-                  <p class="section-copy">按这个顺序走，不要随意打乱。每一步都对应一个明确页面。</p>
+                  <p class="section-copy">按这个顺序走，不要随意打乱。每一步都对应一个明确页面，目的是先建立判断顺序，再进入具体专题。</p>
                 </div>
               </div>
 
@@ -324,7 +324,7 @@ const chooserCards = [
               <div class="section-head compact-head">
                 <div>
                   <p class="eyebrow">补充资源</p>
-                  <p class="section-copy">这几项适合作为这一条路径的补充，而不是起点。</p>
+                  <p class="section-copy">这几项适合作为这一条路径的补充，而不是起点。先走主线，再看补充资料。</p>
                 </div>
               </div>
 
@@ -348,7 +348,7 @@ const chooserCards = [
         <div class="section-head">
           <div>
             <p class="eyebrow">路径之外，先看这些更新信号</p>
-            <p class="section-copy">如果你已经选好路径，这些更新能帮你判断最近有没有新的资料值得插队看一眼。</p>
+            <p class="section-copy">如果你已经选好路径，这些更新能帮你判断最近有没有新的资料值得插队看一眼，但它们不应该替代主线本身。</p>
           </div>
         </div>
 

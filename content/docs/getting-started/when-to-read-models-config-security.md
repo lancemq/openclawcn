@@ -2,7 +2,7 @@
 title: 模型、配置和安全这三页分别什么时候看
 description: 用最短方式判断什么时候该去看模型选择、关键配置和安全实践，避免把问题带到错误页面里越看越乱。
 category: 入门
-updatedAt: 2026-03-23
+updatedAt: 2026-03-24
 sourceType: internal
 tags: [models, configurations, security, decision, getting-started]
 ---
@@ -87,6 +87,25 @@ tags: [models, configurations, security, decision, getting-started]
 - 选模型：去 [模型选择指南](/models)
 - 配系统：去 [关键配置](/configurations)
 - 看边界：去 [安全实践](/security)
+
+## 2026 年 3 月 24 日的中文阅读误区
+
+近期公开可访问的中文教程站和社区文章，在模型、配置和安全这三类内容上，经常会出现一种很自然但很容易带偏人的写法：
+
+- 先讲模型推荐
+- 再给一份配置示例
+- 最后顺手提一句安全
+
+这对快速建立印象很有帮助，但如果你已经要真正落地，阅读顺序更稳的方式通常还是：
+
+1. 先看配置结构，确认系统是怎么组织的  
+2. 再看模型选择，决定默认 provider 和 fallback  
+3. 最后看安全边界，收入口、反向代理和远程访问
+
+也就是说：
+
+- 中文外部资料更适合帮你建立“方向感”
+- 站内这三页更适合帮你把“真正的判断顺序”拉回来
 
 ## 如果你三个问题都混在一起
 

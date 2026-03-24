@@ -2,7 +2,7 @@
 title: BlueBubbles 与 iMessage 接入
 description: 为什么官方更推荐 BlueBubbles，而不是 legacy imsg，以及远程 Mac 和 webhook 模式下该注意什么。
 category: 功能
-updatedAt: 2026-03-11
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/channels/bluebubbles
 sourceName: OpenClaw Docs
 sourceType: official
@@ -120,6 +120,28 @@ BlueBubbles 是 webhook + API 密码模型，安全边界必须明确。
 3. 再准备一台稳定 Mac
 4. 本地验证 BlueBubbles
 5. 再过渡到长期远程运行
+
+## 2026 年 3 月 24 日的 Apple 生态入口观察
+
+近期公开可访问的中文教程站虽然很少把 iMessage 当成第一批重点入口，但在中文用户讨论里，它仍然经常被当成“高价值、但更重运维”的能力来关注。
+
+结合官方资料和中文外部资料，当前最值得长期保留的判断有两条：
+
+### 1. iMessage 更适合被当成专项入口，而不是默认第一入口
+
+如果你只是想验证 OpenClaw 能不能进入消息系统，Telegram、WebChat 或其他更轻入口通常更适合先跑通。  
+BlueBubbles 更适合在你已经明确需要 Apple 生态入口时再上。
+
+### 2. 中文环境里更容易低估它的长期维护成本
+
+很多人会把它理解成“接一个渠道”，但 BlueBubbles 实际上更接近：
+
+- 一台稳定的 Mac
+- 一套 BlueBubbles server
+- 一个 webhook 回传链路
+- 一条清晰的远程访问路径
+
+所以它更像长期服务，而不是一次性扫码配置。
 
 ## 下一步推荐
 

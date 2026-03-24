@@ -2,7 +2,7 @@
 title: vLLM 本地模型 Provider 怎么接
 description: 基于最新官方 vLLM provider 文档，整理 OpenClaw 如何接入 vLLM、本地自动发现和手动模型声明各自适合什么场景。
 category: 功能
-updatedAt: 2026-03-21
+updatedAt: 2026-03-24
 source: https://docs.openclaw.ai/providers/vllm
 sourceName: OpenClaw Docs
 sourceType: official
@@ -158,3 +158,46 @@ curl http://127.0.0.1:8000/v1/models
 - 想做多 provider 编排：再接 [模型提供商与故障转移](/docs/manual/providers-and-fallback)
 
 把它们分层理解之后，就不太容易再把“本地模型运行时”和“统一模型 provider 配置”混成一件事。
+
+## 2026 年 3 月 24 日的本地模型观察
+
+近期公开可访问的中文教程站在介绍本地模型时，越来越常把 Ollama 和 vLLM 放在同一张图里讨论。  
+这对建立整体印象有帮助，但如果不把两者边界拆开，很容易出现错误预期。
+
+这轮整理时重点参考了：
+
+- [OpenClaw 中文教程首页](https://openclawgithub.cc/en/)
+- [OpenClaw 中文教程：安装与环境](https://openclawgithub.cc/en/guide/install/)
+
+结合官方资料和中文外部资料，当前更值得长期保留的判断有三条：
+
+### 1. vLLM 更适合被当成“服务化本地推理后端”
+
+如果你需要：
+
+- 独立推理服务
+- 明确的 `/v1` 接口
+- 多台 OpenClaw 实例共享同一个本地推理后端
+
+那 vLLM 通常比“只在单机跑一个本地模型”更合适。
+
+### 2. 中文场景里，本地模型更常被当成兜底或专项入口
+
+近期中文教程里，本地模型经常和国内 provider 一起出现。  
+更接近真实落地的做法通常是：
+
+- 云端 provider 负责主力任务
+- vLLM / Ollama 负责隐私场景、实验任务或低成本兜底
+
+这比“一开始就让本地模型承担所有主任务”更贴近多数团队现状。
+
+### 3. 对中文用户来说，服务联通性比模型名字更先排查
+
+很多“本地模型接不上”的问题，真正原因并不是模型本身，而是：
+
+- vLLM 服务没起
+- `/v1/models` 不通
+- baseUrl 指错
+- API key / header 没对齐
+
+所以中文站里会一直强调先测 `/v1/models`，再谈 provider 编排。

@@ -175,13 +175,13 @@ const learnEntries = [
           <p class="eyebrow">Community Desk</p>
           <h1 class="hero-title">把问题分流、协作入口和更新追踪放到同一个工作台里。</h1>
           <p class="section-copy hero-description">
-            社区页不该只是入口合集。这里优先回答三件事：你现在该去哪里、怎样提问更容易被处理、中文社区当前已经提供了什么。
+            社区页不该只是入口合集。这里优先回答三件事：你现在该去哪里、怎样提问更容易被处理、以及在 FAQ、搜索、路径和专题都不够时该怎样继续往下走。
           </p>
 
           <div class="hero-summary">
             <article class="summary-chip">
               <span>建议起点</span>
-              <strong>先查文档，再决定是否公开提问</strong>
+              <strong>先查 FAQ / 文档，再决定是否公开提问</strong>
             </article>
             <article class="summary-chip">
               <span>目标</span>
@@ -200,7 +200,7 @@ const learnEntries = [
           <div class="hero-signals">
             <div class="signal-pill">
               <strong>资料优先</strong>
-              <span>概念不清先查文档与 FAQ</span>
+              <span>问题还不清先查 FAQ、路径和文档</span>
             </div>
             <div class="signal-pill">
               <strong>问题公开化</strong>
@@ -221,8 +221,8 @@ const learnEntries = [
           <div class="board-grid">
             <article class="board-stat">
               <span class="board-label">优先入口</span>
-              <strong>文档 / Issues / 反馈</strong>
-              <p>先判断问题类型，再选择对应入口。</p>
+              <strong>FAQ / 文档 / Issues / 反馈</strong>
+              <p>先判断问题类型，再选择对应入口；问题越模糊，越应该先走 FAQ 或路径。</p>
             </article>
             <article class="board-stat">
               <span class="board-label">建议携带</span>

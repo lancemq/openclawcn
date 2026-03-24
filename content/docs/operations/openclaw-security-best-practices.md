@@ -6,7 +6,7 @@ date: "2026-03-09"
 author: "Security Team"
 source: "https://docs.openclaw.ai/zh-CN/gateway/security"
 sourceName: "OpenClaw Docs"
-updatedAt: 2026-03-17
+updatedAt: 2026-03-24
 sourceType: official
 tags: ["security", "best-practices", "guide"]
 ---
@@ -174,6 +174,52 @@ openclaw doctor --generate-gateway-token
 - trusted-proxy 配置风险
 - 过于宽松的 trusted proxies
 
+## 2026 年 3 月 24 日的外部安全观察
+
+这轮整理时，除了官方安全文档，我还对照了近期公开可访问的中文教程站和部署说明。  
+从这些外部资料里，当前最值得写进长期文档的，不是“又多了哪些安全功能”，而是几个反复出现的真实风险点。
+
+重点参考了：
+
+- [OpenClaw 中文教程：部署与 Docker](https://openclawgithub.cc/guide/deploy/)
+- [OpenClaw 中文教程：安装与环境](https://openclawgithub.cc/en/guide/install/)
+- [官方安全文档](https://docs.openclaw.ai/zh-CN/gateway/security)
+
+结合这些来源，当前最值得强调的提醒有三条：
+
+### 1. 很多外部教程会把“先开放端口”写成默认动作
+
+这在中文云主机场景里尤其常见。  
+它确实能更快完成第一轮联通性验证，但如果你把这种临时做法直接带进长期环境，风险会明显放大。
+
+更稳的默认顺序仍然是：
+
+1. Gateway 尽量保持 loopback  
+2. 远程优先走 SSH tunnel / Tailscale Serve / 受控反向代理  
+3. 只有在真正明确边界后，再讨论公网入口
+
+### 2. 中文团队更容易低估“控制面”本身的暴露风险
+
+很多人把安全焦点只放在消息入口或模型密钥上，但在长期运行环境里，Control UI、Dashboard、WebChat 和反向代理后的浏览器控制面往往才是更敏感的边界。
+
+如果你参考外部教程时看到下面这些做法，就应该立刻回到官方安全页核对：
+
+- 直接把管理端口映射到公网
+- 长期开启 `allowInsecureAuth`
+- 把 `dangerouslyDisableDeviceAuth` 当成常规配置
+- 把反向代理仅当成 TLS 终止，而不校验 trusted proxies
+
+### 3. allowFrom、群组 mention 和本地文件权限经常被低估
+
+中文教程更常关注“怎么接上渠道”，但对长期安全来说，下面这些配置往往更关键：
+
+- `allowFrom`
+- 群组 requireMention
+- pairing 文件权限
+- session 日志和本地凭据目录权限
+
+也就是说，真正的安全边界往往不是“有没有开 HTTPS”，而是“谁能触发、谁能配对、谁能读本地状态文件”。
+
 ## 常见安全场景
 
 ### 场景一：家庭部署
@@ -226,3 +272,4 @@ openclaw config restore <backup-file>
 - [远程访问与 Tailscale / SSH](/docs/operations/remote-access)
 - [故障排除与诊断思路](/docs/reference/troubleshooting)
 - [Gateway 架构概览](/docs/manual/architecture)
+- [国内云部署思路](/docs/setup/china-cloud-deployment)
