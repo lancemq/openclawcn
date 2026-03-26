@@ -6,7 +6,7 @@ updatedAt: 2026-03-26
 source: https://docs.openclaw.ai/web/dashboard
 sourceName: OpenClaw Docs
 sourceType: official
-tags: [dashboard, auth, unauthorized, 1008, operations]
+tags: [dashboard, auth, unauthorized, "1008", operations]
 ---
 
 # Dashboard 遇到 unauthorized、1008 和 AUTH_TOKEN_MISMATCH 时怎么恢复
