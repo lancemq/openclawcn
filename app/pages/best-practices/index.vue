@@ -41,6 +41,21 @@ const filteredItems = computed(() =>
 
 const featuredPractices = computed(() => orderedItems.value.slice(0, 3))
 
+const longformPractices = [
+  {
+    title: '团队长期运行蓝图：把 OpenClaw 从可用做成可运营',
+    description: '把控制面、渠道、模型、记忆、自动化、安全和维护整合成一套长期运行蓝图，适合团队主线阅读。',
+    to: '/best-practices/production-operations-blueprint',
+    meta: '运维长文',
+  },
+  {
+    title: '内容网络编辑手册：把文档、实践、新闻和专题织成体系',
+    description: '面向站点运营，把文档、新闻、最佳实践、专题页和长文放回一张编辑地图里。',
+    to: '/best-practices/content-network-editorial-playbook',
+    meta: '内容长文',
+  },
+]
+
 const practiceStats = computed(() => [
   {
     label: '更适合谁',
@@ -98,6 +113,25 @@ useSeo({
         @update="(key, value) => updateFilters(key as 'category' | 'difficulty', value)"
       />
 
+      <section class="entry-panel">
+        <div class="result-group-head">
+          <p class="eyebrow">整合长文</p>
+          <p class="muted">适合已经有基础，准备跨越多个主题建立完整方法框架时阅读</p>
+        </div>
+        <div class="entry-grid">
+          <NuxtLink
+            v-for="item in longformPractices"
+            :key="item.to"
+            :to="item.to"
+            class="entry-card"
+          >
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
+      </section>
+
       <div v-if="isManifestReady" class="masonry-grid collection-grid">
         <NuxtLink
           v-for="item in filteredItems"
@@ -133,6 +167,57 @@ useSeo({
 </template>
 
 <style scoped>
+.entry-panel,
+.entry-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.entry-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.entry-card {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(64, 73, 85, 0.12);
+  background: rgba(255, 255, 255, 0.58);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.entry-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(12, 108, 105, 0.22);
+  box-shadow: 0 12px 26px rgba(74, 56, 28, 0.08);
+}
+
+.entry-card strong {
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.04rem;
+  line-height: 1.38;
+  text-wrap: balance;
+}
+
+.entry-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.66;
+}
+
+.result-group-head {
+  display: grid;
+  gap: 4px;
+}
+
+.result-group-head .eyebrow,
+.result-group-head .muted {
+  margin: 0;
+}
+
 .masonry-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -181,6 +266,10 @@ useSeo({
 }
 
 @media (max-width: 900px) {
+  .entry-grid {
+    grid-template-columns: 1fr;
+  }
+
   .masonry-grid {
     grid-template-columns: repeat(2, 1fr);
   }

@@ -125,6 +125,21 @@ const decisionDocs = [
   },
 ]
 
+const longformDocs = [
+  {
+    title: '从第一次跑通到长期运行：完整系统地图',
+    description: '把安装、Gateway、控制面、渠道、模型、记忆、自动化和维护放到同一条主线上，适合做总览和补结构。',
+    to: '/docs/manual/from-first-run-to-long-running-system',
+    meta: '系统长文',
+  },
+  {
+    title: '从 Skills 到 Workflows：扩展栈完整地图',
+    description: '把 Skills、Tools、插件、Hooks、ClawHub、OpenProse、Lobster 和 approvals 收成一张扩展地图。',
+    to: '/docs/manual/extension-stack-full-map',
+    meta: '扩展长文',
+  },
+]
+
 const docStats = computed(() => [
   {
     label: '当前文档数',
@@ -209,6 +224,25 @@ useSeo({
         </div>
       </section>
 
+      <section class="entry-panel">
+        <div class="result-group-head">
+          <p class="eyebrow">深度长文</p>
+          <p class="muted">适合已经有一些基础，想把分散页面重新连成完整结构时阅读</p>
+        </div>
+        <div class="entry-grid entry-grid-wide">
+          <NuxtLink
+            v-for="item in longformDocs"
+            :key="item.to"
+            :to="item.to"
+            class="entry-card"
+          >
+            <span class="tag">{{ item.meta }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.description }}</p>
+          </NuxtLink>
+        </div>
+      </section>
+
       <div v-if="isManifestReady" class="masonry-grid collection-grid">
         <NuxtLink
           v-for="item in filteredItems"
@@ -251,6 +285,10 @@ useSeo({
 
 .entry-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.entry-grid-wide {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .entry-card {
@@ -324,6 +362,10 @@ useSeo({
   .masonry-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .entry-grid-wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 900px) {
@@ -331,11 +373,19 @@ useSeo({
   .masonry-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .entry-grid-wide {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 600px) {
   .entry-grid,
   .masonry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-grid-wide {
     grid-template-columns: 1fr;
   }
 }
