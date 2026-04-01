@@ -24,6 +24,7 @@ function toAbsoluteUrl(siteUrl: string, path: string) {
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
   const siteUrl = config.public.siteUrl.replace(/\/$/, '')
+  const feedUrl = toAbsoluteUrl(siteUrl, '/rss.xml')
 
   const [news, bestPractices] = await Promise.all([
     queryCollection(event, 'news').all(),
@@ -48,14 +49,24 @@ export default defineEventHandler(async (event) => {
     .filter((item) => item.title && item.path)
     .sort((left, right) => String(right.date || '').localeCompare(String(left.date || '')))
 
+  const latestDate = items
+    .map(item => item.date)
+    .find((value) => {
+      const parsed = new Date(String(value || ''))
+      return !Number.isNaN(parsed.valueOf())
+    })
+
   const feed = [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<rss version="2.0">',
+    '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
     '<channel>',
     '  <title>OpenClawCN 更新订阅</title>',
     `  <link>${escapeXml(siteUrl)}</link>`,
     '  <description>OpenClaw 中文站的新闻动态与最佳实践更新订阅。</description>',
     '  <language>zh-CN</language>',
+    `  <atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml" />`,
+    `  <generator>${escapeXml(config.public.siteName)}</generator>`,
+    ...(latestDate ? [`  <lastBuildDate>${new Date(latestDate).toUTCString()}</lastBuildDate>`] : []),
     ...items.map((item) => {
       const lines = [
         '  <item>',

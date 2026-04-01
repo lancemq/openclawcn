@@ -7,6 +7,12 @@ useSeo({
   title: '学习路径',
   description: '按新手部署、Windows/WSL、渠道接入、Skills 扩展和团队运维等目标整理 OpenClaw 的连续学习路径。',
   path: '/paths',
+  schemaType: 'CollectionPage',
+  itemList: learningPaths.slice(0, 8).map(path => ({
+    title: path.title,
+    to: path.next,
+    description: path.summary,
+  })),
 })
 
 const { data: manifest } = await useContentManifest()

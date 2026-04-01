@@ -175,6 +175,12 @@ useSeo({
   title: '文档中心',
   description: 'OpenClaw 中文文档入口，包含产品介绍、快速开始、功能专题、运维与更新跟踪。',
   path: '/docs',
+  schemaType: 'CollectionPage',
+  itemList: decisionDocs.slice(0, 5).map(item => ({
+    title: item.title,
+    to: item.to,
+    description: item.description,
+  })),
 })
 </script>
 

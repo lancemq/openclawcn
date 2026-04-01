@@ -69,6 +69,12 @@ useSeo({
   description: 'OpenClawCN 持续跟踪 OpenClaw 的版本更新、使用提醒和中文解读。',
   path: '/news',
   type: 'website',
+  schemaType: 'CollectionPage',
+  itemList: featuredNews.value.map(item => ({
+    title: item.title,
+    to: item.path,
+    description: item.description,
+  })),
 })
 </script>
 

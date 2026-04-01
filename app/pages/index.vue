@@ -16,6 +16,12 @@ useSeo({
   description: '面向中文用户的 OpenClaw 介绍、文档、更新、视频教程和社区支持入口。',
   path: '/',
   type: 'website',
+  schemaType: 'CollectionPage',
+  itemList: userRouteOverview.slice(0, 6).map(item => ({
+    title: item.title,
+    to: item.to,
+    description: item.description,
+  })),
 })
 
 const { data: manifest } = await useContentManifest()

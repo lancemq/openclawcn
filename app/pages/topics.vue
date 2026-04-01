@@ -7,6 +7,12 @@ useSeo({
   title: '主题中心',
   description: '按安装、Gateway 运维、渠道、Skills、模型和安全等主题跨文档、视频、新闻与实践聚合 OpenClaw 内容。',
   path: '/topics',
+  schemaType: 'CollectionPage',
+  itemList: topicDefinitions.slice(0, 8).map(topic => ({
+    title: topic.title,
+    to: `/topics?topic=${topic.slug}`,
+    description: topic.description,
+  })),
 })
 
 const route = useRoute()

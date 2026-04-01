@@ -102,6 +102,7 @@ useSeo({
   description: (page.value.description as string) || 'OpenClawCN 最佳实践页面',
   path: pagePath.value,
   type: 'article',
+  articleType: 'TechArticle',
   section: String(page.value.category || '最佳实践'),
   publishedTime: typeof page.value.date === 'string' ? page.value.date : undefined,
   updatedTime: typeof page.value.updatedAt === 'string' ? page.value.updatedAt : undefined,

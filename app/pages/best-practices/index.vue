@@ -83,6 +83,12 @@ useSeo({
   description: '查看 OpenClawCN 当前整理的 OpenClaw 接入、更新跟踪、安全与协作最佳实践。',
   path: '/best-practices',
   type: 'website',
+  schemaType: 'CollectionPage',
+  itemList: longformPractices.map(item => ({
+    title: item.title,
+    to: item.to,
+    description: item.description,
+  })),
 })
 </script>
 
