@@ -163,6 +163,18 @@ export default defineNuxtConfig({
         'cache-control': 'public, max-age=3600, s-maxage=3600',
       },
     },
+    '/llms.txt': {
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+        'cache-control': 'public, max-age=3600, s-maxage=3600',
+      },
+    },
+    '/llms-full.txt': {
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+        'cache-control': 'public, max-age=3600, s-maxage=3600',
+      },
+    },
     '/sitemap.xml': {
       headers: {
         'content-type': 'application/xml; charset=utf-8',

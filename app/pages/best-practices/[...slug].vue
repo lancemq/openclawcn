@@ -103,6 +103,11 @@ useSeo({
   path: pagePath.value,
   type: 'article',
   section: String(page.value.category || '最佳实践'),
+  publishedTime: typeof page.value.date === 'string' ? page.value.date : undefined,
+  updatedTime: typeof page.value.updatedAt === 'string' ? page.value.updatedAt : undefined,
+  author: typeof (page.value as any)?.author === 'string' ? String((page.value as any).author) : undefined,
+  tags: pageTags.value,
+  breadcrumbs: breadcrumbItems.value,
 })
 </script>
 
@@ -122,6 +127,13 @@ useSeo({
         <h1>{{ page?.title }}</h1>
         <p class="muted">{{ page?.description }}</p>
         <ContentMetaPanel :items="metaItems" />
+        <ContentAIOverview
+          :description="String(page?.description || '')"
+          :tags="pageTags"
+          :section="String(page?.category || '最佳实践')"
+          :updated-at="typeof page?.updatedAt === 'string' ? page.updatedAt : undefined"
+          :source-name="typeof page?.sourceName === 'string' ? page.sourceName : undefined"
+        />
         <MarkdownContent :content="page" />
       </article>
 
