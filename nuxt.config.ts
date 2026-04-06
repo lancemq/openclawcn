@@ -42,9 +42,9 @@ const toolRoutes = [
   '/tools',
   '/tools/plugins',
   '/tools/exec-and-approvals',
-  '/tools/hooks-and-webhooks',
   '/tools/automation',
-  '/tools/troubleshooting',
+  '/tools/triggers',
+  '/tools/diagnostics',
   '/tools/stacks',
 ]
 
@@ -138,7 +138,9 @@ export default defineNuxtConfig({
     '/paths': { prerender: true },
     '/topics': { prerender: true },
     '/docs': { prerender: true },
-    '/docs/getting-started': { redirect: '/docs/getting-started/getting-started' },
+    '/docs/getting-started': { prerender: true },
+    '/tools/hooks-and-webhooks': { redirect: '/tools/triggers' },
+    '/tools/troubleshooting': { redirect: '/tools/diagnostics' },
     '/videos': { prerender: true },
     '/derivatives': { prerender: true },
     '/news': { prerender: true },
