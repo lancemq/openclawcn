@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   getHermesRelatedPages,
+  hermesSecurityChecklist,
   hermesSecurityLadder,
   hermesSecurityLinks,
   hermesSecurityRisks,
@@ -85,6 +86,25 @@ const relatedPages = getHermesRelatedPages('security')
               <span class="series-tag">{{ item.step }}</span>
             </div>
             <strong>{{ item.title }}</strong>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">运行前检查</p>
+            <h2>如果你准备把 Hermes 从演示推向长期运行，至少先确认这四件事</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesSecurityChecklist" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
         </div>

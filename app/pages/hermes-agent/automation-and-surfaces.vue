@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {
+  hermesBrowserAndAutomationNotes,
   getHermesRelatedPages,
+  hermesSurfaceMatrix,
   hermesSurfacePatterns,
   hermesSurfaces,
 } from '~/data/hermes-agent'
@@ -72,6 +74,26 @@ const relatedPages = getHermesRelatedPages('automation-and-surfaces')
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">入口选择矩阵</p>
+            <h2>不同接面更适合承接不同类型的任务</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesSurfaceMatrix" :key="item.surface" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="terminal" tone="brand" small />
+              <strong>{{ item.surface }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.bestFor }}</p>
+            <small>{{ item.tradeoff }}</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">结构影响</p>
             <h2>入口越真实，Hermes 越像系统而不是聊天界面</h2>
           </div>
@@ -79,6 +101,25 @@ const relatedPages = getHermesRelatedPages('automation-and-surfaces')
 
         <div class="series-grid-3">
           <article v-for="item in hermesSurfacePatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="accent" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">浏览器与自动化补充</p>
+            <h2>这两类能力最容易让 Hermes 从“解释者”变成“执行者”</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesBrowserAndAutomationNotes" :key="item.title" class="series-card">
             <div class="series-card-top">
               <SeriesGlyph kind="flow" tone="accent" small />
               <strong>{{ item.title }}</strong>
@@ -114,5 +155,10 @@ const relatedPages = getHermesRelatedPages('automation-and-surfaces')
 <style scoped>
 .hermes-subpage {
   gap: 24px;
+}
+
+.series-card small {
+  color: var(--ink-soft);
+  line-height: 1.6;
 }
 </style>

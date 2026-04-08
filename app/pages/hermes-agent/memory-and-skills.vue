@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import {
   getHermesRelatedPages,
+  hermesMemoryAssets,
+  hermesMemoryCollaboration,
   hermesMemoryFitTasks,
   hermesMemoryLoops,
   hermesMemoryOverkill,
   hermesMemoryPillars,
+  hermesMemoryWarnings,
+  hermesSkillLifecycle,
+  hermesSubagentPatterns,
 } from '~/data/hermes-agent'
 
 useSeo({
@@ -55,6 +60,25 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">长期积累资产</p>
+            <h2>Hermes 的“越跑越强”，最终会沉淀成这三类资产</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesMemoryAssets" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="stack" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.description }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">四个判断</p>
             <h2>长期记忆、技能和子 Agent，不是附加项，而是 Hermes 的成长引擎</h2>
           </div>
@@ -83,6 +107,66 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
           <article v-for="item in hermesMemoryLoops" :key="item.step" class="series-card loop-card">
             <span class="loop-step">{{ item.step }}</span>
             <strong>{{ item.title }}</strong>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="hermes-dual-grid">
+        <section class="card series-panel">
+          <div class="series-head">
+            <div>
+              <p class="eyebrow">技能生命周期</p>
+              <h2>真正有价值的技能，通常会经历这条演化路径</h2>
+            </div>
+          </div>
+
+          <div class="resource-stack">
+            <article v-for="item in hermesSkillLifecycle" :key="item.stage" class="series-card">
+              <div class="series-card-top">
+                <SeriesGlyph kind="grid" tone="brand" small />
+                <span class="series-tag">{{ item.stage }}</span>
+              </div>
+              <strong>{{ item.title }}</strong>
+              <p class="series-card-copy">{{ item.detail }}</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="card series-panel">
+          <div class="series-head">
+            <div>
+              <p class="eyebrow">子 Agent 分工</p>
+              <h2>子 Agent 的价值，不只是更快，而是更可拆分</h2>
+            </div>
+          </div>
+
+          <div class="resource-stack">
+            <article v-for="item in hermesSubagentPatterns" :key="item.title" class="series-card">
+              <div class="series-card-top">
+                <SeriesGlyph kind="orbit" tone="accent" small />
+                <strong>{{ item.title }}</strong>
+              </div>
+              <p class="series-card-copy">{{ item.description }}</p>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">团队协作含义</p>
+            <h2>长期积累不是只服务单个操作者，也会改变团队协作方式</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesMemoryCollaboration" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
         </div>
@@ -126,6 +210,25 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
             </article>
           </div>
         </section>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">边界提醒</p>
+            <h2>长期积累很强，但开得过重也会带来额外负担</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesMemoryWarnings" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.description }}</p>
+          </article>
+        </div>
       </section>
 
       <section class="card series-panel">

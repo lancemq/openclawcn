@@ -69,6 +69,67 @@ export const hermesHeroSignals = [
   },
 ]
 
+export const hermesOverviewFacts = [
+  {
+    label: '官方定位',
+    value: '长期在线的自治 Agent',
+    note: 'Hermes 官方表达的重点是 lives on your server、remembers、gets more capable the longer it runs。',
+  },
+  {
+    label: '核心成长线',
+    value: '记忆、技能、子 Agent',
+    note: '它的长期价值不只来自模型本身，而是来自随着运行逐步形成的复用能力。',
+  },
+  {
+    label: '关键执行面',
+    value: '真实沙箱、浏览器、消息入口',
+    note: '这让 Hermes 不只是会解释任务，而是能真正接触环境、执行动作和持续推进。',
+  },
+  {
+    label: '使用门槛',
+    value: '先理解工作方式，再看具体配置',
+    note: '如果只盯着命令和安装，很容易把 Hermes 误解成更复杂的聊天壳。',
+  },
+]
+
+export const hermesReadingSequence = [
+  {
+    step: '01',
+    title: '先立住整体认知',
+    detail: '先看总览页，知道 Hermes 在整组专题里是什么角色、和哪些 agent 形态不同。',
+  },
+  {
+    step: '02',
+    title: '再理解它为什么成立',
+    detail: '能力地图页负责解释长期运行、记忆、执行和自动推进如何拼成系统。',
+  },
+  {
+    step: '03',
+    title: '然后决定你最关心哪一层',
+    detail: '如果你在意运行方式，就去 operations；如果你在意成长机制，就去 memory-and-skills。',
+  },
+  {
+    step: '04',
+    title: '最后才进入入口与安全判断',
+    detail: '入口、浏览器、自动化和安全边界更适合作为第二轮理解，而不是第一屏就把注意力打散。',
+  },
+]
+
+export const hermesWhyItMatters = [
+  {
+    title: '把 Agent 从“会回答”推进到“会持续工作”',
+    body: 'Hermes 真正重要的地方，不只是把模型装进一个更完整的界面，而是把 agent 变成一种能长期驻留、长期推进的工作结构。',
+  },
+  {
+    title: '把偶然成功的操作变成可复用资产',
+    body: '当工作开始被记忆、技能和子 agent 支撑时，Agent 的价值就不再只靠某一次 prompt 表现得好不好。',
+  },
+  {
+    title: '把多入口、多时间尺度的任务收进同一个系统',
+    body: '消息、CLI、浏览器和定时任务并不只是多个入口，它们共同构成一种更真实的工作面。',
+  },
+]
+
 export const hermesOverviewComparisons = [
   {
     title: '不是普通聊天 Agent',
@@ -365,6 +426,62 @@ export const hermesCapabilityConnections = [
   },
 ]
 
+export const hermesCapabilityArchitecture = [
+  {
+    layer: 'Identity Layer',
+    title: '长期在线身份层',
+    description: '先有“持续存在的 agent 身份”，后面才谈得上状态、记忆和长期协作。',
+  },
+  {
+    layer: 'Memory Layer',
+    title: '上下文与记忆层',
+    description: '这一层决定 Hermes 能不能把过去工作的结果真正带进未来，而不是轮轮重置。',
+  },
+  {
+    layer: 'Action Layer',
+    title: '技能与执行层',
+    description: '技能、工具、浏览器和沙箱共同构成真实动作面，让 Hermes 不止停留在解释。',
+  },
+  {
+    layer: 'Coordination Layer',
+    title: '自动推进与协作层',
+    description: '子 Agent、自动化和结果回报让任务可以跨时间、跨入口、跨子任务持续前进。',
+  },
+]
+
+export const hermesCapabilityFitMatrix = [
+  {
+    title: '最适合的任务',
+    examples: ['长期跟踪型研究', '定时巡检与持续值守', '多入口协作任务', '需要累积知识的工作流'],
+    note: '这些任务能显著放大长期运行、记忆和持续推进的收益。',
+  },
+  {
+    title: '勉强能做但未必划算',
+    examples: ['一次性问答', '零碎即时查询', '没有复用价值的临时动作'],
+    note: '这类任务并不是做不了，而是 Hermes 的系统性优势不一定能被充分体现。',
+  },
+  {
+    title: '容易被误配的场景',
+    examples: ['把它当成更复杂聊天窗口', '把所有入口同时打开', '过早依赖高风险自动化'],
+    note: '这些误配通常会让复杂度比收益涨得更快。',
+  },
+]
+
+export const hermesCapabilityAntiPatterns = [
+  {
+    title: '只看 feature 数量，不看能力之间的关系',
+    detail: 'Hermes 的强点不是“会很多件事”，而是这些能力能形成一个持续运转的系统。',
+  },
+  {
+    title: '把记忆和技能当作锦上添花',
+    detail: '如果把它们看成可有可无的外挂，就很难理解 Hermes 为什么适合长期运行。',
+  },
+  {
+    title: '把自动推进理解成“自动点按钮”',
+    detail: '真正的自动推进包含任务接续、状态延续和结果回报，而不是简单替你执行几个动作。',
+  },
+]
+
 export const hermesOperationsModes = [
   {
     title: '快速启动模式',
@@ -413,6 +530,40 @@ export const hermesOperationsMistakes = [
   {
     title: '只关心能不能启动，不关心如何接管',
     detail: '长期运行系统真正难的是如何接手、如何审计、如何知道它刚刚做了什么。',
+  },
+]
+
+export const hermesOperationPath = [
+  {
+    title: '先跑最小链路',
+    description: '优先验证 Hermes 能不能稳定接收一个任务、完成一个动作、回报一个结果。',
+  },
+  {
+    title: '再引入真实入口',
+    description: '当你开始接消息、CLI 或浏览器入口时，Hermes 才真正进入真实工作场景。',
+  },
+  {
+    title: '然后才考虑长期运行',
+    description: '长期运行不是把进程挂久一点，而是让状态、日志、回报和接管路径都变得稳定。',
+  },
+  {
+    title: '最后再加自动推进与高风险动作',
+    description: '定时任务、浏览器控制、外部写入这类能力越后开，长期稳定性通常越好。',
+  },
+]
+
+export const hermesOperationSignals = [
+  {
+    title: '状态可见',
+    detail: '如果你说不清 Hermes 现在在处理什么、刚刚做了什么，就还不适合把它开得太自动。',
+  },
+  {
+    title: '入口收敛',
+    detail: '入口越多，越要先搞清每个入口分别负责什么，而不是全都接进来再慢慢猜。',
+  },
+  {
+    title: '接管低成本',
+    detail: '长期运行系统最怕“跑是跑着，但人接不上”，所以接管路径要和运行能力一起设计。',
   },
 ]
 
@@ -484,6 +635,89 @@ export const hermesMemoryOverkill = [
   },
 ]
 
+export const hermesMemoryAssets = [
+  {
+    title: '上下文资产',
+    description: '过去的观察、结论、偏好和任务状态会变成后续工作的起点，而不是散落在旧会话里的噪音。',
+  },
+  {
+    title: '技能资产',
+    description: '反复有效的方法和流程会逐渐从“偶然成功”转成可复用的长期能力。',
+  },
+  {
+    title: '协作资产',
+    description: '当子 Agent 分工模式逐渐稳定，复杂任务的拆分与接手成本都会下降。',
+  },
+]
+
+export const hermesMemoryCollaboration = [
+  {
+    title: '人类不再每次都要重新解释背景',
+    detail: '长期记忆最直接的价值之一，是让协作者接手时不必一次次从头补全部上下文。',
+  },
+  {
+    title: '技能让团队习惯更容易被固化',
+    detail: '一旦某些工作方式值得保留，技能就是把团队经验沉淀进 agent 的关键方式。',
+  },
+  {
+    title: '子 Agent 让复杂工作从个人负担变成结构化分工',
+    detail: '当任务能被拆解并行后，协作的成本不只下降，而且更容易被复盘和优化。',
+  },
+]
+
+export const hermesMemoryWarnings = [
+  {
+    title: '不是所有历史都值得记住',
+    description: '长期积累的关键在于筛选有价值的信息，而不是把所有过程都原样保留下来。',
+  },
+  {
+    title: '不是所有重复动作都值得做成技能',
+    description: '只有会持续复用、且能稳定提升结果质量的模式，才值得被编码成技能。',
+  },
+  {
+    title: '不是所有复杂任务都该立刻拆成子 Agent',
+    description: '拆得过细会增加协调负担，子 Agent 真正适合相对完整且可并行的子任务。',
+  },
+]
+
+export const hermesSkillLifecycle = [
+  {
+    stage: 'Capture',
+    title: '先观察重复模式',
+    detail: '不是每个做过一次的动作都值得变成技能，只有反复出现、并且对结果有稳定影响的模式才值得沉淀。',
+  },
+  {
+    stage: 'Encode',
+    title: '再打包为可复用技能',
+    detail: '技能的价值在于把经验从“这次刚好做对”变成“下次也更容易做对”。',
+  },
+  {
+    stage: 'Refine',
+    title: '在长期运行中继续修正',
+    detail: '技能不是一经写完就永远稳定，而是会随着任务和上下文的变化继续被校正。',
+  },
+  {
+    stage: 'Compose',
+    title: '最后进入更大的工作组合',
+    detail: '真正成熟的技能，最终会进入更复杂的多步骤或多 agent 协作，而不再只是单点招式。',
+  },
+]
+
+export const hermesSubagentPatterns = [
+  {
+    title: '分探索与分执行',
+    description: '主 agent 负责掌握全局，子 agent 去探索局部问题、并行收集信息或执行独立分支任务。',
+  },
+  {
+    title: '按主题拆分而不是按句子拆分',
+    description: '子 agent 更适合处理相对完整的子任务，而不是把一个简单问题硬拆成过多小碎片。',
+  },
+  {
+    title: '子 Agent 的价值在并行与隔离',
+    description: '它不只是为了更快，也为了让复杂任务的不同部分不互相污染上下文。',
+  },
+]
+
 export const hermesSurfaces = [
   {
     title: 'CLI 与交互式入口',
@@ -515,6 +749,44 @@ export const hermesSurfacePatterns = [
   {
     title: '自动化让边界比功能更重要',
     detail: '当 Hermes 能被自动唤起和持续运行时，最重要的常常不再是它会什么，而是它该不该做什么。',
+  },
+]
+
+export const hermesSurfaceMatrix = [
+  {
+    surface: 'CLI',
+    bestFor: '验证、试验、明确输入输出',
+    tradeoff: '进入门槛低，但更偏主动操作场景。',
+  },
+  {
+    surface: '消息入口',
+    bestFor: '真实协作、异步沟通、持续接单',
+    tradeoff: '最贴近真实使用，但也更容易放大边界和状态管理问题。',
+  },
+  {
+    surface: '浏览器',
+    bestFor: '网页阅读、表单处理、跨站操作',
+    tradeoff: '执行面更强，但风险和复杂度也明显上升。',
+  },
+  {
+    surface: '自动化任务',
+    bestFor: '定时巡检、重复跟进、长期观察',
+    tradeoff: '最能体现持续推进价值，也最需要清楚的启停与回报设计。',
+  },
+]
+
+export const hermesBrowserAndAutomationNotes = [
+  {
+    title: '浏览器不是“看网页的附加功能”',
+    detail: '一旦浏览器进入工作流，Hermes 就能从解释页面内容转向直接处理网页任务，这会显著改变任务结构。',
+  },
+  {
+    title: '自动化不是“节省点击”的别称',
+    detail: '真正的自动化价值在于让 Hermes 能持续值守和持续推进，而不是简单代替几次手动操作。',
+  },
+  {
+    title: '入口和自动化必须一起考虑回报机制',
+    detail: '入口越真实、触发越自动，越需要让人类能够看见状态、理解进度并在必要时低成本接手。',
   },
 ]
 
@@ -570,6 +842,25 @@ export const hermesSecurityLinks = [
     title: 'Features Overview',
     description: '如果你还没搞清自己启用了哪些能力，先回功能总览页再判断风险更稳。',
     href: 'https://hermes-agent.nousresearch.com/docs/user-guide/features/overview',
+  },
+]
+
+export const hermesSecurityChecklist = [
+  {
+    title: '先缩小入口，再扩大能力',
+    detail: '不要一开始就同时开放消息、浏览器和自动化任务；先让最小入口稳定，再逐步放开。',
+  },
+  {
+    title: '先能看见状态，再谈自治',
+    detail: '如果没有清晰的日志、结果回报和接管路径，所谓长期自治只会增加排障和风险成本。',
+  },
+  {
+    title: '高风险动作最后启用',
+    detail: '任何外部写入、浏览器操作和自动触发都应该晚于基础运行验证，而不是反过来。',
+  },
+  {
+    title: '把安全当作运行设计的一部分',
+    detail: '对于长期在线的 agent，安全不该是最后一页文档，而应是运行方式的一部分。',
   },
 ]
 

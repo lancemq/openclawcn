@@ -6,10 +6,13 @@ import {
   hermesFaqItems,
   hermesHeroSignals,
   hermesInternalLinks,
+  hermesOverviewFacts,
   hermesOverviewComparisons,
+  hermesReadingSequence,
   hermesResourceLinks,
   hermesSeriesPages,
   hermesScenarios,
+  hermesWhyItMatters,
 } from '~/data/hermes-agent'
 
 useSeo({
@@ -132,6 +135,14 @@ const heroActions = [
         </aside>
       </section>
 
+      <div class="series-grid-4 hermes-facts-grid">
+        <article v-for="item in hermesOverviewFacts" :key="item.label" class="series-stat-card hermes-fact-card">
+          <span class="series-kicker">{{ item.label }}</span>
+          <span class="series-stat-value">{{ item.value }}</span>
+          <p>{{ item.note }}</p>
+        </article>
+      </div>
+
       <HermesSeriesNav />
 
       <section id="map" class="card series-panel">
@@ -173,6 +184,25 @@ const heroActions = [
             </div>
             <p class="series-card-copy">{{ item.description }}</p>
             <small>{{ item.contrast }}</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">为什么值得单独看</p>
+            <h2>Hermes 值得做成一组专题，而不是只留一张总览页</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesWhyItMatters" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="spark" tone="accent" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.body }}</p>
           </article>
         </div>
       </section>
@@ -270,6 +300,23 @@ const heroActions = [
             <strong>{{ item.title }}</strong>
             <p>{{ item.description }}</p>
           </NuxtLink>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">推荐顺序</p>
+            <h2>如果你打算把这组 Hermes 专题系统读完，建议按这个节奏推进</h2>
+          </div>
+        </div>
+
+        <div class="reading-sequence">
+          <article v-for="item in hermesReadingSequence" :key="item.step" class="series-card sequence-card">
+            <span class="flow-step">{{ item.step }}</span>
+            <strong>{{ item.title }}</strong>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
         </div>
       </section>
 
@@ -389,6 +436,10 @@ const heroActions = [
   align-items: stretch;
 }
 
+.hermes-facts-grid {
+  align-items: stretch;
+}
+
 .hermes-mini-card {
   background: rgba(255, 255, 255, 0.68);
 }
@@ -461,6 +512,17 @@ const heroActions = [
   background: rgba(255, 255, 255, 0.72);
 }
 
+.reading-sequence {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sequence-card,
+.hermes-fact-card {
+  align-content: start;
+}
+
 .hermes-dual-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -471,6 +533,10 @@ const heroActions = [
   .capability-flow {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .reading-sequence {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
@@ -479,6 +545,7 @@ const heroActions = [
   }
 
   .capability-flow,
+  .reading-sequence,
   .hermes-dual-grid,
   .beliefs-grid {
     grid-template-columns: 1fr;

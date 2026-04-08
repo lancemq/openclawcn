@@ -2,6 +2,8 @@
 import {
   getHermesRelatedPages,
   hermesOperationEntryChoices,
+  hermesOperationPath,
+  hermesOperationSignals,
   hermesOperationsMistakes,
   hermesOperationsModes,
 } from '~/data/hermes-agent'
@@ -76,6 +78,25 @@ const relatedPages = getHermesRelatedPages('operations')
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">从启动到长期运行</p>
+            <h2>更稳的理解路径，不是“装完就长期在线”</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-4">
+          <article v-for="item in hermesOperationPath" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.description }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">入口判断</p>
             <h2>不同入口，不只是体验不同，而是工作方式不同</h2>
           </div>
@@ -105,6 +126,25 @@ const relatedPages = getHermesRelatedPages('operations')
           <article v-for="item in hermesOperationsMistakes" :key="item.title" class="series-card">
             <div class="series-card-top">
               <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">真正该观察什么</p>
+            <h2>一套系统是否已经进入“可长期运行”状态，通常看这三件事</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesOperationSignals" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="pulse" tone="muted" small />
               <strong>{{ item.title }}</strong>
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
