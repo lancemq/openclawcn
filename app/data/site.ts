@@ -207,6 +207,12 @@ export const extensionOverview = [
     meta: 'Tools',
   },
   {
+    title: 'Hermes Agent 专题',
+    description: '围绕长期运行、记忆积累、任务推进和官方资料入口，先建立对 Hermes Agent 的整体认知。',
+    to: '/hermes-agent',
+    meta: 'Agent',
+  },
+  {
     title: 'Skills',
     description: '整理 OpenClaw 当前常见、实用且讨论度高的 skills，给出适用场景、安装命令和使用提醒。',
     to: '/skills',

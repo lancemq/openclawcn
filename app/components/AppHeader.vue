@@ -31,6 +31,7 @@ const navGroups = [
     items: [
       { label: '最佳实践', to: '/best-practices' },
       { label: '工具系列', to: '/tools' },
+      { label: 'Hermes Agent', to: '/hermes-agent' },
       { label: 'Skills', to: '/skills' },
       { label: '案例展示', to: '/showcase' },
       { label: '二次开发', to: '/secondary-development' },

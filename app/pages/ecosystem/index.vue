@@ -19,6 +19,12 @@ const featuredItems = computed(() =>
 
 const learnEntries = [
   {
+    title: 'Hermes Agent 专题',
+    description: '如果你正在判断长期在线、自主推进的 agent 系统长什么样，这一页更适合先建立整体认知。',
+    to: '/hermes-agent',
+    meta: 'Agent',
+  },
+  {
     title: '二次开发专题',
     description: '如果你不只是浏览生态，而是准备真正开始扩展，先进入技能、插件、Hooks 和 ClawHub 的开发专题。',
     to: '/secondary-development',
