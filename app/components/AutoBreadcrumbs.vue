@@ -3,6 +3,7 @@ const route = useRoute()
 
 const hiddenPatterns = [
   /^\/$/,
+  /^\/hermes-agent\/.+/,
   /^\/docs\/.+/,
   /^\/news\/.+/,
   /^\/best-practices\/.+/,
