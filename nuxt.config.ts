@@ -110,6 +110,13 @@ export default defineNuxtConfig({
           href: '/favicon.svg',
         },
       ],
+      script: [
+        {
+          async: true,
+          src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7712476875404468',
+          crossorigin: 'anonymous',
+        },
+      ],
     },
   },
   runtimeConfig: {
