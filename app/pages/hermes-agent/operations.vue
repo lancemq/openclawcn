@@ -6,6 +6,8 @@ import {
   hermesOperationSignals,
   hermesOperationsMistakes,
   hermesOperationsModes,
+  hermesOperationsCases,
+  hermesOperationsGuide,
 } from '~/data/hermes-agent'
 
 useSeo({
@@ -155,6 +157,55 @@ const relatedPages = getHermesRelatedPages('operations')
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>从零开始运行 Hermes，建议按这个节奏推进</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-4">
+          <article v-for="item in hermesOperationsGuide" :key="item.step" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="brand" small />
+              <span class="flow-step">{{ item.step }}</span>
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>真实团队是怎么选择入口和运行方式的</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesOperationsCases" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="terminal" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.scenario }}</p>
+            <div class="scenario-meta">
+              <div>
+                <span class="series-kicker">做法</span>
+                <p>{{ item.approach }}</p>
+              </div>
+              <div>
+                <span class="series-kicker">效果</span>
+                <p>{{ item.result }}</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">继续阅读</p>
             <p class="section-copy">如果你已经理解运行语境，下一步通常会去这几页继续补认知。</p>
           </div>
@@ -190,5 +241,35 @@ const relatedPages = getHermesRelatedPages('operations')
 .series-card small {
   color: var(--ink-soft);
   line-height: 1.6;
+}
+
+.scenario-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.scenario-meta > div {
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(64, 73, 85, 0.08);
+}
+
+.scenario-meta p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.flow-step {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(15, 102, 116, 0.1);
+  color: var(--brand);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 </style>

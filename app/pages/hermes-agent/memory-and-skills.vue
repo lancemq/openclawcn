@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   getHermesRelatedPages,
+  hermesGlossary,
   hermesMemoryAssets,
   hermesMemoryCollaboration,
   hermesMemoryFitTasks,
@@ -8,6 +9,8 @@ import {
   hermesMemoryOverkill,
   hermesMemoryPillars,
   hermesMemoryWarnings,
+  hermesMemoryCases,
+  hermesMemoryGuide,
   hermesSkillLifecycle,
   hermesSubagentPatterns,
 } from '~/data/hermes-agent'
@@ -234,6 +237,55 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>把记忆、技能和子 Agent 用起来，建议按这四步走</h2>
+          </div>
+        </div>
+
+        <div class="hermes-guide-grid">
+          <article v-for="item in hermesMemoryGuide" :key="item.step" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="brand" small />
+              <span class="flow-step">{{ item.step }}</span>
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>长期积累在真实场景中是怎么运作的</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesMemoryCases" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="terminal" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.scenario }}</p>
+            <div class="scenario-meta">
+              <div>
+                <span class="series-kicker">做法</span>
+                <p>{{ item.approach }}</p>
+              </div>
+              <div>
+                <span class="series-kicker">效果</span>
+                <p>{{ item.result }}</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">继续阅读</p>
             <p class="section-copy">理解完成长机制后，下一步通常会回到能力、运行、入口或安全页继续收口。</p>
           </div>
@@ -286,6 +338,42 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
   align-content: start;
 }
 
+.hermes-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.flow-step {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(15, 102, 116, 0.1);
+  color: var(--brand);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.scenario-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.scenario-meta > div {
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(64, 73, 85, 0.08);
+}
+
+.scenario-meta p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
 .hermes-dual-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -296,11 +384,16 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
   .memory-loop {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .hermes-guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
   .memory-loop,
-  .hermes-dual-grid {
+  .hermes-dual-grid,
+  .hermes-guide-grid {
     grid-template-columns: 1fr;
   }
 }

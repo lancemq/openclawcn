@@ -4,6 +4,7 @@ import {
   hermesCapabilityFlow,
   hermesCoreBeliefs,
   hermesFaqItems,
+  hermesGlossary,
   hermesHeroSignals,
   hermesInternalLinks,
   hermesOverviewFacts,
@@ -392,6 +393,26 @@ const heroActions = [
           </article>
         </div>
       </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">术语表</p>
+            <h2>Hermes 专题常用术语速查</h2>
+            <p class="section-copy">这组术语贯穿整个系列，理解它们有助于更快地建立一致认知。</p>
+          </div>
+        </div>
+
+        <div class="glossary-grid">
+          <article v-for="item in hermesGlossary" :key="item.term" class="series-card glossary-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="stack" tone="muted" small />
+              <strong>{{ item.term }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.definition }}</p>
+          </article>
+        </div>
+      </section>
     </div>
   </section>
 </template>
@@ -447,9 +468,12 @@ const heroActions = [
 .beliefs-grid,
 .resource-stack,
 .faq-stack {
-  display: grid;
-  gap: 16px;
-}
+    grid-template-columns: 1fr;
+  }
+
+  .glossary-grid {
+    grid-template-columns: 1fr;
+  }
 
 .belief-card,
 .flow-card,
@@ -518,6 +542,16 @@ const heroActions = [
   gap: 14px;
 }
 
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.glossary-card {
+  align-content: start;
+}
+
 .sequence-card,
 .hermes-fact-card {
   align-content: start;
@@ -546,6 +580,7 @@ const heroActions = [
 
   .capability-flow,
   .reading-sequence,
+  .glossary-grid,
   .hermes-dual-grid,
   .beliefs-grid {
     grid-template-columns: 1fr;

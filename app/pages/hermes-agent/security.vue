@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {
   getHermesRelatedPages,
+  hermesSecurityAntiPatterns,
+  hermesSecurityCases,
   hermesSecurityChecklist,
   hermesSecurityLadder,
   hermesSecurityLinks,
@@ -110,6 +112,54 @@ const relatedPages = getHermesRelatedPages('security')
         </div>
       </section>
 
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>安全策略在实践中是怎么落地的</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesSecurityCases" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="terminal" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.scenario }}</p>
+            <div class="scenario-meta">
+              <div>
+                <span class="series-kicker">做法</span>
+                <p>{{ item.approach }}</p>
+              </div>
+              <div>
+                <span class="series-kicker">效果</span>
+                <p>{{ item.result }}</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">反模式</p>
+            <h2>这些安全做法最容易引入不该有的风险</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesSecurityAntiPatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
       <section class="hermes-dual-grid">
         <section class="card series-panel">
           <div class="series-head">
@@ -169,6 +219,24 @@ const relatedPages = getHermesRelatedPages('security')
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
+}
+
+.scenario-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.scenario-meta > div {
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(64, 73, 85, 0.08);
+}
+
+.scenario-meta p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
 }
 
 @media (max-width: 760px) {

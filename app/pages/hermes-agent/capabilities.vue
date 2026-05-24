@@ -2,6 +2,8 @@
 import {
   hermesCapabilityAntiPatterns,
   hermesCapabilityArchitecture,
+  hermesCapabilityCases,
+  hermesCapabilityGuide,
   getHermesRelatedPages,
   hermesCapabilityConnections,
   hermesCapabilityFitMatrix,
@@ -204,6 +206,52 @@ const relatedPages = getHermesRelatedPages('capabilities')
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>按这三步走，能把能力架构用起来</h2>
+          </div>
+        </div>
+
+        <div class="capability-flow-grid">
+          <article v-for="item in hermesCapabilityGuide" :key="item.step" class="series-card flow-card">
+            <span class="flow-step">{{ item.step }}</span>
+            <strong>{{ item.title }}</strong>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>看看这些场景里，能力架构是如何落地的</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesCapabilityCases" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="terminal" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.scenario }}</p>
+            <div class="scenario-meta">
+              <div>
+                <span class="series-kicker">做法</span>
+                <p>{{ item.approach }}</p>
+              </div>
+              <div>
+                <span class="series-kicker">效果</span>
+                <p>{{ item.result }}</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">继续阅读</p>
             <p class="section-copy">如果这一页已经帮你立住了能力判断，下一步更适合继续看这些分页。</p>
           </div>
@@ -259,6 +307,24 @@ const relatedPages = getHermesRelatedPages('capabilities')
 }
 
 .series-card small {
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.scenario-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.scenario-meta > div {
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(64, 73, 85, 0.08);
+}
+
+.scenario-meta p {
+  margin: 0;
   color: var(--ink-soft);
   line-height: 1.6;
 }

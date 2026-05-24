@@ -2,6 +2,8 @@
 import {
   hermesBrowserAndAutomationNotes,
   getHermesRelatedPages,
+  hermesSurfaceCases,
+  hermesSurfaceAntiPatterns,
   hermesSurfaceMatrix,
   hermesSurfacePatterns,
   hermesSurfaces,
@@ -132,6 +134,54 @@ const relatedPages = getHermesRelatedPages('automation-and-surfaces')
       <section class="card series-panel">
         <div class="series-head">
           <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>真实世界中入口是怎么组合使用的</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesSurfaceCases" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="terminal" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.scenario }}</p>
+            <div class="scenario-meta">
+              <div>
+                <span class="series-kicker">做法</span>
+                <p>{{ item.approach }}</p>
+              </div>
+              <div>
+                <span class="series-kicker">效果</span>
+                <p>{{ item.result }}</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">反模式</p>
+            <h2>入口配置中这些做法最容易出问题</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesSurfaceAntiPatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
             <p class="eyebrow">继续阅读</p>
             <p class="section-copy">如果你已经理解入口与触发面，下一步通常会回到运行页或安全页继续判断。</p>
           </div>
@@ -158,6 +208,24 @@ const relatedPages = getHermesRelatedPages('automation-and-surfaces')
 }
 
 .series-card small {
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.scenario-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.scenario-meta > div {
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(64, 73, 85, 0.08);
+}
+
+.scenario-meta p {
+  margin: 0;
   color: var(--ink-soft);
   line-height: 1.6;
 }
