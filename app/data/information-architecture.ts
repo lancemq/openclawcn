@@ -21,8 +21,26 @@ export const informationLayers = [
     ],
   },
   {
+    id: 'hermes',
+    title: '第三层：Hermes Agent 专题',
+    summary: '长期在线、持续积累、持续推进——从总览、能力、运行、记忆到安全的完整专题体系。',
+    items: [
+      { title: 'Hermes 总览', to: '/hermes-agent', meta: '总览' },
+      { title: '能力地图', to: '/hermes-agent/capabilities', meta: '能力' },
+      { title: '运行与使用', to: '/hermes-agent/operations', meta: '运行' },
+      { title: '记忆技能子 Agent', to: '/hermes-agent/memory-and-skills', meta: '记忆' },
+      { title: '自动化浏览器入口', to: '/hermes-agent/automation-and-surfaces', meta: '入口' },
+      { title: '安全与边界', to: '/hermes-agent/security', meta: '安全' },
+      { title: '配置与部署', to: '/hermes-agent/configuration', meta: '配置' },
+      { title: '技能开发指南', to: '/hermes-agent/skills', meta: '技能' },
+      { title: '子 Agent 编排', to: '/hermes-agent/subagents', meta: '编排' },
+      { title: '实战案例', to: '/hermes-agent/showcases', meta: '案例' },
+      { title: '性能与监控', to: '/hermes-agent/monitoring', meta: '监控' },
+    ],
+  },
+  {
     id: 'advanced',
-    title: '第三层：进阶',
+    title: '第四层：进阶',
     summary: '最佳实践、工具系列、Skills、案例和二次开发更适合在你跑通基础链路后继续深入。',
     items: [
       { title: '最佳实践', to: '/best-practices', meta: '方法' },
@@ -33,7 +51,7 @@ export const informationLayers = [
   },
   {
     id: 'updates',
-    title: '第四层：动态',
+    title: '第五层：动态',
     summary: '新闻、路线图、生态项目和背景故事负责回答最近有什么变化、项目在往哪走。',
     items: [
       { title: '新闻动态', to: '/news', meta: '更新' },
@@ -44,7 +62,7 @@ export const informationLayers = [
   },
   {
     id: 'support',
-    title: '第五层：支持',
+    title: '第六层：支持',
     summary: '搜索、FAQ、社区、反馈和下载属于动作入口，适合在你已经知道要解决什么问题时快速补位。',
     items: [
       { title: '站内搜索', to: '/search', meta: '搜索' },

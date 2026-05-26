@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { hermesSeriesPages } from '~/data/hermes-agent'
+
 const year = new Date().getFullYear()
+
+const hermesItems = hermesSeriesPages.map(p => ({
+  label: p.title,
+  to: p.to,
+}))
 
 const footerLinks = {
   start: {
@@ -18,6 +25,10 @@ const footerLinks = {
       { label: '模型选择', to: '/models' },
       { label: '安全实践', to: '/security' },
     ],
+  },
+  hermes: {
+    title: 'Hermes',
+    items: hermesItems,
   },
   advanced: {
     title: '进阶',

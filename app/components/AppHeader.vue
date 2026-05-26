@@ -1,6 +1,13 @@
 <script setup lang="ts">
+import { hermesSeriesPages } from '~/data/hermes-agent'
+
 const route = useRoute()
 const { openSearch } = useGlobalSearch()
+
+const hermesSubItems = hermesSeriesPages.map(p => ({
+  label: p.title,
+  to: p.to,
+}))
 
 const navGroups = [
   {
@@ -25,13 +32,18 @@ const navGroups = [
     ],
   },
   {
+    label: 'Hermes',
+    slug: 'hermes',
+    to: '/hermes-agent',
+    items: hermesSubItems,
+  },
+  {
     label: '进阶',
     slug: 'advanced',
     to: '/best-practices',
     items: [
       { label: '最佳实践', to: '/best-practices' },
       { label: '工具系列', to: '/tools' },
-      { label: 'Hermes Agent', to: '/hermes-agent' },
       { label: 'Skills', to: '/skills' },
       { label: '案例展示', to: '/showcase' },
       { label: '二次开发', to: '/secondary-development' },
@@ -61,7 +73,7 @@ const navGroups = [
       { label: '下载中心', to: '/download' },
     ],
   },
-] as const
+]
 
 const homeItem = { label: '首页', to: '/' }
 
@@ -100,7 +112,7 @@ const activeGroup = computed(() =>
     <div class="container header-inner">
       <div class="header-ribbon">
         <span>OpenClawCN 中文资料站</span>
-        <span>开始 · 文档 · 进阶 · 动态 · 支持</span>
+        <span>开始 · 文档 · Hermes · 进阶 · 动态 · 支持</span>
       </div>
 
       <div class="header-top">
