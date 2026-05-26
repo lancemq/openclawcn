@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesLogging,
   hermesMetrics,
   hermesMonitoringOverview,
@@ -19,7 +18,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('monitoring')
 </script>
 
 <template>
@@ -30,8 +28,6 @@ const relatedPages = getHermesRelatedPages('monitoring')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '性能与监控' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -125,26 +121,6 @@ const relatedPages = getHermesRelatedPages('monitoring')
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">理解监控体系后，下一步适合回到安全边界页或进入配置部署页。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

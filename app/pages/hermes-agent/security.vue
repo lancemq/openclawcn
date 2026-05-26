@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesSecurityAntiPatterns,
   hermesSecurityCases,
   hermesSecurityChecklist,
@@ -21,7 +20,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('security')
 </script>
 
 <template>
@@ -32,8 +30,6 @@ const relatedPages = getHermesRelatedPages('security')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '安全与边界' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -178,26 +174,6 @@ const relatedPages = getHermesRelatedPages('security')
               <p>{{ item.description }}</p>
               <a :href="item.href" target="_blank" rel="noreferrer" class="series-pill-link">打开入口</a>
             </article>
-          </div>
-        </section>
-
-        <section class="card series-panel">
-          <div class="series-head">
-            <div>
-              <p class="eyebrow">继续阅读</p>
-              <h2>如果你要回到专题体系里继续看</h2>
-            </div>
-          </div>
-
-          <div class="resource-stack">
-            <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-              <div class="series-card-top">
-                <SeriesGlyph kind="grid" tone="brand" small />
-                <span class="series-tag">{{ item.meta }}</span>
-              </div>
-              <strong>{{ item.title }}</strong>
-              <p>{{ item.description }}</p>
-            </NuxtLink>
           </div>
         </section>
       </section>

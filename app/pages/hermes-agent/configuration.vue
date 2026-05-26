@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesConfigChecklist,
   hermesConfigMistakes,
   hermesConfigOverview,
@@ -19,7 +18,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('configuration')
 </script>
 
 <template>
@@ -30,8 +28,6 @@ const relatedPages = getHermesRelatedPages('configuration')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '配置与部署' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -126,26 +122,6 @@ const relatedPages = getHermesRelatedPages('configuration')
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">理解配置体系后，下一步适合继续理解技能开发或子 Agent 编排。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

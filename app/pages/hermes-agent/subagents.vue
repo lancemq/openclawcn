@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesSubagentBestPractices,
   hermesSubagentOrchestration,
   hermesSubagentOverview,
@@ -18,7 +17,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('subagents')
 </script>
 
 <template>
@@ -29,8 +27,6 @@ const relatedPages = getHermesRelatedPages('subagents')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '子 Agent 编排' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -109,26 +105,6 @@ const relatedPages = getHermesRelatedPages('subagents')
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">理解子 Agent 编排后，下一步适合回到配置部署或进入实战案例页。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

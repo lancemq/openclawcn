@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesGlossary,
   hermesMemoryAssets,
   hermesMemoryCollaboration,
@@ -27,7 +26,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('memory-and-skills')
 </script>
 
 <template>
@@ -38,8 +36,6 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '记忆、技能与子 Agent' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -280,26 +276,6 @@ const relatedPages = getHermesRelatedPages('memory-and-skills')
               </div>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">理解完成长机制后，下一步通常会回到能力、运行、入口或安全页继续收口。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

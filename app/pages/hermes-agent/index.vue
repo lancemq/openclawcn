@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  hermesAudienceRoutes,
   hermesCapabilityFlow,
   hermesCoreBeliefs,
   hermesFaqItems,
@@ -9,9 +8,7 @@ import {
   hermesInternalLinks,
   hermesOverviewFacts,
   hermesOverviewComparisons,
-  hermesReadingSequence,
   hermesResourceLinks,
-  hermesSeriesPages,
   hermesScenarios,
   hermesWhyItMatters,
 } from '~/data/hermes-agent'
@@ -41,11 +38,6 @@ useSeo({
       title: '典型场景',
       to: '/hermes-agent#scenarios',
       description: '用代表性场景判断 Hermes 更适合什么任务。',
-    },
-    {
-      title: '专题地图',
-      to: '/hermes-agent#map',
-      description: '从总览进入后续 5 个深读分页。',
     },
   ],
 })
@@ -144,70 +136,6 @@ const heroActions = [
         </article>
       </div>
 
-      <HermesSeriesNav />
-
-      <section id="map" class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">专题地图</p>
-            <h2>Hermes 已经从一张认知页，扩成一组可继续深入的专题</h2>
-            <p class="section-copy">
-              总览页先帮你建立判断，后面的 5 个分页分别承接能力、运行、长期积累、外部入口和安全边界。
-            </p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in hermesSeriesPages.slice(1)" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="flow" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">高信号对比</p>
-            <h2>先分清 Hermes 不是哪一类东西</h2>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <article v-for="item in hermesOverviewComparisons" :key="item.title" class="series-card compare-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="shield" tone="accent" small />
-              <strong>{{ item.title }}</strong>
-            </div>
-            <p class="series-card-copy">{{ item.description }}</p>
-            <small>{{ item.contrast }}</small>
-          </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">为什么值得单独看</p>
-            <h2>Hermes 值得做成一组专题，而不是只留一张总览页</h2>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <article v-for="item in hermesWhyItMatters" :key="item.title" class="series-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="spark" tone="accent" small />
-              <strong>{{ item.title }}</strong>
-            </div>
-            <p class="series-card-copy">{{ item.body }}</p>
-          </article>
-        </div>
-      </section>
-
       <section id="beliefs" class="card series-panel">
         <div class="series-head">
           <div>
@@ -280,43 +208,6 @@ const heroActions = [
                 <p>{{ item.gap }}</p>
               </div>
             </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">阅读分流</p>
-            <h2>你现在更适合先往哪一页继续</h2>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in hermesAudienceRoutes" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="orbit" tone="muted" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">推荐顺序</p>
-            <h2>如果你打算把这组 Hermes 专题系统读完，建议按这个节奏推进</h2>
-          </div>
-        </div>
-
-        <div class="reading-sequence">
-          <article v-for="item in hermesReadingSequence" :key="item.step" class="series-card sequence-card">
-            <span class="flow-step">{{ item.step }}</span>
-            <strong>{{ item.title }}</strong>
-            <p class="series-card-copy">{{ item.detail }}</p>
           </article>
         </div>
       </section>

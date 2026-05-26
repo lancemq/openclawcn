@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {
   hermesBrowserAndAutomationNotes,
-  getHermesRelatedPages,
   hermesSurfaceCases,
   hermesSurfaceAntiPatterns,
   hermesSurfaceMatrix,
@@ -21,7 +20,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('automation-and-surfaces')
 </script>
 
 <template>
@@ -32,8 +30,6 @@ const relatedPages = getHermesRelatedPages('automation-and-surfaces')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '自动化、浏览器与入口' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -176,26 +172,6 @@ const relatedPages = getHermesRelatedPages('automation-and-surfaces')
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">如果你已经理解入口与触发面，下一步通常会回到运行页或安全页继续判断。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

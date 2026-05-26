@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesSkillsOverview,
   hermesSkillTypes,
   hermesSkillDevProcess,
@@ -20,7 +19,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('skills')
 </script>
 
 <template>
@@ -31,8 +29,6 @@ const relatedPages = getHermesRelatedPages('skills')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '技能开发指南' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -147,26 +143,6 @@ const relatedPages = getHermesRelatedPages('skills')
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">理解技能开发后，下一步通常会去子 Agent 编排或配置部署页。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

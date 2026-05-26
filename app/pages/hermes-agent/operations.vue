@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesOperationEntryChoices,
   hermesOperationPath,
   hermesOperationSignals,
@@ -22,7 +21,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('operations')
 </script>
 
 <template>
@@ -33,8 +31,6 @@ const relatedPages = getHermesRelatedPages('operations')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '运行与使用' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -200,26 +196,6 @@ const relatedPages = getHermesRelatedPages('operations')
               </div>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">如果你已经理解运行语境，下一步通常会去这几页继续补认知。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

@@ -4,7 +4,6 @@ import {
   hermesCapabilityArchitecture,
   hermesCapabilityCases,
   hermesCapabilityGuide,
-  getHermesRelatedPages,
   hermesCapabilityConnections,
   hermesCapabilityFitMatrix,
   hermesCapabilityPillars,
@@ -22,14 +21,8 @@ useSeo({
     { label: 'Hermes Agent', to: '/hermes-agent' },
     { label: '能力地图' },
   ],
-  itemList: hermesCapabilitySections.map(section => ({
-    title: section.title,
-    to: '/hermes-agent/capabilities',
-    description: section.description,
-  })),
 })
 
-const relatedPages = getHermesRelatedPages('capabilities')
 </script>
 
 <template>
@@ -40,8 +33,6 @@ const relatedPages = getHermesRelatedPages('capabilities')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '能力地图' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -246,26 +237,6 @@ const relatedPages = getHermesRelatedPages('capabilities')
               </div>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">如果这一页已经帮你立住了能力判断，下一步更适合继续看这些分页。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>

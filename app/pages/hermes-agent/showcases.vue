@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  getHermesRelatedPages,
   hermesShowcases,
   hermesShowcasePatterns,
 } from '~/data/hermes-agent'
@@ -17,7 +16,6 @@ useSeo({
   ],
 })
 
-const relatedPages = getHermesRelatedPages('showcases')
 </script>
 
 <template>
@@ -28,8 +26,6 @@ const relatedPages = getHermesRelatedPages('showcases')
         { label: 'Hermes Agent', to: '/hermes-agent' },
         { label: '实战案例' },
       ]" />
-
-      <HermesSeriesNav />
 
       <section class="series-hero">
         <div class="card series-main">
@@ -91,26 +87,6 @@ const relatedPages = getHermesRelatedPages('showcases')
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card series-panel">
-        <div class="series-head">
-          <div>
-            <p class="eyebrow">继续阅读</p>
-            <p class="section-copy">看完案例后，下一步适合回能力地图页建立系统理解，或去监控页了解如何保障长期运行。</p>
-          </div>
-        </div>
-
-        <div class="series-grid-3">
-          <NuxtLink v-for="item in relatedPages" :key="item.to" :to="item.to" class="series-link-card">
-            <div class="series-card-top">
-              <SeriesGlyph kind="grid" tone="brand" small />
-              <span class="series-tag">{{ item.meta }}</span>
-            </div>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.description }}</p>
-          </NuxtLink>
         </div>
       </section>
     </div>
