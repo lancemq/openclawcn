@@ -32,12 +32,6 @@ const navGroups = [
     ],
   },
   {
-    label: 'Hermes',
-    slug: 'hermes',
-    to: '/hermes-agent',
-    items: hermesSubItems,
-  },
-  {
     label: '进阶',
     slug: 'advanced',
     to: '/best-practices',
@@ -72,6 +66,12 @@ const navGroups = [
       { label: '提交反馈', to: '/feedback' },
       { label: '下载中心', to: '/download' },
     ],
+  },
+  {
+    label: 'Hermes',
+    slug: 'hermes',
+    to: '/hermes-agent',
+    items: hermesSubItems,
   },
 ]
 
@@ -112,7 +112,7 @@ const activeGroup = computed(() =>
     <div class="container header-inner">
       <div class="header-ribbon">
         <span>OpenClawCN 中文资料站</span>
-        <span>开始 · 文档 · Hermes · 进阶 · 动态 · 支持</span>
+        <span>开始 · 文档 · 进阶 · 动态 · 支持 · Hermes</span>
       </div>
 
       <div class="header-top">

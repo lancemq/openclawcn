@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import {
-  hermesShowcases,
+  hermesShowcaseAntiPatterns,
+  hermesShowcaseConfirmations,
+  hermesShowcasePath,
   hermesShowcasePatterns,
+  hermesShowcases,
 } from '~/data/hermes-agent'
 
 useSeo({
@@ -81,6 +84,63 @@ useSeo({
 
         <div class="series-grid-3">
           <article v-for="item in hermesShowcasePatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="pulse" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">反模式</p>
+            <h2>引入 Hermes 时容易踩的坑</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesShowcaseAntiPatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>如何在你的场景中落地 Hermes</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesShowcasePath" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="accent" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>案例背后的核心认知</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesShowcaseConfirmations" :key="item.title" class="series-card">
             <div class="series-card-top">
               <SeriesGlyph kind="pulse" tone="brand" small />
               <strong>{{ item.title }}</strong>

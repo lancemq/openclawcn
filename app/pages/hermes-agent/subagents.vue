@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {
+  hermesSubagentAntiPatterns,
   hermesSubagentBestPractices,
+  hermesSubagentConfirmations,
   hermesSubagentOrchestration,
   hermesSubagentOverview,
+  hermesSubagentPath,
 } from '~/data/hermes-agent'
 
 useSeo({
@@ -99,6 +102,63 @@ useSeo({
 
         <div class="series-grid-3">
           <article v-for="item in hermesSubagentBestPractices" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="pulse" tone="brand" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">反模式</p>
+            <h2>子 Agent 的使用中这些做法要避免</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesSubagentAntiPatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>从简单到复杂，逐步掌握子 Agent 编排</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesSubagentPath" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="accent" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>来自实践的经验总结</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesSubagentConfirmations" :key="item.title" class="series-card">
             <div class="series-card-top">
               <SeriesGlyph kind="pulse" tone="brand" small />
               <strong>{{ item.title }}</strong>

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {
+  hermesConfigAntiPatterns,
   hermesConfigChecklist,
+  hermesConfigConfirmations,
   hermesConfigMistakes,
   hermesConfigOverview,
+  hermesConfigPath,
   hermesConfigSections,
 } from '~/data/hermes-agent'
 
@@ -118,6 +121,63 @@ useSeo({
           <article v-for="item in hermesConfigMistakes" :key="item.title" class="series-card">
             <div class="series-card-top">
               <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">反模式</p>
+            <h2>这几种配置心态最容易出问题</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesConfigAntiPatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>配置 Hermes 的最佳顺序</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesConfigPath" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="accent" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>真实用户怎么说</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesConfigConfirmations" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="pulse" tone="brand" small />
               <strong>{{ item.title }}</strong>
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>

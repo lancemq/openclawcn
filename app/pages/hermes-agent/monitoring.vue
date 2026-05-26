@@ -2,7 +2,10 @@
 import {
   hermesLogging,
   hermesMetrics,
+  hermesMonitoringAntiPatterns,
+  hermesMonitoringConfirmations,
   hermesMonitoringOverview,
+  hermesMonitoringPath,
   hermesTroubleshooting,
 } from '~/data/hermes-agent'
 
@@ -117,6 +120,63 @@ useSeo({
           <article v-for="item in hermesTroubleshooting" :key="item.title" class="series-card">
             <div class="series-card-top">
               <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">反模式</p>
+            <h2>监控中最容易犯的错</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-2">
+          <article v-for="item in hermesMonitoringAntiPatterns" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="shield" tone="muted" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>监控体系的搭建节奏</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesMonitoringPath" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="accent" small />
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">案例印证</p>
+            <h2>监控原则来自实际教训</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article v-for="item in hermesMonitoringConfirmations" :key="item.title" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="pulse" tone="brand" small />
               <strong>{{ item.title }}</strong>
             </div>
             <p class="series-card-copy">{{ item.detail }}</p>
