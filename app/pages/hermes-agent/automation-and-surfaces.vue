@@ -4,6 +4,7 @@ import {
   hermesSurfaceCases,
   hermesSurfaceAntiPatterns,
   hermesSurfaceMatrix,
+  hermesSurfacePath,
   hermesSurfacePatterns,
   hermesSurfaces,
 } from '~/data/hermes-agent'
@@ -174,6 +175,62 @@ useSeo({
           </article>
         </div>
       </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">实操路径</p>
+            <h2>入口启用的推荐顺序</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-4">
+          <article v-for="item in hermesSurfacePath" :key="item.step" class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="accent" small />
+              <span class="process-step">{{ item.step }}</span>
+              <strong>{{ item.title }}</strong>
+            </div>
+            <p class="series-card-copy">{{ item.detail }}</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card series-panel">
+        <div class="series-head">
+          <div>
+            <p class="eyebrow">官方资源</p>
+            <h2>更多入口和自动化参考</h2>
+          </div>
+        </div>
+
+        <div class="series-grid-3">
+          <article class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="stack" tone="brand" small />
+              <strong>频道配置文档</strong>
+            </div>
+            <p class="series-card-copy">官方频道接入完整指南，覆盖 Telegram、WhatsApp、Discord 等。</p>
+            <a href="https://docs.openclaw.ai/channels" target="_blank" rel="noopener" class="series-link">查看频道文档 →</a>
+          </article>
+          <article class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="flow" tone="accent" small />
+              <strong>自动化文档</strong>
+            </div>
+            <p class="series-card-copy">定时任务、Cron 和事件触发的完整配置。</p>
+            <a href="https://docs.openclaw.ai/automation" target="_blank" rel="noopener" class="series-link">查看自动化文档 →</a>
+          </article>
+          <article class="series-card">
+            <div class="series-card-top">
+              <SeriesGlyph kind="pulse" tone="brand" small />
+              <strong>浏览器控制</strong>
+            </div>
+            <p class="series-card-copy">浏览器能力和多步骤网页操作指南。</p>
+            <a href="https://docs.openclaw.ai/tools/browser" target="_blank" rel="noopener" class="series-link">查看浏览器文档 →</a>
+          </article>
+        </div>
+      </section>
     </div>
   </section>
 </template>
@@ -191,6 +248,45 @@ useSeo({
 .scenario-meta {
   display: grid;
   gap: 12px;
+}
+
+.scenario-meta > div {
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(64, 73, 85, 0.08);
+}
+
+.scenario-meta p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.process-step {
+  display: inline-flex;
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(15, 102, 116, 0.1);
+  color: var(--brand);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.series-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 8px;
+  color: var(--brand);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.series-link:hover {
+  text-decoration: underline;
 }
 
 .scenario-meta > div {
