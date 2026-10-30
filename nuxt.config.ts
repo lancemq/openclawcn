@@ -112,6 +112,10 @@ export default defineNuxtConfig({
       ],
       script: [
         {
+          // 百度统计
+          innerHTML: `var _hmt = _hmt || [];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?4b5ce38a6523cae3a48ccd5669a51aa6";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();`,
+        },
+        {
           async: true,
           src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7712476875404468',
           crossorigin: 'anonymous',
